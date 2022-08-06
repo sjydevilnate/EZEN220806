@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Jest UI TDD</title>
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css" />
+
+</head>
+<body>
+    <xmp>
+
+    // UI 테스트UI 컴포넌트 테스트
+    1. react-testing-library
+        https://testing-library.com/
+    2. Enzyme(엔자임)
+
+
+    @testing-library는 DOM 테스팅 라이브러리 (DOM Testing Library) 이다.
+    react-testing-library는 실제 react-dom 위에서 동작한다.
+    react-testing-library는 DOM을 찾는 기능들이 제공된다.
+    npm install --save-dev @testing-library/react
+
+
+
+
+    ##################################
+    1. 작업 개요
+    ##################################
+
+    테스트 주도 개발(Test-driven development) TDD 방법론을 리액트 프로젝트에 적용하는 방법에 대해서 알아보려고 한다.
+
+    테스트 코드 작성이 필수라는것이다.
+
+    테스트 주도 개발  프로세스(절차)는
+    1. 실패하는 테스트 명세를 작성한다.
+    2. 실패한 테스트를 통과하는 코드를 작성한다.
+    3. 작성된 코드를 리팩토링한다.
+
+    10.1 테스트주도개발이란
+    10.2 테스트 주도 개발 방법론
+    • 실패하는 테스트 명세를 작성한다.
+    • 실패를 통과하는 코드를 간단하고 빠르게 작성한다.
+    • 이렇게 작성한 코드를 리팩토링한다.
+    10.3 프로젝트준비
+    10.4 개발
+        1) PageHeader 컴포넌트
+        2) Button 컴포넌트
+        3) List 페이지 컴포넌트
+        4) Add 페이지 컴포넌트
+        5) Detail 페이지 컴포넌트
+        6) NotFound 페이지 컴포넌트
+        7)App 컴포넌트
+    10.5 요약
+
+
+
+    ##################################
+    2. 프로젝트 생성 작업
+       소요시간: 20분
+    ##################################
+    step 1-01. node / npm 버전 업그레이드
+        $ node -v                          #  node 버전 확인
+        v16.14.2
+
+        $ npm install -g npm@latest        #  npm 최신 버전 설치
+
+        $ npm -v                           #  npm 버전 확인
+        8.13.2
+
+        $ npx -v                           #  npx(=npm extension) 버전 확인
+        8.13.2
+
+
+    step 1-02. 프로젝트 생성
+
+        $ npm uninstall -g create-react-app        # 전역으로 설치된 create-react-app 모듈 삭제하기
+
+        $ npx clear-npx-cache                      # npx 로 다운로드된 캐쉬되어 있는 모듈 삭제
+        Need to install the following packages:
+          clear-npx-cache
+        Ok to proceed? (y) y
+        ....
+
+        $ npx create-react-app jesttdd01        # 프로젝트명은 소문자로 만들어야 함.
+        Need to install the following packages:
+          create-react-app
+        Ok to proceed? (y) y
+        ...
+        5분 소요
+        ...
+
+        $ ls                                       # jesttdd01 폴더가 보이는지 확인
+        $ cd jesttdd01                             # jesttdd01 폴더로 이동
+        $ ls                                       # package.json 파일이 보이는지 확인
+        $ npm install --save react@17.0.2          # react 17 버전으로 다운사이징. 최신 react 버전 18
+        $ npm install --save react-dom@17.0.2      # react 17 버전으로 다운사이징. 최신 react 버전 18
+        $ npm ls react                             # 설치된 react 버전 확인
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+    step 1-03. 실행 중인 프로세스 중지
+        터미널에서 "ctrl + c" 눌러 실행된 서버를 중지한다
+
+
+    step 1-04. 프로젝트 소스 커밋
+        $ ls                                  # package.json 파일이 보이는지 확인
+        $ git status                          # 파일 상태 확인
+        $ git add -AN                         #
+        $ git status                          # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'     # 파일 commit
+        $ git status                          # 파일 상태 확인
+        $ git push                            #
+
+        github 사이트에서 소스가 올라갔는지 확인한다.
+
+    step 1-11. babel 모듈 설치
+        https://babeljs.io/docs/en/babel-preset-env-standalone
+        https://babeljs.io/docs/en/babel-preset-react
+        https://webpack.js.org/loaders/
+
+        $ npm install --save-dev @babel/core @babel/cli
+        $ npm install --save-dev @babel/preset-env
+        $ npm install --save-dev @babel/preset-react
+        $ npm install --save-dev babel-loader
+
+
+    step 1-12. Jasmine 기반의 테스트 프레임워크 jest 설치
+        https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/
+        https://github.com/facebook/jest/issues/3750
+        https://testing-library.com/docs/react-testing-library/intro/
+
+        jest 는 코드가 제대로 동작하는지 확인하는 Jasmine 기반의 '테스팅 프레임워크' 입니다.
+        jest-cli 는 단일 파일만 테스트 하는 경우에 사용합니다.
+        @testing-library는 실제 react-dom 위에서 동작하는 DOM 테스팅 라이브러리 (DOM Testing Library) 이다.
+
+        $ npm install --save-dev jest
+        $ npm install --save-dev jest-cli
+        $ npm install --save-dev @types/jest
+        $ npm install --save-dev babel-jest
+        $ npm install --save-dev @testing-library/react
+        $ npm install --save-dev @testing-library/jest-dom
+        $ npm install --save-dev @testing-library/user-event
+
+    step 1-13. supertest 모듈 설치
+        $ npm install --save-dev supertest
+
+    step 1-14. superagent 모듈 설치
+        $ npm install --save-dev supertest superagent
+
+    step 1-15. nodemon 모듈 설치
+        $ npm install --save-dev nodemon
+
+
+    step 1-21. prop-types 설치(필수)
+        prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
+
+        $ npm install --save prop-types
+
+
+    step 1-22. styled-component
+        styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
+
+        $ npm install --save styled-components
+        $ npm install --save-dev @types/styled-components jest-styled-components
+
+
+    step 1-23. 리액트 라우터 설치(필수)
+        react-router:
+        react-router-dom: 브라우저에서 사용되는 react-router 라이브러리. 필수
+
+        $ npm install --save react-router react-router-dom
+
+
+    step 1-24. 리덕스 설치(필수)
+        redux : redux를 사용할 수있게 하는 라이브러리
+        react-redux : react에서 redux를 사용할 수있게 하는 라이브러리
+        redux-actions : redux용 action을 정의하기 위한 라이브러리
+        redux-logger : redux용 로깅 처리를 위한 미들웨어 라이브러리
+
+        $ npm install --save redux react-redux redux-logger redux-actions
+
+
+    step 1-25. redux-saga 설치(필수)
+        redux-saga : redux에서 비동기로 액션을 처리하는 미들웨어
+
+        $ npm install --save redux-saga
+
+
+    step 1-26. 비동기 처리(필수)
+        axios : rest api 호출 라이브러리
+
+        $ npm install --save axios
+
+
+    step 1-27. immer 설치(필수)
+        immer : 리덕스 store state 를 불변 객체(읽기 전용)로 처리할 때 사용되는 라이브러리
+
+        $ npm install --save immer
+
+    ##################################
+    2. 배포 테스트
+    ##################################
+
+    2-1. 배포 테스트
+        배포용 파일을 만들고 nginx 에 배포하여 본다.
+        "npm run build" 을 실행하면 /build/ 폴더에 배포용 파일들이 만들어진다.
+
+        $ ls     # build/ 폴더가 보이는지 확인. 없으면 정상
+        node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        $ npm run build
+
+        $ ls    # build/ 폴더가 보이는지 확인. 있으면 정상
+        build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        nginx 에 배포 테스트
+        "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
+
+
+    ##################################
+    3. 프로젝트 폴더 구조
+       소요시간: 05분
+    ##################################
+
+    프로젝트
+    |-- build                    # 빌드된 결과물이 저장되는 폴더. 서버로 배포되는 파일들.
+    |-- node_modules             # npm 모듈(패키지) 저장 폴더
+    |-- public                   # 배포 버전을 빌드할 때 사용하는 파일.
+    |   |-- assets (기타 자원)
+    |   |   |-- images (이미지)
+    |   |   |-- styles (스타일시트)
+    |   |   `-- text
+    |   |-- favicon.ico
+    |   |-- index.html
+    |   |-- logo192.png
+    |   |-- logo512.png
+    |   |-- manifest.json
+    |   `-- robots.txt
+    |-- src                      # 소스 코드 폴더
+    |   |-- common (공통)
+    |   |-- components (공통 프리젠테이션 컴포넌트)
+    |   |-- containers (컨테이너 컴포넌트)
+    |   |   `-- todo
+    |   |       |-- components   (todo 컨테이너에서만 사용되는 프리젠테이션용 컴포넌트 폴더)
+    |   |       |   |-- Add.js
+    |   |       |   |-- Add.test.js
+    |   |       |   |-- Button.js
+    |   |       |   |-- Button.test.js
+    |   |       |   |-- Detail.js
+    |   |       |   |-- Detail.test.js
+    |   |       |   |-- List.js
+    |   |       |   |-- List.test.js
+    |   |       |   |-- NotFound.js
+    |   |       |   |-- NotFound.test.js
+    |   |       |   |-- PageHeader.js
+    |   |       |   `-- PageHeader.test.js
+    |   |       |-- Todo.js
+    |   |       `-- Todo.test.js
+    |   |-- constant (상수)
+    |   |-- models (데이터 모델 변수, 타입)
+    |   |-- pages (페이지 컴포넌트)
+    |   |-- reducers (리듀서)
+    |   |   `-- index.js
+    |   |-- routes (라우팅)
+    |   |   `-- index.js
+    |   |-- store (라우팅)
+    |   |   `-- index.js
+    |   |-- utils (유틸리티 모듈)
+    |   |-- App.css
+    |   |-- App.js
+    |   |-- App.test.js
+    |   |-- index.css
+    |   |-- index.js
+    |   |-- logo.svg
+    |   |-- reportWebVitals.js
+    |   `-- setupTests.js
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc
+    |-- eslintrc.json
+    |-- jsconfig.json
+    |-- package.json
+    `-- README.md
+
+
+    3-1. 프로젝트용 공통 폴더 생성
+      $ mkdir -p ./public/assets \
+              ./public/assets/images \
+              ./public/assets/styles \
+              ./public/assets/text
+
+      $ mkdir -p ./src/common \
+              ./src/components \
+              ./src/containers \
+              ./src/constant \
+              ./src/models \
+              ./src/pages \
+              ./src/reducers \
+              ./src/routes \
+              ./src/store \
+              ./src/utils
+
+    3-2. 프로젝트용 공통 파일 생성
+      $ touch  .babelrc  .env  .prettierrc  eslintrc.json  jsconfig.json
+
+      $ touch ./src/reducers/index.js \
+              ./src/routes/index.js \
+              ./src/store/index.js
+
+    3-3. .babelrc 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > .babelrc
+      $ cat .babelrc
+
+    3-4. .env 파일 생성 후 내용 추가
+      $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+      $ cat .env
+
+    3-5. .prettierrc 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > .prettierrc
+      $ cat .prettierrc
+
+    3-6. eslintrc.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > eslintrc.json
+      $ cat eslintrc.json
+
+    3-7. jsconfig.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > jsconfig.json
+      $ cat jsconfig.json
+
+
+    ##################################
+    4. 프로젝트 환경 설정
+       소요시간: 15분
+    ##################################
+
+    프로젝트
+    |-- ... 생략
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc
+    |-- eslintrc.json
+    |-- package.json
+    `-- README.md
+
+    4-1 .babelrc 설정
+
+        .babelrc 파일을 프로젝트 루트에 만들기
+        $ touch .babelrc
+
+        {
+            "presets": [
+                [
+                    "react-app",
+                ],
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": false,
+                        "targets": {
+                            "node": "current",
+                            "chrome": "79", // 크롬 79까지 지원하는 코드를 만든다
+                        }
+                    }
+                ],
+                [
+                    "@babel/preset-react",
+                    {
+                        "development": process.env.BABEL_ENV === "development",
+                        "pragma": "dom", // default pragma is React.createElement (only in classic runtime)
+                        "pragmaFrag": "DomFrag", // default is React.Fragment (only in classic runtime)
+                        "throwIfNamespace": false, // defaults to true
+                        "runtime": "classic" // defaults to classic
+                        // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
+                    }
+                ]
+            ]
+        }
+
+    4-2. 포트 변경 설정
+        react는 기본적으로 포트 3000 을 사용하는데 다른 포트로 변경할 수 있다.
+        기본 포트 3000 대신 15109 포트를 사용하도록 설정
+
+        현재 작업하는 폴더 위치 확인
+        $ pwd
+
+        파일 목록 출력
+        $ ls    # package.json 파일이 보이는지 확인
+
+        .env 파일을 프로젝트 루트에 만들기
+        $ touch .env
+
+        .env  파일에 아래 내용 추가
+        $ cat .env
+        SKIP_PREFLIGHT_CHECK=true
+        PORT=15109
+
+
+    4-3. eslint 모듈
+        ESlint는 문법 오류를 잡아내고 특정 문법 요소를 사용하여 코드를 수정하기 위해 사용되는 모듈 입니다.
+
+        airbnb ESLint 규칙을 사용하려면 아래 5개의 패키지들은 필수로 설치해야 합니다.
+          . eslint
+          . eslint-plugin-import
+          . eslint-plugin-react
+          . eslint-plugin-react-hooks
+          . eslint-plugin-jsx-a11y
+
+        eslint-config-airbnb 는 airbnb 스타일 가이드의 코드 규칙을 적용할 수 있는 모듈
+
+        babel-eslint : 정식 표준이 아닌 자바스크립트, 즉 ES6 이상의 최신 자바스크립트 문법을 사용하는 경우 설치 필요
+
+
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+
+        $ ls      # package.json 보이는지 확인
+
+        $ npm init @eslint/config
+
+        $ npm install --save-dev eslint  eslint-plugin-import  eslint-plugin-react  eslint-plugin-react-hooks  eslint-plugin-jsx-a11y
+        $ npm install --save-dev eslint-config-airbnb
+
+        $ npm install --save-dev babel-eslint
+
+        $ cat package.json    # package.json 에 ESLint 모듈들이 추가되었는지 확인한다.
+
+
+    4-4. Prettier 설정
+        Prettier는 코드 포맷터(Code Formatter)다
+        prettier 사용되는 예시
+            . 한 줄의 최대 길이는 얼마로 할 것인가?
+            . 들여쓰기에 tab을 쓸 것인가? space를 쓸 것인가?
+            . 문자 리터럴로  ' 를 쓸 것인가? " 쓸 것인가?
+        Prettier는 소스 코드를 저장하거나 git 커밋할 때 정의된 규칙에 따라 코드의 형식을 자동으로 수정한다.
+
+        prettier : Prettier 모듈을 설치할 때는 --save-exact 옵션을 사용하세요. --save-exact 은 Prettier 버전이 달라져도 코드 스타일 변화가 생기지 않도록 하는 옵션입니다.
+        eslint-config-react: react 프로젝트에 맞춰진 ESLint 규칙을 추가합니다.
+        eslint-plugin-prettier: 코드 코맷할 때 Prettier를 사용하게 만드는 규칙을 추가합니다.
+        eslint-config-prettier: Prettier와 충돌할 설정들을 비활성화합니다.
+
+        $ npm install --save-dev --save-exact prettier
+        $ npm install --save-dev eslint-config-react
+        $ npm install --save-dev eslint-plugin-prettier
+        $ npm install --save-dev eslint-config-prettier
+
+        .prettierrc 파일을 프로젝트 루트에 만들기
+        $ touch .prettierrc
+
+        .prettierrc 파일에 아래 내용을 추가
+
+        $ cat .prettierrc
+        {
+          "printWidth": 130,
+          "tabWidth": 2,
+          "singleQuote": true,
+          "semi": true,
+          "useTabs": false,
+          "trailingComma": "all",
+          "proseWrap": "always",
+          "requireConfig": false,
+          "bracketSpacing": true,
+          "jsxBracketSameLine": false,
+          "jsxSingleQuote": false,
+          "quoteProps": "as-needed",
+          "endOfLine": "crlf"
+        }
+
+
+    4-5. eslint 설정
+        eslintrc.json 파일에 아래 내용을 추가
+        https://poiemaweb.com/eslint
+        https://yrnana.dev/post/2021-09-02-eslint
+        https://eslint.org/docs/user-guide/configuring/rules
+
+        ESLint의 핵심 구성 정보는 env, globals, rules세가지 영역으로 나누어져 구성되어 있습니다.
+          . env는 실행 환경에 대한 설정, 사전 전역 변수 설정. 브라우저, node, es6 환경이 활성화
+          . globals는 사용자가 추가하는 전역 변수 설정.
+          . extends 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . plugins 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . rules 설치한 플러그인들의 적용, 활성화 규칙 및 오류 설정에 관한 것들.
+
+
+        eslintrc.json 파일을 프로젝트 루트에 만들기
+        $ touch eslintrc.json
+
+        $ cat eslintrc.json
+        {
+            "parserOptions": {
+                "ecmaVersion": 12
+            },
+            "env": {
+                "browser": true,
+                "commonjs": true,
+                "node": true,
+                "jest": true,
+                "es6": true,
+                "es2021": true
+            },
+            "globals": {
+                "_": false
+            },
+            "extends": [
+                "react-app",
+                "prettier",
+                "airbnb"
+            ],
+            "parser": "babel-eslint",
+            "parserOptions": {
+                "ecmaVersion": 12
+            },
+            "plugins": ["import", "html"],
+            "rules": {
+                // "off" or 0 - turn the rule off
+                // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+                // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
+
+                // windows linebreaks when not in production environment
+                "linebreak-style": [ "error", "unix" ],
+                // suppress errors for missing 'import React' in files
+                "react/react-in-jsx-scope": "off",
+                // allow jsx syntax in js files (for next.js project)
+                "react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ], //should add ".ts" if typescript project
+                "jsx-a11y/label-has-associated-control": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
+                "jsx-a11y/label-has-for": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
+
+                "no-param-reassign": [ "error", { "props": false } ],
+                "arrow-parens": ["error", "always"], // () => {}
+                "arrow-body-style": ["error", "always"],
+                "consistent-return": "off",
+                "func-names": "off",
+                "no-shadow": "off",
+                "no-alert": "off",
+                "no-var": "error",
+                "no-console": "off",
+                "no-debugger": "off"
+            }
+        }
+
+    4-6. jsconfig.json 설정
+        NODE_ENV의 절대 경로 설정.
+        컴포넌트 조합할 때 상대 경로 대신 절대 경로를 사용하여 컴포넌트를 조합
+        "baseUrl": "./src" ==> 절대 경로 설정
+        "include": ["src"] ==> import 시 해당 루트를 자동으로 포함 설정. ex) import 'src/Comp'; 대신 import 'Comp'; 을 사용
+
+        $ echo -e "{\n  \"compilerOptions\": {\n    \"baseUrl\": \"./src\"\n  },\n  "include": ["src"]\n}" >> jsconfig.json
+
+        jsconfig.json  파일 내용 확인
+        $ cat jsconfig.json
+        {
+          "compilerOptions": {
+            "baseUrl": "./src"
+          },
+          "include": ["src"]
+        }
+
+
+    4-7. githook 설정
+        githook은 깃에 특정 이벤트(커밋, 푸시 등)를 감지하여
+        이벤트를 실행하기 전에 특정 동작을 수행할 수 있도록 도와주는 플러그인 입니다.
+
+        husky와 lint-staged의역할은 다음과 같다.
+        . husky: packages.json 파일에서 githook를 사용할 수 있게 해준다.
+        . lint-staged: git 의 stage된 파일들에 특정 동작을 수행할 수 있도록 해준다.
+        . lint-staged와 husky를 사용하여 git 이벤트에 Prettier 명령어를 연동 설정.
+
+        $ npm install --save-dev husky  lint-staged
+
+        ############
+        commit 전에 자동으로 prettier 적용하기
+        ############
+
+        packages.json 에 아래 내용 추가
+
+        $ cat packages.json
+        {
+          ...중략 ,
+          "husky": {
+              "hooks": {
+                  "pre-commit" : "lint-staged"
+              }
+          },
+          "lint-staged": {
+              "src/**/*.{js,jsx,ts,tsx,json,css,scss,md} ": [
+                  "prettier --write"
+              ]
+          }
+        }
+
+    4-8. package.json 에 jest 실행 스크립트 추가
+        변경 전
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+            },
+        }
+
+        변경 후
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+
+                "test:watch": "jest --watch --env=jsdom",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom"
+            },
+            ...중략
+        }
+
+    4-9. 프로젝트 소스 커밋
+        $ pwd               # 현재 작업 디렉토리 확인
+        $ ls                # package.json 보이는지 확인
+        $ git status        # 파일 상태 확인
+        $ git add -AN       # 신규 파일 추가 추가
+        $ git status        # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'
+        $ git status        # 파일 상태 확인
+        $ git push          #
+
+
+    4-10. react 프로젝트 설정 파일 추출하기
+        프로젝트 설정 파일 추출하기 전에 반드시 소스 commit 을 해야만 eject 가 가능하다.
+        eject를 하게 되면 package.json 파일의 내용이 변경된다.
+
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        $ cat package.json
+        $ npm run eject
+        $ cat package.json
+
+
+    ##################################
+    5. 서버 실행
+    ##################################
+        $ ls                                       # counterprj01 폴더가 보이는지 확인
+        $ cd counterprj01                          # counterprj01 폴더로 이동
+        $ ls                                       # package.json 파일이 보이는지 확인
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+        5-1. 서버 중지
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        5-2. 서버 시작
+        $ ls                # package.json 보이는지 확인
+
+        $ npm run start     # package.json 보이면 서버 실행
+        Compiled successfully!
+
+        You can now view counterprj06 in the browser.
+
+          Local:            http://localhost:15109
+          On Your Network:  http://192.168.56.1:15109
+
+        Note that the development build is not optimized.
+        To create a production build, use npm run build.
+
+        webpack compiled successfully
+
+    ##################################
+    6. Jest 테스트 와 디버깅 설정
+    ##################################
+
+    https://tod2.tistory.com/214
+    https://jestjs.io/docs/cli#--envenvironment
+
+    6-1 package.json 에서 실행 jest script 추가
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+
+                "test:watch": "jest --watch --env=jsdom",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom",
+
+                "build-watch": "./node_modules/.bin/webpack -w",
+                "build": "./node_modules/.bin/webpack"
+            },
+            ...중략
+        }
+
+    6-2. 터미널에서 개별 파일 jest 테스트 실행
+        $ npx jest --help
+        $ npx jest --env=jsdom  src/containers/todo/components/PageHeader.test.js
+        $ npx jest --env=jsdom  --watch  src/containers/todo/components/PageHeader.test.js
+
+    6-3. 터미널에서 watch 모드로 jest 테스트 실행
+        $ ls    # package.json 보이는지 확인
+        $ cat package.json
+        $ npm run test:watch
+        $ npx jext --env=jsdom --watch
+
+    6-4. 터미널에서 deubgging 모드로 jest 테스트 실행
+        $ npm run test:debug
+        $ node --inspect-brk node_modules/jest/bin/jest --runInBand --env=jsdom --watch
+
+    6-5. 소스 코드에 debugger 삽입
+
+    6-6. Chrome을 열고 주소 표시줄에 다음을 입력합니다.
+        chrome://inspect
+
+    6-7. "Open dedicated DevTools for Node" 클릭
+        연결 추가 127.0.0.1:9229
+
+    6-8. CLI 에서 실행을 중지하려면 이면 "ctrl + c" 눌러 실행 중지
+
+
+
+
+    ##################################
+    10. 기능 설명
+    ##################################
+
+    ##################################
+    11. 프로젝트 초기 설정
+    ##################################
+
+
+    ##################################
+    12. 프로젝트에 컴포넌트 추가
+    ##################################
+    프로젝트
+        `-- src
+            `-- containers (컨테이너 컴포넌트)
+                `-- todo
+                    |-- components   (todo 컨테이너에서만 사용되는 프리젠테이션용 컴포넌트 폴더)
+                    |   |-- Add.js
+                    |   |-- Add.test.js
+                    |   |-- Button.js
+                    |   |-- Button.test.js
+                    |   |-- Detail.js
+                    |   |-- Detail.test.js
+                    |   |-- List.js
+                    |   |-- List.test.js
+                    |   |-- NotFound.js
+                    |   |-- NotFound.test.js
+                    |   |-- PageHeader.js
+                    |   `-- PageHeader.test.js
+                    |-- Todo.js
+                    `-- Todo.test.js
+
+    12-1. 파일 생성
+      $ pwd       # 현재 작업 디렉토리 확인
+
+      $ ls        # packages.json 이 보이는지 확인
+
+      $ mkdir -p ./src/containers/todo/components
+
+      $ touch ./src/containers/todo/components/Add.js \
+              ./src/containers/todo/components/Add.test.js \
+              ./src/containers/todo/components/Button.js \
+              ./src/containers/todo/components/Button.test.js \
+              ./src/containers/todo/components/Detail.js \
+              ./src/containers/todo/components/Detail.test.js \
+              ./src/containers/todo/components/List.js \
+              ./src/containers/todo/components/List.test.js \
+              ./src/containers/todo/components/NotFound.js \
+              ./src/containers/todo/components/NotFound.test.js \
+              ./src/containers/todo/components/PageHeader.js \
+              ./src/containers/todo/components/PageHeader.test.js \
+              ./src/containers/todo/Todo.js \
+              ./src/containers/todo/Todo.test.js
+
+
+
+    ##################################
+    21. PageHeader 컴포넌트 TDD 기능 구현
+    ##################################
+
+    PageHeader 컴포넌트와 테스트 파일 생성
+        $ touch ./src/containers/todo/components/PageHeader.js \
+                ./src/containers/todo/components/PageHeader.test.js
+
+    PageHeader 컴포넌트 요구 사항
+        . 페이지의 디폴트 제목은 "할 일 목록"을 표시한다.
+        . 주어진 URL에 해당하는 페이지 제목을 표시한다.
+            / ==> 할 일 목록
+            /add ==> 할 일 추가
+            /detail/:id ==>할 일 상세
+            그외의 URL(/not_found) ==> 에러
+        . 할 일 목록 페이지(/) 이외에 페이지에서는 "돌아가기" 링크를 표시한다.
+            / 페이지에서는 "돌아가기" 링크가 표시되지 않는다.
+            /add 페이지에서는 "돌아가기" 링크를 표시한다.
+            /detail/:id 페이지에서는 "돌아가기" 링크를 표시한다.
+            그외의 URL(/not_found) 페이지에서는 "돌아가기" 링크를 표시한다.
+        . 돌아가기 링크의 URL은 홈 URL(/)이다.
+        . 돌아가기 링크를 클릭하면 홈 URL로 이동한다.
+            /add 페이지에서 "돌아가기" 링크를 클릭하면 홈 URL로 이동한다.
+            /not_found 페이지에서 "돌아가기" 링크를 클릭하면 홈 URL로 이동한다.
+        . PageHeader 컴포넌트 스냅삿 저장
+
+    ##################################
+    22. Button 컴포넌트 TDD 기능 구현
+    ##################################
+
+    Button 컴포넌트와 테스트 파일 생성
+        $ touch ./src/containers/todo/components/Button.js \
+                ./src/containers/todo/components/Button.test.js
+
+    Button 컴포넌트 요구 사항
+        . 공통 컴포넌트이므로 부모 컴포넌트에서 버튼의 라벨을 결정할 수 있다.
+        . Button 은 스타일을 가진다.
+            Button 은 파란색 계열의 배경색(#304FFE)이 화면에 표시된다.
+            Button 은 마우스 호버시 배경색(#1E40FF)이 화면에 표시된다.
+            Button 을 누르고 있으면 (active) 버튼 안쪽에 box-shadow를 표시한다. (box-shadow: inset 5px 5px 10px rgba(0,0,0,0.2))
+        . Button 의 배경색과 마우스 호버 색상을 부모 컴포넌트에서 변경 할 수 있다.
+        . 버튼을 클릭할 수 있으며, 클릭하였을 때 동작은 부모 컴포넌트가 결정한다.
+        . Button 컴포넌트 스냅삿 저장
+
+    ##################################
+    23. List 컴포넌트 TDD 기능 구현
+    ##################################
+
+    List 컴포넌트와 테스트 파일 생성
+        $ touch ./src/containers/todo/components/List.js \
+                ./src/containers/todo/components/List.test.js
+
+    List 컴포넌트 요구 사항
+        . 할 일 목록을 보여준다. 할 일 목록은 부모 컴포넌트에서 받는다.
+        . 할 일 목록이 없으면 "할 일이 없습니다"가 표시된다.
+        . 할 일 목록의 행은 할 일을 삭제할 수 있는 "삭제" 버튼을 가지고 있다.
+        . 할 일 목록에서 "삭제" 버튼을 클릭하면 해당 할 일이 삭제된다.
+        . 할 일 목록에서 각각의 행을 클릭하면 할 일 상세페이지("/detail/:id")로 이동한다.
+            * 실제 페이지 이동은 할 수 없으므로 url 변경 여부만으로 확인.
+        . 할 일 목록의 행을 클릭하면 할 일의 실행 여부가 변경된다. 완료이면 미완료, 미완료이면 완료.
+        . 할 일 목록에서 할 일의 실행 여부가 완료이면 line-through 가 생긴다.
+        . List 컴포넌트 스냅삿 저장
+
+
+    ##################################
+    24. ListItem 컴포넌트 TDD 기능 구현
+    ##################################
+
+    ListItem 컴포넌트와 테스트 파일 생성
+        $ touch ./src/containers/todo/components/ListItem.js \
+                ./src/containers/todo/components/ListItem.test.js
+
+    ListItem 컴포넌트 요구 사항
+        . List 컴포넌트 의 각 행을 별도의 컴포넌트를 분리한다 .
+        . 할 일 목록의 행은 할 일을 표시한다.
+        . 할 일 목록의 행은 할 일을 삭제할 수 있는 "삭제" 버튼을 가지고 있다.
+        . 할 일 목록의 행에서 "삭제" 버튼을 클릭하면 해당 할 일이 삭제된다.
+        . 할 일 목록의 각각의 행을 클릭하면 할 일 상세페이지("/detail/:id")로 이동한다.
+        . ListItem 컴포넌트 스냅삿 저장
+
+
+    ##################################
+    25. Add 컴포넌트 TDD 기능 구현
+    ##################################
+
+    Add 컴포넌트와 테스트 파일 생성
+        $ touch ./src/containers/todo/components/Add.js \
+                ./src/containers/todo/components/Add.test.js
+
+    Add 컴포넌트 요구 사항
+        . 할 일을 입력할 수 있는 입력창이 있다.
+        . 할 일 입력창은 기본적으로 "할 일을 입력해 주세요"라는 문구를 표시한다.
+        . 할 일을 추가할 수 있는 추가 버튼이 있다.
+        . 할 일을 입력하고, 추가 버튼을 누르면 할 일을 local Storage에 저장하고 할 일 목록 페이지로 이동한다.
+        . 아무 할 일이 없는 경우에는 할 일 추가 버튼을 클릭하여도 빈 할 일이 저장되지 않으며 할 일 목록 페이지로 이동하지 않는다.
+        . Add 컴포넌트 스냅삿 저장
+
+
+    ##################################
+    26. Detail 컴포넌트 TDD 기능 구현
+    ##################################
+
+    Detail 컴포넌트와 테스트 파일 생성
+        $ touch ./src/containers/todo/components/Detail.js \
+                ./src/containers/todo/components/Detail.test.js
+
+    Detail 컴포넌트 요구 사항
+        . URL을 통해 할 일 목록에서 사용자가 클릭한 할 일의 index 값을 전달받는다.( /detail/2 )
+        . URL을 통해 전달 받은 index를 사용하여 local Storage 에 저장된 할 일 목록에서 해당 할 일을 가져와 표시한다.
+        . URL을 통해 전달 받은 index에 해당하는 할 일이 없는 경우 NotFound 페이지("/NotFound")로 리다이렉트 (Redirect)시킨다.
+        . 현재 보이는 할 일을 삭제 할 수 있는 삭제 버튼이 있다.
+        . 삭제 버튼을 클릭하면 현재 보이는 할 일을 삭제하고, 할 일 목록 페이지("/")로 이동한다.
+        . Detail 컴포넌트 스냅삿 저장
+
+
+    ##################################
+    27. NotFound 컴포넌트 TDD 기능 구현
+    ##################################
+
+    NotFound 컴포넌트와 테스트 파일 생성
+        $ touch ./src/containers/todo/components/NotFound.js \
+                ./src/containers/todo/components/NotFound.test.js
+
+    NotFound 컴포넌트 요구 사항
+        . 화면에 "Not Found"이라는 글자를 표시한다.
+        . NotFound 컴포넌트 스냅삿 저장
+
+
+    ##################################
+    28. App 컴포넌트 TDD 기능 구현
+    ##################################
+
+    App 컴포넌트와 테스트 파일 생성
+        $ touch ./src/App.js \
+                ./src/App.test.js
+
+    App 컴포넌트 요구 사항
+        . App 컴포넌트에 PageHeader 컴포넌트가 표시된다.
+        . App 컴포넌트에 Button 컴포넌트가 표시된다.
+
+        . 홈 화면("/")에는 할 일 목록 페이지가 표시된다.
+        . 홈 화면(할 일 목록 페이지)에서 삭제 버튼을 통해 할 일을 삭제할 수 있다.
+        . 홈 화면에서 할 일 추가 버튼을 눌러 할 일 추가 페이지로 이동할 수 있으며 돌아가기 버튼을 통해 홈 화면으로 되돌아갈 수 있다.
+        . 할 일 추가 페이지에서 할 일을 추가하면 할 일이 추가되며 홈 화면으로 이동한다.
+        . 흠 화면에는 할 일 추가 페이지에서 추가한 할 일들이 보인다.
+        . 홈 화면에서 하나의 할 일을 선택하면 할 일 상세페이지로 이동하며 돌아가기 버튼을 통해 홈화면으로 되돌아갈 수 있다.
+        . 할 일 상세 페이지에서 할 일을 삭제 할 수 있으며 할 일을 삭제하면 홈 화면으로 이동한다.
+        . 홈 화면, 할 일 추가 페이지, 할 일 상세페이지 이외에 URL에는 NotFound 페이지 컴포넌트를 표시한다.
+        . App 컴포넌트 스냅삿 저장
+
+
+    </xmp>
+</body>
+</html>

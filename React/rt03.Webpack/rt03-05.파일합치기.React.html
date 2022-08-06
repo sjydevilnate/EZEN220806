@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRA를 이용한 파일 합치기 실습</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css">
+</head>
+
+<body>
+    <div style="margin: 40px 0 0 40px;">
+        <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
+    </div>
+    <pre>
+      React 에서 Webpack 실습을 위해서는 CRA(create-react-app) 를 사용해야 한다.
+
+      # CRA 는 create react app 의 약자.
+
+      # 버전 확인
+      $ node -v
+      v16.16.0
+
+
+      # npm 최신 버전 설치
+      $ npm install --location=global npm@latest
+
+      $ npm -v
+      8.15.1
+
+      $ npx -v
+      8.15.1
+
+
+
+      $ ls
+
+      $ npx create-react-app webpackprj01
+
+      # 파일 목록 조회
+      $ ls  
+
+      $ cd webpackprj01
+
+      $ ls          # package.json 파일이 있는지 확인
+
+      $ npm run start
+
+      $ cp ../App.css ./src/
+      $ cp ../App.js ./src/
+      $ cp ../Footer.js ./src/
+      $ cp ../Header.js ./src/
+
+    </pre>
+
+</body>
+
+</html>

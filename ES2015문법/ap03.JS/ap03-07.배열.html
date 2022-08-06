@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>배열 학습 내용</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+</head>
+<body>
+    <div>
+        <h2>배열 학습 내용</h2>
+        <ol>
+            <li>
+                <h3>배열 선언 방법</h3>
+                <ul>
+                    <li>배열 리터럴( [] ) 을 이용한 객체 선언</li>
+                    <li>Array 생성자 함수를 이용한 객체 선언</li>
+                </ul>
+            </li>
+            <li>
+                <h3>배열 RCUD2S 방법</h3>
+                <table class="table">
+                    <thead>
+                        <tr style="font-weight: bold" class="row0">
+                            <td data-row="0" data-col="0" class="col0">생성</td>
+                            <td data-row="0" data-col="1" class="col1">let arr = [ ] ;</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="font-weight: normal" class="row1">
+                            <td data-row="1" data-col="0" class="col0">추가. Create</td>
+                            <td data-row="1" data-col="1" class="col1">arr[arr.length] = 값;</td>
+                        </tr>
+                        <tr style="font-weight: normal" class="row2">
+                            <td data-row="2" data-col="0" class="col0">읽기. Read</td>
+                            <td data-row="2" data-col="1" class="col1">arr[방번호]</td>
+                        </tr>
+                        <tr style="font-weight: normal" class="row3">
+                            <td data-row="3" data-col="0" class="col0">수정. Update</td>
+                            <td data-row="3" data-col="1" class="col1">arr[방번호] = 값;</td>
+                        </tr>
+                        <tr style="font-weight: normal" class="row4">
+                            <td data-row="4" data-col="0" class="col0">삭제. Delete</td>
+                            <td data-row="4" data-col="1" class="col1">arr.splice(방번호, 삭제개수)</td>
+                        </tr>
+                        <tr style="font-weight: normal" class="row7">
+                            <td data-row="7" data-col="0" class="col0">검색. Search</td>
+                            <td data-row="7" data-col="1" class="col1">arr.filter()</td>
+                        </tr>
+                        <tr style="font-weight: normal" class="row5">
+                            <td data-row="5" data-col="0" class="col0">정렬. Sort</td>
+                            <td data-row="5" data-col="1" class="col1">arr.sort() ✽비교기준: 문자</td>
+                        </tr>
+                        <tr style="font-weight: normal" class="row8">
+                            <td data-row="8" data-col="0" class="col0">복제.</td>
+                            <td data-row="8" data-col="1" class="col1">arr.map()</td>
+                        </tr>
+                        <tr style="font-weight: normal" class="row9">
+                            <td data-row="9" data-col="0" class="col0"></td>
+                            <td data-row="9" data-col="1" class="col1">arr.findIndex()</td>
+                        </tr>
+                        <tr style="font-weight: normal" class="row9">
+                            <td data-row="9" data-col="0" class="col0"></td>
+                            <td data-row="9" data-col="1" class="col1">arr.reduce()</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li>
+                <h3>배열 복사</h3>
+                <ul>
+                    <li>배열 얕은 복사</li>
+                    <li>배열 깊은 복사</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <div>
+        <h2>배열의 RCUD2S 방법과 filter, map, reduce 메서드 사용법에 대해서 실습한다.</h2>
+        <ol>
+            <li class="langjs">
+                <h3 class="langjs">배열 생성</h3>
+                <p class="langjs">
+                    배열 리터럴([])을 이용하여 배열을 생성하는 방법을 학습한다. <br />
+                    실행결과예시) [true, 100, "two"]
+                </p>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">RCUD2S: Read. 배열 요소 출력</h3>
+                <p class="langjs">
+                    [true, 100, 'two'] 에서 두번째 요소값을 console.log()를 사용하여 콘솔에 출력하시오<br />
+                    실행결과예시) 100
+                </p>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">RCUD2S: Create. 배열 요소 추가</h3>
+                <p>
+                    arr 배열에 "three", undefined, "four", "aaa" 순으로 추가하시오.<br />
+                    arr 배열을 console.log()를 사용하여 콘솔에 출력하시오<br />
+                    실행결과예시) [true, 100, "two", "three", undefined, "four", "aaa"]
+                </p>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">RCUD2S: Update. 배열 요소 수정</h3>
+                <p class="langjs">
+                    arr 배열의 첫번째 요소를 "update"로 바꾸고<br />
+                    arr 배열을 console.log()를 사용하여 콘솔에 출력하시오<br />
+                    실행결과예시) ["update", 100, "two", "three", undefined, "four", "aaa"]
+                </p>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">RCUD2S: Delete. 배열 요소 삭제</h3>
+                <p class="langjs">
+                    arr 배열에서 "two"를 삭제하고 배열을 콘솔에 출력하시오<br />
+                    실행결과예시) ["update", 100, "three", undefined, "four", "aaa"]
+                </p>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">RCUD2S: Search. 배열 검색</h3>
+                <p class="langjs">
+                    arr = [1,3, 3784, 98, 842, 8230] 에서 100이상인 값만 찾으시오.<br />
+                    실행결과예시) [3784, 842, 8230]
+                </p>
+                <ul>
+                    <li>filter() 메서드를 사용하여</li>
+                </ul>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">배열 복제. map() 메서드 사용법을 학습한다.</h3>
+                <p class="langjs">arr = [1,3, 3784, 98, 842, 8230] 의 복제 배열을 만드시오.</p>
+                <ul>
+                    <li>map() 메서드를 사용하여</li>
+                </ul>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">findIndex() 메서드 사용법을 학습한다.</h3>
+                <p class="langjs">
+                    arr = [1,3, 3784, 98, 842, 8230] 배열에서 98 의 인덱스를 찾으시오 <br />
+                    실행결과예시) 3
+                </p>
+                <ul>
+                    <li>findIndex() 메서드를 사용하여</li>
+                </ul>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">reduce() 메서드 사용법을 학습한다.</h3>
+                <p class="langjs">
+                    arr = [1,3, 3784, 98, 842, 8230] 의 총합을 구하시오. <br />
+                    실행결과예시) [1, 3, 3784, 98, 842, 8230] " 의 총합은 " 12958
+                </p>
+                <ul>
+                    <li>reduce() 메서드를 사용하여</li>
+                </ul>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">RCUD2S: Sort. 배열 정렬</h3>
+                <p class="langjs">
+                    arr = [1,3, 3784, 98, 842, 8230] 을 오름차순으로 정렬하시오. <br />
+                    실행결과예시) <br />
+                    배열 요소 정렬 전 (6) [1, 3, 3784, 98, 842, 8230] <br />
+                    배열 요소 정렬 후 (6) [1, 3, 98, 842, 3784, 8230] <br />
+                </p>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+            </li>
+        </ol>
+    </div>
+</body>
+
+</html>
+
+<script>
+// 배열의 RCUD2S 방법과 filter, map, reduce 메서드 사용법에 대해서 실습한다.
+// 배열 생성
+// 배열 리터럴([])을 이용하여 배열을 생성하는 방법을 학습한다.
+// 실행결과예시) [true, 100, "two"]
+const str = 'aaaa';
+let arr =  [true, 100, "two"];
+
+// RCUD2S: Read. 배열 요소 출력
+// [true, 100, 'two'] 에서 두번째 요소값을 console.log()를 사용하여 콘솔에 출력하시오
+// 실행결과예시) 100
+console.log( arr[1] ); // 100
+
+// RCUD2S: Create. 배열 요소 추가
+// arr 배열에 "three", undefined, "four", "aaa" 순으로 추가하시오.
+// arr 배열을 console.log()를 사용하여 콘솔에 출력하시오
+// 실행결과예시) [true, 100, "two", "three", undefined, "four", "aaa"]
+
+
+// RCUD2S: Update. 배열 요소 수정
+// arr 배열의 첫번째 요소를 "update"로 바꾸고
+// arr 배열을 console.log()를 사용하여 콘솔에 출력하시오
+// 실행결과예시) ["update", 100, "two", "three", undefined, "four", "aaa"]
+
+
+// RCUD2S: Delete. 배열 요소 삭제
+// arr 배열에서 "two"를 삭제하고 배열을 콘솔에 출력하시오
+// 실행결과예시) ["update", 100, "three", undefined, "four", "aaa"]
+
+
+// RCUD2S: Search. 배열 검색
+// arr = [1,3, 3784, 98, 842, 8230] 에서 100이상인 값만 찾으시오.
+// 실행결과예시) [3784, 842, 8230]
+// filter() 메서드를 사용하여
+arr = [1,3, 3784, 98, 842, 8230]
+let arrFilter = arr.filter(
+    (item, index, array)=>{
+        if( item >= 100){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+);
+console.log( arrFilter);
+arrFilter = arr.filter( (item, index, array)=>( item >= 100 ? true : false ) );
+console.log( arrFilter);
+
+
+// 배열 복제. map() 메서드 사용법을 학습한다.
+// arr = [1,3, 3784, 98, 842, 8230] 의 복제 배열을 만드시오.
+// map() 메서드를 사용하여
+let arrMap = arr.map( (item,index,arr)=>{
+    return  item * 10;
+});
+console.log( arrMap);
+arrMap = arr.map( (item,index,arr)=> item * 10 );
+console.log( arrMap);
+
+
+// findIndex() 메서드 사용법을 학습한다.
+// arr = [1,3, 3784, 98, 842, 8230] 배열에서 98 의 인덱스를 찾으시오
+// 실행결과예시) 3
+// findIndex() 메서드를 사용하여
+
+// reduce() 메서드 사용법을 학습한다.
+// arr = [1,3, 3784, 98, 842, 8230] 의 총합을 구하시오.
+// 실행결과예시) [1, 3, 3784, 98, 842, 8230] " 의 총합은 " 12958
+// reduce() 메서드를 사용하여
+let arrReduce = arr.reduce((pvalue, cvalue, index, array)=>{
+    debugger;
+    return pvalue + cvalue;
+}, 0);
+console.log(arrReduce); // 12958
+
+// arr.map( ()=> () );
+// arr.filter( ()=> () );
+// arr.reduce( ()=> () );
+arrReduce = arr.reduce((pvalue, cvalue, index, array)=>(pvalue + cvalue), 0);
+console.log(arrReduce); // 12958
+
+
+// RCUD2S: Sort. 배열 정렬
+// arr = [1,3, 3784, 98, 842, 8230] 을 오름차순으로 정렬하시오.
+// 실행결과예시)
+// 배열 요소 정렬 전 (6) [1, 3, 3784, 98, 842, 8230]
+// 배열 요소 정렬 후 (6) [1, 3, 98, 842, 3784, 8230]
+
+
+</script>
+

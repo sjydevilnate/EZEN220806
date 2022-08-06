@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>함수 학습 내용</title>
+        <link rel="stylesheet" href="../css/reset.css" />
+    </head>
+
+    <body>
+        <div>
+            <h2>함수 학습 내용</h2>
+            <ol>
+                <li class="langjs">
+                    <h3>함수 정의 방법</h3>
+                    <table class="table">
+                        <thead>
+                            <th>구분</th>
+                            <th>코드</th>
+                        </thead>
+                        <tbody>
+                            <tr style="font-weight: normal" class="row0">
+                                <td data-row="0" data-col="0" class="col0">선언식 함수 정의</td>
+                                <td data-row="0" data-col="1" class="col1">
+                                    <pre class="langjs">
+                                    <code class="langjs">
+    var add = function (a, b) {
+        return a + b;
+    };
+    var sum = add(1, 2);
+                                    </code>
+                                </pre>
+                                </td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row1">
+                                <td data-row="1" data-col="0" class="col0">표현식 함수 정의</td>
+                                <td data-row="1" data-col="1" class="col1">
+                                    <pre class="langjs">
+                                    <code class="langjs">
+    function totalsum() {
+        var result = 0;
+        for (var i = 0; i < arguments.length; i++) {
+            result += arguments[i];
+        }
+        return result;
+    }
+    var sum = totalsum(1, 2, 3);
+                                    </code>
+                                </pre>
+                                </td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row2">
+                                <td data-row="2" data-col="0" class="col0">화살표 함수 정의</td>
+                                <td data-row="2" data-col="1" class="col1">
+                                    <pre class="langjs">
+                                    <code class="langjs">
+    var add = (a, b) => {
+        return a + b;
+    }
+    var sum = add(1, 3); // 4
+                                    </code>
+                                </pre>
+                                </td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row2">
+                                <td data-row="2" data-col="0" class="col0">생성자 함수 정의</td>
+                                <td data-row="2" data-col="1" class="col1">
+                                    <pre class="langjs">
+                                    <code class="langjs">
+    // 생성자 함수는 객체를 만들 때 사용된다.
+    function Goo(name, age) {
+        this.name = name;
+        this.run = function () {
+            return this.name;
+        };
+    };
+    var goo = new Goo('goo', 31);
+                                    </code>
+                                </pre>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li class="langjs">
+                    <h2>this의 사용법 학습</h2>
+                    <p>함수 호출 패턴과 this 바인딩</p>
+                    <ul>
+                        <li>함수에서 this는 window 객체에 바인딩</li>
+                        <li>메서드에서 this는 호출 객체에 바인딩</li>
+                        <li>내부 함수의 this는 window 객체에 바인딩</li>
+                        <li>이벤트 핸들러에서 this는 호출 객체에 바인딩</li>
+                        <li>생성자 함수에서 this는 호출 객체에 바인딩</li>
+                        <li>apply에서 this는 호출 객체에 바인딩</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </body>
+</html>
+

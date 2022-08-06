@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+
+</head>
+
+<body>
+    <pre>
+        <dl>
+            <dt>useEffect 훅 이란?</dt>
+            <dd>side effects를 수행하는 훅</dd>
+        </dl>
+        <dl>
+            <dt>side effects 란?</dt>
+            <dd>&nbsp;</dd>
+        </dl>
+
+        <div>
+            <h3>useEffect 사용법</h3>
+            <a href="https://ko.reactjs.org/docs/hooks-overview.html#effect-hook" target="_blank" rel="noopener noreferrer">useEffect OverView</a>
+            <a href="https://ko.reactjs.org/docs/hooks-effect.html" target="_blank" rel="noopener noreferrer">useEffect 와 lifecycle </a>
+        </div>
+    </pre>
+    <xmp>
+        참조 타입의 상태값을 만들고 변경하는 방법을 배운다.
+        1. ExampleContainer, Example 컴포넌트를 만든다.
+        2. ExampleContainer 컴포넌트의 상태값 만들기
+            const [state, setState] = useState({ id: 0, name: '', count: 10, }); // 상태값이 참조타입 경우
+            const callbackState = useCallback( (param)=>{
+                // 상태 변경 처리
+            }, [state]);
+        3.ExampleContainer 컴포넌트의 JSX
+            <div>
+                <Example state={state} callbackState={callbackState} >
+                </Example>
+            </div>
+        4. Example 컴포넌트의 상태값 만들기
+            const [age, setAge] = useState(42);
+            const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
+        5.Example 컴포넌트의 JSX
+            <div>
+                <p>You clicked {props.state.count} times</p>
+                <button onClick={(e) => alert("상태값 변경 코드 작성") }>
+                Click me
+                </button>
+            </div>
+
+    </xmp>
+    <hr>
+
+    <div id="app">
+    </div>
+</body>
+
+</html>
+
+
+
+
+
+

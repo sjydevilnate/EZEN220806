@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Sample</title>
+</head>
+
+<body>
+    <pre>
+        Babel 에 대해서 학습한다.
+
+        Babel 이란 JS 컴파일러(=번역기)다.
+            ES2015 를 ES5 로 바꾸어 주는
+            JSX 를 ES5로 바꾸어 주는
+
+        온라인 babel 컴파일러 : https://babeljs.io/repl/
+
+        <hr>
+
+        변수선언:
+            ES5 : var        : 함수 스코팅
+            ES2016 : let, const : 블락 스코핑
+        함수선언:
+            ES5 : function(){}
+            ES2016 : ()=>{ }
+    </pre>
+    <hr>
+    <div id="output_es5">
+        <!-- Hello, ES5 -->
+    </div>
+    <hr>
+    <div id="output_es6">
+        <!-- Hello, ES2016 -->
+    </div>
+
+</body>
+
+</html>
+
+<!-- ES5 사용하기 -->
+<script>
+    const func6 = function() {
+        return 'Hello, ES5';
+    };
+    const output_es5 = document.getElementById("output_es5"); // 찾기
+    output_es5.innerText = func6() ;  // 설정
+</script>
+
+<!-- ES2015 사용하기 -->
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin>
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script type="text/babel">
+    const func2015 = () => ('Hello, ES6');
+    const output_es6 = document.getElementById("output_es6"); // 찾기
+    output_es6.innerText = func2015() ;  // 설정
+</script>

@@ -1,0 +1,40 @@
+{
+    "Axios Promise": {
+        "prefix": "axios",
+        "body": [
+            "// import axios from 'axios';",
+            "",
+            "const result = axios({",
+            "    url: 'item',  // 호출되는 서버 주소.",
+            "    method: 'get',       // request method: get, post, delete, put",
+            "    params: { },  // 서버로 보내는 데이터. { data1:'test1', data2:'test2' } ",
+            "    timeout: 30000,    // 최대 대기 시간: 30초. 30초 이상이 되면 fail 부분이 실행됨.",
+            "    responseType: 'json',  // response로 넘어오는 데이터 형태: text, html, xml, json, jsonp, script",
+            "});"
+        ],
+        "description": "axios script"
+    },
+    "Axios Then": {
+        "prefix": "axiosthen",
+        "body": [
+            "// import axios from \"axios\";",
+            "",
+            "axios({",
+            "    url: \"item\",  // 호출되는 서버 주소.",
+            "    method: \"get\",       // request method: get, post, delete, put",
+            "    params: { },  // 서버로 보내는 데이터. 예시) { data1:\"test1\", data2:\"test2\" } ",
+            "    timeout: 30000,    // 최대 대기 시간: 30초. 30초 이상이 되면 fail 부분이 실행됨.",
+            "    responseType: \"json\",  // response로 넘어오는 데이터 형태: text, html, xml, json, jsonp, script",
+            "})",
+            ".then( (res) => {",
+            "    console.log(res.data);",
+            "    this.$data.message = res.data;",
+            "})",
+            ".catch((error) => {",
+            "    console.log(error);",
+            "});"
+        ],
+        "description": "axios script"
+    },
+
+}

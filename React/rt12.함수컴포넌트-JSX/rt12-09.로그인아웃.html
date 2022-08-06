@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>조건부 렌더링</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+    <style>
+        div { font-weight: bold; }
+
+        .profile { position: relative; z-index: 10; zoom: 1; border: 1px solid #dcdcdc; border-bottom: 0; height: 99px; _width: 298px }
+        .profile .user_area { background-color: #f3f4f3; border-bottom: 1px solid #dcdcdc; height: 54px; position: relative; z-index: 10 }
+        .profile .user_info { position: relative; padding: 8px 0 4px 58px; zoom: 1 }
+        .profile .user_thumbnail { position: absolute; left: 11px; top: 5px; width: 42px; height: 42px; overflow: hidden }
+        .profile .user_thumbnail img { width: auto; height: auto; max-width: 100%; max-height: 100% }
+        .profile .user_thumbnail .mask { width: 100%; height: 100%; position: absolute; left: 0; top: 0 }
+
+        .profile .private { margin-bottom: 5px; line-height: 19px; white-space: nowrap; position: relative }
+        .profile .private .user_name { max-width: 90px; *width: 90px; vertical-align: middle; position: relative; overflow: hidden; box-sizing: content-box; margin-right: 6px }
+        .profile .private .user_name a { color: #2f3743; font-weight: bold }
+        .profile .private .user_name a:hover { text-decoration: none }
+        .profile .private .user_name a strong { max-width: 79px; *width: 79px; vertical-align: top; *vertical-align: middle }
+        .profile .private .user_name a:hover strong { text-decoration: underline }
+        .profile .private .login_on { width: 17px; height: 11px; margin: 4px 2px 0 0; overflow: hidden; background-position: -20px -340px; vertical-align: top }
+        .profile .private .link_myinfo { color: #848688; text-decoration: underline }
+        .profile .private .set_login_protect { width: 12px; height: 18px; background-position: -58px 4px; vertical-align: top; margin-left: -1px }
+        .profile .private .btn_logout { position: absolute; right: 12px; border: 1px solid #d1d1d1; color: #848688; height: 16px; overflow: hidden; vertical-align: top }
+        .profile .private .btn_logout .btn_inr { border: 1px solid #fff; border-right: 0; border-bottom: 0; background-color: #f6f7f8; padding: 0 4px 0; height: 15px; line-height: 15px; vertical-align: top; *line-height: 17px }
+
+        .bar { width: 1px; height: 16px; background-position: 100% -18px; vertical-align: top; overflow: hidden }
+
+    </style>
+</head>
+
+<body>
+    <xmp>
+        조건부 렌더링
+
+        참고: https://reactjs.org/docs/conditional-rendering.html
+
+        생성할 컴포넌트
+            GreetinContainer
+            Greeting
+            GuestGreeting
+            UserGreeting
+
+        로그인이 된 경우: GuestGreeting 컴포넌트
+            <div class="login">
+                <form>
+                    <input type="hidden" name="seq" value="1">
+                    <label> 아이디를 입력하세요 : </label>
+                    <input type="text" name="userid"/>  <br/>
+                    <label> 패스워드를 입력하세요 :</label>
+                    <input type="password"  name="password"/>  <br/>
+                    <input type="checkbox" name="hobby" value="music"> music
+                    <input type="checkbox" name="hobby" value="yoga"> yoga
+                    <input type="checkbox" name="hobby" value="reading"> reading <br/>
+                    <input type="button" id="submit" value="전송" v-on:click="clickLogin" />
+                </form>
+            </div>
+
+
+        로그인이 안된 경우: UserGreeting 컴포넌트
+            <div class="profile">
+                <div class="user_area">
+                    <div class="user_info">
+                        <a href="#" class="user_thumbnail">
+                            <span class="mask"></span>
+                            <img id="profile_image" src="../images/myInfo.gif">
+                        </a>
+                        <div class="private">
+                            <span class="user_name">
+                                <a href="#"><strong id="user_name">??? 회원님</strong></a>
+                            </span>
+                            <a href="#" target="_parent" class="link_myinfo">내정보</a>
+                            <a href="" target="_parent" class="btn_logout">
+                                <span class="btn_inr" v-on:click="clickLogout" >로그아웃</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </xmp>
+    <hr>
+
+    <div id="app">
+    </div>
+</body>
+
+</html>
+
+
+
+

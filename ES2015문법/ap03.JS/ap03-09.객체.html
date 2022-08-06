@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>객체 학습 내용</title>
+        <link rel="stylesheet" href="../css/reset.css" />
+    </head>
+    <body>
+        <div>
+            <h2>객체 학습 내용</h2>
+            <ol>
+                <li>
+                    <h3>객체 선언 방법</h3>
+                    <ul>
+                        <li>객체 리터럴( {} ) 을 이용한 객체 선언</li>
+                        <li>생성자 함수를 이용한 객체 선언</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>객체 복사</h3>
+                    <ul>
+                        <li>객체 얕은 복사: 파일 바로가기 </li>
+                        <li>객체 깊은 복사: 파일 복사</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>객체 RCUD 방법</h3>
+                    <table class="table">
+                        <thead>
+                            <tr style="font-weight: bold" class="row0">
+                                <td data-row="0" data-col="0" class="col0">생성</td>
+                                <td data-row="0" data-col="1" class="col1">var obj = { } ;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="font-weight: normal" class="row2">
+                                <td data-row="2" data-col="0" class="col0">읽기. Read</td>
+                                <td data-row="2" data-col="1" class="col1">
+                                    obj.name <br />
+                                    obj['name']
+                                </td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row1">
+                                <td data-row="1" data-col="0" class="col0">추가. Create</td>
+                                <td data-row="1" data-col="1" class="col1">
+                                    obj.name=값; <br />
+                                    obj['name']=값;
+                                </td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row3">
+                                <td data-row="3" data-col="0" class="col0">수정. Update</td>
+                                <td data-row="3" data-col="1" class="col1">
+                                    obj.name=값; <br />
+                                    obj['name']=값;
+                                </td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row4">
+                                <td data-row="4" data-col="0" class="col0">삭제. Delete</td>
+                                <td data-row="4" data-col="1" class="col1">
+                                    delete obj.name;<br />
+                                    delete obj['name'];
+                                </td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row6">
+                                <td data-row="6" data-col="0" class="col0">검색. Search</td>
+                                <td data-row="6" data-col="1" class="col1">X</td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row5">
+                                <td data-row="5" data-col="0" class="col0">정렬. Sort</td>
+                                <td data-row="5" data-col="1" class="col1">X</td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row7">
+                                <td data-row="7" data-col="0" class="col0">얕은 복사</td>
+                                <td data-row="7" data-col="1" class="col1">Object.create()</td>
+                            </tr>
+                            <tr style="font-weight: normal" class="row7">
+                                <td data-row="7" data-col="0" class="col0">깊은 복사</td>
+                                <td data-row="7" data-col="1" class="col1">JSON.parse( JSON.stringify( ) )</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+        </div>
+        <div>
+            <h2>객체의 RCUD2S 사용법에 대해서 실습한다.</h2>
+            <ul>
+                <li class="langjs">
+                    <h3>객체 리터럴( {} ) 을 이용한 객체 선언</h3>
+                    <pre class="langjs">
+                        <code class="langjs">
+    var foo = {
+        name : 'foo',
+        run : function () { return this.name; }
+    };
+                        </code>
+                    </pre>
+                </li>
+                <li class="langjs">
+                    <h3>생성자 함수를 이용한 객체 선언. 상속 구현 시 사용</h3>
+                    <p>※생성자 함수란 첫 글자를 대문자로 시작하는 함수</p>
+                    <pre class="langjs">
+                        <code class="langjs">
+    function Goo(name, age) {
+        this.name = name;
+        this.run = function () { return this.name; };
+    };
+    var goo = new Goo('goo', 31);
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2>실습. 객체 RCUD 방법을 학습한다.</h2>
+            <pre class="langjs">
+                <code class="langjs">
+    // 객체 리터럴( {} )을 이용하여 객체 생성합니다.
+    var foo = {
+        name: 'foo',
+        age: 30,
+        array: [1,4,5,5],
+        run() {
+            return this.name;
+        },
+    };
+                </code>
+            </pre>
+            <ol>
+                <li class="langjs">
+                    <h3>RCUD : R. 읽기- 마침표 표기법</h3>
+                    <p class="langjs"> 마침표(.) 표기법을 사용하여 foo 객체의 name 값을 console.log()로 출력하시오 </p>
+                    <pre class="langjs">
+                        <code class="langjs">
+
+                        </code>
+                    </pre>
+                </li>
+                <li class="langjs">
+                    <h3>RCUD : R. 읽기- 대괄호 표기법</h3>
+                    <p class="langjs"> 대괄호( [] )표기법을 사용하여 foo 객체의 age 값을 console.log()로 출력하시오 </p>
+                    <pre class="langjs">
+                        <code class="langjs">
+
+                        </code>
+                    </pre>
+                </li>
+                <li class="langjs">
+                    <h3>RCUD : Create. 추가</h3>
+                    <p class="langjs">
+                        <ul>
+                            <li>foo 객체에 키명이 gender 인 프로퍼티를 추가하고 gender 값에 "man" 을 설정하시오</li>
+                            <li>foo 객체의 gender 값을 console.log()로 출력하시오</li>
+                        </ul>
+                    </p>
+                    <pre class="langjs">
+                        <code class="langjs">
+
+                        </code>
+                    </pre>
+                </li>
+                <li class="langjs">
+                    <h3> RCUD : Update. 수정</h3>
+                    <p class="langjs">
+                        <ul>
+                            <li>foo 객체에 name 값을 "bar" 로 바꾸시오</li>
+                            <li>foo 객체의 name 값을 console.log()로 출력하시오</li>
+                        </ul>
+                    </p>
+                    <pre class="langjs">
+                        <code class="langjs">
+
+                        </code>
+                    </pre>
+                </li>
+                <li class="langjs">
+                    <h3> RCUD : Delete. 삭제</h3>
+                    <p class="langjs">
+                        객체에서 프로퍼티(속성)을 삭제하려면 delete 연산자를 사용한다.
+                    </p>
+                    <pre class="langjs">
+                        <code class="langjs">
+    delete foo.age;
+    delete foo.gender;
+    console.log( foo.age    );
+    console.log( foo.gender );
+                        </code>
+                    </pre>
+                </li>
+            </ol>
+        </div>
+        <div>
+            <h2>문제1. 다음의 그림을 자바스크립트 객체로 만드시오</h2>
+            <img src="data:image/jpeg;base64,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">
+            <pre class="langjs">
+                <code class="langjs">
+
+                </code>
+            </pre>
+        </div>
+        <div>
+            <h2>문제2. 다음의 표를 자바스크립트 객체로 만드시오</h2>
+            <table>
+                <thead>
+                    <th>키</th>
+                    <th>값</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>이름</td>
+                        <td>Nature of Code</td>
+                    </tr>
+                    <tr>
+                        <td>가격</td>
+                        <td>30000</td>
+                    </tr>
+                    <tr>
+                        <td>저자</td>
+                        <td>다니엘</td>
+                    </tr>
+                    <tr>
+                        <td>ISBN</td>
+                        <td>9788968481901</td>
+                    </tr>
+                    <tr>
+                        <td>페이지수</td>
+                        <td>620페이지</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p></p>
+            <pre class="langjs">
+                <code class="langjs">
+
+                </code>
+            </pre>
+        </div>
+    </body>
+</html>
+
+

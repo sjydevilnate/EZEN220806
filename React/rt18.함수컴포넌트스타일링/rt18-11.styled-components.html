@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <xmp>
+    styled-components 사용하는 방법을 학습한다.
+
+    리액트에서 스타일링을 처리 하는 방법은 크게 2가지 방식이다.
+    1. 인라인 방식
+    2. 파일 방식
+
+    인라인 방식을 사용하는 것이 가장 추천되는 방식이다.
+
+    인라인 방식으로 스타일링을 할 때도 아래의 2 가지로 처리 가능한데
+    1. Javascript 표기법을 사용하는 스타일링
+    2. CSS 표기법을 사용하는 스타일링
+    이다.
+
+    CSS 표기법을 사용하는 스타일링할 때 사용되는 라이브러리가 styled-components 이다.
+    styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리 이다.
+
+    styled-components를 사용하여 리액트 컴포넌트를 생성하기 위해서는 Styled.[HTML 태그] 형식과 템플릿 리터럴(`)을 사용한다.
+
+    예시 1)
+    >>> styled-components 적용 전
+    <style>
+        .App {
+            text-align: center;
+        }
+    </style>
+
+    <div className="App">
+        ...중략
+    </div>
+
+    >>> styled-components 적용 후
+    const styledContainerDiv = Styled.div`
+        text-align: center;
+    `;
+    <styledContainerDiv>
+        ...중략
+    </styledContainerDiv>
+
+
+    React CLI 을 사용하여 React 어플리케이션을 만들어 본다.
+
+
+    1. 프로젝트 생성 작업
+        step 1-01. node / npm 버전 업그레이드
+            $ node -v                          #  node 버전 확인
+            v16.12.0
+
+            $ npm -v                           #  npm 버전 확인
+            8.1.0
+
+            $ npx -v                           #  npx 버전 확인
+            8.1.0
+
+            $ npm install -g npm@8.1.0         #  npm 버전 업그레이드
+
+
+        step 1-02. 프로젝트 생성
+            $ npx create-react-app styleprj01          # 프로젝트명은 소문자로 만들어야 함.
+            $ ls                                       # styleprj01 폴더가 보이는지 확인
+            $ cd styleprj01                            # styleprj01 폴더로 이동
+            $ ls                                       # package.json 파일이 보이는지 확인
+            $ npm install --save react@16.14.0         # react 16 버전으로 다운사이징. 최신 react 버전 17.0.2
+            $ npm install --save react-dom@16.14.0     # react 16 버전으로 다운사이징. 최신 react 버전 17.0.2
+            $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+        step 1-03. 실행 중인 프로세스 중지
+            커맨트에서  "ctrl + c" 눌러 중지하고 다시 실행 한다
+
+        step 1-04. 프로젝트 소스 커밋
+            $ ls
+            $ git add -AN       # 신규 파일 추가 추가
+            $ git commit -a -m '프로젝트 시작하기'
+            $ git push
+
+        step 1-05. styled-component
+            styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리 이다.
+
+            $ npm install --save styled-components
+            $ npm install --save-dev jest-styled-components
+
+        step 1-06. 배포용 파일 빌드. /dist/ 폴더에 파일 만들어짐.
+            $ npm run build
+
+
+        step 1-07. 서버 시작
+            $ ls                # package.json 보이는지 확인
+            $ npm run start     # package.json 보이면 서버 실행
+
+
+        step 1-08. 서버 중지
+            터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+
+    2. App.css 대신 styled-components 을 사용하는 인라인 스타링으로 바꾸어 보기
+
+        작업 2-01. App.test.js 수정
+            리액트에서는 TDD 를 작성할 때 jest 를 사용한다.
+            파일명.test.js 가 테스트용 TDD 파일이다.
+
+            test('renders learn react link', () => {
+              const {container}= render(<App />);
+
+              const linkElement = screen.getByText(/learn react/i);
+              expect(linkElement).toBeInTheDocument();
+
+              expect(container.getElementsByClassName('App-logo')).toHaveLength(1);
+              expect(container.getElementsByClassName('App-logo')[0]).toHaveAttribute( 'src', 'logo.svg');
+              expect(container.getElementsByTagName('p')).toHaveLength(1);
+              expect(container.getElementsByTagName('p')[0]).toHaveTextContent('Edit src/App.js and save to reload.');
+              expect(container).toMatchSnapshot();
+            });
+
+        작업 2-02. App.test.js 테스트
+            $ npm run test
+
+            Watch Usage
+            › Press a to run all tests.
+            › Press f to run only failed tests.
+            › Press q to quit watch mode.
+            › Press p to filter by a filename regex pattern.
+            › Press t to filter by a test name regex pattern.
+            › Press Enter to trigger a test run.
+
+
+            PASS  src/App.test.js (7.046 s)
+            √ renders learn react link (61 ms)
+
+            Test Suites: 1 passed, 1 total
+            Tests:       1 passed, 1 total
+            Snapshots:   0 total
+            Time:        12.099 s
+            Ran all test suites.
+
+            Watch Usage: Press w to show more.
+
+        작업 2-03. App.js 파일에 'styled-components' import
+            import Styled from 'styled-components';
+
+        작업 2-04. App.js 파일에서 .App 클래스를 styled-components 방식으로 바꾸어 보자.
+            .App {
+                text-align: center;
+            }
+            <div className="App">
+                ...생략
+            </div>
+
+            const StyledContainerApp = Styled.div`
+                text-align: center;
+            `;
+            <StyledContainerApp>
+                ...생략
+            </StyledContainerApp>
+
+
+        작업 2-05. App.js 파일에서 .App-header 클래스를 styled-components 방식으로 바꾸어 보자.
+
+            .App-header {
+                background-color: #282c34;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: calc(10px + 2vmin);
+                color: white;
+            }
+
+            <header className="App-header">
+            ...생략
+            </header>
+
+
+            const StyledContainerAppHeader = Styled.header`
+                background-color: #282c34;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: calc(10px + 2vmin);
+                color: white;
+            `;
+            <StyledContainerAppHeader>
+            ...생략
+            </StyledContainerAppHeader>
+
+
+
+        작업 2-06. App.js 파일에서 .App-logo 클래스를 styled-components 방식으로 바꾸어 보자.
+
+            .App-logo {
+                height: 40vmin;
+                pointer-events: none;
+            }
+
+            @media (prefers-reduced-motion: no-preference) {
+                .App-logo {
+                    animation: App-logo-spin infinite 20s linear;
+                }
+            }
+            @keyframes App-logo-spin {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            <img src={logo} className="App-logo" alt="logo" />
+
+            const StyledContainerAppLogo = Styled.img`
+                height: 40vmin;
+                pointer-events: none;
+
+                @media (prefers-reduced-motion: no-preference) {
+                    animation: App-logo-spin infinite 20s linear;
+                }
+
+                @keyframes App-logo-spin {
+                    from {
+                        transform: rotate(0deg);
+                    }
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+            `;
+            <StyledContainerAppLogo src={logo} alt="logo" />
+
+
+        작업 2-07. App.js 파일에서 .App-link 클래스를 styled-components 방식으로 바꾸어 보자.
+
+            .App-link {
+                color: #61dafb;
+            }
+            <a
+                className="App-link"
+                href="https://reactjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Learn React
+            </a>
+
+            const StyledContainerAppLink = Styled.a`
+                color: #61dafb;
+            `;
+
+        작업 2-08. App.js 파일에서  css를 import 하는 부분을 찾아 삭제하도록 한다.
+            import App from './App'; 삭제
+
+        작업 2-09. App.css 파일 삭제
+
+        작업 2-10. App.test.js 수정
+            리액트에서는 TDD 를 작성할 때 jest 를 사용한다.
+            파일명.test.js 가 테스트용 TDD 파일이다.
+
+            test('renders learn react link', () => {
+              const {container}= render(<App />);
+
+              const linkElement = screen.getByText(/learn react/i);
+              expect(linkElement).toBeInTheDocument();
+
+              // expect(container.getElementsByClassName('App-logo')).toHaveLength(1);
+              // expect(container.getElementsByClassName('App-logo')[0]).toHaveAttribute( 'src', 'logo.svg');
+
+              const applogo = screen.getByAltText( 'logo');
+              expect(applogo).toBeInTheDocument();
+              expect(applogo).toHaveAttribute( 'src', 'logo.svg');
+
+              expect(container.getElementsByTagName('p')).toHaveLength(1);
+              expect(container.getElementsByTagName('p')[0]).toHaveTextContent('Edit src/App.js and save to reload.');
+              expect(container).toMatchSnapshot();
+            });
+
+        작업 2-11. App.test.js 테스트
+            $ npm run test
+
+
+    </xmp>
+</body>
+</html>

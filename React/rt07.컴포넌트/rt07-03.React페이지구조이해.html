@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+</head>
+
+<body>
+    <xmp>
+        <!-- react 플러그인 include   -->
+        <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+        < script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">/* JSX를 자바스크립트로 변환 */</script>
+        < script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"> /* import { React} from 'react'; */</script>
+        < script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">/* import { ReactDOM } from 'react-dom'; */</script>
+        < script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.0/redux.js">/* redux import */</script>
+        < script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.2/react-redux.js">/* react-redux import */</script>
+        < script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> /* jQuery library */</script>
+
+        //import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
+        //import ReactRedux, {Provider, useDispatch, useSelector } from "react-redux";
+        //import ReactRouterDom, {BrowserRouter,Switch,Router,Route,IndexRoute,Link,IndexLink,NavLink,useRouteMatch,useParams} from "react-router-dom";
+
+        const {useState, useEffect, useRef, useCallback, useMemo} = React;
+        const {Provider, useDispatch, useSelector} = ReactRedux;
+        const {BrowserRouter,Switch,Router,Route,IndexRoute,Link,IndexLink,NavLink,useRouteMatch,useParams} = ReactRouterDom;
+
+        console.log(useState); // 상태값 처리
+        console.log(useRef); // 렌더링과 무관한 상태값 또는 real dom 직접 접근
+        console.log(useEffect); // 부수 효과 처리. 부수 효과란 함수 외부의 데이터를 변경하는 연산
+        console.log(useCallback); // 콜백 메서드(자식에서 호출되는 부모 메서드)
+        // console.log(useDispatch); // store.dispatch() 호출
+        // console.log(useSelector); // store.state 가져오기
+
+        function Comp({name}) {
+            // 컴포넌트의 상태값 설정
+            const [mesg, setMesg] = useState("hi!!!!" ); // 상태값이 기본타입인 경우
+            //const [state, setState] = useState({ id: 0, name: "", age: 0, }); // 상태값이 참조타입 경우
+
+            // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
+            const refIsMounted = useRef(false);
+            useEffect( () => {
+                if (refIsMounted.current){
+                    // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
+                }
+                else {
+                    // 마운트 완료 후에 실행됨. 한번만. focus 줄때
+                    refIsMounted.current = true;
+                }
+            });
+
+            // 이벤트 핸들러 작성
+            const handler = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만들면 this bind()를 생략해도 된다
+                console.log(event.target)
+            };
+
+            // JSX로 화면 만들기
+            return (
+                <div onClick={handler}>
+                    {props.name}, {mesg}
+                </div>
+            )
+        };
+
+        Comp.propsTypes = { /* props의 프로퍼티 타입 설정 */ }
+        Comp.defaultProps = { /*  props의 디폴트 값 설정 */ }
+
+        //export default Comp;
+
+
+        // Component 를 화면에 붙이는 작업.
+        ReactDOM.render(<Comp name="Hello"></Comp>, document.getElementById("app"));
+
+        작성  순서
+            단계1: React 객체 스크립트 플러그인 추가 or 객체 import
+            단계2. React 객체 import 여부 확인
+                console.log(React);
+                console.log(ReactDOM);
+            단계3. Component 만들기
+            단계4. Component 화면에 주입
+
+    </xmp>
+    <hr>
+
+    <div id="app">
+        ?????
+    </div>
+</body>
+
+</html>
+
+
+
+
+

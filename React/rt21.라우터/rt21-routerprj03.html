@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 라우팅</title>
+    <link rel="stylesheet" href="../css/reset.css"/>
+    <style>
+        body {
+            background-color: #ffcc00;
+            padding: 20px;
+            margin: 0;
+        }
+        h1,h2,p,ul,li {
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        ul.header li {
+            display: inline;
+            list-style-type: none;
+            margin: 0;
+        }
+        ul.header {
+            background-color: #111;
+            padding: 0;
+        }
+        ul.header li a {
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 20px;
+            display: inline-block;
+        }
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+        }
+        .content h2 {
+            padding: 0;
+            margin: 0;
+        }
+        .content li {
+            margin-bottom: 10px;
+        }
+        .active {
+            background-color: #0099ff;
+        }
+    </style>
+</head>
+<body>
+    <xmp>
+    라우팅을 테스트 하기 위한 예제를 만들어 본다.
+    라우팅을 테스트 하기 위해서는 서버로 실행해야 합니다.
+
+
+
+    Hello 컴포넌트:
+        HelloHeader
+        HelloFooter
+        HelloMenu
+        HelloKorean
+        HelloEnglish
+        HelloJapanese
+        HelloConatiner
+
+
+    HelloHeader 컴포넌트 JSX 화면
+        <div>
+            <h2 style="background-color: orange; color: white; padding: 8px;">Hello Router</h2>
+        </div>
+
+    HelloFooter 컴포넌트 JSX 화면
+        <div style="background-color: orange; color: white; padding: 8px;">
+            라우팅을 이용하는 애플리케이션입니다.
+        </div>
+
+    HelloMenu 컴포넌트 JSX 화면
+        <div>
+            <nav>
+                <ul>
+                    <li> <Link to="/ko">한국어</Link> </li>
+                    <li> <Link to="/en">영어</Link> </li>
+                    <li> <Link to="/ja">일본어</Link> </li>
+                </ul>
+            </nav>
+        </div>
+
+    HelloKorean 컴포넌트 JSX 화면
+        <div>
+            <h1>안녕하세요</h1>
+        </div>
+
+    HelloEnglish 컴포넌트 JSX 화면
+        <div>
+            <h1>Hello</h1>
+        </div>
+
+    HelloJapanese 컴포넌트 JSX 화면
+        <div>
+            <h1>こんにちは</h1>
+        </div>
+
+    HelloContainer 컴포넌트 JSX 화면
+        <div style="margin: 20px;">
+            <HelloHeader></HelloHeader>
+            <HelloMenu></HelloMenu>
+            {/* A <Switch> looks through its children <Route>s and
+                renders the first one that matches the current URL. */}
+            <Switch>
+                <Route path="/" component={HelloKorean} exact />
+                <Route path="/ko" component={HelloKorean} />
+                <Route path="/en" component={HelloEnglish} />
+                <Route path="/ja" component={HelloJapanese}  />
+            </Switch>
+            <HelloFooter></HelloFooter>
+        </div>
+
+    ------------------------
+
+    1. 프로젝트 생성 작업
+        step 1-01. 프로젝트 생성
+            $ npx create-react-app routerprj01 --scripts-version 16.14.0  # 프로젝트명은 소문자로 만들어야 함.
+            $ ls                                # routerprj01 폴더가 보이는지 확인
+            $ cd routerprj01                    # routerprj01 폴더로 이동
+            $ ls                                # package.json 파일이 보이는지 확인
+            $ npm run start                     # package.json 파일이 보이면 서버 실행
+
+
+        step 1-02. prop-types 설치(필수)
+            컴포넌트의 매개변수들의 타입을 정의할 때 사용되는 라이브러리.
+            $ npm install --save prop-types
+
+
+        step 1-03. 리액트 라우터 설치(필수)
+            react-router-dom: 브라우저에서 사용되는 react-router 라이브러리 . 필수
+            react-router-redux: 리덕스를 사용하여 라우터 처리하는 라이브러리. 선택
+            $ npm install --save react-router-dom history
+            $ npm install --save react-router-redux
+
+
+        step 1-04. 리덕스 설치(필수)
+            react-redux : react에서 redux를 사용할 수있게 하는 라이브러리
+            redux-actions : redux용 action을 정의하기 위한 라이브러리
+            $ npm install --save react-redux redux-actions
+
+            redux-logger : redux용 로깅 처리를 위한 미들웨어 라이브러리
+            $ npm install --save react-redux redux-actions redux-logger
+
+        step 1-05. 비동기 처리(필수)
+            axios : rest api 호출 라이브러리
+            redux-saga : redux에서 비동기로 액션을 처리하는 미들웨어 라이브러리
+            $ npm install --save redux-saga axios
+
+
+        step 1-06. immer 설치(필수)
+            immer : 리덕스 store state 를 불변 객체, 읽기 전용으로 처리할 때 사용되는 라이브러리
+            $ npm install --save immer
+
+
+        step 1-07. cross-env 설치(필수)
+            $ npm install --save-dev cross-env
+            cross-env: 프로젝트에서 NODE_PATH 를 사용하여 절대 경로로 파일을 불러오기 위하여 환경 변수를 설정 할 때
+                        운영체제마다 방식이 다르므로 공통적인 방법으로 설정 할 수 있게 해주는 라이브러리입니다.
+
+
+        step 1-08. redux-toolkit 설치(선택)
+            react 17 에서는 설치시 오류 발생
+            redux-devtools-extension : 스토어의 상태를 개발자 도구에서 조회 할 수 있는 크롬 확장 프로그램
+            $ npm install --save-dev redux-devtools
+
+
+        step 1-11. install material-ui
+            $ npm install --save @material-ui/core
+
+
+        step 1-12. install the Bootstrap 4
+            $ npm install --save bootstrap
+
+
+        step 1-13. reselect 설치
+            $ npm install --save reselect
+
+        step 1-21. eslint 모듈
+            ESlint는 문법 에러를 잡아내고 특정 문법 요소를 사용하여 코드를 수정하기 위해 사용
+
+            $ npm install --save-dev eslint
+
+        step 1-22. prettier 모듈
+            코드를 좀 더 보기 좋게 고치는 데 사용되는 모듈
+            prettier 사용되는 예시
+              . 한 줄의 최대 길이는 얼마로 할 것인가?
+              . 들여쓰기에 tab을 쓸 것인가? space를 쓸 것인가?
+              . 문자 리터럴로  ' 를 쓸 것인가? " 쓸 것인가?
+            Prettier 모듈을 설치할 때는 --save-exact 옵션을 사용하세요.
+            이는 Prettier 버전이 달라져도 코드 스타일 변화가 생기지 않도록 하는 옵션입니다.
+
+            $ npm install --save-dev prettier
+
+        step 1-23. 필요한 추가 모듈들
+            eslint-config-prettier: Prettier와 충돌할 설정들을 비활성화합니다.
+            eslint-plugin-prettier: 코드 코맷할 때 Prettier를 사용하게 만드는 규칙을 추가합니다.
+
+            $ npm install --save-dev eslint-plugin-prettier eslint-config-prettier
+
+
+        step 1-31. 프로젝트 실행
+            $ ls # package.json 보이는지 확인
+            $ npm run start # package.json 보이면 서버 실행
+
+
+        step 1-32. 배포용 파일 빌드. /dist/ 폴더에 파일 만들어짐.
+            $ npm run build
+
+
+        step 1-33. react 프로젝트 설정 파일 추출하기
+            package.json 파일의 내용이 변경된다.
+            $ npm run eject
+
+
+    2. 프로젝트 폴더 구조
+        프로젝트
+        ├─ build                    # 빌드 결과물 폴더
+        ├─ node_modules             # npm 모듈(패키지) 저장 폴더
+        ├─ public                   # 배포 버전을 빌드할 때 사용하는 파일.
+        │   ├─ index.html
+        │   └─ favion.ico
+        ├─ src # 소스 코드 폴더
+        │   ├─ actions (리덕스 액션함수)
+        │   ├─ api (API 모듈)
+        │   ├─ assets (기타 자원)
+        │   │   ├─ images (이미지)
+        │   │   ├─ styles (스타일시트)
+        │   │   └─ text
+        │   ├─ common (공통)
+        │   ├─ components (프리젠테이션 컴포넌트)
+        │   ├─ containers (컨테이너  컴포넌트)
+        │   ├─ constant (상수)
+        │   ├─ models (데이터 모델 변수, 타입)
+        │   ├─ pages (페이지 컴포넌트)
+        │   ├─ reducers (리덕스의 리듀서)
+        │   │   └─ index.js
+        │   ├─ routes (라우팅)
+        │   │   └─ index.js
+        │   ├─ store (Redux 관련 코드)
+        │   │   └─ index.js
+        │   ├─ styles (스타일시트)
+        │   ├─ utils (유틸리티 모듈)
+        │   ├─ App.css
+        │   ├─ App.js
+        │   └─ index.js
+        ├─ babel.config.js
+        ├─ package.json
+        └─ README.md
+
+
+    3. 프로젝트 디렉토리 및 파일 생성
+        3.1 디렉토리 생성
+        $ mkdir -p ./src/actions \
+                   ./src/api \
+                   ./src/assets \
+                   ./src/assets/images \
+                   ./src/assets/styles \
+                   ./src/assets/text \
+                   ./src/common \
+                   ./src/components \
+                   ./src/containers \
+                   ./src/constant \
+                   ./src/models \
+                   ./src/pages \
+                   ./src/reducers \
+                   ./src/routes \
+                   ./src/store \
+                   ./src/utils
+
+
+        3.2 프로젝트 공통 파일 생성
+        $ touch ./src/reducers/index.js \
+                ./src/routes/index.js \
+                ./src/store/index.js \
+                .eslintrc.json \
+                ..prettierrc \
+                .env \
+                jsconfig.json
+
+
+    4. 프로젝트 환경 설정
+        4.1 NODE_ENV 설정
+            우리가 코드들을 불러올 때 '../components/Something' 이런식으로 불러와야 하는 코드를 'components/Something'
+            이렇게 불러 올 수 있도록 프로젝트의 루트경로를 설정하겠습니다. package.json 파일의 script 부분을 다음과 같이 수정하세요.
+
+            "scripts": {
+              "start": "cross-env NODE_PATH=src react-scripts start",
+              "build": "cross-env NODE_PATH=src react-scripts build",
+              "test": "react-scripts test --env=jsdom",
+              "eject": "react-scripts eject"
+            }
+
+        4.2 jsconfig.json 설정
+            {
+                "compilerOptions": {
+                    "baseUrl": "./src"
+                }
+            }
+
+        4.3 eslint 설정
+            .eslintrc.json 파일을 프로젝트 루트에 만들고 아래 내용을 추가
+            {
+              "plugins": ["prettier"],
+              "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+              "settings": {
+                  "import/resolver": {
+                      node: { paths: [path.resolve('./src/')] }
+                  },
+              },
+              "rules": {
+                "prettier/prettier": "error",
+                "no-unused-vars": 1,
+                "comma-dangle": 0,
+                "no-console": 0,
+                "no-debugger": 1,
+                "eol-last": 0
+              }
+            }
+
+        4.4 Prettier 설정
+            ..prettierrc 파일을 프로젝트 루트에 만들고 아래 내용을 추가
+            {
+              "singleQuote": true,
+              "semi": true,
+              "useTabs": false,
+              "tabWidth": 2,
+              "trailingComma": "es5",
+              "printWidth": 130,
+              "editor.formatOnSave": true,
+              "proseWrap": "always",
+              "requireConfig": false,
+              "bracketSpacing": true,
+              "jsxBracketSameLine": false
+            }
+
+        4.5 환경 설정
+            프로젝트 root에 .env 파일을 만들고 아래 내용을 추가 한다.
+            $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+
+            .env 파일 내용 확인
+            $ cat .env
+            SKIP_PREFLIGHT_CHECK=true
+            PORT=15109
+
+        4.9 프로젝트 재실행
+            실행중이면 "ctrl + c" 눌러 중지하고 다시 실행 한다
+            $ ls
+            $ npm run start # package.json 보이면 서버 실행
+
+        5. 프로젝트 초기 설정.
+    </xmp>
+    <hr>
+    <div id="app">
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Jest</title>
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css" />
+
+</head>
+<body>
+    <hr>
+    <xmp>
+    자바스크립트 테스트 프레임워크
+        . Mocha
+        . Jasmine
+        . Jest
+        . Karma
+
+    Jest는 Jasmine을 기반으로 한 CLI 도구다.
+        . https://jestjs.io/
+
+    Jest 테스트 파일
+        . __test__ 폴더
+        . xxxx.test.js 파일
+
+    Jest의 장점
+        . 제로 설정
+        . 스냅샷 테스트 지원
+        . Mocking 객체 테스트 지원
+        . 테스트 코드 분리 지원
+        . 코드 coverage(정적 분석) 지원
+        . Jasmine assertion 지원
+
+    Jest는 test suite 와 test unit 의 구조를 갖는다.
+        . describe: 테스트 꾸러미. 여러 개의 테스트를 감싸는 역활
+        . before: 준비
+        . before Each: 모든 테스트 꾸러미 또는 개별 테스트를 위한 준비
+        . after: 정리
+        . afterEach: 모든 태스트 꾸러미 또는 개별 테스트를 위한 정리
+        . test: 개별 테스트 케이스.
+
+    태스트는
+        1. 테스트 꾸러미 작성 ==> describe
+        2. 테스트 케이스 작성 ==> it
+        3. 테스트 케이스에 assertion 생성. assertion 은 BDD 형식으로 작성하며 예/아니오 로  처리된다.
+
+    describe('Noun: method or a class/module name', () => {
+        beforeAll((done) => {
+            // This code will be called just once before all it statements
+            done()
+        });
+        beforeEach((done) => {
+            // This code will be called many times before all it statements
+            done()
+        });
+        afterAll((done) => {
+            // This code will be called just once after all it statements
+            done()
+        });
+        afterEach((done) => {
+            // This code will be called many times after all it statements
+            done()
+        });
+        it('Verb describing the behavior', (done) => {
+            // Assertions
+            done()
+        });
+        test('Verb describing the behavior', (done) => {
+            // Assertions
+            done()
+        });
+    });
+
+    Jest가 지원하는 주요 assertion 메서드 목록
+    . not: 이어지는체인의 비교를반대로만든다.
+    . expect(OBJECT).toBe(value): 자바스크립트 일치 연산자←==)를 시용했을 때 값이 동일 할 것을 예상한다(값뿐만 아니라 값의 타입도 비교한다). 3
+    . expect(OBJECT).toEqual(value): 값을 갚은 비교(deep-equal) 했을 때 동일할 것을 예상 한다.
+    . expect(OBJECT).toBeFalsy(): 값이 거짓일 것으로 예상한다(이어지는참고사항을살펴보기 바란다).
+    . expect(OBJECT).toBeTruthy(): 값이 참일 것으로 예상한다.
+    . expect(OBJECT).toBeNul l(): 값이 null 일 것으로 예상한다.
+    . expect(OBJECT).toBeUndefined(): 값이 정의되지 않을 것으로 예상한다.
+    . expect(OBJECT).toBeDefined(): 값이 정의될 것으로 예상한다.
+    . expect(OBJECT).toMatch(regexp): 값이 정규표현식에 일치할 것으로 예상한다.
+
+
+    구글 검색
+    . jest saga debugging
+    . How To Debug Jest Tests
+
+        https://www.youtube.com/watch?v=Nl54MJDR2p8&ab_channel=BrianDesign
+        https://www.youtube.com/watch?v=g4MdUjxA-S4&list=PLZKTXPmaJk8L1xCg_1cRjL5huINlP2JKt
+
+    jest 동영상
+        https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/
+        https://github.com/facebook/jest/issues/3750
+
+
+    jest 프로젝트 참조 사이트
+        https://jestjs.io/docs/cli
+        https://jestjs.io/docs/getting-started
+
+    jest 테스트 코드 작성시 참조 사이트
+        https://jestjs.io/docs/getting-started
+        http://www.albertgao.xyz/2017/05/24/how-to-test-expressjs-with-jest-and-supertest/
+        https://yonghyunlee.gitlab.io/temp_post/jest/
+        https://www.js2uix.com/frontend/jest-study-step2/
+        https://www.js2uix.com/frontend/jest-study-step3/
+
+
+
+    무작위 비밀번호를 생성하는 모듈을 생성하고 단위 테스트를 작성하는 프로젝트를 만들어 본다.
+
+
+
+
+    ##################################
+    1. 작업 개요
+    ##################################
+
+    ##################################
+    2. 프로젝트 생성 작업
+       소요시간: 20분
+    ##################################
+    step 1-01. node / npm 버전 업그레이드
+        $ node -v                          #  node 버전 확인
+        v16.14.2
+
+        $ npm install -g npm@latest        #  npm 최신 버전 설치
+
+        $ npm -v                           #  npm 버전 확인
+        8.13.2
+
+        $ npx -v                           #  npx(=npm extension) 버전 확인
+        8.13.2
+
+
+    step 1-02. 프로젝트 생성
+        $ mkdir jestprj01  # 프로젝트명은 소문자로 만들어야 함.
+        $ cd jestprj01
+        $ npx jest init
+        $ npm initpackage name: (jestprj01)
+
+        version: (1.0.0)
+        description:
+        entry point: (index.js)
+        test command:
+        git repository:
+        keywords:
+        author:
+        license: (ISC)
+        About to write to  jestprj01\package.json:
+
+        {
+          "name": "jestprj01",
+          "version": "1.0.0",
+          "description": "",
+          "main": "index.js",
+          "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1"
+          },
+          "author": "",
+          "license": "ISC"
+        }
+
+
+        Is this OK? (yes)
+
+        $ ls                                 # package.json 파일이 보이는지 확인s
+        package.json
+
+        $ cat package.json
+        {
+          "name": "jestprj01",
+          "version": "1.0.0",
+          "description": "",
+          "main": "index.js",
+          "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1"
+          },
+          "author": "",
+          "license": "ISC"
+        }
+
+
+    step 1-04. 프로젝트 소스 커밋
+        $ ls                                  # package.json 파일이 보이는지 확인
+        $ git status                          # 파일 상태 확인
+        $ git add -AN                         #
+        $ git status                          # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'     # 파일 commit
+        $ git status                          # 파일 상태 확인
+        $ git push                            #
+
+        github 사이트에서 소스가 올라갔는지 확인한다.
+
+    step 1-11. babel 모듈 설치
+        https://babeljs.io/docs/en/babel-preset-env-standalone
+        https://babeljs.io/docs/en/babel-preset-react
+        
+        $ npm install --save-dev @babel/core @babel/cli
+        $ npm install --save-dev @babel/preset-env
+        $ npm install --save-dev @babel/preset-react
+
+
+    step 1-12. Jasmine 기반의 테스트 프레임워크 jest 설치
+        https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/
+        https://github.com/facebook/jest/issues/3750
+
+        jest 는 코드가 제대로 동작하는지 확인하는 Jasmine 기반의 '테스팅 프레임워크' 입니다.
+        jest-cli 는 단일 파일만 테스트 하는 경우에 사용합니다.
+        @testing-library는 실제 react-dom 위에서 동작하는 DOM 테스팅 라이브러리 (DOM Testing Library) 이다.
+
+        $ npm install --save-dev jest
+        $ npm install --save-dev jest-cli
+        $ npm install --save-dev @types/jest
+        $ npm install --save-dev babel-jest
+        $ npm install --save-dev @testing-library/react
+        $ npm install --save-dev @testing-library/jest-dom
+        $ npm install --save-dev @testing-library/user-event
+
+    step 1-13. supertest 모듈 설치
+        $ npm install --save-dev supertest
+
+    step 1-14. superagent 모듈 설치
+        $ npm install --save-dev supertest superagent
+
+    step 1-15. nodemon 모듈 설치
+        $ npm install --save-dev nodemon
+
+
+    step 1-21. prop-types 설치(필수)
+        prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
+
+        $ npm install --save prop-types
+
+
+    step 1-22. styled-component
+        styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
+
+        $ npm install --save styled-components
+        $ npm install --save-dev @types/styled-components jest-styled-components
+
+
+    step 1-23. 리액트 라우터 설치(필수)
+        react-router:
+        react-router-dom: 브라우저에서 사용되는 react-router 라이브러리. 필수
+
+        $ npm install --save react-router react-router-dom
+
+
+    ##################################
+    2. 배포 테스트
+    ##################################
+
+    2-1. 배포 테스트
+        배포용 파일을 만들고 nginx 에 배포하여 본다.
+        "npm run build" 을 실행하면 /build/ 폴더에 배포용 파일들이 만들어진다.
+
+        $ ls     # build/ 폴더가 보이는지 확인. 없으면 정상
+        node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        $ npm run build
+
+        $ ls    # build/ 폴더가 보이는지 확인. 있으면 정상
+        build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        nginx 에 배포 테스트
+        "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
+    </xmp>
+
+    <img src="./snap0030.png" width="100%" />
+
+    <xmp>
+
+
+    ##################################
+    3. 프로젝트 폴더 구조
+       소요시간: 05분
+    ##################################
+
+    프로젝트
+    |-- node_modules             # npm 모듈(패키지) 저장 폴더
+    |-- src                      # 소스 코드 폴더
+    │   |-- password.js
+    │   |-- password.test.js
+    │   |-- sum.js
+    │   `-- sum.test.js
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc
+    |-- eslintrc.json
+    |-- jsconfig.json
+    |-- package.json
+    `-- README.md
+
+
+    3-1. 프로젝트용 공통 폴더 생성
+      $ mkdir -p ./src
+
+    3-2. 프로젝트용 공통 파일 생성
+      $ touch  .babelrc  .env  .prettierrc  eslintrc.json  jsconfig.json
+
+
+    3-3. .babelrc 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > .babelrc
+      $ cat .babelrc
+
+    3-4. .env 파일 생성 후 내용 추가
+      $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+      $ cat .env
+
+    3-5. .prettierrc 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > .prettierrc
+      $ cat .prettierrc
+
+    3-6. eslintrc.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > eslintrc.json
+      $ cat eslintrc.json
+
+    3-7. jsconfig.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > jsconfig.json
+      $ cat jsconfig.json
+
+
+    ##################################
+    4. 프로젝트 환경 설정
+       소요시간: 15분
+    ##################################
+
+    프로젝트
+    |-- ... 생략
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc
+    |-- eslintrc.json
+    |-- package.json
+    `-- README.md
+
+    4-1 .babelrc 설정
+
+        .babelrc 파일을 프로젝트 루트에 만들기
+        $ touch .babelrc
+
+        {
+            "presets": [
+                [
+                    "react-app",
+                ],
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": false,
+                        "targets": {
+                            "node": "current",
+                            "chrome": "79", // 크롬 79까지 지원하는 코드를 만든다
+                        }
+                    }
+                ],
+                [
+                    "@babel/preset-react",
+                    {
+                        "development": process.env.BABEL_ENV === "development",
+                        "pragma": "dom", // default pragma is React.createElement (only in classic runtime)
+                        "pragmaFrag": "DomFrag", // default is React.Fragment (only in classic runtime)
+                        "throwIfNamespace": false, // defaults to true
+                        "runtime": "classic" // defaults to classic
+                        // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
+                    }
+                ]
+            ]
+        }
+
+    4-2. 포트 변경 설정
+        react는 기본적으로 포트 3000 을 사용하는데 다른 포트로 변경할 수 있다.
+        기본 포트 3000 대신 15109 포트를 사용하도록 설정
+
+        현재 작업하는 폴더 위치 확인
+        $ pwd
+
+        파일 목록 출력
+        $ ls    # package.json 파일이 보이는지 확인
+
+        .env 파일을 프로젝트 루트에 만들기
+        $ touch .env
+
+        .env  파일에 아래 내용 추가
+        $ cat .env
+        SKIP_PREFLIGHT_CHECK=true
+        PORT=15109
+
+
+    4-3. eslint 모듈
+        ESlint는 문법 오류를 잡아내고 특정 문법 요소를 사용하여 코드를 수정하기 위해 사용되는 모듈 입니다.
+
+        airbnb ESLint 규칙을 사용하려면 아래 5개의 패키지들은 필수로 설치해야 합니다.
+          . eslint
+          . eslint-plugin-import
+          . eslint-plugin-react
+          . eslint-plugin-react-hooks
+          . eslint-plugin-jsx-a11y
+
+        eslint-config-airbnb 는 airbnb 스타일 가이드의 코드 규칙을 적용할 수 있는 모듈
+
+        babel-eslint : 정식 표준이 아닌 자바스크립트, 즉 ES6 이상의 최신 자바스크립트 문법을 사용하는 경우 설치 필요
+
+
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+
+        $ ls      # package.json 보이는지 확인
+
+        $ npm install --save-dev eslint  eslint-plugin-import  eslint-plugin-react  eslint-plugin-react-hooks  eslint-plugin-jsx-a11y
+
+        $ npm install --save-dev eslint-config-airbnb
+
+        $ npm install --save-dev babel-eslint
+
+        $ cat package.json    # package.json 에 ESLint 모듈들이 추가되었는지 확인한다.
+
+
+    4-4. Prettier 설정
+        Prettier는 코드 포맷터(Code Formatter)다
+        prettier 사용되는 예시
+            . 한 줄의 최대 길이는 얼마로 할 것인가?
+            . 들여쓰기에 tab을 쓸 것인가? space를 쓸 것인가?
+            . 문자 리터럴로  ' 를 쓸 것인가? " 쓸 것인가?
+        Prettier는 소스 코드를 저장하거나 git 커밋할 때 정의된 규칙에 따라 코드의 형식을 자동으로 수정한다.
+
+        prettier : Prettier 모듈을 설치할 때는 --save-exact 옵션을 사용하세요. --save-exact 은 Prettier 버전이 달라져도 코드 스타일 변화가 생기지 않도록 하는 옵션입니다.
+        eslint-plugin-prettier: 코드 코맷할 때 Prettier를 사용하게 만드는 규칙을 추가합니다.
+        eslint-config-react: react 프로젝트에 맞춰진 ESLint 규칙을 추가합니다
+        eslint-config-prettier: Prettier와 충돌할 설정들을 비활성화합니다.
+
+        $ npm install --save-dev --save-exact prettier
+        $ npm install --save-dev eslint-plugin-prettier
+        $ npm install --save-dev eslint-config-react
+        $ npm install --save-dev eslint-config-prettier
+
+        .prettierrc 파일을 프로젝트 루트에 만들기
+        $ touch .prettierrc
+
+        .prettierrc 파일에 아래 내용을 추가
+
+        $ cat .prettierrc
+        {
+          "printWidth": 130,
+          "tabWidth": 2,
+          "singleQuote": true,
+          "semi": true,
+          "useTabs": false,
+          "trailingComma": "all",
+          "proseWrap": "always",
+          "requireConfig": false,
+          "bracketSpacing": true,
+          "jsxBracketSameLine": false,
+          "jsxSingleQuote": false,
+          "quoteProps": "as-needed",
+          "endOfLine": "crlf"
+        }
+
+
+    4-5. eslint 설정
+        eslintrc.json 파일에 아래 내용을 추가
+        https://poiemaweb.com/eslint
+        https://yrnana.dev/post/2021-09-02-eslint
+        https://eslint.org/docs/user-guide/configuring/rules
+
+        ESLint의 핵심 구성 정보는 env, globals, rules세가지 영역으로 나누어져 구성되어 있습니다.
+          . env는 실행 환경에 대한 설정, 사전 전역 변수 설정. 브라우저, node, es6 환경이 활성화
+          . globals는 사용자가 추가하는 전역 변수 설정.
+          . extends 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . plugins 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . rules 설치한 플러그인들의 적용, 활성화 규칙 및 오류 설정에 관한 것들.
+
+
+        eslintrc.json 파일을 프로젝트 루트에 만들기
+        $ touch eslintrc.json
+
+        $ cat eslintrc.json
+        {
+            "parserOptions": {
+                "ecmaVersion": 12
+            },
+            "env": {
+                "browser": true,
+                "commonjs": true,
+                "node": true,
+                "jest": true,
+                "es6": true,
+                "es2021": true
+            },
+            "globals": {
+                "_": false
+            },
+            "extends": [
+                "react-app",
+                "prettier",
+                "airbnb"
+            ],
+            "parser": "babel-eslint",
+            "parserOptions": {
+                "ecmaVersion": 12
+            },
+            "plugins": ["import", "html"],
+            "rules": {
+                // "off" or 0 - turn the rule off
+                // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+                // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
+
+                // windows linebreaks when not in production environment
+                "linebreak-style": [ "error", "unix" ],
+                // suppress errors for missing 'import React' in files
+                "react/react-in-jsx-scope": "off",
+                // allow jsx syntax in js files (for next.js project)
+                "react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ], //should add ".ts" if typescript project
+                "jsx-a11y/label-has-associated-control": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
+                "jsx-a11y/label-has-for": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
+
+                "no-param-reassign": [ "error", { "props": false } ],
+                "arrow-parens": ["error", "always"], // () => {}
+                "arrow-body-style": ["error", "always"],
+                "consistent-return": "off",
+                "func-names": "off",
+                "no-shadow": "off",
+                "no-alert": "off",
+                "no-var": "error",
+                "no-console": "off",
+                "no-debugger": "off"
+            }
+        }
+
+    4-6. jsconfig.json 설정
+        NODE_ENV의 절대 경로 설정.
+        컴포넌트 조합할 때 상대 경로 대신 절대 경로를 사용하여 컴포넌트를 조합
+        "baseUrl": "./src" ==> 절대 경로 설정
+        "include": ["src"] ==> import 시 해당 루트를 자동으로 포함 설정. ex) import 'src/Comp'; 대신 import 'Comp'; 을 사용
+
+        $ echo -e "{\n  \"compilerOptions\": {\n    \"baseUrl\": \"./src\"\n  },\n  "include": ["src"]\n}" >> jsconfig.json
+
+        jsconfig.json  파일 내용 확인
+        $ cat jsconfig.json
+        {
+          "compilerOptions": {
+            "baseUrl": "./src"
+          },
+          "include": ["src"]
+        }
+
+
+    4-7. githook 설정
+        githook은 깃에 특정 이벤트(커밋, 푸시 등)를 감지하여
+        이벤트를 실행하기 전에 특정 동작을 수행할 수 있도록 도와주는 플러그인 입니다.
+
+        husky와 lint-staged의역할은 다음과 같다.
+        . husky: packages.json 파일에서 githook를 사용할 수 있게 해준다.
+        . lint-staged: git 의 stage된 파일들에 특정 동작을 수행할 수 있도록 해준다.
+        . lint-staged와 husky를 사용하여 git 이벤트에 Prettier 명령어를 연동 설정.
+
+        $ npm install --save-dev husky  lint-staged
+
+        ############
+        commit 전에 자동으로 prettier 적용하기
+        ############
+
+        packages.json 에 아래 내용 추가
+
+        $ cat packages.json
+        {
+          ...중략 ,
+          "husky": {
+              "hooks": {
+                  "pre-commit" : "lint-staged"
+              }
+          },
+          "lint-staged": {
+              "src/**/*.{js,jsx,ts,tsx,json,css,scss,md} ": [
+                  "prettier --write"
+              ]
+          }
+        }
+
+    4-8. package.json 에 jest 실행 스크립트 추가
+        변경 전
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+            },
+        }
+
+        변경 후
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+
+                "test:watch": "jest --watch --env=jsdom",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom"
+            },
+            ...중략
+        }
+
+    4-9. 프로젝트 소스 커밋
+        $ pwd               # 현재 작업 디렉토리 확인
+        $ ls                # package.json 보이는지 확인
+        $ git status        # 파일 상태 확인
+        $ git add -AN       # 신규 파일 추가 추가
+        $ git status        # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'
+        $ git status        # 파일 상태 확인
+        $ git push          #
+
+
+    4-10. react 프로젝트 설정 파일 추출하기
+        프로젝트 설정 파일 추출하기 전에 반드시 소스 commit 을 해야만 eject 가 가능하다.
+        eject를 하게 되면 package.json 파일의 내용이 변경된다.
+
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        $ cat package.json
+        $ npm run eject
+        $ cat package.json
+
+
+    ##################################
+    6. Jest 테스트 와 디버깅 방법
+    ##################################
+
+    https://tod2.tistory.com/214
+
+    6-1 package.json 에서 실행 jest script 추가
+        {
+            ...중략
+            "scripts": {
+                "test": "echo \"Error: no test specified\" && exit 1"
+            },
+        }
+
+        변경 후
+        {
+            ...중략
+            "scripts": {
+                "test": "jest",
+                "test:watch": "jest --watch --env=jsdom",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom",
+
+                "build-watch": "./node_modules/.bin/webpack -w",
+                "build": "./node_modules/.bin/webpack"
+            },
+            ...중략
+        }
+
+    6-2. 터미널에서 개별 파일 jest 테스트 실행
+        $ npx jest --help
+        $ npx jest --env=jsdom  src/containers/todo/components/PageHeader.test.js
+        $ npx jest --env=jsdom  --watch  src/containers/todo/components/PageHeader.test.js
+
+    6-3. 터미널에서 watch 모드로 jest 테스트 실행
+        $ ls    # package.json 보이는지 확인
+        $ cat package.json
+        $ npm run test:watch
+        $ npx jext --env=jsdom --watch
+
+    6-4. 터미널에서 deubgging 모드로 jest 테스트 실행
+        $ npm run test:debug
+        $ node --inspect-brk node_modules/jest/bin/jest --runInBand --env=jsdom --watch
+
+    6-5. 소스 코드에 debugger 삽입
+
+    6-6. Chrome을 열고 주소 표시줄에 다음을 입력합니다.
+        chrome://inspect
+
+    6-7. "Open dedicated DevTools for Node" 클릭
+        연결 추가 127.0.0.1:9229
+
+    6-8. CLI 에서 실행을 중지하려면 이면 "ctrl + c" 눌러 실행 중지
+
+
+
+
+    ##################################
+    10. 기능 설명
+    ##################################
+
+    ##################################
+    11. 프로젝트 초기 설정
+    ##################################
+
+    ##################################
+    12. 프로젝트에 컴포넌트 추가
+    ##################################
+    프로젝트
+    `-- src
+        |-- password.js
+        |-- password.test.js
+        |-- sum.js
+        `-- sum.test.js
+
+      $ touch ./src/password.js \
+              ./src/password.test.js \
+              ./src/sum.js \
+              ./src/sum.test.js
+
+
+    ##################################
+    . password 테스트 코드 작성
+    ##################################
+        5-01. 파일 생성
+            $ touch ./src/password.js \
+                    ./src/password.test.js
+
+        5-02. src/password.js 에 비밀번호 생성 코드 작성
+            export const generateRandomPassword = () => {
+                return Math.random().toString(36).slice(-8); // slice에 음수를 사용해서
+            };
+
+        5-03. src/password.test.js 에 단위 테스트 작성
+            import { generateRandomPassword } from './password';
+
+            describe('Noun: method or a class/module name', () => {
+                test('Verb describing the behavior', () => {
+                    // Assertions
+                    const password = generateRandomPassword();
+                    expect(password).toMatch(/^[a-zA-Z0-9]{8}$/);
+                });
+            });
+
+
+        5-04. 개별 파일 jest 테스트 실행
+
+            $ npx jest src/password.test.js
+            PASS  ./password.test.js
+                Noun: method or a class/module name
+                √ Verb describing the behavior (2 ms)
+                √ Verb describing the behavior (2 ms)
+
+            Test Suites: 1 passed, 1 total
+            Tests:       2 passed, 2 total
+            Snapshots:   0 total
+            Time:        1.613 s, estimated 3 s
+            Ran all test suites matching /password.test.js/i.
+
+
+            $ npm jest src/password.test.js
+            PASS  ./password.test.js
+                Noun: method or a class/module name
+                √ Verb describing the behavior (2 ms)
+                √ Verb describing the behavior (2 ms)
+
+            Test Suites: 1 passed, 1 total
+            Tests:       2 passed, 2 total
+            Snapshots:   0 total
+            Time:        1.613 s, estimated 3 s
+            Ran all test suites matching /password.test.js/i.
+
+        5-05. 전체 jest 테스트 실행 - package.json 의 script로 test 실행하기
+            $ ls # package.json 보이는지 확인
+            $ npm run test
+            $ npx jest
+
+
+        5-06. 전체 jest 테스트 실행 - watch 모드로 jest 실행하기
+            $ ls # package.json 보이는지 확인
+            $ npm run test:watch
+            $ npx jest --watch
+
+    ##################################
+    . sum 테스트 코드 작성
+    ##################################
+
+        6-01. 파일 생성
+            $ touch ./src/sum.js \
+                    ./src/sum.test.js
+
+
+        6-02. src/sum.js 만들기
+            export const sum = (a, b) => {
+              return a + b;
+            };
+
+        6-03. src/sum.test.js 만들기
+            import { sum } from './sum';
+
+            describe('Noun: method or a class/module name', () => {
+                test('Verb describing the behavior', () => {
+                    // Assertions
+                    expect(sum(1, 2)).toEqual(3);
+                    expect(sum(1, 2)).toBeLessThan(4);
+                });
+            });
+
+
+        6-04. sum 관련 테스트 코드만 실행
+            $ npx jest sum.test.js    # 실행을 중지하려면 이면 "ctrl + c" 눌러 실행 중지
+            $ npm test src/sum.test.js
+
+            $ npx jest --watch src/sum.test.js
+            $ npm test --watch src/sum.test.js
+
+
+            PASS  src/sum.test.js
+            √ adds 1 + 2 to equal 3 (1 ms)
+            Test Suites: 1 passed, 1 total
+            Tests:       1 passed, 1 total
+            Snapshots:   0 total
+            Time:        1.349 s
+            Ran all test suites matching /sum/i.
+
+
+        6-05. 전체 jest 테스트 실행 - package.json 의 script로 test 실행하기
+            $ ls # package.json 보이는지 확인
+            $ npm run test
+            $ npx jest
+
+
+
+        6-06. 전체 jest 테스트 실행 - watch 모드로 jest 실행하기
+            $ ls # package.json 보이는지 확인
+            $ npm run test:watch
+            $ npx jest --watch
+    </xmp>
+</body>
+</html>

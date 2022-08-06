@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Routing 예제</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <style>
+        .active {
+            background-color: lightblue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <xmp>
+    Basic Routing 기법에 대해서 학습한다
+
+    https://reactrouter.com/web/guides/quick-start 사이트 참조.
+
+
+    https://velog.io/@soryeongk/ReactRouterDomV6
+    https://velog.io/@ksmfou98/React-Router-v6-업데이트-정리
+
+    1. 컴포넌트 만들기
+        Menu
+        Home
+        Memo
+        Topics
+        App
+
+    2. 메뉴 설정 예제
+    Link나 NavLink 컴포넌트를 사용하여 작성.
+    새로고침이 발생하면 안된다. a 태그 사용 불가.
+
+    <div>
+        <ul>
+            <li><NavLink activeClassName={'active'} activeStyle={{color:'red'}} exact to="/">Home</NavLink></li>
+            <li><NavLink activeClassName={'active'} activeStyle={{color:'red'}} exact to="/memo">Memo</NavLink></li>
+            <li><NavLink activeClassName={'active'} activeStyle={{color:'red'}} exact to="/topics">Topics</NavLink></li>
+        </ul>
+    </div>
+
+    3. App 컴코넌트에 라우팅 설정
+    <BrowserRouter>
+        <Menu />
+        <Switch>
+            <Route exact path="/" exact component={Home} />
+            <Route exact path="/memo" component={Memo} />
+            <Route exact path="/topics" component={Topics} />
+            <Redirect path="*" to="/" />
+        </Switch>
+    </BrowserRouter>
+    </xmp>
+
+    <hr>
+    <div id="app">
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+

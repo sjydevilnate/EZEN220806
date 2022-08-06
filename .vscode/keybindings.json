@@ -1,0 +1,19 @@
+// Place your key bindings in this file to override the defaultsauto[]
+// https://code.visualstudio.com/docs/getstarted/keybindings
+[
+  {
+    "key": "f8",
+    "command": "-editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "f8",
+    "command": "workbench.action.debug.continue",
+    "when": "debugState == 'stopped'"
+  },
+  {
+    "key": "f5",
+    "command": "-workbench.action.debug.continue",
+    "when": "debugState == 'stopped'"
+  }
+]

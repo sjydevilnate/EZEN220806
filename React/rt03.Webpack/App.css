@@ -1,0 +1,21 @@
+section {
+  height: 150px;
+  background-color: #95db5e;
+  margin: 0 5% 20px 5%;
+  margin: 40px 0px;
+}
+
+div {
+  margin: 40px 20px;
+}
+
+header {
+  height: 60px;
+  background-color: #efb14e;
+  margin: 0 0 20px 0;
+}
+
+footer {
+  height: 60px;
+  background-color: #78d0d1;
+}

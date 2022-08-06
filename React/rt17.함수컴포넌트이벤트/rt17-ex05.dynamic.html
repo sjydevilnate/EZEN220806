@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05-12</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css" />
+
+    <style>
+        #app div { width: 150px; height: 150px; text-align: center; }
+        #app .ready { background-color: pink; color: brown; }
+        #app .active { background-color: green; color: tomato; border-radius: 30%; }
+        #app .done { background-color: yellow; color: blue; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <xmp>
+
+        미리 설정되어 있는 CSS 를 사용하여 만드시오.
+
+        div#app을 클릭하면 state값을 변경하는 메소드를 구성하세요.
+        ready => active => done => ready
+
+        #app div {width:150px; height:150px; text-align:center;}
+        #app .ready {background-color:pink; color:brown;}
+        #app .active {background-color:green; color:tomato; border-radius:30%;}
+        #app .done {background-color:yellow; color:blue; border-radius:50%;}
+
+        위의 CSS를 인라인 스타일로 바꾸어 컴포넌트에 설정하도록 한다.
+
+    </xmp>
+
+    <!-- div#app을 클릭하면 state값을 변경하는 메소드를 구성하세요.
+    ready => active => done => ready -->
+    <div id="app">
+        <div class="ready">
+            ready
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
