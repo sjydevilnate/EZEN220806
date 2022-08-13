@@ -38,7 +38,8 @@
         $ pwd   # 현재 작업 디렉토리 확인
           /ES2015문법/ap06.ES2015문법-cli
 
-        $ mkdir -p es2015test  # 현재 디렉토리에 es2015test 폴더 만들기
+        # 현재 디렉토리에 es2015test 폴더 만들기
+        $ mkdir -p es2015test
 
         $ ls    # 현재 작업 디렉토리 파일 목록 조회
 
@@ -46,6 +47,7 @@
 
         $ pwd   # 현재 작업 디렉토리 확인
           /ES2015문법/ap06.ES2015문법-cli/es2015test
+
 
       ##################################
       # node 프로젝트 설정 초기화
@@ -107,7 +109,8 @@
       ##################################
       # nodemon 모듈 설치
       ##################################
-          nodemon은 디렉토리의 파일 변경이 감지되면 노드 응용 프로그램을 자동으로 다시 시작하여 프로그램을 개발하는 데 도움이 되는 도구입니다.
+          nodemon은 디렉토리의 파일 변경이 감지되면
+          노드 응용 프로그램을 자동으로 다시 시작하여 프로그램을 개발하는 데 도움이 되는 도구입니다.
           $ npm install --save-dev nodemon
 
 
@@ -118,7 +121,8 @@
           https://babeljs.io/docs/en/babel-preset-react
           https://www.daleseo.com/js-babel/
 
-          $ npm install --save-dev @babel/core @babel/cli
+          $ npm install --save-dev @babel/core
+          $ npm install --save-dev @babel/cli
           $ npm install --save-dev @babel/preset-env
 
           $ cat package.json
@@ -148,11 +152,11 @@
       # 폴더 구조 및 파일 확인
       ##################################
         \es2015test
-        |   .babelrc
         |   package.json
         \---node_modules/
         \---src/
               \---ap06-01.js
+
 
 
       ##################################
@@ -164,7 +168,7 @@
         또는 직접 상위 디렉토리의 src 디렉토리를 현재 디렉토리로 복사하거나 이동한다.
 
         $ ls -a
-        ./  ../  .babelrc  node_modules/  package.json  package-lock.json  src/
+        ./  ../  node_modules/  package.json  package-lock.json  src/
 
         $ es2015test/src/ap06-01.js 파일 생성 후 코드 추가
         'use strict';
@@ -189,7 +193,7 @@
       # ==> 명령어 옵션(--presets=@babel/env) 을 이용한 트랜스 컴파일 수행
       ##################################
 
-      $ npx babel --presets=@babel/env src/ap06-01.js
+      $ npx babel --presets=@babel/env  src/ap06-01.js
       'use strict';
 
       var name = 'world';

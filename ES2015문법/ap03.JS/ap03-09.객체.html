@@ -240,4 +240,90 @@
     </body>
 </html>
 
-
+<script>
+    // 생성자 함수를 이용한 객체 생성
+    function Foo(name, age) {
+        this.name = name;
+        this.age = age;
+        this.run = function () {
+            return this.name;
+        };
+    }
+    var goo = new Foo("goo", 40);
+    console.log(typeof goo, goo);
+    // 객체 리터럴( {} )을 이용하여 객체 생성합니다.
+    var foo = {
+        name: "foo" /* 프로퍼티 name = 'foo'  */,
+        age: 30 /* 프로퍼티 age = 30      */,
+        array: [1, 4, 5, 5] /* 프로퍼티 array = [1,4,5,5] */,
+        run() { /* 메서드 */
+            return this.name;
+        },
+    };
+
+    // RCUD : R. 읽기- 마침표 표기법
+    // 마침표(.) 표기법을 사용하여 foo 객체의 name 값을 console.log()로 출력하시오
+    console.log( foo.name); // foo
+    console.log(foo.age); // 30
+
+    // RCUD : R. 읽기- 대괄호 표기법
+    // 대괄호( [] )표기법을 사용하여 foo 객체의 age 값을 console.log()로 출력하시오
+    console.log( foo['name']); // foo
+    console.log(foo['age']); // 30
+
+    // RCUD : Create. 추가
+    // foo 객체에 키명이 gender 인 프로퍼티를 추가하고 gender 값에 "man" 을 설정하시오
+    // foo 객체의 gender 값을 console.log()로 출력하시오
+    foo.gender = 'man';
+    foo['nickanme'] = "ba";
+    console.log(foo.gender);
+    console.log(foo.nickname);
+
+
+    // RCUD : Update. 수정
+    // foo 객체에 name 값을 "bar" 로 바꾸시오
+    // foo 객체의 name 값을 console.log()로 출력하시오
+    foo.name = 'bar1';
+    console.log(foo.name); // bar1
+
+    foo['name']= 'bar2';
+    console.log(foo["name"]); // bar2
+    console.log(foo.name); // bar2
+
+    const key = 'name';
+    foo[key]= 'abc';
+    console.log(foo[key]); // abc
+
+    // RCUD : Delete. 삭제
+    // 객체에서 프로퍼티(속성)을 삭제하려면 delete 연산자를 사용한다.
+    delete foo.age;
+    delete foo.gender;
+    console.log( foo.age    );  // undefined
+    console.log( foo.gender );  // undefined
+    console.log( foo );  // undefined
+
+
+    // 문제1. 다음의 그림을 자바스크립트 객체로 만드시오
+    const Dog = {
+        name: "Fido",
+        weight: 40,
+        breed: "Mixed",
+        loves: ["w", "f"],
+    };
+
+    // 문제2. 다음의 표를 자바스크립트 객체로 만드시오
+    const Book = {
+        "이름": "Nature of Code",
+        "가격": 30000,
+        "저자": "다니엘",
+        "ISBN": "9788968481901",
+        "페이지수": "620페이지",
+    };
+
+    // 배열을 객체로 만들기
+    const array = {
+        '0': 'a0',
+        '1': 'a1',
+    }
+    console.log( array[0]); // a0
+</script>
