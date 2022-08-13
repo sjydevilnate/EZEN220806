@@ -95,6 +95,51 @@
 </html>
 
 
+<script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin>
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin>
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin>
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script type="text/babel">
+
+    const { useState, useEffect, useRef, useCallback, useMemo, Fragment } = React;
+
+    function Comp(props) {
+
+      // 컴포넌트의 상태값 설정
+      //const [변수명, 메서드명] = useState('');
+      const [mesg, setMesg] = useState('hi!!!!'); // 상태값이 기본타입인 경우
+
+      // 이벤트 핸들러 작성.
+      const handler = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+
+        // mesg = '바꿧어, 화면은 어떤가요?' + 화면새로고침
+        setMesg('바꿧어, 화면은 어떤가요?');
+      };
+
+      // JSX로 화면 만들기
+      return (
+        <div onClick={handler}>
+            {props.name}, {mesg}
+        </div>
+      )
+    }
+
+    // 만든 컴포넌트를 화면에 붙인다.
+    ReactDOM.render(
+        <Comp name={'Hello'}></Comp>,
+        document.getElementById("app")
+    );
+
+</script>
+
+
 
 
 

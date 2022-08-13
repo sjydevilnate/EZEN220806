@@ -4,18 +4,18 @@
       개선된 객체 프러퍼티 표현식
       개선된 객체 메서드 표현식
 */
-var name = "홍길동";
-var age = 20;
+const name = '홍길동';
+const age = 20;
 // ES5
-var p1 = {
-    name: name,
-    age: age,
-    powderYell: function () {
-        var yell = this.name.toUpperCase();
-        console.log(yell + yell + "!!!");
-    },
-    setAge: function (mph) {
-        this.age = mph;
-        console.log("나이:", mph);
-    },
+const p1 = {
+  name,
+  age,
+  powderYell() {
+    var yell = this.name.toUpperCase();
+    console.log(yell + yell + '!!!');
+  },
+  setAge(mph) {
+    this.age = mph;
+    console.log('나이:', mph);
+  }
 };
