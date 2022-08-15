@@ -1,6 +1,5 @@
 'use strict';
 
-debugger;
 const name = 'world';
 console.log(`Hello ${name}`);
 

@@ -31,13 +31,12 @@ if (true) {
   let msg = 'block scope';
 }
 const outer = (params) => {
-    let msg = "function scope at outer ";
+    let msg = 'function scope at outer';
 
     if( true ){
-        let msg = "block scope at outer ";
+        let msg = 'block scope at outer';
     }
 }
 const pizza =true;
 pizza = false; // 에러 발생.
-
 

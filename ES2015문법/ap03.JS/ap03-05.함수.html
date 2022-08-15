@@ -99,4 +99,44 @@
         </div>
     </body>
 </html>
+<script>
+    // 표현식 함수 선언
+    var add = function (a, b) {
+        console.log("arguments >>> ", arguments); // arguments 객체 출력
+        return a + b;
+    };
+    console.log(add(1)); // (출력값) NaN
+    console.log(add(1, 2)); // (출력값) 3
+    console.log(add(1, 2, 3)); // (출력값) 3
 
+    // 선언식 함수 선언
+    function sum() {
+        var result = 0;
+        for (var i = 0; i < arguments.length; i++) {
+            result += arguments[i];
+        }
+        return result;
+    }
+    console.log(sum(1, 2, 3)); // (출력값) 6
+    console.log(sum(1, 2, 3, 4, 5, 6, 7, 8, 9)); // (출력값) 45
+
+
+    // 화살표 함수 선언
+    var add = (a, b) => {
+        return a + b;
+    };
+    var sum = add(1, 3); // 4
+    console.log(sum); // (출력값) 4
+
+
+    // 생성자 함수란 첫 글자를 대문자로 시작하는 함수
+    // 생성자 함수는 객체를 만들 때 사용된다.
+    function Goo(name, age) {
+        this.name = name;
+        this.run = function () {
+            return this.name;
+        };
+    };
+    var goo = new Goo("goo", 31);
+    console.log(goo); // Goo {name: "goo", run:  }
+</script>

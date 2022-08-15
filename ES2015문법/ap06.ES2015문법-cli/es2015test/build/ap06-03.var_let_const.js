@@ -36,10 +36,10 @@ if (true) {
 }
 
 var outer = function outer(params) {
-  var msg = "function scope at outer ";
+  var msg = 'function scope at outer';
 
   if (true) {
-    var _msg2 = "block scope at outer ";
+    var _msg2 = 'block scope at outer';
   }
 };
 

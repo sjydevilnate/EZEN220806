@@ -1,6 +1,5 @@
 'use strict';
 
-debugger;
 var name = 'world';
 console.log("Hello ".concat(name));
 
