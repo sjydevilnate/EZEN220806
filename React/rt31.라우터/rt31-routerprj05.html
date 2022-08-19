@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 라우팅</title>
+    <link rel="stylesheet" href="../css/reset.css"/>
+    <style>
+        body {
+            background-color: #ffcc00;
+            padding: 20px;
+            margin: 0;
+        }
+        h1,h2,p,ul,li {
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        ul.header li {
+            display: inline;
+            list-style-type: none;
+            margin: 0;
+        }
+        ul.header {
+            background-color: #111;
+            padding: 0;
+        }
+        ul.header li a {
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 20px;
+            display: inline-block;
+        }
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+        }
+        .content h2 {
+            padding: 0;
+            margin: 0;
+        }
+        .content li {
+            margin-bottom: 10px;
+        }
+        .active {
+            background-color: #0099ff;
+        }
+    </style>
+</head>
+<body>
+    <xmp>
+    라우팅을 테스트 하기 위한 예제를 만들어 본다.
+    라우팅을 테스트 하기 위해서는 서버로 실행해야 합니다.
+
+    User 컴포넌트:
+        UserList
+        UserCard
+        UserConatiner
+
+    UserList 컴포넌트 JSX 화면
+        <div>
+            {users && users.map( (user)=>{
+                return (
+                    <li key={user.id}>
+                        <Link to={`/user/{user.id}`}>{user.name}</Link>
+                    </li>
+                )}
+            )}
+        </div>
+
+    UserCard 컴포넌트 JSX 화면
+        <div>
+            <div>{user.id} : {user.name} : {user.info}</div>
+            <div><Link to='/'>뒤로가기</Link></div>
+        </div>
+
+    UserConatiner 컴포넌트 JSX 화면
+        <BrowserRouter>
+            <div style={{margin:20}}>
+                <div>
+                    <Switch>
+                        <Route path='/user/:id' component={UserCard}></Route>
+                        <Route component={UserList}></Route>}
+                    </Switch>
+                </div>
+            </div>
+        </BrowserRouter>
+
+    ------------------------
+
+    App 컴포넌트
+        <BrowserRouter>
+            <Page></Page>
+        </BrowserRouter>
+
+    </xmp>
+    <hr>
+    <div id="app">
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>React 라우팅</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+</head>
+<body>
+    <div>
+        <!-- Home 페이지 만들기 -->
+        <li class="langjs">
+            <h3 class="langjs">Home 페이지 만들기</h3>
+            <ul>
+                <li>메뉴 목록(좌측)과 메모 생성 버튼(우측)을 만든다.</li>
+                <li>좌측에는 메뉴나 목록 컴포넌트를</li>
+                <li>우측에는 메모 생성버튼이나 메모 내용 같은 컴포넌트를 위치시킨다.</li>
+            </ul>
+
+            <img src="./1차/memoprj-01.png" alt=""> <br><br>
+            <pre class="langjs">
+                <xmp class="langjs">
+<div id="root">
+    <div style="display: flex; flex: 1 1 0%; margin: 10px;">
+        <aside style="width: 200px; border: 1px solid rgb(204, 204, 204); margin-right: 10px; border-radius: 4px;">
+            <h1 style="padding: 0px 10px;">폴더</h1>
+            <ul style="list-style: none; padding-left: 0px;">
+                <li style="padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: 1px solid rgb(221, 221, 221);">
+                    <a href="/memo">메모</a>
+                </li>
+                <li style="padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: none;">
+                    <a href="/trash">휴지통</a>
+                </li>
+            </ul>
+        </aside>
+        <main style="flex: 1 1 0%; overflow: auto; border: 1px solid rgb(204, 204, 204); border-radius: 4px;">
+            <div style="margin: 10px;">
+                <a href="/memo/add" style="display: inline-block; border: 1px solid rgb(204, 204, 204); border-radius: 4px; margin: 0px 10px 10px 0px; padding: 8px 16px; width: auto; overflow: visible; background: transparent; color: inherit; text-decoration: none;">
+                    새로운 메모
+                </a>
+            </div>
+        </main>
+    </div>
+</div>
+                </xmp>
+            </pre>
+            <br>
+            <pre class="langjs">
+                <xmp class="langjs">
+<Layout>
+    <Sidebar>
+        // 사이드바: 메모장, 휴지통 링크를 위치한다
+        <SidebarTitle>폴더</SidebarTitle>
+
+        // 메뉴 목록
+        <List>
+            <ListItem>
+                <Link to="/memo">메모</Link>
+            </ListItem>
+            <ListItem>
+                <Link to="/trash">휴지통</Link>
+            </ListItem>
+        </List>
+    </Sidebar>
+    <Main>
+        // 메인: 메모 생성 버튼을 위치한다
+        <Link to="/memo/add">새로운 메모</Link>
+    </Main>
+</Layout>
+                </xmp>
+            </pre>
+            <p class="langjs">
+                <ul>
+                    <li>src/pages/Home.js</li>
+                    <li>src/components/Layout.js</li>
+                    <li>src/components/List.js</li>
+                    <li>src/components/ListItem.js</li>
+                    <li>src/components/Main.js</li>
+                    <li>src/components/Sidebar.js</li>
+                    <li>src/components/SidebarTitle.js</li>
+                </ul>
+                <pre class="langjs">
+                    <code class="langjs">
+$ touch ./src/pages/Home.js \
+        ./src/components/Layout.js \
+        ./src/components/List.js \
+        ./src/components/ListItem.js \
+        ./src/components/Main.js \
+        ./src/components/Sidebar.js \
+        ./src/components/SidebarTitle.js
+                    </code>
+                </pre>
+            </p>
+        </li>
+        <hr>
+
+        <!-- Memo 페이지 만들기 -->
+        <li class="langjs">
+            <h3 class="langjs">Memo 페이지 만들기</h3>
+            <p class="langjs">
+
+            </p>
+            <ul>
+
+            </ul>
+            <img src="./1차/memoprj-02.png" alt=""> <br><br>
+            <pre class="langjs">
+                <xmp class="langjs">
+<div id="root">
+    <div style="display: flex; flex: 1 1 0%; margin: 10px">
+        <aside style=" width: 200px; border: 1px solid rgb(204, 204, 204); margin-right: 10px; border-radius: 4px;">
+            <a href="/" style=" text-decoration: none; font-size: 24px; padding: 10px; display: block; ">&lt;</a>
+            <h1 style="padding: 0px 10px">메모</h1>
+            <ul style="list-style: none; padding-left: 0px">
+                <li style=" padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: 1px solid rgb(221, 221, 221); ">
+                    <a href="/memo/2">두번째 메모입니다.</a>
+                </li>
+                <li style=" padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: none; ">
+                    <a href="/memo/1">첫번재 메모입니다.</a>
+                </li>
+            </ul>
+        </aside>
+        <main style=" flex: 1 1 0%; overflow: auto; border: 1px solid rgb(204, 204, 204); border-radius: 4px;">
+            <div style="margin: 10px">
+                <a href="/memo/add" style=" display: inline-block; border: 1px solid rgb(204, 204, 204); border-radius: 4px; margin: 0px 10px 10px 0px; padding: 8px 16px; width: auto; overflow: visible; background: transparent; color: inherit; text-decoration: none; ">
+                    새로운 메모
+                </a>
+                <button style=" display: inline-block; border: 1px solid rgb(204, 204, 204); border-radius: 4px; margin: 0px 10px 10px 0px; padding: 8px 16px; width: auto; overflow: visible; background: transparent; color: inherit; ">
+                    삭제
+                </button>
+                <div style="border-top: 1px solid rgb(221, 221, 221); padding-top: 10px">
+                    <div style="margin-bottom: 15px">
+                        <span style="color: rgb(170, 170, 170)">
+                            2021. 9. 11. 오전 8:58:54
+                        </span>
+                    </div>
+                    <div>
+                        두번째 메모입니다.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+                </xmp>
+            </pre>
+            <p class="langjs">
+                <ul>
+                    <li>src/pages/Memo.js</li>
+                    <li>src/components/Layout.js</li>
+                    <li>src/components/List.js</li>
+                    <li>src/components/ListItem.js</li>
+                    <li>src/components/Main.js</li>
+                    <li>src/components/Sidebar.js</li>
+                    <li>src/components/SidebarTitle.js</li>
+                </ul>
+                <pre class="langjs">
+                    <code class="langjs">
+$ touch ./src/pages/Home.js \
+        ./src/components/Layout.js \
+        ./src/components/List.js \
+        ./src/components/ListItem.js \
+        ./src/components/Main.js \
+        ./src/components/Sidebar.js \
+        ./src/components/SidebarTitle.js
+                    </code>
+                </pre>
+            </p>
+        </li>
+        <hr>
+
+        <li class="langjs">
+            <h3 class="langjs">Trash 페이지 만들기</h3>
+            <p class="langjs">
+
+            </p>
+            <ul>
+
+            </ul>
+            <img src="./1차/memoprj-05.png" alt=""> <br><br>
+            <pre class="langjs">
+                <xmp class="langjs">
+<div style="display: flex; flex: 1 1 0%; margin: 10px;">
+    <aside style="width: 200px; border: 1px solid rgb(204, 204, 204); margin-right: 10px; border-radius: 4px;"><a
+            href="/" style="text-decoration: none; font-size: 24px; padding: 10px; display: block;">&lt;</a>
+        <h1 style="padding: 0px 10px;">휴지통</h1>
+        <ul style="list-style: none; padding-left: 0px;">
+            <li
+                style="padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: 1px solid rgb(221, 221, 221);">
+                <a href="/memo/3">세번째 메모입니다.</a></li>
+        </ul>
+    </aside>
+    <main style="flex: 1 1 0%; overflow: auto; border: 1px solid rgb(204, 204, 204); border-radius: 4px;">
+        <div style="margin: 10px;"><button
+                style="display: inline-block; border: 1px solid rgb(204, 204, 204); border-radius: 4px; margin: 0px 10px 10px 0px; padding: 8px 16px; width: auto; overflow: visible; background: transparent; color: inherit;">복구</button>
+            <div style="border-top: 1px solid rgb(221, 221, 221); padding-top: 10px;">
+                <div style="margin-bottom: 15px;"><span style="color: rgb(170, 170, 170);">2021. 9. 11. 오전
+                        7:02:10</span></div>
+                <div>세번째 메모입니다.</div>
+            </div>
+        </div>
+    </main>
+</div>
+                </xmp>
+            </pre>
+            <p class="langjs">
+                <ul>
+                    <li>src/pages/Home.js</li>
+                    <li>src/components/Layout.js</li>
+                    <li>src/components/List.js</li>
+                    <li>src/components/ListItem.js</li>
+                    <li>src/components/Main.js</li>
+                    <li>src/components/Sidebar.js</li>
+                    <li>src/components/SidebarTitle.js</li>
+                </ul>
+                <pre class="langjs">
+                    <code class="langjs">
+$ touch ./src/pages/Home.js \
+        ./src/components/Layout.js \
+        ./src/components/List.js \
+        ./src/components/ListItem.js \
+        ./src/components/Main.js \
+        ./src/components/Sidebar.js \
+        ./src/components/SidebarTitle.js
+                    </code>
+                </pre>
+            </p>
+        </li>
+        <hr>
+
+        <li class="langjs">
+            <h3>라우팅 설정</h3>
+            <p class="langjs">
+                라우팅 설정 관련해서는
+                <a href="https://reactrouter.com/web/guides/quick-start" target="_blank">https://reactrouter.com/web/guides/quick-start</a>
+                사이트를 참조하세요.
+            </p>
+            <ol>
+                <li>Home, Memo,  Trash 컴포넌트를 만든다</li>
+                <li>App 컴포넌트를 만들다
+                    <ol>
+                        <li>라우팅 기능을 추가 한다. BrowserRouter, Switch, Route, Redirect 컴포넌트</li>
+                        <li>메뉴 기능을 추가한다. Link, NavLink 컴포넌트 </li>
+                    </ol>
+                </li>
+                <li>/ 요청으로 들어오면: Home 컴포넌트를 렌더링 한다</li>
+                <li>
+                    /memo 요청으로 들어오면: Memo 컴포넌트를 렌더링 한다
+                    <p>메모장 화면에서는 보유한 메모 목록을 보여준다</p>
+                </li>
+                <li>
+                    /trash 요청으로 들어오면: Trash 컴포넌트를 렌더링 한다
+                    <p>삭제한 메모는 휴지통 화면에서 확인할 수 있다</p>
+                </li>
+                <li>위 세 개 규칙을 벗어나면: 루트(/) 요청으로 리다이렉션 한다</li>
+                <li>/memo 요청이 들어오면: 좌측에 메모 목록을 보여준다</li>
+                <li>/memo/* 요청이 들어오면: 우측에 뭔가를 표시한다</li>
+                <li>/memo/add 요청시: AddMemo 컴포넌트를 렌더링 한다</li>
+                <li>/memo/:id 요청시: Memo 컴포넌트를 렌더링 한다</li>
+                <li>/ 요청시: '메모가 없습니다'를 렌더링 한다</li>
+            </ol>
+            <pre class="langjs">
+                <xmp class="langjs">
+# src/routes/RouterHome.js
+<BrowserRouter>
+    <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/memo" component={Memo} />
+        <Route path="/trash" component={Trash} />
+        <Redirect path="*" to="/" />
+    </Switch>
+</BrowserRouter>
+
+
+# src/routes/RouterMemo.js
+<Switch>
+    <Route path={`${match.url}/add`} exact component={AddMemo} />
+    <Route path={`${match.url}/:id`} exact component={Memo} />
+    <Route path={`${match.url}/`} exact component={() => <div>메모가 없습니다. 새로운 메모를 만들어 보세요.</div>} />
+</Switch>
+
+
+# src/routes/RouterTrash.js
+<Switch>
+    <Route path={`${match.url}/:id`} exact component={RemovedMemo} />
+    <Route path={`${match.url}/`} exact component={() => <div>휴지통이 비었습니다.</div>} />
+</Switch>
+                </xmp>
+            </pre>
+
+            <p class="langjs">
+                <ul>
+                    <li>src/routes/RouterHome.js</li>
+                    <li>src/routes/RouterMemo.js</li>
+                    <li>src/routes/RouterTrash.js</li>
+                </ul>
+                <pre class="langjs">
+                    <code class="langjs">
+$ touch ./src/routes/RouterHome.js \
+        ./src/routes/RouterMemo.js \
+        ./src/routes/RouterTrash.js
+                    </code>
+                </pre>
+            </p>
+        </li>
+        <hr>
+
+
+        <li class="langjs">
+            <h3 class="langjs"> 도전. Memo 수정 페이지 만들기</h3>
+            <p class="langjs">
+
+            </p>
+            <img src="./1차/memoprj-03.png" alt=""> <br><br>
+            <ul>
+
+            </ul>
+            <pre class="langjs">
+                <xmp class="langjs">
+<div style="display: flex; flex: 1 1 0%; margin: 10px;">
+    <aside style="width: 200px; border: 1px solid rgb(204, 204, 204); margin-right: 10px; border-radius: 4px;"><a
+            href="/" style="text-decoration: none; font-size: 24px; padding: 10px; display: block;">&lt;</a>
+        <h1 style="padding: 0px 10px;">메모</h1>
+        <ul style="list-style: none; padding-left: 0px;">
+            <li
+                style="padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: 1px solid rgb(221, 221, 221);">
+                <a href="/memo/2">두번째 메모입니다.</a></li>
+            <li style="padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: none;"><a
+                    href="/memo/1">첫번재 메모입니다.</a></li>
+        </ul>
+    </aside>
+    <main style="flex: 1 1 0%; overflow: auto; border: 1px solid rgb(204, 204, 204); border-radius: 4px;">
+        <div style="margin: 10px;">
+            <form><textarea placeholder="여기에 메모를 입력하세요"
+                    style="width: 97%; height: 100px; border-radius: 4px; border: 1px solid rgb(204, 204, 204); padding: 10px;"></textarea>
+            </form><a href="/memo"
+                style="display: inline-block; border: 1px solid rgb(204, 204, 204); border-radius: 4px; margin: 0px 10px 10px 0px; padding: 8px 16px; width: auto; overflow: visible; background: transparent; color: inherit; text-decoration: none;">취소</a><button
+                style="display: inline-block; border: 1px solid rgb(204, 204, 204); border-radius: 4px; margin: 0px 10px 10px 0px; padding: 8px 16px; width: auto; overflow: visible; background: transparent; color: inherit;">저장</button>
+        </div>
+    </main>
+</div>
+                </xmp>
+            </pre>
+        </li>
+        <hr>
+
+    </div>
+    <div>
+        <h3>참고 사이트</h3>
+        <p>
+            <li>https://jeonghwan-kim.github.io/dev/2019/07/08/react-router-ts.html</li>
+            <li>https://github.com/jeonghwan-kim/study-react-ts/tree/master/router</li>
+            <li>https://reactrouter.com/web/guides/quick-start</li>
+        </p>
+    </div>
+    <hr>
+
+
+    <xmp>
+    React CLI 을 사용하여 memoprj01 어플리케이션을 만들어 본다.
+
+
+
+    ##################################
+    1. 프로젝트 생성 작업
+    ##################################
+    step 1-01. node / npm 버전 업그레이드
+        $ node -v                          #  node 버전 확인
+        v16.14.2
+
+        $ npm -v                           #  npm 버전 확인
+        8.6.0
+
+        $ npx -v                           #  npx(=npm extension) 버전 확인
+        8.6.0
+
+
+    step 1-02. 프로젝트 생성
+        $ npm config set legacy-peer-deps true
+
+        $ npm uninstall -g create-react-app        # 전역으로 설치된 create-react-app 모듈 삭제하기
+
+        $ npx clear-npx-cache                      # npx 로 다운로드된 캐쉬 모듈을 삭제
+        Need to install the following packages:
+          clear-npx-cache
+        Ok to proceed? (y) y
+        ....
+
+        $ npx create-react-app counterprj01        # 프로젝트명은 소문자로 만들어야 함.
+        Need to install the following packages:
+          create-react-app
+        Ok to proceed? (y)
+        ...
+
+        $ ls                                       # memoprj01 폴더가 보이는지 확인
+        $ cd memoprj01                             # memoprj01 폴더로 이동
+        $ ls                                       # package.json 파일이 보이는지 확인
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+    step 1-03. 실행 중인 프로세스 중지
+        터미널에서  "ctrl + c" 눌러 중지한다
+
+    step 1-04. 프로젝트 소스 커밋
+        $ ls
+        $ git status                          # 파일 상태 확인
+        $ git add -AN                         #
+        $ git status                          # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'     # 파일 상태 확인
+        $ git push                            #
+
+        github 사이트에서 소스가 올라갔는지 확인한다.
+
+    step 1-05. eslint 모듈
+        ESlint는 문법 오류를 잡아내고 특정 문법 요소를 사용하여 코드를 수정하기 위해 사용
+
+        현재 작업하는 폴더 위치 확인
+        $ pwd
+
+        파일 목록 출력
+        $ ls
+
+        eslint 모듈을 설치한다.
+        $ npm install --save-dev eslint
+
+        Airbnb style guide 를 설치한다.
+        $ npm install --save-dev eslint-config-airbnb
+
+        eslint 플러그인 설치한다.
+        $ npm install --save-dev eslint-plugin-import eslint-plugin-html
+
+        정식 표준이 아닌 자바스크립트의 경우 babel-eslint를 사용해 파싱해야 한다.
+        $ npm install --save-dev babel-eslint
+
+        $ cat package.json
+
+
+    step 1-06. 배포 테스트
+        배포용 파일을 만들고 nginx 에 배포하여 본다.
+        "npm run build" 을 실행하면 /build/ 폴더에 배포용 파일들이 만들어진다.
+
+        $ ls
+        node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        $ npm run build
+
+        $ ls
+        build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        nginx 에 배포 테스트
+        "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
+
+
+    step 1-11. Jasmine 기반의 테스트 프레임워크 jest 설치
+        https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/
+        https://github.com/facebook/jest/issues/3750
+
+        $ npm install --save-dev jest
+
+
+    step 1-21. prop-types 설치(필수)
+        컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
+        $ npm install --save prop-types
+
+    step 1-22. styled-component
+        styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리 이다.
+        $ npm install --save styled-components
+        $ npm install --save-dev jest-styled-components
+
+    step 1-23. 리액트 라우터 설치(필수)
+        react-router-dom: 브라우저에서 사용되는 react-router 라이브러리. 필수
+        $ npm install --save react-router-dom
+
+
+    step 1-24. 리덕스 설치(필수)
+        react-redux : react에서 redux를 사용할 수있게 하는 라이브러리
+        redux-actions : redux용 action을 정의하기 위한 라이브러리
+        redux-logger : redux용 로깅 처리를 위한 미들웨어 라이브러리
+
+        $ npm install --save redux react-redux redux-logger redux-actions
+
+
+    step 1-25. redux-saga 설치(필수)
+        redux-saga : redux에서 비동기로 액션을 처리하는 미들웨어 라이브러리
+        $ npm install --save redux-saga
+
+
+    step 1-26. 비동기 처리(필수)
+        axios : rest api 호출 라이브러리
+        $ npm install --save axios
+
+
+    step 1-27. immer 설치(필수)
+        immer : 리덕스 store state 를 불변 객체, 읽기 전용으로 처리할 때 사용되는 라이브러리
+        $ npm install --save immer
+
+
+
+
+
+
+    step 1-99. react 프로젝트 설정 파일 추출하기
+        프로젝트 설정 파일 추출하기 전에 반드시 소스 commit 을 해야만 eject 가 가능하다.
+        eject를 하게 되면 package.json 파일의 내용이 변경된다.
+        $ ls                # package.json 보이는지 확인
+        $ git add -AN       # 신규 파일 추가 추가
+        $ git commit -a -m '프로젝트 시작하기'
+        $ cat package.json
+        $ npm run eject
+        $ cat package.json
+
+
+
+    ##################################
+    2. 기능 설명
+    ##################################
+
+
+    ##################################
+    3. 프로젝트 폴더 구조
+    ##################################
+
+    프로젝트
+    |-- build                    # 빌드된 결과물이 저장되는 폴더. 서버로 배포되는 파일들.
+    |-- node_modules             # npm 모듈(패키지) 저장 폴더
+    |-- public                   # 배포 버전을 빌드할 때 사용하는 파일.
+    |   |-- assets (기타 자원)
+    |   |   |-- images (이미지)
+    |   |   |-- styles (스타일시트)
+    |   |   `-- text
+    |   |-- favicon.ico
+    |   |-- index.html
+    |   |-- logo192.png
+    |   |-- logo512.png
+    |   |-- manifest.json
+    |   `-- robots.txt
+    |-- src                      # 소스 코드 폴더
+    |   |-- common (공통)
+    |   |-- components (공통 프리젠테이션 컴포넌트)
+    |   |-- containers (컨테이너 컴포넌트)
+    |   |   |-- 컨테이너컴포넌트1
+    |   |   |   |-- components   (컨테이너컴포넌트1 에서만 사용되는 프리젠테이션 컴포넌트 폴더)
+    |   |   |   |-- action.js    (액션상수,액션함수 정의)
+    |   |   |   |-- api.js       (외부 API 호출)
+    |   |   |   |-- saga.js      (외부 API 호출 saga)
+    |   |   |   |-- reducer.js   (리덕스 리듀서)
+    |   |   |   |-- 컨테이너컴포넌트1.js     (컴포넌트 UI )
+    |   |        `-- 컨테이너컴포넌트1.css   (컨테이너컴포넌트1 에서만 사용되는 css 파일)
+    |   |   `-- 컨테이너컴포넌트2
+    |   |        |-- components   (컨테이너컴포넌트2 에서만 사용되는 프리젠테이션 컴포넌트 폴더)
+    |   |        |-- action.js    (액션상수,액션함수 정의)
+    |   |        |-- api.js       (외부 API 호출)
+    |   |        |-- saga.js      (외부 API 호출 saga)
+    |   |        |-- reducer.js   (리덕스 리듀서)
+    |   |        |-- 컨테이너컴포넌트2.js    (컴포넌트 UI )
+    |   |        `-- 컨테이너컴포넌트2.css   (컨테이너컴포넌트2 에서만 사용되는 css 파일)
+    |   |-- constant (상수)
+    |   |-- models (데이터 모델 변수, 타입)
+    |   |-- pages (페이지 컴포넌트)
+    |   |-- reducers (리듀서)
+    |   |   `-- index.js
+    |   |-- routes (라우팅)
+    |   |   `-- index.js
+    |   |-- store (라우팅)
+    |   |   `-- index.js
+    |   |-- utils (유틸리티 모듈)
+    |   |-- App.css
+    |   |-- App.js
+    |   |-- App.test.js
+    |   |-- index.css
+    |   |-- index.js
+    |   |-- logo.svg
+    |   |-- reportWebVitals.js
+    |   `-- setupTests.js
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc
+    |-- eslintrc.json
+    |-- jsconfig.json
+    |-- package.json
+    `-- README.md
+
+
+    3-1. 디렉토리 생성
+      $ mkdir -p ./public/assets \
+              ./public/assets/images \
+              ./public/assets/styles \
+              ./public/assets/text
+              
+      $ mkdir -p ./src/common \
+              ./src/components \
+              ./src/containers \
+              ./src/constant \
+              ./src/models \
+              ./src/pages \
+              ./src/reducers \
+              ./src/routes \
+              ./src/store \
+              ./src/utils
+
+    3-2. 프로젝트 공통 파일 생성
+      $ touch .env  .prettierrc  eslintrc.json  jsconfig.json
+
+      $ touch ./src/reducers/index.js \
+              ./src/routes/index.js \
+              ./src/store/index.js
+
+    3-3. .env 파일 생성 후 내용 추가
+      $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+      $ cat .env
+
+    3-4. .prettierrc 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > .prettierrc
+      $ cat .prettierrc
+
+    3-5. eslintrc.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > eslintrc.json
+      $ cat eslintrc.json
+
+    3-6. jsconfig.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > jsconfig.json
+      $ cat jsconfig.json
+
+
+    ##################################
+    4. 프로젝트 환경 설정
+    ##################################
+
+    4-1. 포트 변경 설정
+        react는 기본적으로 포트 3000 을 사용하는데 다른 포트로 변경할 수 있다.
+        기본 포트 3000 대신 15109 포트를 사용하도록 설정
+
+        .env 파일을 프로젝트 루트에 만들기
+        $ touch .env
+
+        .env  파일에 아래 내용 추가
+        $ cat .env
+        SKIP_PREFLIGHT_CHECK=true
+        PORT=15109
+
+
+    4-2. Prettier 설정
+        Prettier는 코드 포맷터(Code Formatter)다
+        Prettier는 소스 코드를 깃에 커밋할 때 정의한 규칙에 따라 코드의 형식을 자동으로 수정한다.
+
+        Prettier 모듈을 설치할 때는 --save-exact 옵션을 사용하세요.
+        --save-exact 은 Prettier 버전이 달라져도 코드 스타일 변화가 생기지 않도록 하는 옵션입니다.
+        $ npm install --save-dev --save-exact prettier
+
+        eslint-plugin-prettier: 코드 코맷할 때 Prettier를 사용하게 만드는 규칙을 추가합니다.
+        $ npm install --save-dev eslint-plugin-prettier
+
+        eslint-config-react: react 프로젝트에 맞춰진 ESLint 규칙을 추가합니다
+        $ npm install --save-dev eslint-config-react
+
+        eslint-config-prettier: Prettier와 충돌할 설정들을 비활성화합니다.
+        $ npm install --save-dev eslint-config-prettier
+
+        .prettierrc 파일에 아래 내용을 추가
+        $ .prettierrc
+        {
+          "printWidth": 130,
+          "tabWidth": 2,
+          "singleQuote": true,
+          "semi": true,
+          "useTabs": false,
+          "trailingComma": "all",
+          "proseWrap": "always",
+          "requireConfig": false,
+          "bracketSpacing": true,
+          "jsxBracketSameLine": false,
+          "jsxSingleQuote": false,
+          "quoteProps": "as-needed",
+          "endOfLine": "crlf"
+        }
+
+
+    4-3. eslint 설정
+        eslintrc.json 파일에 아래 내용을 추가
+        https://poiemaweb.com/eslint
+        https://eslint.org/docs/user-guide/configuring/rules
+
+        $ eslintrc.json
+        {
+            "env": {
+                "browser": true,
+                "commonjs": true,
+                "es2021": true,
+                "node": true,
+                "jest": true,
+                "es6": true
+            },
+            "extends": [
+                "react-app",
+                "prettier",
+                "airbnb"
+            ],
+            "parser": "babel-eslint",
+            "parserOptions": {
+                "ecmaVersion": 12
+            },
+            "globals": {
+                "_": false
+            },
+            "plugins": ["import", "html"],
+            "rules": {
+                // windows linebreaks when not in production environment
+                "linebreak-style": [ "error", "unix" ],
+                "react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ],
+
+                // "off" or 0 - turn the rule off
+                // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+                // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
+                "jsx-a11y/label-has-associated-control": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
+                "jsx-a11y/label-has-for": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
+                "no-param-reassign": [ "error", { "props": false } ],
+                "arrow-parens": ["error", "always"], // () => {}
+                "arrow-body-style": ["error", "always"],
+                "consistent-return": "off",
+                "func-names": "off",
+                "no-shadow": "off",
+                "no-alert": "off",
+                "no-var": "error",
+                "no-console": "off",
+                "no-debugger": "off"
+            }
+        }
+
+
+    4-4. githook 설정
+        githook은 깃에 특정 이벤트(커밋, 푸시 등)를 감지하여 이벤트를 실행하기 전에 특정 동작을 수행할 수 있도록 도와준다.
+
+        husky와 lint-staged의역할은 다음과 같다.
+        . husky: packages.json 파일에서 githook를 사용할 수 있게 해준다.
+        . lint-staged: 깃의 stage된 파일들에 특정 동작을 수행할 수 있도록 해준다.
+        . lint-staged와 husky를 사용하여 git 이벤트에 Prettier 명령어를 연동 설정.
+
+        $ npm install --save-dev husky  lint-staged
+
+        ############
+        commit 전에 자동으로 prettier 적용하기
+        ############
+
+        packages.json 에 아래 내용 추가
+        {
+          ...중략 ,
+          "husky": {
+              "hooks": {
+                  "pre-commit" : "lint-staged"
+              }
+          },
+          "lint-staged": {
+              "src/**/*.{js,jsx,ts,tsx,json,css,scss,md} ": [
+                  "prettier --write"
+              ]
+          }
+        }
+
+
+    4-5. 절대 경로 import 를 위한 NODE_PATH 설정
+        리액트 컴포넌트를 조합할 때 보통은 상대 경로(import Button from '../../../Buttton')를 사용하여 컴포넌트를 불러오게 된다.
+        상대 경로 추가 방식은 어떤 경로를 지정하고 있는지 명확하게 파악하기 어려운 단점이 있다.
+
+        cross-env 모듈을 사용하면 절대 경로로 컴포넌트를 추가하는 것이 가능하다.
+        cross-env 모듈을 사용하면 상대 경로나 절대 경로를 사용하여 컴포넌트를 추가할 수 있다.
+
+        적용 전: import Button from '../../../Buttton';
+        적용 전: import Button from 'components/Buttton';
+
+        프로젝트에 절대 경로 import 설정을 하겠습니다.
+
+        4-5-1 package.json 파일의 script 부분을 다음과 같이 수정하세요.
+            "scripts": {
+                "start": "cross-env NODE_PATH=src node scripts/start.js",
+                "build": "cross-env NODE_PATH=src node scripts/build.js",
+
+                "test:watch": "jest --watch",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch",
+            }
+
+        4-5-2. jsconfig.json 에 컴포넌트 조합할 때 상대 경로 대신 절대 경로 사용 설정.
+
+            jsconfig.json 파일을 프로젝트 루트에 만들고 파일에 아래 내용 추가
+
+            {
+                "compilerOptions": {
+                    "baseUrl": "./src"
+                }
+            }
+
+    4-6. react 프로젝트 설정 파일 추출하기
+        프로젝트 설정 파일 추출하기 전에 반드시 소스 commit 을 해야만 eject 가 가능하다.
+        eject를 하게 되면 package.json 파일의 내용이 변경된다.
+
+        실행중이면 "ctrl + c" 눌러 중지 한다
+        $ ls                # package.json 보이는지 확인
+        $ git add -AN       # 신규 파일 추가 추가
+        $ git commit -a -m '프로젝트 시작하기'
+        $ cat package.json
+        $ npm run eject
+        $ cat package.json
+
+    4-7. 프로젝트 재실행
+        . 서버 중지
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        . 서버 시작
+        $ ls                # package.json 보이는지 확인
+        $ npm run start     # package.json 보이면 서버 실행
+
+
+    ##################################
+    10. 기능 설명
+    ##################################
+
+
+
+    ##################################
+    11. 프로젝트 초기 설정
+    ##################################
+
+    11-1. 디렉토리 생성
+    $ mkdir -p ./src/assets \
+               ./src/assets/images \
+               ./src/assets/styles \
+               ./src/assets/text \
+               ./src/common \
+               ./src/components \
+               ./src/containers \
+               ./src/constant \
+               ./src/models \
+               ./src/pages \
+               ./src/routes \
+               ./src/utils
+
+
+    ##################################
+    12. 프로젝트에 컴포넌트 추가
+    ##################################
+    12-1. logo.svg 파일 삭제
+        $ rm ./src/logo.svg
+
+    12-2. App.css 수정
+        기존에 있던 파일 내용을 지우고 아래의 css를 추가한다.
+
+    12-3. src/store/index.js 수정
+        const store = {
+            memo: [
+                { id: 2, content: '두번째 메모입니다.', createdAt: Date.now() },
+                { id: 1, content: '첫번재 메모입니다.', createdAt: Date.now() - 1 },
+            ],
+        };
+        export default store;
+
+
+    12-4. 프로젝트 페이지 파일 생성
+        $ touch ./src/pages/Home.js \
+                ./src/pages/Memo.js \
+                ./src/pages/Trash.js
+
+    12-5. App.js 수정
+        import './App.css';
+        import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+        import Home from "./pages/Home";
+
+        function App(props) {
+            // JSX로 화면 만들기
+            return (
+              <BrowserRouter>
+                <Switch>
+                  <Route path="/" exact component={Home} />
+                  <Redirect path="*" to="/" />
+                </Switch>
+              </BrowserRouter>
+            )
+        }
+        export default App;
+
+    13. Home 관련 페이지, 컴포넌트 작성
+        13-1. src/pages/Home.js
+
+        13-2. src/components/Layout.js
+            <div style="display: flex; flex: 1 1 0%; margin: 10px;">
+                {props.children}
+            </div>
+
+        13-3 src/components/Sidebar.js
+            <aside style="width: 200px; border: 1px solid rgb(204, 204, 204); margin-right: 10px; border-radius: 4px;">
+                {props.children}
+            </aside>
+
+        13-4. src/components/SidebarTitle.js
+            <h1 style="padding: 0px 10px;">
+                {props.children}
+            </h1>
+
+        13-5. src/components/List.js
+            <ul style="list-style: none; padding-left: 0px;">
+                {props.children}
+            </ul>
+
+        13-6. src/components/ListItem.js
+            <li style="padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: none;">
+                {props.children}
+            </li>
+
+        13-7. src/components/Main.js
+            <main style="flex: 1 1 0%; overflow: auto; border: 1px solid rgb(204, 204, 204); border-radius: 4px;">
+                {props.children}
+            </main>
+
+
+   14. Memo 관련 페이지, 컴포넌트 작성
+       14-1. App.js 수정
+            import './App.css';
+            import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+            import Home from "./pages/Home";
+            import Memo from "./pages/Memo";
+            import store from "./store";
+
+            function App(props) {
+                // JSX로 화면 만들기
+                return (
+                  <BrowserRouter>
+                    <Switch>
+                      <Route path="/" exact component={Home} />
+                      <Route path="/memo" component={() => <Memo store={store} />} />
+                      <Redirect path="*" to="/" />
+                    </Switch>
+                  </BrowserRouter>
+                )
+            }
+            export default App;
+
+       14-2. src/pages/Memo.js
+
+    </xmp>
+
+</body>
+</html>

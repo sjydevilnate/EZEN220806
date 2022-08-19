@@ -1,0 +1,31 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello React TS!</title>
+    <link rel="stylesheet" href="./normalize.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="app">
+        <div style="display: flex; flex: 1 1 0%; margin: 10px;">
+            <aside style="width: 200px; border: 1px solid rgb(204, 204, 204); margin-right: 10px; border-radius: 4px;"><a href="/"
+                    style="text-decoration: none; font-size: 24px; padding: 10px; display: block;">&lt;</a>
+                <h1 style="padding: 0px 10px;">메모</h1>
+                <ul style="list-style: none; padding-left: 0px;">
+                    <li style="padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: 1px solid rgb(221, 221, 221);"><a href="/memo/2">두번째 메모입니다.</a></li>
+                    <li style="padding: 15px; border-bottom: 1px solid rgb(221, 221, 221); border-top: none;"><a href="/memo/1">첫번재 메모입니다.</a></li>
+                </ul>
+            </aside>
+            <main style="flex: 1 1 0%; overflow: auto; border: 1px solid rgb(204, 204, 204); border-radius: 4px;">
+                <div style="margin: 10px;"><a href="/memo/add"
+                        style="display: inline-block; border: 1px solid rgb(204, 204, 204); border-radius: 4px; margin: 0px 10px 10px 0px; padding: 8px 16px; width: auto; overflow: visible; background: transparent; color: inherit; text-decoration: none;">새로운 메모</a><button style="display: inline-block; border: 1px solid rgb(204, 204, 204); border-radius: 4px; margin: 0px 10px 10px 0px; padding: 8px 16px; width: auto; overflow: visible; background: transparent; color: inherit;">삭제</button>
+                    <div style="border-top: 1px solid rgb(221, 221, 221); padding-top: 10px;">
+                        <div style="margin-bottom: 15px;"><span style="color: rgb(170, 170, 170);">2022. 4. 27. 오후 9:13:22</span></div>
+                        <div>두번째 메모입니다.</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

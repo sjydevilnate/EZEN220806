@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LetterCard</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+
+    <style>
+        .letter {
+            padding: 10px;
+            margin: 10px;
+            color: #333333;
+            display: inline-block;
+            font-family: monospace;
+            font-size : 32px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <xmp>
+        컴포넌트에 CSS를 적용하는 방법을 학습한다.
+
+        1. 컴포넌트의 인라인 스타일링 설정 방법을 학습한다.
+        2. props 의 사용법을 학습한다.
+        3. props.children( === innerHTML) 의 사용법을 학습한다.
+
+        작업 순서
+        1. 프리젠테이션 컴포넌트 LetterCard 만들기. <== 각자
+            아래의 html 코드를 컴포넌트로 만들기
+            <div class="letter" style="background-color:#58B3FF;">A</div>
+
+        2. 컨테이너 컴포넌트 LetterContainer 만들기. <== 각자
+        render(){
+            return(
+                <div>
+                    <LetterCard bgcolor={"#58B3FF"} letter={"A"}></LetterCard>
+                    <LetterCard bgcolor={"#FF605F"} letter={"E"}></LetterCard>
+                    <LetterCard bgcolor={"#FFD52E"} letter={"I"}></LetterCard>
+                    <LetterCard bgcolor={"#49DD8E"} letter={"O"}></LetterCard>
+                    <LetterCard bgcolor={"#AE99FF"} letter={"U"}></LetterCard>
+                </div>
+            )
+        }
+
+        3. ReactDOM 을 사용하여 LetterContainer를 화면에 붙인다. <== 각자
+            예시)
+            ReactDOM.render(
+                <LetterContainer></LetterContainer>
+                ,
+                document.getElementById("app")
+            );
+
+        4. LetterCard 컴포넌트에서는 background-color 값을
+            부모에서 bgcolor 속성값을 넘기면 받아서 사용하도록 한다.
+            예시)
+            <LetterCard bgcolor={"#FFD52E"}>I</LetterCard>
+
+        5. 자식 태그(innerHTML)를 리액트에서 넘겨 받는 방법은 props.children 을 사용하면 된다.
+            예시)
+            <LetterCard bgcolor={"#FFD52E"}>
+                <span>I</span>  <== props.children 을 사용하여 받을 수 있다.
+            </LetterCard>
+
+        6. LetterContainer 의 render()를 아래와 같이 수정한다. <== 같이
+            예시)
+            render(){
+                return (
+                    <div>
+                        <LetterCard bgcolor={"#58B3FF"} letter={"A"}>
+                        </LetterCard>
+                        <LetterCard bgcolor={"#FF605F"} letter={"E"}>
+                        </LetterCard>
+                        <LetterCard bgcolor={"#FFD52E"} letter={"I"}>
+                            <span>I</span>
+                        </LetterCard>
+                        <LetterCard bgcolor={"#49DD8E"} letter={"O"}>
+                            <span>O</span>
+                        </LetterCard>
+                        <LetterCard bgcolor={"#AE99FF"} letter={"U"}>
+                            <span>U</span>
+                        </LetterCard>
+                    </div>
+                )
+            }
+    </xmp>
+    <hr>
+
+    <h2>스타일로 만든 LetterCard</h2>
+    <div class="App">
+        <div class="letter" style="background-color:#58B3FF;">A</div>
+        <div class="letter" style="background-color:#FF605F;">E</div>
+        <div class="letter" style="background-color:#FFD52E;">I</div>
+        <div class="letter" style="background-color:#49DD8E;">O</div>
+        <div class="letter" style="background-color:#AE99FF;">U</div>
+    </div>
+    <hr>
+
+    <h2>컴포넌트로 만든 LetterCard</h2>
+    <div id="app">
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+        <title>05-12</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                text-align: center;
+                background-color: #f6f6f8;
+            }
+
+            input {
+                border-style: groove;
+                width: 200px;
+            }
+
+            button {
+                border-style: groove;
+            }
+
+            .shadow {
+                box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
+            }
+
+            h1 {
+                color: #2f3b52;
+                font-weight: 900;
+                margin: 2.5rem 0 1.5rem;
+            }
+
+            input:focus {
+                outline: none;
+            }
+
+            .inputBox {
+                background: white;
+                height: 50px;
+                line-height: 50px;
+                border-radius: 5px;
+            }
+
+            .inputBox input {
+                border-style: none;
+                font-size: 0.9rem;
+            }
+
+            .addContainer {
+                float: right;
+                background: linear-gradient(to right, #6478fb, #8763fb);
+                display: inline-block;
+                width: 3rem;
+                border-radius: 0 5px 5px 0;
+            }
+
+            .addBtn {
+                color: white;
+                vertical-align: middle;
+            }
+
+            .closeModalBtn {
+                color: #62acde;
+            }
+
+            .modal-mask {
+                position: fixed;
+                z-index: 9998;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: table;
+                transition: opacity 0.3s ease;
+            }
+
+            .modal-wrapper {
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+            .modal-container {
+                width: 300px;
+                margin: 0px auto;
+                padding: 20px 30px;
+                background-color: #fff;
+                border-radius: 2px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+                transition: all 0.3s ease;
+                font-family: Helvetica, Arial, sans-serif;
+            }
+
+            .modal-header h3 {
+                margin-top: 0;
+                color: #62acde;
+            }
+
+            .modal-body {
+                margin: 20px 0;
+            }
+
+            .modal-default-button {
+                float: right;
+            }
+
+            .modal-enter {
+                opacity: 0;
+            }
+
+            .modal-leave-active {
+                opacity: 0;
+            }
+
+            .modal-enter .modal-container,
+            .modal-leave-active .modal-container {
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+
+            ul {
+                list-style-type: none;
+                padding-left: 0px;
+                margin-top: 0;
+                text-align: left;
+            }
+
+            li {
+                display: flex;
+                min-height: 50px;
+                height: 50px;
+                line-height: 50px;
+                margin: 0.5rem 0;
+                padding: 0 0.9rem;
+                background: white;
+                border-radius: 5px;
+            }
+
+            li.checked {
+                background: #BBB;
+                color: #fff;
+                text-decoration: line-through;
+            }
+
+            .checkBtn {
+                line-height: 45px;
+                color: #62acde;
+                margin-right: 5px;
+            }
+
+            .removeBtn {
+                margin-left: auto;
+                color: #de4343;
+            }
+
+            .list-enter-active,
+            .list-leave-active {
+                transition: all 1s;
+            }
+
+            .list-enter,
+            .list-leave-to {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            .clearAllContainer {
+                width: 8.5rem;
+                height: 50px;
+                line-height: 50px;
+                background-color: white;
+                border-radius: 5px;
+                margin: 0 auto;
+            }
+
+            .clearAllBtn {
+                color: #e20303;
+                display: block;
+            }
+
+        </style>
+    </head>
+    <body>
+        <pre style="text-align:left;">
+    컨테이너 컴포넌트와 프리젠테이션 컴포넌트로 나누어 작성한다.
+    생성할 컴포넌트
+        TodoHeader
+        TodoInput
+        TodoList
+        TodoListItem
+        TodoFooter
+        TodoApp
+
+    선 학습 필요 사항:
+        array.reduce() 사용법
+        array.map() 사용법
+        array.filter() 사용법
+        array.findIndex() 사용법
+        array.splice() 사용법
+
+
+    items 는 아래와 같다고 가정한다
+    items = [
+        { id: 1, todo: "영화보기", done: false },
+        { id: 2, todo: "주말 산책", done: true },
+        { id: 3, todo: "ES6 학습", done: false },
+        { id: 4, todo: "잠실 야구장", done: false }
+    ]
+
+    items에서 최대 id 값을 구하는 방법.
+        방법1. items.reduce() 를 사용하여 최대 id 값을 찾기
+        방법2. items.map()과 Math.max()를 사용하여 max id를 찾는 방법
+
+    기능 추가
+        1. add 할 때 items 가 빈 배열인 경우 기능 추가
+        2. add 후에 input 태그에 남아있는 입력값 지우기
+        3. input 태그에 빈 문자일이 입력 되는 경우는 배열에 추가되지 않게.
+        4. todo 타이틀 바꾸기. 기능 누락. 기능 추가가 필요합니다.
+
+    주의 사항.
+        1. checked 메서드에서 class에 빈 문자열로 설정하면 안됨.
+            null 로 설정하면 됨.
+        2. 삭제 버튼을 클릭하면 click 이벤트가 bubbling 된다.
+            click 이벤트가 bubbling 안되게 이벤트 취소 기능을 추가해야 한다.
+    </pre>
+
+    <hr>
+    <div id="app">
+
+        <!-- TodoHeader -->
+        <header>
+            <h1>TODO it!</h1>
+        </header>
+
+        <!-- TodoInput -->
+        <div class="inputBox shadow">
+            <input type="text" placeholder="Type what you have to do" onKeyUp />
+            <span class="addContainer" onClick>
+                <i aria-hidden="true" class="addBtn fas fa-plus"></i>
+            </span>
+
+            <div class="modal-mask" onKeyUp v-if="showModal">
+                <div class="modal-wrapper">
+                    <div class="modal-container">
+                        <div class="modal-header">
+                            <h3 slot="header">경고</h3>
+                        </div>
+
+                        <div class="modal-footer">
+                            <span onClick>
+                                할 일을 입력하세요.
+                                <i class="closeModalBtn fas fa-times" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TodoList -->
+        <!-- "checked(todoItem.done)"  <==> "todoItem.done ? 'checked': null "  -->
+        <section>
+            <ul>
+                <li onClick>
+                    <i aria-hidden="true" class="checkBtn fas fa-check"></i>
+                    영화보기
+                    <span type="button" class="removeBtn" onClick>
+                        <i aria-hidden="true" class="far fa-trash-alt"></i>
+                    </span>
+                </li>
+                <li onClick class="checked">
+                    <i aria-hidden="true" class="checkBtn fas fa-check"></i>
+                    주말 산책
+                    <span type="button" class="removeBtn" onClick>
+                        <i aria-hidden="true" class="far fa-trash-alt"></i>
+                    </span>
+                </li>
+                <li onClick>
+                    <i aria-hidden="true" class="checkBtn fas fa-check"></i>
+                    ES6 학습
+                    <span type="button" class="removeBtn" onClick>
+                        <i aria-hidden="true" class="far fa-trash-alt"></i>
+                    </span>
+                </li>
+                <li onClick>
+                    <i aria-hidden="true" class="checkBtn fas fa-check"></i>
+                    잠실 야구장
+                    <span type="button" class="removeBtn" onClick>
+                        <i aria-hidden="true" class="far fa-trash-alt"></i>
+                    </span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- TodoFooter -->
+        <div class="clearAllContainer">
+            <span class="clearAllBtn" onClick>Clear All</span>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Crud Project</title>
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css" />
+
+</head>
+<body>
+
+    <div style="margin-top: 40px;">
+        <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
+    </div>
+
+    <xmp>
+    React CLI 을 사용하여 React 스타일링 연습을 위한 어플리케이션을 만들어 본다.
+
+
+
+    ##################################
+    1. 작업 개요
+    ##################################
+
+    ##################################
+    2. 프로젝트 생성 작업
+       소요시간: 20분
+    ##################################
+    step 1-01. node / npm 버전 업그레이드
+        $ node -v                          #  node 버전 확인
+        v16.16.0
+
+        $ npm install -g npm@latest        #  npm 최신 버전 설치
+
+        $ npm -v                           #  npm 버전 확인
+        8.15.1
+
+        $ npx -v                           #  npx(=npm extension) 버전 확인
+        8.15.1
+
+
+    step 1-02. 프로젝트 생성
+
+        $ npm uninstall -g create-react-app        # 전역으로 설치된 create-react-app 모듈 삭제하기
+
+        $ npx clear-npx-cache                      # npx 로 다운로드된 캐쉬되어 있는 모듈 삭제
+        Need to install the following packages:
+          clear-npx-cache
+        Ok to proceed? (y) y
+        ....
+
+        $ npx create-react-app styleprj01            # 프로젝트명은 소문자로 만들어야 함.
+        Need to install the following packages:
+          create-react-app
+        Ok to proceed? (y) y
+        ...
+        5분 소요
+        ...
+
+        $ ls                                       # styleprj01 폴더가 보이는지 확인
+        $ cd styleprj01                             # styleprj01 폴더로 이동
+        $ ls                                       # package.json 파일이 보이는지 확인
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+    step 1-03. 실행 중인 프로세스 중지
+        터미널에서 "ctrl + c" 눌러 실행된 서버를 중지한다
+
+
+    step 1-04. 프로젝트 소스 커밋
+        $ ls                                        # package.json 파일이 보이는지 확인
+        $ git status                                # 파일 상태 확인
+        $ git add -AN                               #
+        $ git status                                # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'      # 파일 commit
+        $ git status                                # 파일 상태 확인
+        $ git push                                  #
+
+        github 사이트에서 소스가 올라갔는지 확인한다.
+
+
+    step 1-11. babel 모듈 설치
+        https://babeljs.io/docs/en/babel-preset-env-standalone
+        https://babeljs.io/docs/en/babel-preset-react
+
+        $ npm install --save-dev @babel/core @babel/cli @babel/preset-env
+
+
+    step 1-21. prop-types 설치(필수)
+        prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
+
+        $ npm install --save prop-types
+
+
+    step 1-22. styled-component
+        styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
+        https://www.npmjs.com/package/styled-components
+
+        $ npm install --save styled-components
+
+
+    step 1-23. classnames
+        조건부로 className을 함께 결합하기 위한 라이브러리입니다.
+        https://www.npmjs.com/package/classnames
+
+        $ npm install --save classnames
+
+
+    step 1-24. react-router-dom
+        react-router-dom 패키지는 웹 애플리케이션에서 Router를 처리하기 위한 라이브러리입니다.
+        https://www.npmjs.com/package/react-router-dom
+
+        $ npm install --save react-router-dom
+
+
+    ##################################
+    3. 프로젝트 폴더 구조
+       소요시간: 05분
+    ##################################
+
+    프로젝트
+    |-- build
+    |-- node_modules             # npm 모듈(패키지) 저장 폴더
+    |-- public
+    |   |-- favicon.ico
+    |   |-- index.html
+    |   |-- logo192.png
+    |   |-- logo512.png
+    |   |-- manifest.json
+    |   `-- robots.txt
+    |-- src
+    |   |-- App.css
+    |   |-- App.js
+    |   |-- CSSModule.css
+    |   |-- CSSModule.js
+    |   |-- CSSModule.module.css
+    |   |-- StyledApp.js
+    |   |-- StyledApp.test.js
+    |   |-- StyledComponent.js
+    |   |-- index.js
+    |   `-- reportWebVitals.js
+    |-- test
+    |   |-- test.classnames.js
+    |   `-- test.styled-componet.js
+    |-- .babelrc
+    |-- .gitignore
+    |-- README.md
+    `-- package.json
+
+    3-1. 필요없는 파일 삭제
+
+
+    3-2. 프로젝트 소스 커밋
+        $ pwd               # 현재 작업 디렉토리 확인
+        $ ls                # package.json 보이는지 확인
+        $ git status        # 파일 상태 확인
+        $ git add -AN       # 신규 파일 추가 추가
+        $ git status        # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'
+        $ git status        # 파일 상태 확인
+        $ git push          #
+
+
+
+    ##################################
+    4. 트랜스컴파일 수행
+
+    4.1 테스트 파일 생성
+        $ mkdir -p ./test
+
+
+        # test.classnames.js 파일을 생성하고 아래 내용을 추가한다.
+        $ touch ./test/test.classnames.js
+
+        $ cat ./test/test.classnames.js
+        const classNames = require('classnames');
+        const cx = classNames('foo', 'bar'); // => 'foo bar'
+        console.log(cx);
+
+
+        # test.styled-componet.js 파일을 생성하고 아래 내용을 추가한다.
+        $ touch ./test/test.styled-componet.js
+
+        $ cat ./test/test.styled-componet.js
+        const {default:styled, css} = require('styled-components');
+        const {Link} = require('react-router-dom');
+
+        // 문자열로 styled 의 인자로 전달
+        const MyInput = styled('input')`
+            background: gray;
+        `;
+        console.log(MyInput);
+
+
+        // 아예 컴포넌트 형식의 값을 넣어줌
+        const StyledLink = styled(Link)`
+            color: blue;
+        `;
+        console.log(StyledLink);
+
+        const Sample = ({ style }) => {
+            return <div style={style}>Sample</div>;
+        };
+        console.log(Sample);
+
+
+
+    4.2 명령어 옵션(--presets=@babel/env) 을 이용한 트랜스 컴파일 수행
+        https://babeljs.io/docs/en/babel-cli
+
+        $ npx babel --presets=@babel/env,@babel/preset-react test/test.classnames.js
+        $ npx babel --presets=@babel/env,@babel/preset-react test/test.styled-componet.js
+
+
+    4.3 Babel 설정 파일(.babelrc)을 이용한 트랜스 컴파일 수행
+        https://babeljs.io/docs/en/babel-cli
+
+        $ ls -a               # 현재 디렉토리의 파일 목록 조회
+        ./  ../  .gitignore  build/  node_modules/  package.json  public/  README.md  src/  test/
+
+        $ touch .babelrc      # babel 설정 파일 생성
+
+        $ echo -e "{\n  \"presets\": [\"@babel/env\", \"@babel/preset-react\"]\n}" > .babelrc
+
+        $ cat .babelrc    # .babelrc 내용 확인
+        {
+            "presets": ["@babel/env", "@babel/preset-react"]
+        }
+
+        $  npx babel test/test.classnames.js
+        $  npx babel test/test.styled-componet.js
+
+
+    4.4 src 폴더에 있는 js 파일을 es5로 트랜스 컴파일하여 build 폴더에 추가하시오.
+        $ ls -a                          # package.json 파일이 있는지 확인.
+        $ npx babel test/ -d build/      # package.json 파일이 있는 곳에서 수행.
+        Successfully compiled 2 files with Babel (1582ms).
+
+        $ ls -al ./build/
+        total 9
+        drwxr-xr-x 1 admin 197121    0  7월 31 16:18 ./
+        drwxr-xr-x 1 admin 197121    0  7월 31 16:16 ../
+        -rw-r--r-- 1 admin 197121  154  7월 31 16:19 test.classnames.js
+        -rw-r--r-- 1 admin 197121 1130  7월 31 16:19 test.styled-componet.js
+
+        $  node build/test.classnames.js
+        $  node build/test.styled-componet.js
+
+
+    4.5 build 폴더에 있는 파일을 디버깅하기.
+        a. build/test.classnames.js 파일을 연다.
+        b. breakpoint를 지정한다.
+        c. F5 를 눌러 디버깅을 시작한다.
+
+
+    ##################################
+    5. 서버 실행
+    ##################################
+        $ ls                                       # styleprj01 폴더가 보이는지 확인
+        $ cd styleprj01                            # styleprj01 폴더로 이동
+        $ ls                                       # package.json 파일이 보이는지 확인
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+        5-1. 서버 중지
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        5-2. 서버 시작
+        $ ls                # package.json 보이는지 확인
+
+        $ npm run start     # package.json 보이면 서버 실행
+        Compiled successfully!
+
+        You can now view counterprj06 in the browser.
+
+          Local:            http://localhost:15109
+          On Your Network:  http://192.168.56.1:15109
+
+        Note that the development build is not optimized.
+        To create a production build, use npm run build.
+
+        webpack compiled successfully
+
+
+    ##################################
+    6. Jest 테스트 와 디버깅 방법
+    ##################################
+
+    https://tod2.tistory.com/214
+    https://jestjs.io/docs/cli#--envenvironment
+
+    6-1 package.json 에서 실행 jest script 추가
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+
+                "test:watch": "jest --watch --env=jsdom",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom",
+
+                "build-watch": "./node_modules/.bin/webpack -w",
+                "build": "./node_modules/.bin/webpack"
+            },
+            ...중략
+        }
+
+    6-2. 터미널에서 개별 파일 jest 테스트 실행
+        $ npx jest --help
+        $ npx jest --env=jsdom  src/containers/todo/components/PageHeader.test.js
+        $ npx jest --env=jsdom  --watch  src/containers/todo/components/PageHeader.test.js
+
+    6-3. 터미널에서 watch 모드로 jest 테스트 실행
+        $ ls    # package.json 보이는지 확인
+        $ cat package.json
+        $ npm run test:watch
+        $ npx jext --env=jsdom --watch
+
+    6-4. 터미널에서 deubgging 모드로 jest 테스트 실행
+        $ npm run test:debug
+        $ node --inspect-brk node_modules/jest/bin/jest --runInBand --env=jsdom --watch
+
+    6-5. 소스 코드에 debugger 삽입
+
+    6-6. Chrome을 열고 주소 표시줄에 다음을 입력합니다.
+        chrome://inspect
+
+    6-7. "Open dedicated DevTools for Node" 클릭
+        연결 추가 127.0.0.1:9229
+
+    6-8. CLI 에서 실행을 중지하려면 이면 "ctrl + c" 눌러 실행 중지
+
+
+
+
+    ##################################
+    11. App.css 대신 styled-components 을 사용하는 스타일링으로 바꾸보자.
+    ##################################
+
+
+    11-1. 파일 생성
+    $ ls    # packages.json 이 보이는지 확인.
+
+
+
+    $ cp ./src/App.js ./src/StyledApp.js
+    $ mv ./src/App.test.js ./src/StyledApp.test.js
+
+    작업 11-01. StyledApp.test.js 수정
+        리액트에서는 TDD 를 작성할 때 jest 를 사용한다.
+        파일명.test.js 가 테스트용 TDD 파일이다.
+
+        test('renders learn react link', () => {
+            const {container}= render(<StyledApp />);
+
+            const linkElement = screen.getByText(/learn react/i);
+            expect(linkElement).toBeInTheDocument();
+
+            expect(container.getElementsByClassName('App-logo')).toHaveLength(1);
+            expect(container.getElementsByClassName('App-logo')[0]).toHaveAttribute( 'src', 'logo.svg');
+            expect(container.getElementsByTagName('p')).toHaveLength(1);
+            expect(container.getElementsByTagName('p')[0]).toHaveTextContent('Edit src/App.js and save to reload.');
+            expect(container).toMatchSnapshot();
+        });
+
+    작업 11-02. StyledApp.test.js 테스트
+        $ npm run test
+
+        Watch Usage
+        › Press a to run all tests.
+        › Press f to run only failed tests.
+        › Press q to quit watch mode.
+        › Press p to filter by a filename regex pattern.
+        › Press t to filter by a test name regex pattern.
+        › Press Enter to trigger a test run.
+
+
+        PASS  src/StyledApp.test.js (7.046 s)
+        √ renders learn react link (61 ms)
+
+        Test Suites: 1 passed, 1 total
+        Tests:       1 passed, 1 total
+        Snapshots:   0 total
+        Time:        12.099 s
+        Ran all test suites.
+
+        Watch Usage: Press w to show more.
+
+    작업 11-03. App.js 파일에 'styled-components' import
+        import Styled from 'styled-components';
+
+    작업 11-04. StyledApp.js 파일에서 .App 클래스를 styled-components 방식으로 바꾸어 보자.
+        .App {
+            text-align: center;
+        }
+        <div className="App">
+            ...생략
+        </div>
+
+        const StyledApp = Styled.div`
+            text-align: center;
+        `;
+        <StyledApp>
+            ...생략
+        </StyledApp>
+
+
+    작업 11-05. StyledApp.js 파일에서 .App-header 클래스를 styled-components 방식으로 바꾸어 보자.
+
+        .App-header {
+            background-color: #282c34;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: calc(10px + 2vmin);
+            color: white;
+        }
+
+        <header className="App-header">
+        ...생략
+        </header>
+
+
+        const StyledAppHeader = Styled.header`
+            background-color: #282c34;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: calc(10px + 2vmin);
+            color: white;
+        `;
+        <StyledAppHeader>
+        ...생략
+        </StyledAppHeader>
+
+
+
+    작업 11-06. StyledApp.js 파일에서 .App-logo 클래스를 styled-components 방식으로 바꾸어 보자.
+
+        .App-logo {
+            height: 40vmin;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .App-logo {
+                animation: App-logo-spin infinite 20s linear;
+            }
+        }
+        @keyframes App-logo-spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        <img src={logo} className="App-logo" alt="logo" />
+
+        const StyledAppLogo = Styled.img`
+            height: 40vmin;
+            pointer-events: none;
+
+            @media (prefers-reduced-motion: no-preference) {
+                animation: App-logo-spin infinite 20s linear;
+            }
+
+            @keyframes App-logo-spin {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        `;
+        <StyledAppLogo src={logo} alt="logo" />
+
+
+    작업 11-07. StyledApp.js 파일에서 .App-link 클래스를 styled-components 방식으로 바꾸어 보자.
+
+        .App-link {
+            color: #61dafb;
+        }
+        <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Learn React
+        </a>
+
+        const StyledAppLink = Styled.a`
+            color: #61dafb;
+        `;
+
+    작업 11-08. StyledApp.js 파일에서  css를 import 하는 부분을 찾아 삭제하도록 한다.
+        import './App.css'; 삭제
+
+    작업 11-09. App.css 파일 삭제
+
+    작업 11-10. StyledApp.test.js 수정
+        리액트에서는 TDD 를 작성할 때 jest 를 사용한다.
+        파일명.test.js 가 테스트용 TDD 파일이다.
+
+        test('renders learn react link', () => {
+            const {container}= render(<App />);
+
+            const linkElement = screen.getByText(/learn react/i);
+            expect(linkElement).toBeInTheDocument();
+
+            // expect(container.getElementsByClassName('App-logo')).toHaveLength(1);
+            // expect(container.getElementsByClassName('App-logo')[0]).toHaveAttribute( 'src', 'logo.svg');
+
+            const applogo = screen.getByAltText( 'logo');
+            expect(applogo).toBeInTheDocument();
+            expect(applogo).toHaveAttribute( 'src', 'logo.svg');
+
+            expect(container.getElementsByTagName('p')).toHaveLength(1);
+            expect(container.getElementsByTagName('p')[0]).toHaveTextContent('Edit src/App.js and save to reload.');
+            expect(container).toMatchSnapshot();
+        });
+
+    작업 11-11. StyledApp.test.js 테스트
+        $ npm run test
+
+        11-12. 라우팅 수정
+        $ cat ./src/App.js 수정
+
+        변경 후
+        import React, { Component } from "react";
+        import StyledApp from "./StyledApp";
+
+        class App extends Component {
+          render() {
+            return (
+              <div>
+                <h1> Styled App Component</h1>
+                <StyledApp></StyledApp>
+                <hr />
+              </div>
+            );
+          }
+        }
+
+        export default App;
+
+    ##################################
+    13. 프로젝트에 CSSModule 컴포넌트 추가
+    ##################################
+    13-1. 파일 생성
+    $ ls    # packages.json 이 보이는지 확인.
+
+    $ touch ./src/CSSModule.css
+    $ touch ./src/CSSModule.js
+    $ touch ./src/CSSModule.module.css
+
+
+    13-2. 라우팅 수정
+    $ cat ./src/App.js 수정
+
+    변경 후
+    import React, { Component } from "react";
+    import CSSModule from "./CSSModule";
+
+    class App extends Component {
+      render() {
+        return (
+          <div>
+            <h1> Styled App Component</h1>
+            <StyledApp></StyledApp>
+            <hr />
+            <h1> CSS Module Component</h1>
+            <CSSModule></CSSModule>
+            <hr />
+          </div>
+        );
+      }
+    }
+
+    export default App;
+
+
+    ##################################
+    15. 프로젝트에 StyledComponent 컴포넌트 추가
+    ##################################
+
+    15-1. 파일 생성
+    $ ls    # packages.json 이 보이는지 확인.
+
+    $ touch ./src/StyledComponent.js
+
+
+    15-2. 라우팅 수정
+    $ cat ./src/App.js 수정
+
+    변경 후
+    import React, { Component } from "react";
+    import CSSModule from "./CSSModule";
+    import StyledComponent from './StyledComponent';
+
+    class App extends Component {
+      render() {
+        return (
+          <div>
+            <h1> Styled App Component</h1>
+            <StyledApp></StyledApp>
+            <hr />
+            <h1> CSS Module Component</h1>
+            <CSSModule></CSSModule>
+            <hr />
+            <h1>Styled Component</h1>
+            <StyledComponent></StyledComponent>
+            <hr />
+          </div>
+        );
+      }
+    }
+
+    export default App;
+
+
+
+    ##################################
+    21. 프로젝트에 LetterCard 컴포넌트 추가하고 styled-components 방식을 적용하시오.
+    "rt18-11.LetterCard.html" 참조
+    ##################################
+
+    21-1. 파일 생성
+    $ ls    # packages.json 이 보이는지 확인.
+
+    $ touch ./src/LetterCard.js
+
+
+    25-2. 라우팅 수정
+    $ ~/src/index.js 수정
+    변경 전 : import App from './App';
+    변경 후 : import App from './src/LetterCard';
+
+
+
+
+
+
+    ##################################
+    23. 프로젝트에 ColorCard 컴포넌트 추가하고 CSS module 방식을 적용하시오.
+    "rt18-13.ColorCard.html" 참조
+    ##################################
+
+    23-1. 파일 생성
+    $ ls    # packages.json 이 보이는지 확인.
+
+    $ touch ./src/ColorCard.js
+    $ touch ./src/ColorCard.module.css
+
+
+    25-2. 라우팅 수정
+    $ ~/src/index.js 수정
+    변경 전 : import App from './App';
+    변경 후 : import App from './src/ColorCard';
+
+
+
+
+
+
+    ##################################
+    25. 프로젝트에 Circle 컴포넌트 추가하고 CSS module 방식을 적용하시오.
+    "rt18-15.Circle.html" 참조
+    ##################################
+
+    25-1. 파일 생성
+    $ ls    # packages.json 이 보이는지 확인.
+
+    $ touch ./src/ColorCard.js
+    $ touch ./src/ColorCard.module.css
+
+
+    25-2. 라우팅 수정
+    $ ~/src/index.js 수정
+    변경 전 : import App from './App';
+    변경 후 : import App from './src/ColorCard';
+
+
+    ##################################
+    31. 프로젝트에 routing을 적용해 본다.
+    "rt51-03.단순라우팅.html" 참조
+    ##################################
+
+    31-1. src/index.js 수정
+    import React from "react";
+    import ReactDOM from "react-dom/client";
+    import { BrowserRouter } from "react-router-dom";
+    import App from "./App";
+    import reportWebVitals from "./reportWebVitals";
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(
+    <React.StrictMode>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </React.StrictMode>
+    );
+
+
+    31-2. src/App.js 수정
+
+    import React, { Component } from "react";
+    import { NavLink, Routes, Route } from "react-router-dom";
+    import StyledApp from "./StyledApp";
+    import CSSModule from "./CSSModule";
+    import StyledComponent from "./StyledComponent";
+
+    class App extends Component {
+      render() {
+        return (
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <NavLink
+                    activeClassName={"active"}
+                    activeStyle={{ color: "red" }}
+                    exact
+                    to="/styledapp"
+                  >
+                    StyledApp
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    activeClassName={"active"}
+                    activeStyle={{ color: "red" }}
+                    exact
+                    to="/cssmodule"
+                  >
+                    CSSModule
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    activeClassName={"active"}
+                    activeStyle={{ color: "red" }}
+                    exact
+                    to="/styledcomponent"
+                  >
+                    StyledComponent
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
+
+            <Routes>
+              <Route path="/styledapp" element={<StyledApp />} />
+              <Route path="/cssmodule" element={<CSSModule />} />
+              <Route path="/styledcomponent" element={<StyledComponent />} />
+            </Routes>
+          </div>
+        );
+      }
+    }
+
+    export default App;
+
+    </xmp>
+    <hr>
+
+</body>
+</html>

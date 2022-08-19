@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>조건부 렌더링</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+</head>
+
+<body>
+    <xmp>
+        JSX 안에서 조건부 렌더링 방법을 학습한다.
+
+        작성할 컴포넌트
+            MailboxContainer
+            Mailbox
+
+        Mailbox 의 render() 에서 사용할 JSX 코드
+        <div>
+            <h1>Hello!</h1>
+            {/* props.unreadMessages.length > 0 인 경우에만 나오게 하시오*/}
+            <h2>
+                You have unread messages.
+            </h2>
+        </div>
+
+        JSX 안에서 props.unreadMessages.length 가 0보다 큰 경우에만
+        아래 메시지가 나오게 하시오
+        ==> You have unread messages.
+
+        https://reactjs.org/docs/conditional-rendering.html 를 참고
+
+
+        const { useState } = React;
+
+        function Mailbox(props) {
+            return (
+                <div>
+                    <h1>Hello!</h1>
+                    {/* props.unreadMessages.length > 0 인 경우에만 나오게 하시오*/}
+                    <h2>
+                        You have unread messages.
+                    </h2>
+                </div>
+            );
+        }
+
+        function MailboxContainer(props) {
+            const [messages1,setMessages1] = useState(['React']);
+            const [messages2,setMessages2] = useState([]);
+            const [messages3,setMessages3] = useState(null);
+            return (
+                <div>
+                    <Mailbox unreadMessages={messages1} />
+                    <hr />
+                    <Mailbox unreadMessages={messages2} />
+                    <hr />
+                    <Mailbox unreadMessages={messages3} />
+                </div>
+            );
+        }
+
+        ReactDOM.render( <MailboxContainer />, document.getElementById('app') );
+    </xmp>
+    <hr>
+
+    <div id="app"></div>
+</body>
+
+</html>
+
+
+
+

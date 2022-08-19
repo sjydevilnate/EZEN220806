@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>redux counter</title>
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css" />
+
+</head>
+<body>
+
+    <div style="margin-top: 40px;">
+        <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
+    </div>
+
+    <xmp>
+    React CLI 을 사용하여 Counter 어플리케이션을 만들어 본다.
+
+    "vue36-01.vuex-state.html" 를 참고하여 작성하시오.
+
+    </xmp>
+
+    <div style="margin: 0 0 0 120px;">
+      <div>            <p></p>
+          <p>
+              1. 실행 전에  서버를 실행하세요.
+              <a href="#" onClick="window.open('../../st04.ES2015문법/ap09.서버통신/ap09-03.Node서버실행.html','Node서버실행','width=900,height=650,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">Node서버실행</a>
+          </p>
+          <p>
+              2. 브라우저로 서버 실행 여부 확인<br>
+              <a href="http://localhost:5050/counter" target="_blank">http://localhost:5050/counter</a>   ==> 현재값 가져오기<br>
+              <a href="http://localhost:5050/counter?step=1" target="_blank">http://localhost:5050/counter?step=1</a>   ==> 1 씩 증가<br>
+              <a href="http://localhost:5050/counter?step=1" target="_blank">http://localhost:5050/counter?step=-1</a>   ==> -1 씩 증가<br>
+              <a href="http://localhost:5050/counter?step=10" target="_blank">http://localhost:5050/counter?step=10</a>  ==> 10 씩 증가<br>
+              <a href="http://localhost:5050/counter?step=10" target="_blank">http://localhost:5050/counter?step=-10</a>  ==> -10 씩 증가<br>
+          </p>
+      </div>
+    </div>
+
+    <xmp>
+
+
+
+
+
+    ##################################
+    1. 작업 개요
+    ##################################
+
+    ##################################
+    2. 프로젝트 생성 작업
+       소요시간: 20분
+    ##################################
+    step 1-01. node / npm 버전 업그레이드
+        $ node -v                          #  node 버전 확인
+        v16.14.2
+
+        $ npm install -g npm@latest        #  npm 최신 버전 설치
+
+        $ npm -v                           #  npm 버전 확인
+        8.13.2
+
+        $ npx -v                           #  npx(=npm extension) 버전 확인
+        8.13.2
+
+
+    step 1-02. 프로젝트 생성
+
+        $ npm uninstall -g create-react-app        # 전역으로 설치된 create-react-app 모듈 삭제하기
+
+        $ npx clear-npx-cache                      # npx 로 다운로드된 캐쉬되어 있는 모듈 삭제
+        Need to install the following packages:
+          clear-npx-cache
+        Ok to proceed? (y) y
+        ....
+
+        $ npx create-react-app counterprj01        # 프로젝트명은 소문자로 만들어야 함.
+        Need to install the following packages:
+          create-react-app
+        Ok to proceed? (y) y
+        ...
+        5분 소요
+        ...
+
+        $ ls                                       # counterprj01 폴더가 보이는지 확인
+        $ cd counterprj01                          # counterprj01 폴더로 이동
+        $ ls                                       # package.json 파일이 보이는지 확인
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+    </xmp>
+
+    <img src="./snap0029.png" width="100%" />
+
+    <xmp>
+    step 1-03. 실행 중인 프로세스 중지
+        터미널에서 "ctrl + c" 눌러 실행된 서버를 중지한다
+
+
+    step 1-04. 프로젝트 소스 커밋
+        $ ls                                  # package.json 파일이 보이는지 확인
+        $ git status                          # 파일 상태 확인
+        $ git add -AN                         #
+        $ git status                          # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'     # 파일 commit
+        $ git status                          # 파일 상태 확인
+        $ git push                            #
+
+        github 사이트에서 소스가 올라갔는지 확인한다.
+
+    step 1-11. babel 모듈 설치
+        https://babeljs.io/docs/en/babel-preset-env-standalone
+        https://babeljs.io/docs/en/babel-preset-react
+        https://webpack.js.org/loaders/
+
+        $ npm install --save-dev @babel/core @babel/cli
+        $ npm install --save-dev @babel/preset-env
+        $ npm install --save-dev @babel/preset-react
+        $ npm install --save-dev babel-loader
+
+
+    step 1-12. Jasmine 기반의 테스트 프레임워크 jest 설치
+        https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/
+        https://github.com/facebook/jest/issues/3750
+        https://testing-library.com/docs/react-testing-library/intro/
+
+        jest 는 코드가 제대로 동작하는지 확인하는 Jasmine 기반의 '테스팅 프레임워크' 입니다.
+        jest-cli 는 단일 파일만 테스트 하는 경우에 사용합니다.
+        @testing-library는 실제 react-dom 위에서 동작하는 DOM 테스팅 라이브러리 (DOM Testing Library) 이다.
+
+        $ npm install --save-dev jest
+        $ npm install --save-dev jest-cli
+        $ npm install --save-dev @types/jest
+        $ npm install --save-dev babel-jest
+        $ npm install --save-dev @testing-library/react
+        $ npm install --save-dev @testing-library/jest-dom
+        $ npm install --save-dev @testing-library/user-event
+
+    step 1-13. supertest 모듈 설치
+        $ npm install --save-dev supertest
+
+    step 1-14. superagent 모듈 설치
+        $ npm install --save-dev supertest superagent
+
+    step 1-15. nodemon 모듈 설치
+        $ npm install --save-dev nodemon
+
+
+    step 1-21. prop-types 설치(필수)
+        prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
+
+        $ npm install --save prop-types
+
+
+    step 1-22. styled-component
+        styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
+
+        $ npm install --save styled-components
+        $ npm install --save-dev @types/styled-components jest-styled-components
+
+
+    step 1-23. 리액트 라우터 설치(필수)
+        react-router:
+        react-router-dom: 브라우저에서 사용되는 react-router 라이브러리. 필수
+
+        $ npm install --save react-router react-router-dom
+
+
+    step 1-24. 리덕스 설치(필수)
+        redux : redux를 사용할 수있게 하는 라이브러리
+        react-redux : react에서 redux를 사용할 수있게 하는 라이브러리
+        redux-actions : redux용 action을 정의하기 위한 라이브러리
+        redux-logger : redux용 로깅 처리를 위한 미들웨어 라이브러리
+
+        $ npm install --save redux react-redux redux-logger redux-actions
+
+
+    step 1-25. redux-saga 설치(필수)
+        redux-saga : redux에서 비동기로 액션을 처리하는 미들웨어
+
+        $ npm install --save redux-saga
+
+
+    step 1-26. 비동기 처리(필수)
+        axios : rest api 호출 라이브러리
+
+        $ npm install --save axios
+
+
+    step 1-27. immer 설치(필수)
+        immer : 리덕스 store state 를 불변 객체(읽기 전용)로 처리할 때 사용되는 라이브러리
+
+        $ npm install --save immer
+
+    ##################################
+    2. 배포 테스트
+    ##################################
+
+    2-1. 배포 테스트
+        배포용 파일을 만들고 nginx 에 배포하여 본다.
+        "npm run build" 을 실행하면 /build/ 폴더에 배포용 파일들이 만들어진다.
+
+        $ ls     # build/ 폴더가 보이는지 확인. 없으면 정상
+        node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        $ npm run build
+
+        $ ls    # build/ 폴더가 보이는지 확인. 있으면 정상
+        build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        nginx 에 배포 테스트
+        "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
+    </xmp>
+
+    <img src="./snap0030.png" width="100%" />
+
+    <xmp>
+
+
+    ##################################
+    3. 프로젝트 폴더 구조
+       소요시간: 05분
+    ##################################
+
+    프로젝트
+    |-- build                    # 빌드된 결과물이 저장되는 폴더. 서버로 배포되는 파일들.
+    |-- node_modules             # npm 모듈(패키지) 저장 폴더
+    |-- public                   # 배포 버전을 빌드할 때 사용하는 파일.
+    |   |-- assets (기타 자원)
+    |   |   |-- images (이미지)
+    |   |   |-- styles (스타일시트)
+    |   |   `-- text
+    |   |-- favicon.ico
+    |   |-- index.html
+    |   |-- logo192.png
+    |   |-- logo512.png
+    |   |-- manifest.json
+    |   `-- robots.txt
+    |-- src                      # 소스 코드 폴더
+    |   |-- common (공통)
+    |   |-- components (공통 프리젠테이션 컴포넌트)
+    |   |-- containers (컨테이너 컴포넌트)
+    |   |   `-- counter
+    |   |       |-- components        (counter 컨테이너에서만 사용되는 프리젠테이션 컴포넌트 폴더)
+    |   |       |   |-- LoadingBox.css
+    |   |       |   |-- LoadingBox.js
+    |   |       |   |-- LoadingBox.test.js    (컴포넌트 UI 테스트)
+    |   |       |   |-- Counter.css
+    |   |       |   |-- Counter.js
+    |   |       |   `-- Counter.test.js       (컴포넌트 UI 테스트)
+    |   |       |-- action.js    (액션상수,액션함수 정의)
+    |   |       |-- api.js       (외부 API 호출)
+    |   |       |-- CounterContainer.css  (counter 컨테이너에서만 사용되는 css 파일)
+    |   |       |-- CounterContainer.js   (컴포넌트 UI )
+    |   |       |-- reducer.js   (리덕스 리듀서)
+    |   |       `-- saga.js      (외부 API 호출 saga)
+    |   |-- constant (상수)
+    |   |-- models (데이터 모델 변수, 타입)
+    |   |-- pages (페이지 컴포넌트)
+    |   |-- reducers (리듀서)
+    |   |   `-- index.js
+    |   |-- routes (라우팅)
+    |   |   `-- index.js
+    |   |-- store (라우팅)
+    |   |   `-- index.js
+    |   |-- utils (유틸리티 모듈)
+    |   |-- App.css
+    |   |-- App.js
+    |   |-- App.test.js
+    |   |-- index.css
+    |   |-- index.js
+    |   |-- logo.svg
+    |   |-- reportWebVitals.js
+    |   `-- setupTests.js
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc
+    |-- eslintrc.json
+    |-- jsconfig.json
+    |-- package.json
+    `-- README.md
+
+
+    3-1. 프로젝트용 공통 폴더 생성
+      $ mkdir -p ./public/assets \
+              ./public/assets/images \
+              ./public/assets/styles \
+              ./public/assets/text
+
+      $ mkdir -p ./src/common \
+              ./src/components \
+              ./src/containers \
+              ./src/constant \
+              ./src/models \
+              ./src/pages \
+              ./src/reducers \
+              ./src/routes \
+              ./src/store \
+              ./src/utils
+
+    3-2. 프로젝트용 공통 파일 생성
+      $ touch  .babelrc  .env  .prettierrc  eslintrc.json  jsconfig.json
+
+      $ touch ./src/reducers/index.js \
+              ./src/routes/index.js \
+              ./src/store/index.js
+
+    3-3. .babelrc 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > .babelrc
+      $ cat .babelrc
+
+    3-4. .env 파일 생성 후 내용 추가
+      $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+      $ cat .env
+
+    3-5. .prettierrc 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > .prettierrc
+      $ cat .prettierrc
+
+    3-6. eslintrc.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > eslintrc.json
+      $ cat eslintrc.json
+
+    3-7. jsconfig.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > jsconfig.json
+      $ cat jsconfig.json
+
+
+    ##################################
+    4. 프로젝트 환경 설정
+       소요시간: 15분
+    ##################################
+
+    프로젝트
+    |-- ... 생략
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc
+    |-- eslintrc.json
+    |-- package.json
+    `-- README.md
+
+    4-1 .babelrc 설정
+
+        .babelrc 파일을 프로젝트 루트에 만들기
+        $ touch .babelrc
+
+        {
+            "presets": [
+                [
+                    "react-app",
+                ],
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": false,
+                        "targets": {
+                            "node": "current",
+                            "chrome": "79", // 크롬 79까지 지원하는 코드를 만든다
+                        }
+                    }
+                ],
+                [
+                    "@babel/preset-react",
+                    {
+                        "development": process.env.BABEL_ENV === "development",
+                        "pragma": "dom", // default pragma is React.createElement (only in classic runtime)
+                        "pragmaFrag": "DomFrag", // default is React.Fragment (only in classic runtime)
+                        "throwIfNamespace": false, // defaults to true
+                        "runtime": "classic" // defaults to classic
+                        // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
+                    }
+                ]
+            ]
+        }
+
+    4-2. 포트 변경 설정
+        react는 기본적으로 포트 3000 을 사용하는데 다른 포트로 변경할 수 있다.
+        기본 포트 3000 대신 15109 포트를 사용하도록 설정
+
+        현재 작업하는 폴더 위치 확인
+        $ pwd
+
+        파일 목록 출력
+        $ ls    # package.json 파일이 보이는지 확인
+
+        .env 파일을 프로젝트 루트에 만들기
+        $ touch .env
+
+        .env  파일에 아래 내용 추가
+        $ cat .env
+        SKIP_PREFLIGHT_CHECK=true
+        PORT=15109
+
+
+    4-3. eslint 모듈
+        ESlint는 문법 오류를 잡아내고 특정 문법 요소를 사용하여 코드를 수정하기 위해 사용되는 모듈 입니다.
+
+        airbnb ESLint 규칙을 사용하려면 아래 5개의 패키지들은 필수로 설치해야 합니다.
+          . eslint
+          . eslint-plugin-import
+          . eslint-plugin-react
+          . eslint-plugin-react-hooks
+          . eslint-plugin-jsx-a11y
+
+        eslint-config-airbnb 는 airbnb 스타일 가이드의 코드 규칙을 적용할 수 있는 모듈
+
+        babel-eslint : 정식 표준이 아닌 자바스크립트, 즉 ES6 이상의 최신 자바스크립트 문법을 사용하는 경우 설치 필요
+
+
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+
+        $ ls      # package.json 보이는지 확인
+
+        $ npm init @eslint/config
+
+        $ npm install --save-dev eslint  eslint-plugin-import  eslint-plugin-react  eslint-plugin-react-hooks  eslint-plugin-jsx-a11y
+        $ npm install --save-dev eslint-config-airbnb
+
+        $ npm install --save-dev babel-eslint
+
+        $ cat package.json    # package.json 에 ESLint 모듈들이 추가되었는지 확인한다.
+
+
+    4-4. Prettier 설정
+        Prettier는 코드 포맷터(Code Formatter)다
+        prettier 사용되는 예시
+            . 한 줄의 최대 길이는 얼마로 할 것인가?
+            . 들여쓰기에 tab을 쓸 것인가? space를 쓸 것인가?
+            . 문자 리터럴로  ' 를 쓸 것인가? " 쓸 것인가?
+        Prettier는 소스 코드를 저장하거나 git 커밋할 때 정의된 규칙에 따라 코드의 형식을 자동으로 수정한다.
+
+        prettier : Prettier 모듈을 설치할 때는 --save-exact 옵션을 사용하세요. --save-exact 은 Prettier 버전이 달라져도 코드 스타일 변화가 생기지 않도록 하는 옵션입니다.
+        eslint-config-react: react 프로젝트에 맞춰진 ESLint 규칙을 추가합니다.
+        eslint-plugin-prettier: 코드 코맷할 때 Prettier를 사용하게 만드는 규칙을 추가합니다.
+        eslint-config-prettier: Prettier와 충돌할 설정들을 비활성화합니다.
+
+        $ npm install --save-dev --save-exact prettier
+        $ npm install --save-dev eslint-config-react
+        $ npm install --save-dev eslint-plugin-prettier
+        $ npm install --save-dev eslint-config-prettier
+
+        .prettierrc 파일을 프로젝트 루트에 만들기
+        $ touch .prettierrc
+
+        .prettierrc 파일에 아래 내용을 추가
+
+        $ cat .prettierrc
+        {
+          "printWidth": 130,
+          "tabWidth": 2,
+          "singleQuote": true,
+          "semi": true,
+          "useTabs": false,
+          "trailingComma": "all",
+          "proseWrap": "always",
+          "requireConfig": false,
+          "bracketSpacing": true,
+          "jsxBracketSameLine": false,
+          "jsxSingleQuote": false,
+          "quoteProps": "as-needed",
+          "endOfLine": "crlf"
+        }
+
+
+    4-5. eslint 설정
+        eslintrc.json 파일에 아래 내용을 추가
+        https://poiemaweb.com/eslint
+        https://yrnana.dev/post/2021-09-02-eslint
+        https://eslint.org/docs/user-guide/configuring/rules
+
+        ESLint의 핵심 구성 정보는 env, globals, rules세가지 영역으로 나누어져 구성되어 있습니다.
+          . env는 실행 환경에 대한 설정, 사전 전역 변수 설정. 브라우저, node, es6 환경이 활성화
+          . globals는 사용자가 추가하는 전역 변수 설정.
+          . extends 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . plugins 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . rules 설치한 플러그인들의 적용, 활성화 규칙 및 오류 설정에 관한 것들.
+
+
+        eslintrc.json 파일을 프로젝트 루트에 만들기
+        $ touch eslintrc.json
+
+        $ cat eslintrc.json
+        {
+            "parserOptions": {
+                "ecmaVersion": 12
+            },
+            "env": {
+                "browser": true,
+                "commonjs": true,
+                "node": true,
+                "jest": true,
+                "es6": true,
+                "es2021": true
+            },
+            "globals": {
+                "_": false
+            },
+            "extends": [
+                "react-app",
+                "prettier",
+                "airbnb"
+            ],
+            "parser": "babel-eslint",
+            "parserOptions": {
+                "ecmaVersion": 12
+            },
+            "plugins": ["import", "html"],
+            "rules": {
+                // "off" or 0 - turn the rule off
+                // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+                // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
+
+                // windows linebreaks when not in production environment
+                "linebreak-style": [ "error", "unix" ],
+                // suppress errors for missing 'import React' in files
+                "react/react-in-jsx-scope": "off",
+                // allow jsx syntax in js files (for next.js project)
+                "react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ], //should add ".ts" if typescript project
+                "jsx-a11y/label-has-associated-control": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
+                "jsx-a11y/label-has-for": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
+
+                "no-param-reassign": [ "error", { "props": false } ],
+                "arrow-parens": ["error", "always"], // () => {}
+                "arrow-body-style": ["error", "always"],
+                "consistent-return": "off",
+                "func-names": "off",
+                "no-shadow": "off",
+                "no-alert": "off",
+                "no-var": "error",
+                "no-console": "off",
+                "no-debugger": "off"
+            }
+        }
+
+    4-6. jsconfig.json 설정
+        NODE_ENV의 절대 경로 설정.
+        컴포넌트 조합할 때 상대 경로 대신 절대 경로를 사용하여 컴포넌트를 조합
+        "baseUrl": "./src" ==> 절대 경로 설정
+        "include": ["src"] ==> import 시 해당 루트를 자동으로 포함 설정. ex) import 'src/Comp'; 대신 import 'Comp'; 을 사용
+
+        $ echo -e "{\n  \"compilerOptions\": {\n    \"baseUrl\": \"./src\"\n  },\n  "include": ["src"]\n}" >> jsconfig.json
+
+        jsconfig.json  파일 내용 확인
+        $ cat jsconfig.json
+        {
+          "compilerOptions": {
+            "baseUrl": "./src"
+          },
+          "include": ["src"]
+        }
+
+
+    4-7. githook 설정
+        githook은 깃에 특정 이벤트(커밋, 푸시 등)를 감지하여
+        이벤트를 실행하기 전에 특정 동작을 수행할 수 있도록 도와주는 플러그인 입니다.
+
+        husky와 lint-staged의역할은 다음과 같다.
+        . husky: packages.json 파일에서 githook를 사용할 수 있게 해준다.
+        . lint-staged: git 의 stage된 파일들에 특정 동작을 수행할 수 있도록 해준다.
+        . lint-staged와 husky를 사용하여 git 이벤트에 Prettier 명령어를 연동 설정.
+
+        $ npm install --save-dev husky  lint-staged
+
+        ############
+        commit 전에 자동으로 prettier 적용하기
+        ############
+
+        packages.json 에 아래 내용 추가
+
+        $ cat packages.json
+        {
+          ...중략 ,
+          "husky": {
+              "hooks": {
+                  "pre-commit" : "lint-staged"
+              }
+          },
+          "lint-staged": {
+              "src/**/*.{js,jsx,ts,tsx,json,css,scss,md} ": [
+                  "prettier --write"
+              ]
+          }
+        }
+
+    4-8. package.json 에 jest 실행 스크립트 추가
+        변경 전
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+            },
+        }
+
+        변경 후
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+
+                "test:watch": "jest --watch --env=jsdom",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom"
+            },
+            ...중략
+        }
+
+    4-9. 프로젝트 소스 커밋
+        $ pwd               # 현재 작업 디렉토리 확인
+        $ ls                # package.json 보이는지 확인
+        $ git status        # 파일 상태 확인
+        $ git add -AN       # 신규 파일 추가 추가
+        $ git status        # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'
+        $ git status        # 파일 상태 확인
+        $ git push          #
+
+
+    4-10. react 프로젝트 설정 파일 추출하기
+        프로젝트 설정 파일 추출하기 전에 반드시 소스 commit 을 해야만 eject 가 가능하다.
+        eject를 하게 되면 package.json 파일의 내용이 변경된다.
+
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        $ cat package.json
+        $ npm run eject
+        $ cat package.json
+
+
+    ##################################
+    5. 서버 실행
+    ##################################
+        $ ls                                       # counterprj01 폴더가 보이는지 확인
+        $ cd counterprj01                          # counterprj01 폴더로 이동
+        $ ls                                       # package.json 파일이 보이는지 확인
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+        5-1. 서버 중지
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        5-2. 서버 시작
+        $ ls                # package.json 보이는지 확인
+
+        $ npm run start     # package.json 보이면 서버 실행
+        Compiled successfully!
+
+        You can now view counterprj06 in the browser.
+
+          Local:            http://localhost:15109
+          On Your Network:  http://192.168.56.1:15109
+
+        Note that the development build is not optimized.
+        To create a production build, use npm run build.
+
+        webpack compiled successfully
+  </xmp>
+
+  <img src="./snap0031.png" width="100%" />
+
+  <xmp>
+
+    ##################################
+    6. Jest 테스트 와 디버깅 설정
+    ##################################
+
+    https://tod2.tistory.com/214
+    https://jestjs.io/docs/cli#--envenvironment
+
+    6-1 package.json 에서 실행 jest script 추가
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+
+                "test:watch": "jest --watch --env=jsdom",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom",
+
+                "build-watch": "./node_modules/.bin/webpack -w",
+                "build": "./node_modules/.bin/webpack"
+            },
+            ...중략
+        }
+
+    6-2. 터미널에서 개별 파일 jest 테스트 실행
+        $ npx jest --help
+        $ npx jest --env=jsdom  src/containers/todo/components/PageHeader.test.js
+        $ npx jest --env=jsdom  --watch  src/containers/todo/components/PageHeader.test.js
+
+    6-3. 터미널에서 watch 모드로 jest 테스트 실행
+        $ ls    # package.json 보이는지 확인
+        $ cat package.json
+        $ npm run test:watch
+        $ npx jext --env=jsdom --watch
+
+    6-4. 터미널에서 deubgging 모드로 jest 테스트 실행
+        $ npm run test:debug
+        $ node --inspect-brk node_modules/jest/bin/jest --runInBand --env=jsdom --watch
+
+    6-5. 소스 코드에 debugger 삽입
+
+    6-6. Chrome을 열고 주소 표시줄에 다음을 입력합니다.
+        chrome://inspect
+
+    6-7. "Open dedicated DevTools for Node" 클릭
+        연결 추가 127.0.0.1:9229
+
+    6-8. CLI 에서 실행을 중지하려면 이면 "ctrl + c" 눌러 실행 중지
+
+
+
+
+    ##################################
+    10. 기능 설명
+    ##################################
+
+    ##################################
+    11. 프로젝트 초기 설정
+    ##################################
+
+    프로젝트의 폴더 구조
+    └─ public/index.html 을 열고 아래의 코드를 추가
+
+    11-1. favicon 설정
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+
+    11-2. viewport 설정
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    ##################################
+    12. 프로젝트에 컴포넌트 추가
+    ##################################
+    프로젝트
+        `-- src
+            `-- containers (컨테이너 컴포넌트)
+                `-- counter
+                    |-- components   (counter 컨테이너에서만 사용되는 프리젠테이션용 컴포넌트 폴더)
+                    |-- action.js    (액션상수,액션함수 정의)
+                    |-- api.js       (외부 API 호출)
+                    |-- CounterContainer.css  (counter 컨테이너에서만 사용되는 css 파일)
+                    |-- CounterContainer.js   (컴포넌트 UI )
+                    |-- reducer.js   (리덕스 리듀서)
+                    `-- saga.js      (외부 API 호출 saga)
+
+    12-1. 파일 생성
+      $ pwd       # 현재 작업 디렉토리 확인
+
+      $ ls        # packages.json 이 보이는지 확인
+
+      (counter 와 관련된 컴포넌트를 담을 폴더 생성)
+      $ mkdir -p ./src/containers/counter   # 폴더 생성
+
+      (CounterContainer 컴포넌트 파일 생성)
+      $ touch ./src/containers/counter/CounterContainer.js   # 컴포넌트 파일 생성
+
+      (CounterContainer 컴포넌트 css 파일 생성)
+      $ touch ./src/containers/counter/CounterContainer.css   # 컴포넌트 css 파일 생성
+
+      (액션상수,액션함수 파일 생성)
+      $ touch ./src/containers/counter/action.js   # 액션 파일 생성
+
+      (saga 파일 생성)
+      $ touch ./src/containers/counter/saga.js   # saga 파일 생성
+
+      (외부 API 호출 파일 생성)
+      $ touch ./src/containers/counter/api.js   # API 파일 생성
+
+      (리듀서 파일 생성)
+      $ touch ./src/containers/counter/reducer.js   # 리듀서 파일 생성
+
+      (여러 개의 리듀서를 하나로 합치기)
+      $ mkdir -p ./src/reducers
+      $ touch ./src/reducers/index.js
+
+      (리덕스 store 생성 후 saga 등록하기)
+      $ mkdir -p ./src/store
+      $ touch ./src/store/index.js
+
+
+    ##################################
+    13. 라우팅 설정
+    ##################################
+
+    13-1. 라우팅 수정
+      $ ~/src/index.js 수정
+      변경 전 : import App from './App';
+      변경 후 : import App from './containers/counter/CounterContainer';
+
+    13-2. 실행 화면 확인하고 개발자 모드에서 오류 확인
+      ==> 빈 화면이 나오면 정상.
+  </xmp>
+
+  <img src="./snap0032.png" width="100%" />
+
+  <xmp>
+
+    ##################################
+    14. asare 설정
+      a: actions,
+      s: saga,
+      a: api,
+      re: reducer
+      소요시간: 15분
+    ##################################
+
+    . ctrl + n 을 눌러 새파일을 만들고 단축키 rdxf 를 입력하여 Scaffolding 코드(프로토타입용 코드)를 만든다.
+
+    . Scaffolding 코드에서 식별자 바꾸기
+      컨테이너폴더명         를 www (소문자로 시작, 예시: counter) 로 바꾸기
+      컴포넌트파일명         를 yyy (대문자로 시작, 예시: Counter) 로 바꾸기
+      컨테이너컴포넌트파일명 를 xxx (대문자로 시작, 예시: CounterContainer) 로 바꾸기
+      상태값이름             를 zzz (소문자로 시작, 예시: counter) 로 바꾸기
+
+
+    . 액션상수,액션함수 정의
+      ==> ./src/containers/counter/action.js
+
+    . saga 함수 정의
+      ==> ./src/containers/counter/saga.js
+
+    . 외부 API 호출 정의
+      ==> ./src/containers/counter/api.js
+
+    . 리덕스 리듀서 정의
+      ==> ./src/containers/counter/reducer.js
+
+    . 리듀서 합치기(combineReducers)
+      ==> ./src/reducers/index.js
+
+    . 리덕스 store 생성하기(createStore)
+      ==> ./src/store/index.js
+
+    . store 주입하기
+      ==> ./src/index.js
+
+
+
+    ##################################
+    15. CounterContainer 컴포넌트 + 상태값 사용하여 기능 구현
+        소요시간: 10분
+
+    {header} 에는  "redux 사용 앱" 가 나오게
+    {welcome} 에는 "HELLO WORLD" 가 나오게
+    {counter} 에는 0 이 나오게
+    {callapi} 에는 true 가 되게
+    ##################################
+
+    15-1. ./src/containers/counter/CounterContainer.js 를 편집기에서 연다.
+
+    15-2. 단축키 rfc 로 CounterContainer 컴포넌트 Scaffolding 만들기
+
+    15-3. import 문 추가
+
+    15-4. CounterContainer 컴포넌트의 JSX 만들기
+      return (
+        <div>
+          <h1>{header}</h1>
+          <h2>{welcome}</h2>
+          <h3>{counter}</h3>
+          <div>
+              <input type="checkbox" defaultChecked={callapi} ref={refInputApi} onChange={handlerChangeCallapi} />외부 api 호출
+          </div>
+          <button onClick={handlerIncrement}>더해줘</button>
+          <button onClick={handlerDecrement}>빼줘</button>
+        </div>
+       );
+
+    15-5. CounterContainer 컴포넌트에 상태값 추가.
+      const [header, setHeader] = useState('redux 사용 앱'); // 상태값이 기본타입인 경우
+      const [welcome, setWelcome] = useState('HELLO WORLD'); // 상태값이 기본타입인 경우
+      const [counter, setCounter] = useState(4); // 상태값이 기본타입인 경우
+      const [callapi, setCallapi] = useState(true); // 상태값이 기본타입인 경우
+
+    15-6. CounterContainer 컴포넌트에 ref 추가.
+      const refInputApi = useRef();
+
+    15-7. CounterContainer 컴포넌트에 이벤트 핸들러 추가.
+      const handlerChangeCallapi = () => {
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+        setCallapi(!callapi);
+      };
+      const handlerIncrement = () => {
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+        setCounter(counter + 1);
+      };
+      const handlerDecrement = () => {
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+        setCounter(counter - 1);
+      };
+
+    15-8. 실행 화면 확인
+  </xmp>
+
+  <img src="./snap0033.png" width="100%" />
+
+  <xmp>
+
+
+
+    ##################################
+    16. CounterContainer 컴포넌트 + Reducer 사용하여 기능 구현
+        컴포넌트 ===> action함수 ===> reducer  ===> 컴포넌트
+        소요시간: 10분
+    ##################################
+
+    16-1. redux 호출에 필요한 파일을 생성한다.
+      16-1-1. action.js    (액션상수,액션함수 정의)
+      16-1-4. reducer.js   (리덕스 리듀서)
+
+    16-2. redux store에서 state을 가져오는 get 기능을 구현 한다.
+      reducer  ===> 컴포넌트
+
+      16-2-1. CounterContainer 컴포넌트의 상태값 welcome과 counter 를 redux store 로 옮기기.
+        const stateCounter = {
+          error: null,
+          isLoading: false,
+          counter: 10,
+          welcome: 'HELLO WORLD REDUX',
+        };
+
+      16-2-2. CounterContainer 컴포넌트의 상태값 welcome과 counter 를 주석 처리한다.
+        // const [welcome, setWelcome] = useState('HELLO WORLD');
+        // const [counter, setCounter] = useState(0);
+
+      16-2-3. CounterContainer 컴포넌트에서 useSelector() 사용하여 redux의 store에서 상태값을 가져오는 코드를 추가한다.
+        // redux store 와 연동되는 경우에만 useDispatch(), useSelector() 사용
+        // const dispatch = useDispatch();
+        const { error, isLoading, counter, welcome } = useSelector((state) => state.counter);
+  </xmp>
+
+  <img src="./snap0034.png" width="100%" />
+
+  <xmp>
+
+      16-2-4. setCounter() 관련 코드 주석 처리
+        // setCounter(counter + 1);
+        // setCounter(counter - 1);
+
+      16-2-5. 실행 결과 확인
+
+
+    16-3. redux store에서 state를 증가시키는 하는 set 기능을 구현 한다. ===> 같이
+      컴포넌트 ===> action함수 ===> reducer  ===> 컴포넌트
+  </xmp>
+
+  <img src="./snap0036.png" width="100%" />
+
+  <img src="./snap0035.png" width="100%" />
+
+  <xmp>
+      16-3-1. CounterContainer 컴포넌트에 redux 훅 useDispatch() 추가.
+          const dispatch = useDispatch();
+
+      16-3-2. redux store의 counter 상태값을 증가시킬 수 있도록 CounterContainer.js 컴포넌트의 handlerIncrement 기능을 수정한다.
+        const handlerIncrement = () => {
+          // 이벤트 핸들러는 화살표 함수로 만든다
+          console.log(window.event.target);
+          // setCounter(counter + 1);
+
+          const payload = { counter: counter + 1 };
+          const action = actions.setTaskReducer(payload); // 액션함수를 이용하여 전달될 action 생성
+          debugger;
+          dispatch(action); // action 을 reducer 로 dispatch 하기
+        };
+
+      16-3-3. reducer.js 에 reducerCounter 메서드 작성하기
+        const reducerCounter = (state = stateCounter, action) => {
+          switch (action.type) {
+            case types.SET_ERROR:
+              return setError(state, action.payload);
+            case types.SET_LOADING:
+              return setLoading(state, action.payload);
+            case types.SET_TASK_REDUCER:
+              return setTaskReducer(state, action.payload);
+            default:
+              return state;
+          }
+        };
+
+      16-3-4. reducer.js 에 메서드 수정
+        const setTaskReducer = (state, payload) => {
+          return produce(state, (draft) => {
+            debugger;
+            draft.counter = payload.counter;
+            draft.isLoading = false;
+          });
+        };
+
+      16-3-5. 실행 결과 확인
+
+
+    16-4. redux store에서 state를 감소시키는 하는 set 기능을 구현 한다. ===> 각자
+
+
+    ##################################
+    17. CounterContainer 컴포넌트 + saga + api + Reducer 사용하여 기능 구현
+        컴포넌트 ===> action함수 ===> saga ===> api ==> reducer  ===> 컴포넌트
+        소요시간: 20분
+
+        asare 설정
+        a: actions,
+        s: saga,
+        a: api,
+        re: reducer
+    ##################################
+
+    17-1. api 연동에 필요한 기능을 추가한다.(아사레: a,s,a,re)
+      17-1-1. action.js    (액션상수,액션함수 정의)
+      17-1-2. saga.js      (외부 API 호출 saga)
+      17-1-3. api.js       (외부 API 호출)
+      17-1-4. reducer.js   (리덕스 리듀서)
+
+    17-2. api 연동 get 기능 구현. <== 같이
+
+      http://localhost:5050/counter   ==> 현재값 가져오기
+
+      17-2-1. CounterContainer 컴포넌트에 redux 훅 useDispatch() 추가.
+        const dispatch = useDispatch();
+
+      17-2-2. CounterContainer 컴포넌트 마운트 될 때 api 호출하여 값을 가져와서 reducer의 상태값을 바꾼다.
+        // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
+        const refIsMounted = useRef(false);
+        useEffect(() => {
+          if (refIsMounted.current) {
+            // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
+            console.log('componentDidUpdate');
+          } else {
+            // 마운트 완료 후에 실행됨. 한번만. focus 줄때
+            console.log('componentDidMount');
+            refIsMounted.current = true;
+
+            // 액션함수를 이용하여 api에 전달될 action 생성
+            // http://localhost:5050/counter
+            const action = actions.getTaskSaga({});
+
+            // 생성된 action 을 saga 로 dispatch 하기
+            dispatch(action);
+          }
+        });
+
+      17-2-3. saga.js 에 getTaskSaga 메서드 작성하기
+        export function* getTaskSaga(action) {
+          try {
+            yield put(actions.setLoading(true)); // 액션 디스패치
+            // yield delay(2000); // 2초 기다리기
+            const result = yield call(api.callApi, action.payload);
+            debugger;
+            const payload = { counter: result.data };
+            yield put(actions.setTaskReducer(payload)); // 액션 디스패치
+            yield put(actions.setError(''));
+          } catch (e) {
+            console.log(e);
+            yield put(actions.setError(e));
+          }
+          yield put(actions.setLoading(false)); // 액션 디스패치
+        }
+
+        export function* actionWatcher() {
+          // yield takeLatest(types.GET_PROMISE, getPromise);
+          yield takeLatest(types.GET_TASK_SAGA, getTaskSaga);
+        }
+
+        export default function* rootSaga() {
+          yield all([actionWatcher()]);
+        }
+
+      17-2-4. api.js 에 callApi 메서드 작성하기
+        export function callApi(params) {
+          debugger;
+          return axios({
+            url: 'http://localhost:5050/counter', // 호출되는 서버 주소.
+            method: 'get', // request method: get, post, delete, put
+            params: { ...params }, // 서버로 보내는 데이터. { data1:'test1', data2:'test2' }
+            timeout: 30000, // 최대 대기 시간: 30초. 30초 이상이 되면 fail 부분이 실행됨.
+            responseType: 'json', // response로 넘어오는 데이터 형태: text, html, xml, json, jsonp, script
+          });
+        }
+
+      17-2-5. reducer.js 에 reducerCounter 메서드 작성하기
+        const reducerCounter = (state = stateCounter, action) => {
+          switch (action.type) {
+            case types.SET_ERROR:
+              return setError(state, action.payload);
+            case types.SET_LOADING:
+              return setLoading(state, action.payload);
+            case types.SET_TASK_REDUCER:
+              return setTaskReducer(state, action.payload);
+            default:
+              return state;
+          }
+        };
+
+      17-2-6. reducer.js 에 setTaskReducer 메서드 작성하기
+        const setTaskReducer = (state, payload) => {
+          return produce(state, (draft) => {
+            debugger;
+            draft.counter = payload.counter;
+            draft.isLoading = false;
+          });
+        };
+
+
+    17-3. 외부 api 연동 set 기능 구현. increment <== 같이
+      외부 api 호출해서 redux store 의 state 값을 바꾸는 set 중에 increment 기능을 구현 한다.
+      외부 api 호출 ===> redux store 의 state 값 변경 ===> 컴포넌트
+
+      http://localhost:5050/counter?step=1   ==> 1 씩 증가
+      http://localhost:5050/counter?step=10  ==> 10 씩 증가
+
+      17-3-1. CounterContainer 컴포넌트에 redux 훅 useDispatch() 추가.
+        const dispatch = useDispatch();
+
+      17-3-2. CounterContainer.js 컴포넌트의 handlerIncrement 기능을 수정한다.
+        const handlerIncrement = () => {
+          // 이벤트 핸들러는 화살표 함수로 만든다
+          console.log(window.event.target);
+
+          // setCounter(counter + 1);
+
+          // const payload = { counter: counter + 1 };
+          // const action = actions.setTaskReducer(payload); // 액션함수를 이용하여 전달될 action 생성
+          // debugger;
+          // dispatch(action); // action 을 reducer 로 dispatch 하기
+
+          // http://localhost:5050/counter?step=1   ==> 1 씩 증가
+          const payload = { step: +1 };
+          const action = actions.setTaskSaga(payload); // 액션함수를 이용하여 전달될 action 생성
+          debugger;
+          dispatch(action); // action 을 saga 로 dispatch 하기
+        };
+
+      17-3-3. saga.js 에 setTaskSaga 메서드 작성하기
+        export function* setTaskSaga(action) {
+          try {
+            yield put(actions.setLoading(true)); // 액션 디스패치
+            // yield delay(2000); // 2초 기다리기
+            debugger;
+            const result = yield call(api.callApi, action.payload);
+            // 액션함수를 이용하여 전달될 payload 생성
+            debugger;
+            const payload = { counter: result.data };
+            yield put(actions.setTaskReducer(payload)); // 액션 디스패치
+            yield put(actions.setError(''));
+          } catch (e) {
+            console.log(e);
+            yield put(actions.setError(e));
+          }
+          yield put(actions.setLoading(false)); // 액션 디스패치
+        }
+
+        export function* actionWatcher() {
+          // yield takeLatest(types.GET_PROMISE, getPromise);
+          yield takeLatest(types.GET_TASK_SAGA, getTaskSaga);
+        }
+
+        export default function* rootSaga() {
+          yield all([actionWatcher()]);
+        }
+
+      17-3-4. api.js 에 callApi 메서드 작성하기
+
+        axios 로 "http://localhost:5050/counter" 를 호출하는 get/set 기능을 작성하여 본다.
+
+        export function callApi(params) {
+          debugger;
+          return axios({
+            url: 'http://localhost:5050/counter', // 호출되는 서버 주소.
+            method: 'get', // request method: get, post, delete, put
+            params: { ...params }, // 서버로 보내는 데이터. { data1:'test1', data2:'test2' }
+            timeout: 30000, // 최대 대기 시간: 30초. 30초 이상이 되면 fail 부분이 실행됨.
+            responseType: 'json', // response로 넘어오는 데이터 형태: text, html, xml, json, jsonp, script
+          });
+        }
+
+      17-3-5. reducer.js 에 setTaskReducer 메서드 작성하기
+        const setTaskReducer = (state, payload) => {
+          return produce(state, (draft) => {
+            debugger;
+            draft.counter = payload.counter;
+            draft.isLoading = false;
+          });
+        };
+
+    17-4. 외부 api 연동 set 기능 구현. decrement <== 각자
+      외부 api 호출해서 redux store 의 state 값을 바꾸는 set 중에 decrement 기능을 구현 한다.
+
+      http://localhost:5050/counter?step=-1   ==> -1 씩 증가
+      http://localhost:5050/counter?step=-10  ==> -10 씩 증가
+
+      17-4-1. CounterContainer 컴포넌트의 handlerDecrement 기능을 수정한다.
+        const handlerDecrement = () => {
+          // 이벤트 핸들러는 화살표 함수로 만든다
+          console.log(window.event.target);
+
+          // setCounter(counter - 1);
+
+          // const payload = { counter: counter + 1 };
+          // const action = actions.setTaskReducer(payload); // 액션함수를 이용하여 전달될 action 생성
+          // debugger;
+          // dispatch(action); // action 을 reducer 로 dispatch 하기
+
+          // http://localhost:5050/counter?step=-1   ==> -1 씩 증가
+          const payload = { step: -1 };
+          const action = actions.setTaskSaga(payload); // 액션함수를 이용하여 전달될 action 생성
+          debugger;
+          dispatch(action); // action 을 saga 로 dispatch 하기
+        };
+
+    17-5. 실행 결과 확인
+
+
+    ##################################
+    18. Loading 기능 구현하기
+        소요시간: 10분
+    ##################################
+
+    18-1. loadingbar.gif 를 프로젝트에 복사
+    $ cp ../loading.gif ./public/assets/images/
+
+
+    프로젝트
+      `-- public
+          `-- assets (기타 자원)
+              `-- images (이미지)
+                  `-- loadingbar.gif
+  </xmp>
+    <img src="./loadingbar.gif" alt="" />
+  <xmp>
+
+    18-2. loading 을 위한 css 작성
+    $ touch ./src/containers/counter/CounterContainer.css
+
+      .loadingbox {
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* background-color: rgba(255, 0,0,0.5); */
+        z-index: 100;
+      }
+
+      .loadingbox > .loadingbar {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        top: calc(50% - 150px);
+        left: calc(50% - 150px);
+        z-index: 200;
+      }
+
+
+    18-3. CounterContainer.js 컴포넌트에 CounterContainer.css import 설정 추가
+      import './CounterContainer.css';
+
+
+    18-4. CounterContainer 컴포넌트에 아래의 JSX 수정
+      // JSX로 화면 만들기
+      if(isLoading) {
+        return (
+          <div className="loadingbox">
+            <img className="loadingbar" src="/assets/images/loadingbar.gif" alt="" />
+          </div>
+        )
+      }
+
+      return (
+        <div >
+          <h1>{header}</h1>
+          <h2>{welcome}</h2>
+          <h3>{counter}</h3>
+          <div>
+            <input
+              type="checkbox"
+              defaultChecked={callapi}
+              ref={refInputApi}
+              onChange={handlerChangeCallapi}
+            />
+            외부 api 호출
+          </div>
+          <button onClick={handlerIncrement}>더해줘</button>
+          <button onClick={handlerDecrement}>빼줘</button>
+        </div>
+      );
+
+
+    18-5. saga.js 에 delay 추가
+      변경전: // yield delay(2000); // 2초 기다리기
+      변경후: yield delay(2000); // 2초 기다리기
+
+    18-6. 실행 결과 확인
+
+
+    ##################################
+    21. 프로젝트에  Counter, LoadingBox 컴포넌트 기능 추가
+        소요시간: 20분
+    ##################################
+
+    |-- containers (컨테이너 컴포넌트)
+        `-- counter
+            |-- components        (counter 컨테이너에서만 사용되는 프리젠테이션 컴포넌트 폴더)
+            |   |-- LoadingBox.css
+            |   |-- LoadingBox.js
+            |   |-- Counter.css
+            |   `-- Counter.js
+            |-- action.js                 (액션상수,액션함수 정의)
+            |-- action.test.js            (액션상수,액션함수 테스트)
+            |-- api.js                    (외부 API 호출)
+            |-- api.test.js               (외부 API 호출 테스트)
+            |-- CounterContainer.css      (counter 컨테이너에서만 사용되는 css 파일)
+            |-- CounterContainer.js       (컴포넌트 UI )
+            |-- reducer.js                (리듀서)
+            |-- reducer.test.js           (리듀서 테스트)
+            |-- saga.js                   (saga)
+            `-- saga.test.js              (saga 테스트)
+
+    21-1. 파일 생성
+      $ pwd       # 현재 작업 디렉토리 확인
+
+      $ ls        # packages.json 이 보이는지 확인.
+
+      $ touch ./src/containers/counter/components/Counter.js       # Counter 컴포넌트 파일 생성
+      $ touch ./src/containers/counter/components/Counter.css      # Counter 컴포넌트 css 파일 생성
+
+      $ touch ./src/containers/counter/components/LoadingBox.js    # LoadingBox 컴포넌트 파일 생성
+      $ touch ./src/containers/counter/components/LoadingBox.css   # LoadingBox 컴포넌트 css 파일 생성
+
+    21-2. Counter.js 컴포넌트 기능 구현
+
+        import React, { useState, useEffect, useRef } from 'react';
+        import PropTypes from 'prop-types';
+
+        function Counter({ welcome, counter, callapi, handlerChangeCallapi, handlerIncrement, handlerDecrement }) {
+          // 컴포넌트의 상태값 설정
+          const [header, setHeader] = useState('redux 사용 앱'); // 상태값이 기본타입인 경우
+
+          // ref 만들기.
+          const refInputApi = useRef();
+
+          // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
+          const refIsMounted = useRef(false);
+          useEffect(() => {
+            if (refIsMounted.current) {
+              // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
+              console.log('componentDidUpdate');
+            } else {
+              // 마운트 완료 후에 실행됨. 한번만. focus 줄때
+              console.log('componentDidMount');
+              refIsMounted.current = true;
+            }
+          });
+
+          // JSX로 화면 만들기
+          return (
+            <div>
+              <h1>{header}</h1>
+              <h2>{welcome}</h2>
+              <h3>{counter}</h3>
+              <div>
+                <input type="checkbox" defaultChecked={callapi} ref={refInputApi} onChange={handlerChangeCallapi} />
+                외부 api 호출
+              </div>
+              <button onClick={handlerIncrement}>더해줘</button>
+              <button onClick={handlerDecrement}>빼줘</button>
+            </div>
+          );
+        }
+
+        Counter.propTypes = {
+          // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+          // 인자명: PropTypes.func.isRequired,
+          welcome: PropTypes.string.isRequired,
+          counter: PropTypes.number.isRequired,
+          callapi: PropTypes.bool.isRequired,
+          handlerChangeCallapi: PropTypes.func.isRequired,
+          handlerIncrement: PropTypes.func.isRequired,
+          handlerDecrement: PropTypes.func.isRequired,
+        };
+
+        Counter.defaultProps = {
+          // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+          // 인자명: () => {},
+          welcome: '',
+          counter: 0,
+          callapi: false,
+          handlerChangeCallapi: () => {},
+          handlerIncrement: () => {},
+          handlerDecrement: () => {},
+        };
+
+        export default Counter;
+
+
+    21-3. LoadingBox 컴포넌트 기능 구현
+
+        function LoadingBox(props) {
+          // JSX로 화면 만들기
+          return (
+            <div className="loadingbox">
+              <img className="loadingbar" src="/assets/images/loadingbar.gif" alt="" />
+            </div>
+          );
+        }
+
+        LoadingBox.propTypes = {
+          // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+          // 인자명: PropTypes.func.isRequired,
+        };
+        LoadingBox.defaultProps = {
+          // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+          // 인자명: () => {},
+        };
+
+        export default LoadingBox;
+
+
+    21-4. CounterContainer.css 의 내용을 LoadingBox.css 로 이동
+
+    21-5. CounterContainer 컴포넌트 기능 수정
+
+        import Counter from './components/Counter';
+        import LoadingBox from './components/LoadingBox';
+
+        function CounterContainer(props) {
+          ... 중략
+
+          // 컴포넌트의 상태값 설정
+          // const [header, setHeader] = useState('redux 사용 앱'); // 상태값이 기본타입인 경우
+          // const [welcome, setWelcome] = useState('HELLO WORLD'); // 상태값이 기본타입인 경우
+          // const [counter, setCounter] = useState(0); // 상태값이 기본타입인 경우
+          const [callapi, setCallapi] = useState(true); // 상태값이 기본타입인 경우
+
+          // ref 만들기.
+          // const refInputApi = useRef();
+
+          ... 중략
+
+          // JSX로 화면 만들기
+          if (isLoading) {
+            return <LoadingBox></LoadingBox>;
+          }
+
+          return (
+            <Counter
+              welcome={welcome}
+              counter={counter}
+              callapi={callapi}
+              handlerChangeCallapi={handlerChangeCallapi}
+              handlerIncrement={handlerIncrement}
+              handlerDecrement={handlerDecrement}
+            ></Counter>
+          );
+        }
+
+
+    ##################################
+    31. 프로젝트에  jest TDD 테스트 기능 추가
+    ##################################
+
+    |-- containers (컨테이너 컴포넌트)
+        `-- counter
+            |-- components        (counter 컨테이너에서만 사용되는 프리젠테이션 컴포넌트 폴더)
+            |   |-- LoadingBox.css
+            |   |-- LoadingBox.js
+            |   |-- LoadingBox.test.js    (컴포넌트 UI 테스트)
+            |   |-- Counter.css
+            |   |-- Counter.js
+            |   `-- Counter.test.js       (컴포넌트 UI 테스트)
+            |-- action.js                 (액션상수,액션함수 정의)
+            |-- action.test.js            (액션상수,액션함수 테스트)
+            |-- api.js                    (외부 API 호출)
+            |-- api.test.js               (외부 API 호출 테스트)
+            |-- CounterContainer.css      (counter 컨테이너에서만 사용되는 css 파일)
+            |-- CounterContainer.js       (컴포넌트 UI )
+            |-- CounterContainer.test.js  (컴포넌트 UI 테스트)
+            |-- reducer.js                (리듀서)
+            |-- reducer.test.js           (리듀서 테스트)
+            |-- saga.js                   (saga)
+            `-- saga.test.js              (saga 테스트)
+
+    31-1. 파일 생성
+      $ pwd       # 현재 작업 디렉토리 확인
+
+      $ ls        # packages.json 이 보이는지 확인.
+
+      (컨테이너 컴포넌트 파일)
+      $ touch ./src/containers/counter/CounterContainer.js         # 컴포넌트 파일 생성
+      $ touch ./src/containers/counter/CounterContainer.test.js    # 컴포넌트 테스트 파일 생성
+
+      (액션상수,액션함수 파일)
+      $ touch ./src/containers/counter/action.js            # 액션 파일 생성
+      $ touch ./src/containers/counter/action.test.js       # 액션 테스트 파일 생성
+
+      (saga 파일)
+      $ touch ./src/containers/counter/saga.js              # saga 파일 생성
+      $ touch ./src/containers/counter/saga.test.js         # saga 테스트 파일 생성
+
+      (외부 API 호출 파일)
+      $ touch ./src/containers/counter/api.js               # API 파일 생성
+      $ touch ./src/containers/counter/api.test.js          # API 테스트 파일 생성
+
+      (리듀서 파일)
+      $ touch ./src/containers/counter/reducer.js           # 리듀서 파일 생성
+      $ touch ./src/containers/counter/reducer.test.js      # 리듀서 테스트 파일 생성
+
+      (Counter 컴포넌트 파일)
+      $ touch ./src/containers/counter/Counter.js           # 컴포넌트 파일 생성
+      $ touch ./src/containers/counter/Counter.test.js      # 컴포넌트 테스트 파일 생성
+
+      (LoadingBox 컴포넌트 파일)
+      $ touch ./src/containers/counter/LoadingBox.js        # 컴포넌트 파일 생성
+      $ touch ./src/containers/counter/LoadingBox.test.js   # 컴포넌트 테스트 파일 생성
+    </xmp>
+
+    <hr />
+
+    <div>
+      <h1>{header}</h1>
+      <h2>{welcome}</h2>
+      <h3>{counter}</h3>
+      <div>
+        <input type="checkbox"
+          defaultChecked={callapi}
+          ref={refInputApi}
+          onChange={handlerChangeCallapi} />외부 api 호출
+      </div>
+      <button onClick={handlerIncrement}>더해줘</button>
+      <button onClick={handlerDecrement}>빼줘</button>
+    </div>
+  </body>
+</html>

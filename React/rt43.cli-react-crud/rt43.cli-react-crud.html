@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Crud Project</title>
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css" />
+
+</head>
+<body>
+
+    <div style="margin-top: 40px;">
+        <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
+    </div>
+
+    <xmp>
+        React CLI 을 사용하여 Crud 어플리케이션을 만들어 본다.
+
+
+
+    ##################################
+    1. 작업 개요
+    ##################################
+
+    ##################################
+    2. 프로젝트 생성 작업
+       소요시간: 20분
+    ##################################
+    step 1-01. node / npm 버전 업그레이드
+        $ node -v                          #  node 버전 확인
+        v16.14.2
+
+        $ npm install -g npm@latest        #  npm 최신 버전 설치
+
+        $ npm -v                           #  npm 버전 확인
+        8.13.2
+
+        $ npx -v                           #  npx(=npm extension) 버전 확인
+        8.13.2
+
+
+    step 1-02. 프로젝트 생성
+
+        $ npm uninstall -g create-react-app        # 전역으로 설치된 create-react-app 모듈 삭제하기
+
+        $ npx clear-npx-cache                      # npx 로 다운로드된 캐쉬되어 있는 모듈 삭제
+        Need to install the following packages:
+          clear-npx-cache
+        Ok to proceed? (y) y
+        ....
+
+        $ npx create-react-app crudprj01            # 프로젝트명은 소문자로 만들어야 함.
+        Need to install the following packages:
+          create-react-app
+        Ok to proceed? (y) y
+        ...
+        5분 소요
+        ...
+
+        $ ls                                       # crudprj01 폴더가 보이는지 확인
+        $ cd crudprj01                             # crudprj01 폴더로 이동
+        $ ls                                       # package.json 파일이 보이는지 확인
+        $ npm install --save react@17.0.2          # react 17 버전으로 다운사이징. 최신 react 버전 18
+        $ npm install --save react-dom@17.0.2      # react 17 버전으로 다운사이징. 최신 react 버전 18
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+    step 1-03. 실행 중인 프로세스 중지
+        터미널에서 "ctrl + c" 눌러 실행된 서버를 중지한다
+
+
+    step 1-04. 프로젝트 소스 커밋
+        $ ls                                  # package.json 파일이 보이는지 확인
+        $ git status                          # 파일 상태 확인
+        $ git add -AN                         #
+        $ git status                          # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'     # 파일 commit
+        $ git status                          # 파일 상태 확인
+        $ git push                            #
+
+        github 사이트에서 소스가 올라갔는지 확인한다.
+
+    step 1-11. babel 모듈 설치
+        https://babeljs.io/docs/en/babel-preset-env-standalone
+        https://babeljs.io/docs/en/babel-preset-react
+
+        $ npm install --save-dev @babel/core @babel/cli
+        $ npm install --save-dev @babel/preset-env
+        $ npm install --save-dev @babel/preset-react
+
+
+    step 1-12. Jasmine 기반의 테스트 프레임워크 jest 설치
+        https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/
+        https://github.com/facebook/jest/issues/3750
+
+        jest 는 코드가 제대로 동작하는지 확인하는 Jasmine 기반의 '테스팅 프레임워크' 입니다.
+        jest-cli 는 단일 파일만 테스트 하는 경우에 사용합니다.
+        @testing-library는 실제 react-dom 위에서 동작하는 DOM 테스팅 라이브러리 (DOM Testing Library) 이다.
+
+        $ npm install --save-dev jest
+        $ npm install --save-dev jest-cli
+        $ npm install --save-dev @types/jest
+        $ npm install --save-dev babel-jest
+        $ npm install --save-dev @testing-library/react
+        $ npm install --save-dev @testing-library/jest-dom
+        $ npm install --save-dev @testing-library/user-event
+
+    step 1-13. supertest 모듈 설치
+        $ npm install --save-dev supertest
+
+    step 1-14. superagent 모듈 설치
+        $ npm install --save-dev supertest superagent
+
+    step 1-15. nodemon 모듈 설치
+        $ npm install --save-dev nodemon
+
+
+    step 1-21. prop-types 설치(필수)
+        prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
+
+        $ npm install --save prop-types
+
+
+    step 1-22. styled-component
+        styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
+
+        $ npm install --save styled-components
+        $ npm install --save-dev @types/styled-components jest-styled-components
+
+
+    step 1-23. 리액트 라우터 설치(필수)
+        react-router:
+        react-router-dom: 브라우저에서 사용되는 react-router 라이브러리. 필수
+
+        $ npm install --save react-router react-router-dom
+
+
+    step 1-24. 리덕스 설치(필수)
+        redux : redux를 사용할 수있게 하는 라이브러리
+        react-redux : react에서 redux를 사용할 수있게 하는 라이브러리
+        redux-actions : redux용 action을 정의하기 위한 라이브러리
+        redux-logger : redux용 로깅 처리를 위한 미들웨어 라이브러리
+
+        $ npm install --save redux react-redux redux-logger redux-actions
+
+
+    step 1-25. redux-saga 설치(필수)
+        redux-saga : redux에서 비동기로 액션을 처리하는 미들웨어
+
+        $ npm install --save redux-saga
+
+
+    step 1-26. 비동기 처리(필수)
+        axios : rest api 호출 라이브러리
+
+        $ npm install --save axios
+
+
+    step 1-27. immer 설치(필수)
+        immer : 리덕스 store state 를 불변 객체(읽기 전용)로 처리할 때 사용되는 라이브러리
+
+        $ npm install --save immer
+
+
+
+
+
+
+    ##################################
+    2. 배포 테스트
+    ##################################
+
+    2-1. 배포 테스트
+        배포용 파일을 만들고 nginx 에 배포하여 본다.
+        "npm run build" 을 실행하면 /build/ 폴더에 배포용 파일들이 만들어진다.
+
+        $ ls     # build/ 폴더가 보이는지 확인. 없으면 정상
+        node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        $ npm run build
+
+        $ ls    # build/ 폴더가 보이는지 확인. 있으면 정상
+        build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        nginx 에 배포 테스트
+        "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
+
+
+    ##################################
+    3. 프로젝트 폴더 구조
+       소요시간: 05분
+    ##################################
+
+    프로젝트
+    |-- build                    # 서버로 배포되는 빌드된 결과물이 저장되는 폴더. npm run build 로 생성됨
+    |-- node_modules             # npm 모듈(패키지) 저장 폴더
+    |-- public                   # public 디렉토리는 정적(static) 에셋을 관리할 때 사용합니다. public 디렉토리의 파일들은 webpack에 의해 관리되지 않습니다. 빌드 과정에서 그대로 build 디렉토리로 복사될 뿐입니다.
+    |   |-- assets (기타 자원)
+    |   |   |-- images (이미지)
+    |   |   |-- styles (스타일시트)
+    |   |   `-- text
+    |   |-- favicon.ico
+    |   |-- index.html
+    |   |-- logo192.png
+    |   |-- logo512.png
+    |   |-- manifest.json
+    |   `-- robots.txt
+    |-- src                      # 소스 코드 폴더
+    |   |-- common (공통)
+    |   |-- components (공통 프리젠테이션 컴포넌트)
+    |   |-- containers           # 폴더 생성
+    |   |    `-- CrudContainer
+    |   |       |-- components   (CrudContainer 에서만 사용되는 프리젠테이션 컴포넌트 폴더)
+    |   |       |   |-- CrudInput.js
+    |   |       |   |-- CrudList.js
+    |   |       |   `-- CrudListItem.js
+    |   |       |-- CrudContainer.js     (컴포넌트 UI )
+    |   |       |-- CrudContainer.css   (CrudContainer 에서만 사용되는 css 파일)
+    |   |       |-- action.js    (액션상수,액션함수 정의)
+    |   |       |-- api.js       (외부 API 호출)
+    |   |       |-- saga.js      (외부 API 호출 saga)
+    |   |       `-- reducer.js   (리덕스 리듀서)
+    |   |-- constant (상수)
+    |   |-- models (데이터 모델 변수, 타입)
+    |   |-- pages (페이지 컴포넌트)
+    |   |-- reducers (리듀서)
+    |   |   `-- index.js
+    |   |-- routes (라우팅)
+    |   |   `-- index.js
+    |   |-- store (라우팅)
+    |   |   `-- index.js
+    |   |-- utils (유틸리티 모듈)
+    |   |-- App.css
+    |   |-- App.js
+    |   |-- App.test.js
+    |   |-- index.css
+    |   |-- index.js
+    |   |-- logo.svg
+    |   |-- reportWebVitals.js
+    |   `-- setupTests.js
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc
+    |-- eslintrc.json
+    |-- jsconfig.json
+    |-- package.json
+    `-- README.md
+
+
+    3-1. 프로젝트용 공통 폴더 생성
+      $ mkdir -p ./public/assets \
+              ./public/assets/images \
+              ./public/assets/styles \
+              ./public/assets/text
+
+      $ mkdir -p ./src/common \
+              ./src/components \
+              ./src/containers \
+              ./src/constant \
+              ./src/models \
+              ./src/pages \
+              ./src/reducers \
+              ./src/routes \
+              ./src/store \
+              ./src/utils
+
+    3-2. 프로젝트용 공통 파일 생성
+      $ touch  .babelrc  .env  .prettierrc  eslintrc.json  jsconfig.json
+
+      $ touch ./src/reducers/index.js \
+              ./src/routes/index.js \
+              ./src/store/index.js
+
+    3-3. .babelrc 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > .babelrc
+      $ cat .babelrc
+
+    3-4. .env 파일 생성 후 내용 추가
+      $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+      $ cat .env
+
+    3-5. .prettierrc 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > .prettierrc
+      $ cat .prettierrc
+
+    3-6. eslintrc.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > eslintrc.json
+      $ cat eslintrc.json
+
+    3-7. jsconfig.json 파일 생성 후 내용 추가
+      $ echo -e "{\n}" > jsconfig.json
+      $ cat jsconfig.json
+
+
+    ##################################
+    4. 프로젝트 환경 설정
+       소요시간: 15분
+    ##################################
+
+    프로젝트
+    |-- ... 생략
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc
+    |-- eslintrc.json
+    |-- package.json
+    `-- README.md
+
+    4-1 .babelrc 설정
+
+        .babelrc 파일을 프로젝트 루트에 만들기
+        $ touch .babelrc
+
+        {
+            "presets": [
+                [
+                    "react-app",
+                ],
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": false,
+                        "targets": {
+                            "node": "current",
+                            "chrome": "79", // 크롬 79까지 지원하는 코드를 만든다
+                        }
+                    }
+                ],
+                [
+                    "@babel/preset-react",
+                    {
+                        "development": process.env.BABEL_ENV === "development",
+                        "pragma": "dom", // default pragma is React.createElement (only in classic runtime)
+                        "pragmaFrag": "DomFrag", // default is React.Fragment (only in classic runtime)
+                        "throwIfNamespace": false, // defaults to true
+                        "runtime": "classic" // defaults to classic
+                        // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
+                    }
+                ]
+            ]
+        }
+
+    4-2. 포트 변경 설정
+        react는 기본적으로 포트 3000 을 사용하는데 다른 포트로 변경할 수 있다.
+        기본 포트 3000 대신 15109 포트를 사용하도록 설정
+
+        현재 작업하는 폴더 위치 확인
+        $ pwd
+
+        파일 목록 출력
+        $ ls    # package.json 파일이 보이는지 확인
+
+        .env 파일을 프로젝트 루트에 만들기
+        $ touch .env
+
+        .env  파일에 아래 내용 추가
+        $ cat .env
+        SKIP_PREFLIGHT_CHECK=true
+        PORT=15109
+
+
+    4-3. eslint 모듈
+        ESlint는 문법 오류를 잡아내고 특정 문법 요소를 사용하여 코드를 수정하기 위해 사용되는 모듈 입니다.
+
+        airbnb ESLint 규칙을 사용하려면 아래 5개의 패키지들은 필수로 설치해야 합니다.
+          . eslint
+          . eslint-plugin-import
+          . eslint-plugin-react
+          . eslint-plugin-react-hooks
+          . eslint-plugin-jsx-a11y
+
+        eslint-config-airbnb 는 airbnb 스타일 가이드의 코드 규칙을 적용할 수 있는 모듈
+
+        babel-eslint : 정식 표준이 아닌 자바스크립트, 즉 ES6 이상의 최신 자바스크립트 문법을 사용하는 경우 설치 필요
+
+
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+
+        $ ls      # package.json 보이는지 확인
+
+        $ npm init @eslint/config
+
+        $ npm install --save-dev eslint  eslint-plugin-import  eslint-plugin-react  eslint-plugin-react-hooks  eslint-plugin-jsx-a11y
+        $ npm install --save-dev eslint-config-airbnb
+
+        $ npm install --save-dev babel-eslint
+
+        $ cat package.json    # package.json 에 ESLint 모듈들이 추가되었는지 확인한다.
+
+
+    4-4. Prettier 설정
+        Prettier는 코드 포맷터(Code Formatter)다
+        prettier 사용되는 예시
+            . 한 줄의 최대 길이는 얼마로 할 것인가?
+            . 들여쓰기에 tab을 쓸 것인가? space를 쓸 것인가?
+            . 문자 리터럴로  ' 를 쓸 것인가? " 쓸 것인가?
+        Prettier는 소스 코드를 저장하거나 git 커밋할 때 정의된 규칙에 따라 코드의 형식을 자동으로 수정한다.
+
+        prettier : Prettier 모듈을 설치할 때는 --save-exact 옵션을 사용하세요. --save-exact 은 Prettier 버전이 달라져도 코드 스타일 변화가 생기지 않도록 하는 옵션입니다.
+        eslint-config-react: react 프로젝트에 맞춰진 ESLint 규칙을 추가합니다.
+        eslint-plugin-prettier: 코드 코맷할 때 Prettier를 사용하게 만드는 규칙을 추가합니다.
+        eslint-config-prettier: Prettier와 충돌할 설정들을 비활성화합니다.
+
+        $ npm install --save-dev --save-exact prettier
+        $ npm install --save-dev eslint-config-react
+        $ npm install --save-dev eslint-plugin-prettier
+        $ npm install --save-dev eslint-config-prettier
+
+        .prettierrc 파일을 프로젝트 루트에 만들기
+        $ touch .prettierrc
+
+        .prettierrc 파일에 아래 내용을 추가
+
+        $ cat .prettierrc
+        {
+          "printWidth": 130,
+          "tabWidth": 2,
+          "singleQuote": true,
+          "semi": true,
+          "useTabs": false,
+          "trailingComma": "all",
+          "proseWrap": "always",
+          "requireConfig": false,
+          "bracketSpacing": true,
+          "jsxBracketSameLine": false,
+          "jsxSingleQuote": false,
+          "quoteProps": "as-needed",
+          "endOfLine": "crlf"
+        }
+
+
+    4-5. eslint 설정
+        eslintrc.json 파일에 아래 내용을 추가
+        https://poiemaweb.com/eslint
+        https://yrnana.dev/post/2021-09-02-eslint
+        https://eslint.org/docs/user-guide/configuring/rules
+
+        ESLint의 핵심 구성 정보는 env, globals, rules세가지 영역으로 나누어져 구성되어 있습니다.
+          . env는 실행 환경에 대한 설정, 사전 전역 변수 설정. 브라우저, node, es6 환경이 활성화
+          . plugins 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . extends 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . globals는 사용자가 추가하는 전역 변수 설정.
+          . rules 설치한 플러그인들의 적용, 활성화 규칙 및 오류 설정에 관한 것들.
+
+
+        eslintrc.json 파일을 프로젝트 루트에 만들기
+        $ touch eslintrc.json
+
+        $ cat eslintrc.json
+        {
+            "env": {
+              "browser": true,
+              "commonjs": true,
+              "es2021": true,
+              "node": true,
+              "jest": true,
+              "es6": true,
+              "jest/globals": true
+            },
+            "plugins": [
+                "import",
+                "html",
+                "jest"
+            ],
+            "extends": [
+                "eslint:recommended",
+                "plugin:jest/recommended",
+                "react-app",
+                "prettier",
+                "airbnb"
+            ],
+            "globals": {
+              "_": false
+            },
+            "parser": "babel-eslint",
+            "parserOptions": {
+              "ecmaVersion": "latest",
+              "sourceType": "module"
+            },
+            "rules": {
+              // "off" or 0 - turn the rule off
+              // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+              // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
+
+              // windows linebreaks when not in production environment
+              "linebreak-style": ["error", "unix"],
+              // suppress errors for missing 'import React' in files
+              "react/react-in-jsx-scope": "off",
+              // allow jsx syntax in js files (for next.js project)
+              "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+
+              "jsx-a11y/label-has-associated-control": ["error", { "required": { "some": ["nesting", "id"] } }],
+              "jsx-a11y/label-has-for": ["error", { "required": { "some": ["nesting", "id"] } }],
+              "arrow-parens": ["error", "always"],
+              "arrow-body-style": ["error", "always"],
+              "consistent-return": "off",
+              "func-names": "off",
+              "jest/no-disabled-tests": "warn",
+              "jest/no-focused-tests": "error",
+              "jest/no-identical-title": "error",
+              "jest/prefer-to-have-length": "warn",
+              "jest/valid-expect": "error",
+              "jest/no-try-expect": "off", // DEPRECATED
+              "jest/no-conditional-expect": "off",
+              "no-shadow": "off",
+              "no-alert": "off",
+              "no-var": "error",
+              "no-console": "off",
+              "no-debugger": "off",
+              "no-unused-vars": "off",
+              "no-param-reassign": ["error", { "props": false }]
+            }
+        }
+
+
+
+    4-6. jsconfig.json 설정
+        컴포넌트 경로를 설정할 때 상대 경로 대신 절대 경로를 사용하여 설정하는 방법
+
+        경로 종류
+          1. 절대 경로. ex) import App from 'App';
+          2. 상대 경로. ex) import App from './src/App';
+          3. 별칭 경로. ex) import App from '@/App';
+
+        "baseUrl": "./src" ==> 절대 경로 설정
+        "include": ["src"] ==> import 시 해당 루트를 자동으로 포함 설정. ex) import 'src/Comp'; 대신 import 'Comp'; 을 사용
+
+        https://code.visualstudio.com/docs/languages/jsconfig
+        https://velog.io/@kcj_dev96/jsconfig.json
+        https://stackoverflow.com/questions/58577554/reactjs-module-not-found-when-specifying-paths-in-jsconfig-json
+
+        $ echo -e "{\n  \"compilerOptions\": {\n    \"baseUrl\": \"./src\"\n  },\n  \"include\": [\"src\"]\n}" >> jsconfig.json
+
+        jsconfig.json 파일 내용 확인
+        $ cat jsconfig.json
+        {
+          "compilerOptions": {
+            "baseUrl": "src"
+          },
+          "include": ["src"]
+        }
+
+
+    4-7. githook 설정
+        githook은 깃에 특정 이벤트(커밋, 푸시 등)를 감지하여
+        이벤트를 실행하기 전에 특정 동작을 수행할 수 있도록 도와주는 플러그인 입니다.
+
+        husky와 lint-staged의역할은 다음과 같다.
+        . husky: packages.json 파일에서 githook를 사용할 수 있게 해준다.
+        . lint-staged: git 의 stage된 파일들에 특정 동작을 수행할 수 있도록 해준다.
+        . lint-staged와 husky를 사용하여 git 이벤트에 Prettier 명령어를 연동 설정.
+
+        $ npm install --save-dev husky  lint-staged
+
+        ############
+        commit 전에 자동으로 prettier 적용하기
+        ############
+
+        packages.json 에 아래 내용 추가
+
+        $ cat packages.json
+        {
+          ...중략 ,
+          "husky": {
+              "hooks": {
+                  "pre-commit" : "lint-staged"
+              }
+          },
+          "lint-staged": {
+              "src/**/*.{js,jsx,ts,tsx,json,css,scss,md} ": [
+                  "prettier --write"
+              ]
+          }
+        }
+
+    4-8. package.json 에 jest 실행 스크립트 추가
+        변경 전
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+            },
+        }
+
+        변경 후
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+
+                "test:watch": "jest --watch --env=jsdom",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom"
+            },
+            ...중략
+        }
+
+    4-9. 프로젝트 소스 커밋
+        $ pwd               # 현재 작업 디렉토리 확인
+        $ ls                # package.json 보이는지 확인
+        $ git status        # 파일 상태 확인
+        $ git add -AN       # 신규 파일 추가 추가
+        $ git status        # 파일 상태 확인
+        $ git commit -a -m '프로젝트 시작하기'
+        $ git status        # 파일 상태 확인
+        $ git push          #
+
+
+    4-10. react 프로젝트 설정 파일 추출하기
+        프로젝트 설정 파일 추출하기 전에 반드시 소스 commit 을 해야만 eject 가 가능하다.
+        eject를 하게 되면 package.json 파일의 내용이 변경된다.
+
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        $ cat package.json
+        $ npm run eject
+        $ cat package.json
+
+
+    ##################################
+    5. 서버 실행
+    ##################################
+        $ ls                                       # reactprj01 폴더가 보이는지 확인
+        $ cd reactprj01                            # reactprj01 폴더로 이동
+        $ ls                                       # package.json 파일이 보이는지 확인
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+        5-1. 서버 중지
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        5-2. 서버 시작
+        $ ls                # package.json 보이는지 확인
+
+        $ npm run start     # package.json 보이면 서버 실행
+        Compiled successfully!
+
+        You can now view counterprj06 in the browser.
+
+          Local:            http://localhost:15109
+          On Your Network:  http://192.168.56.1:15109
+
+        Note that the development build is not optimized.
+        To create a production build, use npm run build.
+
+        webpack compiled successfully
+
+    ##################################
+    6. Jest 테스트 와 디버깅 방법
+    ##################################
+
+    https://tod2.tistory.com/214
+    https://jestjs.io/docs/cli#--envenvironment
+
+    6-1 package.json 에서 실행 jest script 추가
+        {
+            ...중략
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject",
+
+                "test:watch": "jest --watch --env=jsdom",
+                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom",
+
+                "build-watch": "./node_modules/.bin/webpack -w",
+                "build": "./node_modules/.bin/webpack"
+            },
+            ...중략
+        }
+
+    6-2. 터미널에서 개별 파일 jest 테스트 실행
+        $ npx jest --help
+        $ npx jest --env=jsdom  src/containers/todo/components/PageHeader.test.js
+        $ npx jest --env=jsdom  --watch  src/containers/todo/components/PageHeader.test.js
+
+    6-3. 터미널에서 watch 모드로 jest 테스트 실행
+        $ ls    # package.json 보이는지 확인
+        $ cat package.json
+        $ npm run test:watch
+        $ npx jext --env=jsdom --watch
+
+    6-4. 터미널에서 deubgging 모드로 jest 테스트 실행
+        $ npm run test:debug
+        $ node --inspect-brk node_modules/jest/bin/jest --runInBand --env=jsdom --watch
+
+    6-5. 소스 코드에 debugger 삽입
+
+    6-6. Chrome을 열고 주소 표시줄에 다음을 입력합니다.
+        chrome://inspect
+
+    6-7. "Open dedicated DevTools for Node" 클릭
+        연결 추가 127.0.0.1:9229
+
+    6-8. CLI 에서 실행을 중지하려면 이면 "ctrl + c" 눌러 실행 중지
+
+
+
+
+    ##################################
+    10. 기능 설명
+    ##################################
+
+    리액트에서의 CRUD2S 방법을 학습한다.
+
+    생성할 컴포넌트
+        CrudContainer
+        CrudInput
+        CrudList
+        CrudListItem
+
+    CRUD2S 학습을 위해서 아래 사항에 대해서 미리 학습한다.
+        1. array.map() 사용법
+        2. array.reduce() 사용법
+        3. array.filter() 사용법
+
+
+    object array 에서 최대값 id 찾기
+        방법 1. reduce() 메서드 사용해서 최대값을 찾는 방법
+            var maxObj = array.reduce( function(prev, curt){
+                return prev.id > curt.id ? prev:  curt  // 최대값 id가 있는 객체
+                return prev.id < curt.id ? prev:  curt  // 최소값 id가 있는 객체
+            })
+            var newid  = maxObj.id + 1
+
+
+    테스트 기본 데이터
+        const items = [
+            {id:1, name: "슈퍼맨", power: 100},
+            {id:2, name: "아쿠아맨", power: 300},
+            {id:3, name: "스파이더맨", power: 500},
+            {id:4, name: "배트맨", power: 30},
+        ]
+
+    ##################################
+    11. 프로젝트 초기 설정
+    ##################################
+
+    프로젝트의 폴더 구조
+    └─ public/index.html 을 열고 아래의 코드를 추가
+
+    11-1. viewport 설정
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    11-2. favicon 설정
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+
+    11-3. fontawesome 폰트 설정
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">
+
+    11-4. ubuntu 폰트 설정
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+
+    11-5. index.html 에 css 파일 설정
+    <link rel="stylesheet" href="%PUBLIC_URL%/reset.css">
+
+    11-6. reset.css 파일을 public 폴더에 복사
+    $ cp ../1차/reset.css ./public/
+
+
+    ##################################
+    12. 프로젝트에 컴포넌트 추가
+    ##################################
+
+    12-1. 파일 생성
+    $ ls    # packages.json 이 보이는지 확인.
+
+    $ mkdir -p ./src/containers/crud
+    $ touch ./src/containers/crud/CrudContainer.js
+
+    $ mkdir ./src/containers/crud/components
+    $ touch ./src/containers/crud/components/CrudInput.js
+    $ touch ./src/containers/crud/components/CrudList.js
+    $ touch ./src/containers/crud/components/CrudListItem.js
+
+
+    (액션상수,액션함수 정의)
+    $ touch ./src/containers/crud/action.js
+
+    (외부 API 호출)
+    $ touch ./src/containers/crud/api.js
+
+    (외부 API 호출 saga)
+    $ touch ./src/containers/crud/saga.js
+
+    (리덕스 리듀서)
+    $ touch ./src/containers/crud/reducer.js
+
+    (CrudContainer 에서만 사용되는 css 파일)
+    $ touch ./src/containers/crud/CrudContainer.css
+
+
+    ##################################
+    13. 라우팅 설정
+    ##################################
+
+    13-1. 라우팅 수정
+        $ ~/src/index.js 수정
+        변경 전 : import App from './App';
+        변경 후 : import App from './containers/crud/CrudContainer';
+
+    13-2. 실행 화면 확인하고 개발자 모드에서 오류 확인
+        ==> 빈 화면이 나오면 정상.
+
+    ##################################
+    14. CrudContainer 컴포넌트 구현
+    ##################################
+
+    14-1. CrudContainer.css 수정
+
+        파일명 src/containers/crud/CrudContainer.css
+
+        .strong {color:red; font-weight:bold; font-size:1.2em;}
+        label { display: inline-block; width: 80px;}
+        #app > div { margin: 5px 0 ;}
+
+
+    14-2. CrudContainer 컴포넌트 만들기
+
+        파일명: src/containers/crud/CrudContainer.js
+
+        import React, { Component } from 'react';
+
+        import './CrudContainer.css';
+
+        function CrudContainer(props) {
+
+            // JSX로 화면 만들기
+            return (
+                <div>
+                </div>
+            );
+        }
+
+        CrudContainer.propTypes = { };
+        CrudContainer.defaultProps = { };
+
+        export default CrudContainer;
+
+    14-3. 1차/JSX.html 파일 내용을 CrudContainer 컴포넌트 JSX 에 추가한다.
+        수정 전:
+
+            // JSX로 화면 만들기
+            return (
+                <div>
+                </div>
+            );
+
+        수정 후:
+            // JSX로 화면 만들기
+            return (
+                <div id="app">
+                    <h1>Creat Read Update Delete</h1>
+                    ... 이하 생략
+                </div>
+            );
+
+
+    14-4. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+    14-5. CrudContainer 컴포넌트 JSX 관련 경고 수정하기
+        for   ===> htmlFor
+        class ===> className
+        value ===> defaultValue
+
+        function CrudContainer(props) {
+
+            ...중략
+
+            // JSX로 화면 만들기
+            return (
+                <div id="app">
+                    <h1>Creat Read Update Delete 2</h1>
+                    <div>
+                        <div>
+                            <label htmlFor="">Name : </label>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="이름을 입력하세요"
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="">Power : </label>
+                            <input
+                                type="number"
+                                name="power"
+                                placeholder="숫자를 입력하세요"
+                            />
+                        </div>
+                        <button type="button">Add</button>
+                    </div>
+                    <hr />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>POWER</th>
+                                <th>CRUD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr className="">
+                                <td>1</td>
+                                <td>슈퍼맨</td>
+                                <td>100</td>
+                                <td>
+                                    <button type="button">Del</button>
+                                    <button type="button">Power Up</button>
+                                    <button type="button">Power Down</button>
+                                    <button type="button">Edit</button>
+                                </td>
+                            </tr>
+                            <tr className="strong">
+                                <td>2</td>
+                                <td>아쿠아맨</td>
+                                <td>300</td>
+                                <td>
+                                    <button type="button">Del</button>
+                                    <button type="button">Power Up</button>
+                                    <button type="button">Power Down</button>
+                                    <button type="button">Edit</button>
+                                </td>
+                            </tr>
+                            <tr className="strong">
+                                <td>3</td>
+                                <td>스파이더맨</td>
+                                <td>500</td>
+                                <td>
+                                    <button type="button">Del</button>
+                                    <button type="button">Power Up</button>
+                                    <button type="button">Power Down</button>
+                                    <button type="button">Edit</button>
+                                </td>
+                            </tr>
+                            <tr className="strong">
+                                <td>4</td>
+                                <td>배트맨</td>
+                                <td>30</td>
+                                <td>
+                                    <button type="button">Del</button>
+                                    <button type="button">Power Up</button>
+                                    <button type="button">Power Down</button>
+                                    <button type="button">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            );
+        }
+
+    14-6. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+    ##################################
+    15. CrudInput 컴포넌트 구현
+    CrudContainer 컴포넌트에서 입력 부분을 CrudInput 컴포넌트로 분리한다.
+    ##################################
+
+    15-1. CrudInput 컴포넌트 만들기
+        src/containers/crud/components/CrudInput.js
+
+        import React, { Component } from 'react';
+
+        function CrudInput(props) {
+          ...중략
+        }
+
+        CrudInput.propTypes = { };
+        CrudInput.defaultProps = { };
+
+        export default CrudInput;
+
+    15-2. CrudInput 컴포넌트의 화면, JSX 만들기
+
+        function CrudInput(props) {
+
+            // JSX로 화면 만들기
+            return (
+                <div>
+                    <div>
+                        <label htmlFor="">Name : </label>
+                        <input type="text"
+                                name="name"
+                                placeholder="이름을 입력하세요"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="">Power : </label>
+                        <input type="number"
+                                name="power"
+                                placeholder="숫자를 입력하세요"
+                        />
+                    </div>
+                    <button type="button">Add</button>
+                </div>
+            );
+        }
+
+    15-3. CrudContainer 에 CrudInput 컴포넌트 추가하기
+        import React, { Component } from 'react';
+        import './CrudContainer.css';
+        import CrudInput from './components/CrudInput';  // import 추가
+
+        function CrudContainer(props) {
+
+            // JSX로 화면 만들기
+            return (
+                <div>
+                    <h1>Creat Read Update Delete</h1>
+                    <CrudInput></CrudInput>
+                    <hr/>
+                    <table>
+                        ... 중략
+                    </table>
+                </div>
+            )
+        }
+
+    15-4. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+    15-5. CrudInput 컴포넌트 기능 수정 및 추가
+        * JSX 관련 경고 수정하기
+            for   ===> htmlFor
+            class ===> className
+            value ===> defaultValue
+        * input 태그에 focus 기능 추가
+        * button 태그에 클릭 기능 추가
+
+        function CrudInput(props) {
+
+            // ref 만들기. 예시) const refInput = useRef();
+            const refInputName  = useRef();
+            const refInputPower = useRef();
+
+            // 이벤트 핸들러 작성.
+            const handlerAdd = ()=>{
+            };
+
+            // JSX로 화면 만들기
+            return (
+                <div>
+                    <div>
+                        <label htmlFor="">Name : </label>
+                        <input type="text"
+                                name="name"
+                                placeholder="이름을 입력하세요"
+                                defaultValue={""}
+                                ref={refInputName}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="">Power : </label>
+                        <input type="number"
+                                name="power"
+                                placeholder="숫자를 입력하세요"
+                                defaultValue={0}
+                                ref={refInputPower}
+                        />
+                    </div>
+                    <button type="button" onClick={handlerAdd}>Add</button>
+                </div>
+            );
+        }
+
+    15-6. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+
+    ##################################
+    16. CrudList 컴포넌트 구현
+    CrudContainer 컴포넌트에서 목록 부분을 CrudList 컴포넌트로 분리한다.
+    ##################################
+
+    16-1. CrudList 컴포넌트 만들기
+    $ ~/src/containers/crud/components/CrudList.js 수정
+        import React, { Component } from 'react';
+
+        function CrudList(props) {
+          ...중략
+        }
+
+        CrudList.propTypes = { };
+        CrudList.defaultProps = { };
+
+        export default CrudList;
+
+    16-2. CrudList 컴포넌트 만들기
+
+        function CrudList(props) {
+            ...중략
+
+            // JSX로 화면 만들기
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>POWER</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="strong">
+                            <td>2</td>
+                            <td>아쿠아맨</td>
+                            <td>300</td>
+                            <td>
+                                <button type="button">Del</button>
+                                <button type="button">Power Up</button>
+                                <button type="button">Power Down</button>
+                                <button type="button">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            )
+        }
+
+    16-3. CrudContainer 에 CrudList 컴포넌트 추가하기
+
+        import React, { Component } from 'react';
+        import './CrudContainer.css';
+        import CrudInput from './components/CrudInput';  // CrudInput import 추가
+        import CrudList from './components/CrudList';  // CrudList import 추가
+
+        function CrudContainer(props) {
+
+            // JSX로 화면 만들기
+            return (
+                <div>
+                    <h1>Creat Read Update Delete</h1>
+                    <CrudInput></CrudInput>
+                    <hr/>
+                    <CrudList></CrudList>
+                </div>
+            )
+        }
+
+    16-4. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+
+    ##################################
+    17. 상태값 내림(props) 기능 추가하기.
+        CrudContainer 에 상태값 추가하고 상태값 내림(props) 을 설정한다.
+    ##################################
+
+    17-1. CrudContainer 에 items 상태값(변수)을 정의하고 items 상태값을 props 로 내린다.
+            function CrudContainer(props) {
+
+                const [items, setItems] = useState([
+                    {id:1, name: "슈퍼맨", power: 100},
+                    {id:2, name: "아쿠아맨", power: 300},
+                    {id:3, name: "스파이더맨", power: 500},
+                    {id:4, name: "배트맨", power: 30},
+                ]);
+
+                ...중략
+                return (
+                    <div id="app">
+                        <h1>Creat Read Update Delete</h1>
+                        <CrudInput></CrudInput>
+                        <hr/>
+                        <CrudList {...props} items={items}></CrudList>
+                    </div>
+                )
+            }
+
+    17-2. CrudList 에 props 설정 추가하기
+
+        function CrudList({ items }) {
+            ...중략
+        }
+
+        CrudList.propTypes = {
+          items: PropTypes.array.isRequired,
+        };
+        CrudList.defaultProps = {
+          items: [],
+        };
+
+    17-3. CrudList 에 JSX 반복문 코드를 추가 추가하기
+
+        "rt12-11.JSX.반복문.html"를 참고하여 JSX 반복문 코드를 추가 하시오.
+
+        function CrudList({ items }) {
+
+            // JSX로 화면 만들기
+            const arrs = items.map( (item)=>{
+                return (
+                    <tr className="strong" item={item} key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.power}</td>
+                        <td>
+                            <button type="button">Del</button>
+                            <button type="button">Power Up</button>
+                            <button type="button">Power Down</button>
+                            <button type="button">Edit</button>
+                        </td>
+                    </tr>
+                )
+            });
+
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>POWER</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {arrs}
+                    </tbody>
+                </table>
+            );
+        }
+
+
+    17-4. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+    17-5. CrudList 의 JSX에 기능 추가하기
+        * power가 300 이상인 사람은 class="strong" 을 적용하시오.
+
+        수정 전: <tr className="strong" item={item} key={item.id}>
+        수정 후: <tr className={item.power >= 300 ? "strong": ""} item={item} key={item.id}>
+
+    17-6. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+    ##################################
+    18. CrudListItem 컴포넌트 구현
+        CrudListItem 에는 View 기능과 Edit 기능이 있다.
+        CrudList 에서 CrudListItem 분리하기
+    ##################################
+
+    18-1. $ ~/src/containers/crud/components/CrudListItem.js
+        import React, { Component } from 'react';
+
+        function CrudListItem(props) {
+          ...중략
+        }
+
+        CrudListItem.propTypes = { };
+        CrudListItem.defaultProps = { };
+
+        export default CrudListItem;
+
+
+    18-2. CrudListItem 컴포넌트 만들기
+
+        function CrudListItem({ item }) {
+            ...중략
+
+            // JSX로 화면 만들기
+            const strong = item.power >= 300 ? "strong" : "";
+            return (
+                <tr className={strong}>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.power}</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+            );
+        }
+
+        CrudListItem.propTypes = {
+          item: PropTypes.object.isRequired,
+        };
+        CrudListItem.defaultProps = {
+          item: {},
+        };
+
+    18-3. CrudList 에 CrudListItem 추가하기
+
+        import CrudListItem from "./CrudListItem"; // import 추가
+
+        function CrudList({ items }) {
+
+            // JSX로 화면 만들기
+            const arrs = items.map((item) => {
+                return (
+                    <CrudListItem item={item} key={item.id}>
+                    </CrudListItem>
+                );
+            });
+
+            // JSX로 화면 만들기
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAM</th>
+                            <th>POWER</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>{arrs}</tbody>
+                </table>
+            );
+        }
+
+    18-4. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+    18-5. CrudListItem 에 onClick 기능 추가하기
+
+        function CrudListItem({ item }) {
+
+            // 이벤트 핸들러 작성.
+            const handlerDel = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만든다
+                console.log(event.target);
+            };
+            const handlerUp = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만든다
+                console.log(event.target);
+            };
+            const handlerDown = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만든다
+                console.log(event.target);
+            };
+            const handlerEdit = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만든다
+                console.log(event.target);
+            };
+
+            // JSX로 화면 만들기
+            const strong = item.power >= 300 ? "strong" : "";
+            render() {
+                <tr className={strong}>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.power}</td>
+                    <td>
+                        <button type="button" onClick={handlerDel}>Del</button>
+                        <button type="button" onClick={handlerUp}>Power Up</button>
+                        <button type="button" onClick={handlerDown}>Power Down</button>
+                        <button type="button" onClick={handlerEdit}>Edit</button>
+                    </td>
+                </tr>
+            }
+        }
+
+    18-6. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+
+    ##################################
+    19. CrudContainer 컴포넌트의 상태값(CrudContainer.items)을 변경하기 위한 callback 메서드 기능을 추가한다.
+    ##################################
+
+    19-1. CrudContainer callback 메서드 정의
+    function CrudContainer(props) {
+
+        // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
+        const callbackDel = useCallback(
+          (id) => {
+            // state 변경
+            const newItems = items.filter((item) => item.id !== id);
+            setItems(newItems);
+          },
+          [/* 메서드와 연관되는 상태(변수)명들을 기술 */ items],
+        );
+        const callbackUp = useCallback(
+          (id) => {
+            // state 변경
+            // item.power = item.power + 100;
+            const newItems = items.map((item) => {
+              if (item.id === id) {
+                item.power = item.power + 100;
+              }
+              return item;
+            });
+            setItems(newItems);
+          },
+          [/* 메서드와 연관되는 상태(변수)명들을 기술 */ items],
+        );
+        const callbackDown = useCallback(
+          (id) => {
+            // state 변경
+            // item.power = item.power - 50;
+            const newItems = items.map((item) => {
+              if (item.id === id) {
+                item.power = item.power - 50;
+              }
+              return item;
+            });
+            setItems(newItems);
+          },
+          [/* 메서드와 연관되는 상태(변수)명들을 기술 */ items],
+        );
+        const callbackSave = useCallback(
+          (newitem) => {
+            // state 변경
+            const newItems = items.map((item) => {
+              if (item.id === newitem.id) {
+                return newitem;
+              }
+              return item;
+            });
+            setItems(newItems);
+          },
+          [/* 메서드와 연관되는 상태(변수)명들을 기술 */ items],
+        );
+        const callbackAdd = useCallback(
+          (newitem) => {
+            // state 변경
+            let maxid = 0;
+            if (items && items.length > 0) {
+              maxid = items.map((item) => item.id).reduce((pval, cval) => (pval > cval ? pval : cval), 0);
+            } else {
+              maxid = 0;
+            }
+
+            // item에 id 추가
+            newitem.id = maxid + 1;
+
+            // items.push(newitem);
+            // items.push(newitem);
+            // items[items.length] = newitem;
+            // items = [ ...items, newitem];
+            setItems([...items, newitem]);
+          },
+          [/* 메서드와 연관되는 상태(변수)명들을 기술 */ items],
+        );
+
+        ...이하 중략
+    }
+
+    19-2. CrudContainer 의 5개 callback 메서드 props 내림 설정한다.
+    function CrudContainer(props) {
+
+        return (
+            <div id="app">
+                <h1>Creat Read Update Delete</h1>
+                <CrudInput callbackAdd={callbackAdd}></CrudInput>
+                <hr/>
+                <CrudList
+                  {...props}
+                  items={items}
+                  callbackDel={callbackDel}
+                  callbackUp={callbackUp}
+                  callbackDown={callbackDown}
+                  callbackSave={callbackSave}
+                ></CrudList>
+            </div>
+        )
+    }
+
+    19-3. CrudList 에 callback 메서드 받는 기능 추가하기
+        function CrudList({ items, callbackDel, callbackUp, callbackDown, callbackSave }) {
+            ...중략
+        }
+
+        CrudList.propTypes = {
+          items: PropTypes.array.isRequired,
+          callbackDel: PropTypes.func.isRequired,
+          callbackUp: PropTypes.func.isRequired,
+          callbackDown: PropTypes.func.isRequired,
+          callbackSave: PropTypes.func.isRequired,
+        };
+        CrudList.defaultProps = {
+          items: [],
+          callbackDel: () => {},
+          callbackUp: () => {},
+          callbackDown: () => {},
+          callbackSave: () => {},
+        };
+
+    19-4. CrudList 에 callback 메서드 내림 기능 추가하기
+    function CrudList({ items, callbackDel, callbackUp, callbackDown, callbackSave }) {
+
+        const arrs = items.map( (item)=>{
+            return (
+                <CrudListItem
+                    {...props}
+                    item={item}
+                    key={item.id}
+                    callbackDel={callbackDel}
+                    callbackUp={callbackUp}
+                    callbackDown={callbackDown}
+                    callbackSave={callbackSave}
+                >
+                </CrudListItem>
+            )
+        });
+
+        // JSX로 화면 만들기
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>POWER</th>
+                        <th>CRUD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {arrs}
+                </tbody>
+            </table>
+        )
+    }
+
+    19-5. CrudListItem 에 callback 메서드 받는 기능 추가하기
+    function CrudListItem({ item, callbackDel, callbackUp, callbackDown, callbackSave }) {
+        ...중략
+    }
+
+    CrudListItem.propTypes = {
+        items: PropTypes.array.isRequired,
+        callbackDel: PropTypes.func.isRequired,
+        callbackUp: PropTypes.func.isRequired,
+        callbackDown: PropTypes.func.isRequired,
+        callbackSave: PropTypes.func.isRequired,
+    };
+    CrudListItem.defaultProps = {
+        items: [],
+        callbackDel: () => {},
+        callbackUp: () => {},
+        callbackDown: () => {},
+        callbackSave: () => {},
+    };
+
+    19-6. CrudListItem 에 callback 호출 기능을 추가한다.
+    function CrudListItem({ item, callbackDel, callbackUp, callbackDown, callbackSave }) {
+
+        // 이벤트 핸들러 작성.
+        const handlerDel = event => {
+          // 이벤트 핸들러는 화살표 함수로 만든다
+          console.log(event.target);
+          // 부모의 콜백 메서드 호출.
+          callbackDel(item.id);
+        };
+        const handlerUp = event => {
+          // 이벤트 핸들러는 화살표 함수로 만든다
+          console.log(event.target);
+          // 부모의 콜백 메서드 호출.
+          callbackUp(item.id);
+        };
+        const handlerDown = event => {
+          // 이벤트 핸들러는 화살표 함수로 만든다
+          console.log(event.target);
+          // 부모의 콜백 메서드 호출.
+          callbackDown(item.id);
+        };
+        const handlerEdit = event => {
+          // 이벤트 핸들러는 화살표 함수로 만든다
+          console.log(event.target);
+        };
+
+        // JSX로 화면 만들기
+        const strong = item.power >= 300 ? 'strong' : '';
+        render() {
+            <tr className={strong}>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.power}</td>
+                <td>
+                    <button type="button" onClick={handlerDel}>Del</button>
+                    <button type="button" onClick={handlerUp}>Power Up</button>
+                    <button type="button" onClick={handlerDown}>Power Down</button>
+                    <button type="button" onClick={handlerEdit}>Edit</button>
+                </td>
+            </tr>
+        }
+    }
+
+    19-6. CrudInput 에 callback 메서드 호출 기능을 추가한다.
+    function CrudInput(props) {
+        ...중략
+
+        // 이벤트 핸들러 작성.
+        const handlerAdd = (event)=>{
+            // 부모 콜백 메서드 호출
+            props.callbackAdd();
+        };
+
+        // JSX로 화면 만들기
+        return (
+          <div>
+            <div>
+              <label htmlFor="">Name : </label>
+              <input type="text" name="name" placeholder="이름을 입력하세요" defaultValue={''} ref={refInputName} />
+            </div>
+            <div>
+              <label htmlFor="">Power : </label>
+              <input type="number" name="power" placeholder="숫자를 입력하세요" defaultValue={0} ref={refInputPower} />
+            </div>
+            <button type="button" onClick={handlerAdd}>
+              Add
+            </button>
+          </div>
+        );
+    }
+
+    19-7. 실행 화면 확인하고 이벤트 핸들러 동작 여부 확인하다.
+
+
+    ##################################
+    20. CrudInput 의 handlerAdd 이벤트 핸들러에 유효성 검사 기능을 추가한다.
+    ##################################
+
+    20-1. CrudInput 의 handlerAdd 이벤트 핸들러에 유효성 검사 기능을 추가한다.
+    function CrudInput(props) {
+        // ref 만들기.
+        const refInputName = useRef(); // focus
+        const refInputPower = useRef(); // focus
+
+        // 이벤트 핸들러 작성.
+        const handlerAdd = (event)=>{
+            // Name 유효성 검사
+            //    . Name 값 입력 여부 검사
+            // Power 유효성 검사
+            //    . Power 값 입력 여부 검사
+            //    . Power 숫자인지 검사
+            // 부모 메서드 props.callbackAdd() 호출
+            // input 태그에 남아있는 입력값 지우기.
+
+            // Name 유효성 검사
+            if( !refInputName.current.value ){
+                alert("이름을 입력하세요");
+
+                // 포커스 설정
+                refInputName.current.focus();
+
+                // 이벤트 취소
+                window.event.stopPropagation();
+                window.event.preventDefault();
+
+                // 이벤트 핸들러 종료
+                return false;
+            }
+
+            // Power 유효성 검사
+            if( !refInputPower.current.value ){
+                alert("파워를 입력하세요");
+
+                // 포커스 설정
+                refInputPower.current.focus();
+
+                // 이벤트 취소
+                window.event.stopPropagation();
+                window.event.preventDefault();
+
+                // 이벤트 핸들러 종료
+                return false;
+            }
+
+            if( isNaN( refInputPower.current.value) ){
+                alert("파워에 숫자를 입력하세요");
+
+                refInputPower.current.focus();
+
+                // 이벤트 취소
+                window.event.stopPropagation();
+                window.event.preventDefault();
+
+                // 아래코드 실행되지 않게 처리.
+                return false;
+            }
+
+            // ref 를 사용하여 현재 입력된 값을 가져온다.
+            const name = refInputName.current.value;
+            const power = Number(refInputPower.current.value);
+            const newItem = {
+                name,
+                power,
+            };
+
+            // 부모(CrudContainer) 메서드 호출
+            // CrudContainer.callbackAdd() 호출
+            props.callbackAdd(newItem);
+
+            // input 태그에 남아있는 입력값 지우기.
+            refInputName.current.value = '';
+            refInputPower.current.value = null;
+        };
+
+        // JSX로 화면 만들기
+        return (
+          <div>
+            <div>
+              <label htmlFor="">Name : </label>
+              <input type="text" name="name" placeholder="이름을 입력하세요" defaultValue={''} ref={refInputName} />
+            </div>
+            <div>
+              <label htmlFor="">Power : </label>
+              <input type="number" name="power" placeholder="숫자를 입력하세요" defaultValue={0} ref={refInputPower} />
+            </div>
+            <button type="button" onClick={handlerAdd}>
+              Add
+            </button>
+          </div>
+        );
+    }
+
+    20-2. CrudContainer 컴포넌트 콜백 메서드 callbackAdd 만들기
+        const callbackAdd = useCallback(
+          (newitem) => {
+            // state 변경
+            let maxid = 0;
+            if (items && items.length > 0) {
+              maxid = items.map((item) => item.id).reduce((pval, cval) => (pval > cval ? pval : cval), 0);
+            } else {
+              maxid = 0;
+            }
+
+            // item에 id 추가
+            newitem.id = maxid + 1;
+
+            // items.push(newitem);
+            // items.push(newitem);
+            // items[items.length] = newitem;
+            // items = [ ...items, newitem];
+            setItems([...items, newitem]);
+          },
+          [/* 메서드와 연관되는 상태(변수)명들을 기술 */ items],
+        );
+
+    20-3. 실행 화면 확인하고 이벤트 핸들러 동작 여부 확인하다.
+
+
+    ##################################
+    21. CrudListItem 컴포넌트에 수정 기능 추가하기
+      CrudListItem 컴포넌트는 보기와 수정의 2 가지 기능이 있다.
+      CrudListItem 컴포넌트의 수정 기능을 만들어 본다.
+    ##################################
+
+        21-1. 편집여부를 확인하기 위한 상태값(state) isEditMode 만들기
+            const [isEditMode, setIsEditMode] = useState(false);
+
+        21-3. formView: 데이터 표시용 JSX 만들기
+            const formView = (
+                <tr className={strong}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.power}</td>
+                        <td>
+                            <button type="button" onClick={handlerDel}>Del</button>
+                            <button type="button" onClick={handlerUp}>Power Up</button>
+                            <button type="button" onClick={handlerDown}>Power Down</button>
+                            <button type="button" onClick={handlerEdit}>Edit</button>
+                        </td>
+                </tr>
+            );
+
+        21-4. formEdit:  데이터 편집용 JSX 만들기
+
+            const formEdit = (
+                <tr className={strong}>
+                    <td>{item.id}</td>
+                    <td>
+                        <input
+                            type="text"
+                            name="name"
+                            ref={refInputName}
+                            defaultValue={item.name}
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="number"
+                            name="power"
+                            ref={refInputPower}
+                            defaultValue={item.power}
+                        />
+                    </td>
+                    <td>
+                        <button type="button" onClick={handlerUp}>Power Up</button>
+                        <button type="button" onClick={handlerDown}>Power Down</button>
+                        <button type="button" onClick={handlerSave}>Save</button>
+                        <button type="button" onClick={handlerEdit}>Cancel</button>
+                    </td>
+                </tr>
+            );
+
+
+        21-5. CrudListItem에 ref 만들기.
+
+          // ref 만들기. 예시) const refInput = useRef();
+          const refInputName  = useRef();
+          const refInputPower = useRef();
+
+        21-6. CrudListItem.isEditMode  === true 이면 formEdit 리턴하고 아니면 formView 리턴한다.
+
+            const formView = (
+                ...중략
+            );
+            const formEdit = (
+                ...중략
+            );
+
+            if( isEditMode )
+                return formEdit;
+
+            return formView;
+
+        21-7. CrudListItem 의 handlerEdit 수정한다.
+
+            const handlerEdit = (event)=>{
+                console.log(event.target);
+                // formView 이면 formEdit 로 바꾸기.
+                // formEdit 이면 formView 로 바꾸기.
+                // isEditMode = !isEditMode;
+                setIsEditMode(!isEditMode);
+            };
+
+        21-8. 실행 화면 확인하고 이벤트 핸들러 동작 여부 확인하다.
+
+        21-9. CrudListItem에 handlerSave 이벤트 핸들러 만들기.
+
+            const handlerSave = (event)=>{
+
+                // formEdit 를 formView로 바꾸기.
+                // isEditMode = !isEditMode;
+                setIsEditMode( !isEditMode );
+
+                // 유효성 검사
+                if(refInputName.current.value.trim() === ''){
+                    alert('이름을 입력하세요')
+                    refInputName.current.focus();
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
+                if(refInputPower.current.value.trim() === ''){
+                    alert('파워를 입력하세요')
+                    refInputPower.current.focus();
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
+                if( isNaN( Number(refInputPower.current.value) ) ){
+                    alert('파워에 숫자를 입력하세요')
+                    refInputPower.current.value=""
+                    refInputPower.current.focus()
+                    event.preventDefault()
+                    return false
+                }
+
+                // 입력된 값을 이용해서 newitem 객체를 만든다.
+                const name = refInputName.current.value;
+                const power = Number(refInputPower.current.value);
+                const newItem = {
+                  id: item.id,
+                  name,
+                  power,
+                };
+
+                // 부모(CrudContainer) 메서드 호출
+                // CrudContainer.callbackAdd() 호출
+                callbackSave( newItem );
+            };
+
+        21-10. 실행 화면 확인하고 이벤트 핸들러 동작 여부 확인하다.
+
+
+
+    ##################################
+    22. 도전. CrudInput 과 CrudListItem 의 중복 코드를 공통 컴포넌트로 만들어 본다.
+      <input name="name" /> 부분을 CustomInputName 컴포넌트로 만든다.
+      <input name="power" /> 부분을 CustomInputPower 컴포넌트로 만든다.
+
+      CustomInputName,CustomInputPower 컴포넌트 작성시
+      "rt16-04.ref로 자식컴포넌트 함수 호출하기.html" 를 참고하세요
+    ##################################
+
+    22-1. input 폴더 만들기
+        $ mkdir -p ./src/components/input
+
+    22-2. CustomInputName 컴포넌트 만들기
+        $ touch ./src/components/input/CustomInputName.js
+
+        import React, { useRef, forwardRef, useImperativeHandle } from 'react';
+
+        function CustomInputName(props, ref) {
+          const inputRef = useRef();
+
+          useImperativeHandle(ref, () => ({
+            get value() {
+              if (ref.current.validation()) {
+                return inputRef.current.value;
+              } else {
+                // ref.current.value('');
+                ref.current.focus();
+                return undefined;
+              }
+            },
+            set value(param) {
+              inputRef.current.value = param;
+            },
+            focus: () => {
+              inputRef.current.focus();
+            },
+            validation: () => {
+              // 유효성 검사
+              if (inputRef.current.value.trim() === '') {
+                alert('이름을 입력하세요');
+                inputRef.current.focus();
+                window.event.preventDefault();
+                window.event.stopPropagation();
+                return false;
+              }
+
+              return true;
+            },
+          }));
+          return <input type="text" placeholder="이름을 입력하세요" defaultValue={props.defaultValue} ref={inputRef} />;
+        }
+        // eslint-disable-next-line no-func-assign
+        CustomInputName = forwardRef(CustomInputName);
+
+        export default CustomInputName;
+
+    22-3. CustomInputPower 컴포넌트 만들기
+        $ touch ./src/components/input/CustomInputPower.js
+
+        import React, { useRef, forwardRef, useImperativeHandle } from 'react';
+
+        function CustomInputPower(props, ref) {
+          const inputRef = useRef();
+
+          useImperativeHandle(ref, () => ({
+            get value() {
+              if (ref.current.validation()) {
+                return inputRef.current.value;
+              } else {
+                // ref.current.value('');
+                ref.current.focus();
+                return undefined;
+              }
+            },
+            set value(param) {
+              inputRef.current.value = param;
+            },
+            focus: () => {
+              inputRef.current.focus();
+            },
+            validation: () => {
+              // 유효성 검사
+
+              if (inputRef.current.value.trim() === '') {
+                alert('파워를 입력하세요');
+                inputRef.current.focus();
+                window.event.preventDefault();
+                window.event.stopPropagation();
+                return false;
+              }
+              if (isNaN(Number(inputRef.current.value))) {
+                alert('파워에 숫자를 입력하세요');
+                inputRef.current.value = '';
+                inputRef.current.focus();
+                window.event.preventDefault();
+                return false;
+              }
+
+              return true;
+            },
+          }));
+          return <input type="number" placeholder="숫자를 입력하세요" defaultValue={props.defaultValue} ref={inputRef} />;
+        }
+        // eslint-disable-next-line no-func-assign
+        CustomInputPower = forwardRef(CustomInputPower);
+
+        export default CustomInputPower;
+
+    22-4. CrudInput 컴포넌트 수정하기
+
+        import CustomInputName from '../../../components/input/CustomInputName';
+        import CustomInputPower from '../../../components/input/CustomInputPower';
+
+        function CrudInput(props) {
+            ...중략
+
+            // 이벤트 핸들러 작성.
+            const handlerAdd = (event)=>{
+
+                // ref 를 사용하여 현재 입력된 값을 가져온다.
+                const name = refInputName.current.value;
+                const power = Number(refInputPower.current.value);
+                const newitem = { name, power };
+
+                // 부모(CrudContainer) 메서드 호출
+                // CrudContainer.callbackAdd() 호출
+                props.callbackAdd(newitem);
+
+                // input 태그에 남아있는 입력값 지우기.
+                refInputName.current.value = '';
+                refInputPower.current.value = null;
+            };
+
+            // JSX로 화면 만들기
+            return (
+            <div>
+                <h3>CrudInput 컴포넌트</h3>
+                <div>
+                    <label htmlFor="">Name : </label>
+                    <CustomInputName defaultValue={""} ref={refInputName} />
+                </div>
+                <div>
+                    <label htmlFor="">Power : </label>
+                    <CustomInputPower defaultValue={0} ref={refInputPower} />
+                </div>
+                <button type="button" onClick={handlerAdd}>Add</button>
+            </div>
+            )
+        }
+
+    22-5. CrudListItem 컴포넌트 수정하기
+
+        import CustomInputName from '../../../components/input/CustomInputName';
+        import CustomInputPower from '../../../components/input/CustomInputPower';
+
+        function CrudListItem({item, callbackDel, callbackUp, callbackDown, callbackSave} ) {
+
+            ...중략
+            const handlerSave = (event)=>{
+                // formEdid 를 formView로 바꾸기.
+                // isEditMode = !isEditMode;
+                setIsEditMode( !isEditMode );
+
+                // ref 를 사용하여 현재 입력된 값을 가져온다.
+                const name = refInputName.current.value;
+                const power = Number(refInputPower.current.value);
+                const newItem = {
+                  id: item.id,
+                  name,
+                  power,
+                };
+
+                // 부모(CrudContainer) 메서드 호출
+                // CrudContainer.callbackAdd() 호출
+                callbackSave(newItem);
+            };
+
+            const formEdit = (
+                <tr className={strong}>
+                    <td>{item.id}</td>
+                    <td>
+                        <CustomInputName ref={refInputName} defaultValue={item.name} />
+                    </td>
+                    <td>
+                        <CustomInputPower ref={refInputPower} defaultValue={item.power} />
+                    </td>
+                    <td>
+                        <button type="button" onClick={handlerUp}>Power Up</button>
+                        <button type="button" onClick={handlerDown}>Power Down</button>
+                        <button type="button" onClick={handlerSave}>Save</button>
+                        <button type="button" onClick={handlerEdit}>Cancel</button>
+                    </td>
+                </tr>
+            );
+            ...중략
+        }
+
+    22-6. 실행 화면 확인하고 이벤트 핸들러 동작 여부 확인하다.
+
+    </xmp>
+    <hr>
+
+    <div id="app">
+        <h1>Creat Read Update Delete</h1>
+        <div>
+            <div>
+                <label for="">Name : </label>
+                <input type="text" name="name" placeholder="이름을 입력하세요" />
+            </div>
+            <div>
+                <label for="">Power : </label>
+                <input type="number" name="power" placeholder="숫자를 입력하세요"  />
+            </div>
+            <button type="button">Add</button>
+        </div>
+        <hr/>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>POWER</th>
+                    <th>CRUD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td>1</td>
+                    <td>슈퍼맨</td>
+                    <td>100</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+                <tr class="strong">
+                    <td>2</td>
+                    <td>아쿠아맨</td>
+                    <td>300</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+                <tr class="strong">
+                    <td>3</td>
+                    <td>스파이더맨</td>
+                    <td>500</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+                <tr class="strong">
+                    <td>4</td>
+                    <td>배트맨</td>
+                    <td>30</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

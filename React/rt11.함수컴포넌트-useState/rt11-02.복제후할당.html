@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css">
+
+    <style>
+        span {
+            font-size: 3em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="margin: 40px 0 20px 15px;">
+        <a href="#" onClick="window.open('../rt01.docs/불변성.pdf','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">5분 동안 교제 64~67, "3.3.1 불변성" 읽기</a>
+        <br>
+        <br>
+        <a href="#" onClick="window.open('../rt01.docs/데이터변환-복제후할당.pdf','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">5분 동안 교제 71~79, "3.3.3 데이터 변환" 읽기</a>
+    </div>
+
+    <xmp>
+
+컴포넌트의 상태(변수) 값을 변경하려면 복제 후 재할당으로 처리해야 한다.
+
+컴포넌트의 상태(변수) 값을 직접 바꾸면 화면 변수의 값은 바뀌지만 화면이 바뀌지 않는다.
+즉, state[0]=100; 과 같이 바꾸면 값은 바뀌지만 화면에 rendering 되지 않는 문제 발생.
+
+어떻게 컴포넌트의 상태의 값을 바꾸어야 하나? 반드시 복제 후 재할당으로 처리해야 한다.
+
+자바스크립트 타입
+    # value 타입에는 string, number, boolen, ...
+    # reference 타입에는 Object, Array, Function, ...
+
+
+const [arr, setArr] = useState([1, 2, 3, 4, 5]);
+
+1. setter 메서드를 사용하는 방식.
+    set변수명([100, 2, 3, 4, 5]);
+
+2. map() 메서드를 사용하여 복제한다.
+    arr.map((value,index,array)=>( index === findIndex ? 200: value));
+
+3. filter() 메서드를 사용하여 삭제한다.
+
+4. spread 연산자 방식 ==> 배열을 새로 만든 뒤 할당. ES6 에서만 가능.
+    var arr_copy = [500, ...arr, 70]; // [500, 3, 4, 5, 70]
+
+실행 순서와 결과 예시
+    (0) [1, 2, 3, 4, 5]
+    (1) [100, 2, 3, 4, 5]       <== 방법1을 적용
+    (2) [100, 300, 3, 4, 5]     <== 방법2을 적용
+    (3) [3, 4, 5]               <== 방법3을 적용
+    (4) [500, 3, 4, 5, 70]      <== 방법4을 적용
+
+    </xmp>
+    <hr>
+    <div id="app">
+        <div>
+            {arr.map( (value,index)=>(<span key={index}> {value} </span>))}
+            <br />
+            <button onClick={handlerChange1}>방법1로 변경</button>
+            <button onClick={handlerChange2}>방법2로 변경</button>
+            <button onClick={handlerChange3}>방법3로 변경</button>
+            <button onClick={handlerChange4}>방법4로 변경</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+
+
+

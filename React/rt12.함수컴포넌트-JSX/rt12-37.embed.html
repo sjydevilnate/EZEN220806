@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+</head>
+
+<body>
+    <xmp>
+        // 변수 선언
+        const item = 'SD 카드';
+        const value = 12000;
+        const imgurl = 'http://placehold.it/430x280';
+
+        p#greeting 에는 새로고침할 때마다 3개의 값이 랜덤하게 출력되게 작성하시오.
+            <p>hi~~~</p>
+            <p>hello~~~</p>
+            <p>bye~~</p>
+
+
+        작업할 내용과 렌더링 후의 코드
+        <div id="app">
+            <div>
+                <!--
+                    const item = 'SD 카드';
+                    const value = 12000;
+                    item 과 value으로 아래와 같이 출력되게 처리
+                -->
+                <h1>SD 카드 - 12000 </h1>
+                <hr>
+
+                <!--
+                    src 를 JS 변수로 처리
+                    const imgurl = 'http://placehold.it/430x280';
+                -->
+                <img src="http://placehold.it/430x280">
+                <hr>
+
+                <!-- style부분을 JS 변수로 처리-->
+                <p style="color: red; background-color: rgb(255, 240, 240); font-size: 2em; margin: 20px 10px;">
+                    죄는 미워하되 사랑은 미워하지 말라
+                </p>
+                <!-- style부분을 JS 변수로 처리-->
+                <p style="color: red; background-color: rgb(255, 240, 240); font-size: 2em; margin: 20px 10px;">
+                    이 또한 지나가리라
+                </p>
+                <hr>
+
+                <!-- <<< 이스케이프처리. < 는 &lt;이다. > 는 &gt;이다. >>> 을 JS 변수로 처리-->
+                <h2> &lt;&lt;&lt; 이스케이프처리. &lt; 는 &amp;lt;이다. &gt; 는 &amp;gt;이다. &gt;&gt;&gt; </h2>
+                <hr>
+
+                <!--
+                    텍스트 부분을 JS 변수로 처리
+                    p#greeting 에는 새로고침할 때마다 3개의 값이 랜덤하게 출력되게 작성하시오.
+                        <p>hi~~~</p>
+                        <p>hello~~~</p>
+                        <p>bye~~</p>
+                -->
+                <p id="greeting">hi~~~</p>
+            </div>
+        </div>
+
+    </xmp>
+    <hr>
+
+    <div id="app"></div>
+</body>
+
+</html>
+
+<!-- react 플러그인 include   -->
+<!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+
+
+

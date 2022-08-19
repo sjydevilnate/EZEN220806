@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 라우팅</title>
+    <link rel="stylesheet" href="../css/reset.css"/>
+    <style>
+        body {
+            background-color: #ffcc00;
+            padding: 20px;
+            margin: 0;
+        }
+        h1,h2,p,ul,li {
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        ul.header li {
+            display: inline;
+            list-style-type: none;
+            margin: 0;
+        }
+        ul.header {
+            background-color: #111;
+            padding: 0;
+        }
+        ul.header li a {
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 20px;
+            display: inline-block;
+        }
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+        }
+        .content h2 {
+            padding: 0;
+            margin: 0;
+        }
+        .content li {
+            margin-bottom: 10px;
+        }
+        .active {
+            background-color: #0099ff;
+        }
+    </style>
+</head>
+<body>
+    <xmp>
+        라우팅을 테스트 하기 위한 예제를 만들어 본다.
+        라우팅을 테스트 하기 위해서는 서버로 실행해야 합니다.
+
+        라우팅 패키지
+        1. react-router
+            <Link to="url" activeClassName="" activeStyleName=""></Link>
+            <Route path="" component={}></Route>
+            <IndexRoute component={}></Route>
+
+            중첩 Route
+            <BrowserRouter>
+                <Route path="/" component={App}>
+                    <IndexRoute component={Home}></IndexRoute>
+                    <Route path="stuff" component={Stuff}>
+                        <Route path="blah" component={MyBlah}></Route>
+                    </Route>
+                    <Route path="contact" component={Contact}></Route>
+                </Route>
+            </BrowserRouter>
+
+        2. react-router-dom
+
+        The prop `history` is marked as required in `Router`, but its value is `undefined`.
+        React does not recognize the `activeClassName` prop on a DOM element.
+
+
+
+
+        문제1. 아래의 링크용 라우팅을 만드시오.
+            /
+            /stuff
+            /contact
+
+            Home 컴포넌트 만들기. JSX 필요
+            Stuff 컴포넌트 만들기. JSX 필요
+            Contact 컴포넌트 만들기. JSX 필요
+
+            <BrowserRouter>
+                <Route path="/" component={Home}> </Route>
+                <Route path="/stuff" component={Stuff}></Route>
+                <Route path="/contact" component={Contact}></Route>
+            </BrowserRouter>
+
+            <BrowserRouter>
+                <Route path="/" component={App}>
+                    <IndexRoute component={Home}></IndexRoute>
+                    <Route path="stuff" component={Stuff}></Route>
+                    <Route path="contact" component={Contact}></Route>
+                </Route>
+            </BrowserRouter>
+
+        문제2. /stuff/blah 라우팅을 추가하시오
+            Blah 컴포넌트 만들기. JSX 필요
+
+            <BrowserRouter>
+                <Route path="/" component={Home}> </Route>
+                <Route path="/stuff" component={Stuff}></Route>
+                <Route path="/contact" component={Contact}></Route>
+                <Route path="/stuff/blah" component={Blah}></Route>
+            </BrowserRouter>
+
+            <BrowserRouter>
+                <Route path="/" component={App}>
+                    <IndexRoute component={Home}></IndexRoute>
+                    <Route path="stuff" component={Stuff}>
+                        <IndexRoute component={Stuff}></IndexRoute>
+                        <Route path="blah" component={Blah}></Route>
+                    </Route>
+                    <Route path="contact" component={Contact}></Route>
+                </Route>
+            </BrowserRouter>
+
+        문제3. 현재 보고 있는 페이지에 액티브 기능(activeStyle, activeClassName) 추가하시오.
+
+        문제4. PathVarable 에 대해서 알아본다.
+            ==> props.match.params
+            About 컴포넌트 만들기. JSX 필요
+
+            http://localhost:3000/about
+            http://localhost:3000/about/홍길동
+            http://localhost:3000/about/홍길동/서울시
+            http://localhost:3000/about/아이유
+            http://localhost:3000/about/아이유/서울시
+
+            위의 라우팅이 가능하게 작성하시오.
+            <Route path="/about/:name?/:city?" component={About}></Route>
+
+        문제5. QueryString 에 대해서 알아본다.
+            ==> props.location.search
+            About 컴포넌트 만들기. JSX 필요
+
+            http://localhost:3000/about/홍길동?age=25&job=none
+            http://localhost:3000/about/홍길동/서울시?age=25&job=none
+            http://localhost:3000/about/아이유?age=29&job=singer
+            http://localhost:3000/about/아이유/서울시?age=29&job=singer
+
+            위의 라우팅이 가능하게 작성하시오.
+
+    ------------------------------------------------------
+
+    function Menu(props) {
+        // JSX로 화면 만들기
+        return (
+            <div>
+                <h1>Simple SPA</h1>
+                <ul className="header">
+                    <li><Link to="/"> Home</Link></li>
+                    <li><Link to="/stuff">Stuff</Link></li>
+                    <li><Link to="/contact">Contact</Link></li>
+                </ul>
+                <div className="content">
+                    {props.children}
+                </div>
+            </div>
+        )
+    }
+
+    function Home(props) {
+        // JSX로 화면 만들기
+        return (
+            <div>
+                <h2>HELLO</h2>
+                <p>Cars facilisis urnam ornare ex volutpat, et convallis erat emementum. Ut aliquam, ipsum vitae gravida suscipit, metus dui bibendum est, eget rhoncus nibh metus nec mmassa. Maecenas hendrerit laoreet augue nec molestie. Cum socis natoque penatibus et magins dis parturient montes, nascetur ridiculus mus.</p>
+                <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
+            </div>
+        )
+    }
+
+    function Stuff(props) {
+        // JSX로 화면 만들기
+        return (
+            <div>
+                <h2>STUFF</h2>
+                <p>Mauris sem velit, vehicula eget sodales vitae, rhoncus eget sapien:</p>
+                <ol>
+                    <li>Nulla pulvinar diam</li>
+                    <li>Facilisis bibendum</li>
+                    <li>Vestibulum vulputate</li>
+                    <li>Eget erat</li>
+                    <li>Id porttitor</li>
+                </ol>
+            </div>
+        )
+    }
+
+    function Contact(props) {
+        // JSX로 화면 만들기
+        return (
+            <div>
+                <h2>GOT QUESTIONS?</h2>
+                <p>The easiest thing to do is post on our <a href="http://forum.kirupa.com" target="_blank" rel="noopener noreferrer">forums</a> </p>
+            </div>
+        )
+    }
+
+    function Blah(props) {
+        // JSX로 화면 만들기
+        return (
+            <div>
+
+            </div>
+        )
+    }
+
+    function App() {
+        // JSX로 화면 만들기
+        return(
+            <BrowserRouter>
+                <Route path="/" component={Menu}> </Route>
+                <Route path="/stuff" component={Stuff}> </Route>
+                <Route path="/contact" component={Contact}> </Route>
+            </BrowserRouter>
+        )
+    }
+
+    </xmp>
+    <hr>
+    <div id="app">
+
+    </div>
+</body>
+</html>

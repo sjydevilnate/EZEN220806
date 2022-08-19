@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../css/reset.css"/>
+</head>
+
+<body>
+    <xmp>
+        HelloWorldContainer, HelloWorld 컴포넌트를 만들고
+        props를 사용하여 인자를 넘겨 받는 방법을 복습한다.
+
+        작업 1. props를 사용하여 인자를 넘겨 받도록 만든다.
+        아래 "실행 화면 예시"의 숫자 부분에 props 를 사용.
+
+        JSX 작성시 주의 사항
+        JSX 에서는 "한개의 root 태그(one parent element)만 사용할 수 있다".
+
+        실행 화면 예시)
+        Hello, react world!!! 1 - component
+        Hello, react world!!! 2 - component
+        Hello, react world!!! 3 - component
+        Hello, react world!!! 4 - component
+
+        작업 2. 여러 개의 root 태그를 두려면 어떻게 하면 될까?
+        ==> React.Fragment 사용하면 가능
+
+        작업 3. JSX 반복문을 사용하는 방법을 적용하여 본다.
+        다음 장에서 학습할 rt12-11.JSX.반복문 을 참조하여 작성하시오
+
+        HelloWorld JSX
+        <div>
+            Hello, react world!!! {props.index} - component
+        </div>
+
+
+        HelloWorldContainer JSX
+        ==> 어떻게 만들면 될까?
+    </xmp>
+    <hr>
+
+    <div id="app">
+        요기에
+    </div>
+</body>
+
+</html>
+
+
+
+
+
