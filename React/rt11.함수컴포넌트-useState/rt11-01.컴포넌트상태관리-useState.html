@@ -68,7 +68,10 @@
             const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
         4.ExampleContainer 컴포넌트의 JSX
             <div>
-                <Example count={count}></Example>
+                <Example
+                    count={count}
+                >
+                </Example>
             </div>
         5.Example 컴포넌트의 JSX
             <div>
@@ -83,7 +86,17 @@
                 <p> { /* todos 상태값이 출력되게 하시오. */ }</p>
             </div>
         6. Example 컴포넌트에 age, fruit, todos 상태값이 출력되게 하시오.
+            todos && todos.map((todo,index) => (<li key={index}>{todo.text}</li>) )
+
         7. 부모 컴포넌트, ExampleContainer 의 count 상태값을 바꾸는 코드를 작성한다.
+            ExampleContainer 컴포넌트의 JSX
+            <div>
+                <Example
+                    count={count}
+                    setCount={setCount}
+                >
+                </Example>
+            </div>
     </xmp>
     <hr>
 
@@ -94,5 +107,73 @@
 </html>
 
 
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.8/react-redux.js" crossorigin="anonymous">
+    /*  import ReactRedux, {Provider, useDispatch, useSelector} from 'react-redux' */
+</script>
+<script src="http://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js" crossorigin="anonymous">
+    /*  import ReactRouterDOM, {BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useRouteMatch} from 'react-router-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
+</script>
+<script type="text/babel">
 
+    const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
+    // 화면에 ExampleContainer 컴포넌트 붙이기
+    ReactDOM.render( <ExampleContainer></ExampleContainer>, document.getElementById("app"));
+
+    function ExampleContainer({ ...props }) {
+      // useState 를 사용한 컴포넌트의 상태값 설정
+      const [count, setCount] = useState(0); // 상태값이 기본타입인 경우
+
+      // JSX로 화면 만들기
+      return (
+        <div>
+          <Example
+            count={count}>
+          </Example>
+        </div>
+      )
+    }
+
+    function Example({
+        count,
+        ...props
+    }) {
+      // useState 를 사용한 컴포넌트의 상태값 설정
+      const [age, setAge] = useState(42);
+      const [fruit, setFruit] = useState('banana');
+      const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
+
+      // 이벤트 핸들러 작성.
+      const handler = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+      };
+
+      // JSX로 화면 만들기
+      return (
+        <div>
+            <p>
+                <p>You clicked {count} times</p>
+                <button onClick={(event) => alert("count 상태값을 바꾸는 코드를 작성하시오.") }>
+                    Click me
+                </button>
+            </p>
+            <p> age: {age}</p>
+            <p> fruit: {fruit}</p>
+            <p> { /* todos 상태값이 출력되게 하시오. */ }</p>
+        </div>
+      )
+    }
+
+</script>

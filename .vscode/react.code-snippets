@@ -747,7 +747,7 @@
             // "</script>",
             "<script type=\"text/babel\">",
             "",
-            "    const { useState, useEffect, useRef, useCallback, useMemo, Fragment } = React;",
+            "    const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;",
             "",
             "</script>"
         ],
