@@ -80,7 +80,104 @@ const [arr, setArr] = useState([1, 2, 3, 4, 5]);
 </html>
 
 
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.8/react-redux.js" crossorigin="anonymous">
+    /*  import ReactRedux, {Provider, useDispatch, useSelector} from 'react-redux' */
+</script>
+<script src="http://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js" crossorigin="anonymous">
+    /*  import ReactRouterDOM, {BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useRouteMatch} from 'react-router-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
+</script>
+<script type="text/babel">
+
+    const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
+
+    ReactDOM.render( <Comp></Comp>, document.getElementById('app'));
+
+    // const {...props} = props;
+    function Comp({...props}) {
+
+      // useState 를 사용한 컴포넌트의 상태값 설정
+      const [arr, setArr] = useState([1,2,3,4,5]); // 상태값이 참조타입 경우
+
+      // 이벤트 핸들러 작성.
+      const handlerChange1 = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+        // arr[0] = 100;
+        // console.log(arr); // [100,2,3,4,5]
+        setArr([100,2,3,4,5]);
+        console.log(arr); // [1,2,3,4,5]
+      };
+      const handlerChange2 = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+        const findIndex = arr.indexOf(2);
+        // 복제
+        // const newarr = arr.map( (value,index)=>{
+        //     if( index === findIndex ){
+        //         return 200;
+        //     }
+        //     else {
+        //         return value;
+        //     }
+        // });
+
+        // 복제
+        const newarr = arr.map( (value,index)=>(index === findIndex ?  200 : value) );
+
+        // 대입(할당)
+        setArr(newarr);
+      };
+      const handlerChange3 = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+
+        // filter를 이용한 삭제. 복제
+        const newarr = arr.filter( (value,index)=>(index > 1 ? true : false) );
+
+        // 대입(할당)
+        setArr(newarr);
+      };
+      const handlerChange4 = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+
+        // 복제
+        //  arr = [3,4,5] 라고 가정.
+        const newarr = [500, ...arr, 70]; // newarr=[500, 3, 4, 5, 70]
+
+        // 대입(할당)
+        setArr(newarr);
+      };
+
+      // JSX로 화면 만들기
+      return (
+        <div>
+            {arr.map( (value,index)=>(<span key={index}> {value} </span>))}
+            <br />
+            <button onClick={handlerChange1}>방법1로 변경</button>
+            <button onClick={handlerChange2}>방법2로 변경</button>
+            <button onClick={handlerChange3}>방법3로 변경</button>
+            <button onClick={handlerChange4}>방법4로 변경</button>
+        </div>
+      )
+    }
+
+
+</script>
 
 
 
-
+
+
+
