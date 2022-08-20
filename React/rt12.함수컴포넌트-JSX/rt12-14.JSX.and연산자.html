@@ -20,15 +20,15 @@
 
         Mailbox 의 render() 에서 사용할 JSX 코드
         <div>
-            <h1>Hello!</h1>
-            {/* props.unreadMessages.length > 0 인 경우에만 나오게 하시오*/}
-            <h2>
-                You have unread messages.
-            </h2>
+            <h1>Hello!</h1>
+            {/* props.unreadMessages.length > 0 인 경우에만 나오게 하시오*/}
+            <h2>
+                You have unread messages.
+            </h2>
         </div>
 
         JSX 안에서 props.unreadMessages.length 가 0보다 큰 경우에만
-        아래 메시지가 나오게 하시오
+        아래 메시지가 나오게 하시오
         ==> You have unread messages.
 
         https://reactjs.org/docs/conditional-rendering.html 를 참고
@@ -72,6 +72,56 @@
 
 </html>
 
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.8/react-redux.js" crossorigin="anonymous">
+    /*  import ReactRedux, {Provider, useDispatch, useSelector} from 'react-redux' */
+</script>
+<script src="http://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js" crossorigin="anonymous">
+    /*  import ReactRouterDOM, {BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useRouteMatch} from 'react-router-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
+</script>
+<script type="text/babel">
 
+    const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
+    ReactDOM.render( <MailboxContainer />, document.getElementById('app'));
 
+    function MailboxContainer(props) {
+        const [messages1,setMessages1] = useState(['React']);
+        const [messages2,setMessages2] = useState([]);
+        const [messages3,setMessages3] = useState(null);
+        return (
+            <div>
+                <Mailbox unreadMessages={messages1} />
+                <hr />
+                <Mailbox unreadMessages={messages2} />
+                <hr />
+                <Mailbox unreadMessages={messages3} />
+            </div>
+        );
+    }
+    // const { unreadMessages, ...props } = props;
+    function Mailbox({ unreadMessages, ...props}) {
+        return (
+            <div>
+                <h1>Hello!</h1>
+                {/* props.unreadMessages.length > 0 인 경우에만 나오게 하시오*/}
+                { unreadMessages && unreadMessages.length > 0 && (
+                    <h2>
+                        You have unread messages.
+                    </h2>
+                )}
+            </div>
+        );
+    }
+    
+</script>
