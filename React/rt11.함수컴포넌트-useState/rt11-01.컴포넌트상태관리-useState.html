@@ -75,12 +75,12 @@
             </div>
         5.Example 컴포넌트의 JSX
             <div>
-                <p>
+                <div>
                     <p>You clicked {count} times</p>
                     <button onClick={(event) => alert("count 상태값을 바꾸는 코드를 작성하시오.") }>
                         Click me
                     </button>
-                </p>
+                </div>
                 <p> age: { /* age 상태값이 출력되게 하시오. */ }</p>
                 <p> fruit: { /* fruit 상태값이 출력되게 하시오. */ }</p>
                 <p> { /* todos 상태값이 출력되게 하시오. */ }</p>
@@ -135,11 +135,17 @@
       // useState 를 사용한 컴포넌트의 상태값 설정
       const [count, setCount] = useState(0); // 상태값이 기본타입인 경우
 
+      const callback = useCallback( (newcount)=>{
+        setCount(newcount);
+      }, [count]);
+
       // JSX로 화면 만들기
       return (
         <div>
           <Example
-            count={count}>
+            count={count}
+            callback={callback}
+        >
           </Example>
         </div>
       )
@@ -147,6 +153,7 @@
 
     function Example({
         count,
+        callback,
         ...props
     }) {
       // useState 를 사용한 컴포넌트의 상태값 설정
@@ -158,20 +165,22 @@
       const handler = ()=>{
         // 이벤트 핸들러는 화살표 함수로 만든다
         console.log(window.event.target);
+
+        callback( count + 1);
       };
 
       // JSX로 화면 만들기
       return (
         <div>
-            <p>
+            <div>
                 <p>You clicked {count} times</p>
-                <button onClick={(event) => alert("count 상태값을 바꾸는 코드를 작성하시오.") }>
+                <button onClick={handler}>
                     Click me
                 </button>
-            </p>
+            </div>
             <p> age: {age}</p>
             <p> fruit: {fruit}</p>
-            <p> { /* todos 상태값이 출력되게 하시오. */ }</p>
+            <p> { todos && todos.map((todo,index) => (<li key={index}>{todo.text}</li>) ) }</p>
         </div>
       )
     }
