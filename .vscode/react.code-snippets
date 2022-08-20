@@ -113,7 +113,7 @@
     "React Functional Component": {
         "prefix": "rfc",
         "body": [
-            "import React, { useState, useEffect, useRef, useCallback, useMemo, Fragment, forwardRef, useReducer, useImperativeHandle } from 'react';",
+            "import React, { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment, forwardRef, useReducer, useImperativeHandle } from 'react';",
             "import PropTypes from 'prop-types';",
             "import Styled from 'styled-components';",
             "// import { useDispatch, useSelector } from 'react-redux';",
