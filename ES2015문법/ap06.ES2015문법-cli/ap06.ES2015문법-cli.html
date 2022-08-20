@@ -218,7 +218,7 @@
         \---node_modules/
         \---src/
               \---ap06-01.js
-              
+
 
       $ touch .babelrc      # babel 설정 파일 생성
 
@@ -248,7 +248,9 @@
       # 트랜스컴파일 수행
       # ==> src 폴더에 있는 js 파일을 es5로 트랜스 컴파일하여 build 폴더에 추가하시오.
       ##################################
-      $ npx babel src/ -d build/      # package.json 파일이 있는 곳에서 수행.
+
+      # package.json 파일이 있는 곳에서 수행.
+      $ npx babel src/ -d build/
         src\ap06-01.js -> build\ap06-01.js
 
 

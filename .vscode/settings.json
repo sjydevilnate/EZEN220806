@@ -38,6 +38,7 @@
     "html.format.extraLiners": "",
     "html.format.wrapAttributes": "force",
     "html.format.wrapLineLength": 0,
+    "html.format.endWithNewline": true,
     "html.format.indentInnerHtml": true,
     "html.suggest.html5": true,
     "auto-close-tag.activationOnLanguage": [
