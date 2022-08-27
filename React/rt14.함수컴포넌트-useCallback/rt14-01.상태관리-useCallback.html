@@ -162,6 +162,9 @@
         // 이벤트 핸들러는 화살표 함수로 만든다
         console.log(window.event.target);
         debugger;
+
+        // 콜백 메서드 호출 === 부모 컴포넌트의 함수 호출.
+        callbackChildText('자식에서 값을 바꾸다');
       };
 
       // JSX로 화면 만들기
