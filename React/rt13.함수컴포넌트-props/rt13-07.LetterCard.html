@@ -105,5 +105,60 @@
 </body>
 </html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script type="text/babel">
 
+    const { useState, useEffect, useRef, useCallback, useMemo, Fragment } = React;
 
+    // {bgcolor, letter} = props;
+    function LetterCard(props) {
+        const {bgcolor, letter, childern} = props;
+
+        // JSX로 화면 만들기
+        const style1 = {
+            backgroundColor: bgcolor,
+        }
+        const temp = props.children ? props.children : letter;
+        return (
+            <div className="letter" style={style1}>
+            {temp}
+            </div>
+        )
+    }
+
+    function LetterContainer(props) {
+
+        // JSX로 화면 만들기
+        return (
+            <div className="App">
+                <LetterCard bgcolor={'#58B3FF'} letter={'A'}></LetterCard>
+                <LetterCard bgcolor={'#FF605F'} letter={'E'}></LetterCard>
+                <LetterCard bgcolor={'#FFD52E'} letter={'I'}>
+                    <span>I</span>
+                </LetterCard>
+                <LetterCard bgcolor={'#49DD8E'} letter={'O'}>
+                    <span>O</span>
+                </LetterCard>
+                <LetterCard bgcolor={'#AE99FF'} letter={'U'}>
+                    <span>U</span>
+                </LetterCard>
+            </div>
+        )
+    }
+
+    ReactDOM.render(
+        <LetterContainer></LetterContainer>
+        ,
+        document.getElementById("app")
+    );
+</script>
