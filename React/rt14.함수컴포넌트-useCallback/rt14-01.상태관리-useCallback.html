@@ -113,40 +113,6 @@
 
     const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
-    // Child 컴포넌트 만들기
-    function Child({ parentText }) {
-      // useState 를 사용한 컴포넌트의 상태값 설정
-      const [childText, setChildText] = useState('child text'); // 상태값이 기본타입인 경우듀서] = useReducer((oldvalue, newvalue)=>({...oldvalue, ...newvalue}), { id: 0, name: '', age: 0, }); // 리듀서(reducer) 방식의 상태값 설정
-
-      // 이벤트 핸들러 작성.
-      const handlerChild = ()=>{
-        // 이벤트 핸들러는 화살표 함수로 만든다
-        console.log(window.event.target);
-      };
-
-      // JSX로 화면 만들기
-      return (
-        <div>
-            parentText: {parentText}
-            <br />
-            childText: {childText}
-            <br />
-            <button onClick={handlerChild}>button</button>
-        </div>
-      )
-    }
-
-    Child.propTypes = {
-      // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
-      // 인자명: PropTypes.func.isRequired,
-      parentText: PropTypes.string.isRequired,
-    };
-    Child.defaultProps = {
-      // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
-      // 인자명: () => {},
-      parentText: '',
-    };
-
     // Parent 컴포넌트 만들기
     function Parent({
       ...props
@@ -208,10 +174,53 @@
       // JSX로 화면 만들기
       return (
         <div>
-          Parent
+            <Child
+                callbackChildText={callbackChildText}
+                parentText={parentText}>
+            </Child>
+            <br />
+            {childMessage}
         </div>
       )
     }
+
+
+    // Child 컴포넌트 만들기
+    function Child({callbackChildText, parentText }) {
+      // useState 를 사용한 컴포넌트의 상태값 설정
+      const [childText, setChildText] = useState('child text'); // 상태값이 기본타입인 경우듀서] = useReducer((oldvalue, newvalue)=>({...oldvalue, ...newvalue}), { id: 0, name: '', age: 0, }); // 리듀서(reducer) 방식의 상태값 설정
+
+      // 이벤트 핸들러 작성.
+      const handlerChild = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+      };
+
+      // JSX로 화면 만들기
+      return (
+        <div>
+            parentText: {parentText}
+            <br />
+            childText: {childText}
+            <br />
+            <button onClick={handlerChild}>button</button>
+        </div>
+      )
+    }
+
+    Child.propTypes = {
+      // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+      // 인자명: PropTypes.func.isRequired,
+      parentText: PropTypes.string.isRequired,
+      callbackChildText: PropTypes.func.isRequired,
+    };
+    Child.defaultProps = {
+      // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+      // 인자명: () => {},
+      parentText: '',
+      callbackChildText:() => {},
+    };
+
 
     Parent.propTypes = {
       // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
