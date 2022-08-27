@@ -64,6 +64,82 @@
 </body>
 </html>
 
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.8/react-redux.js" crossorigin="anonymous">
+    /*  import ReactRedux, {Provider, useDispatch, useSelector} from 'react-redux' */
+</script>
+<script src="http://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js" crossorigin="anonymous">
+    /*  import ReactRouterDOM, {BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useRouteMatch} from 'react-router-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
+</script>
+<script type="text/babel">
+
+    const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
+
+    ReactDOM.render(<Parent></Parent>, document.getElementById('app'));
+
+    function Parent({ }) {
+      // useState 를 사용한 컴포넌트의 상태값 설정
+      const [count, setCount] = useState(10);
+
+      // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
+      const callbackCount = useCallback( (param)=>{
+        console.log( param); // param === 10
+        debugger;
+        // state 변경
+        setCount( count + 1 );
+      }, [/* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */ count ]);
+
+      return (
+        <div id="parent">
+            I am a parent
+            <Child
+                count={count}
+                callbackCount={callbackCount}
+            >
+            </Child>
+        </div>
+      )
+    }
+
+    function Child({
+        count,
+        callbackCount,
+    }) {
+      // 이벤트 핸들러 작성.
+      const handlerParentToggleFromChild = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+
+        // 부모 콜백 메서드 호출.
+        callbackCount( +10 );
+      };
+
+      // JSX로 화면 만들기
+      return (
+        <div id="child">
+            {count}
+            <br/>
+            I am a child
+            <br/>
+            <button onClick={handlerParentToggleFromChild}>
+                toggle
+            </button>
+        </div>
+      )
+    }
+
+</script>
+
 
 
 
