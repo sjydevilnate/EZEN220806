@@ -40,21 +40,24 @@
 </html>
 
 <!-- ES5 사용하기 -->
-<script>
-    const func6 = function() {
+<script type="text/javascript">
+    var func5 = function() {
         return 'Hello, ES5';
     };
-    const output_es5 = document.getElementById("output_es5"); // 찾기
-    output_es5.innerText = func6() ;  // 설정
+
+    // id="output_es5" 인 태그를 찾으시오.
+    var output_es5 = document.getElementById("output_es5"); // 찾기
+    output_es5.innerHTML = func5(); // 설정
 </script>
 
 <!-- ES2015 사용하기 -->
-
 <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin>
     /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
 </script>
 <script type="text/babel">
     const func2015 = () => ('Hello, ES6');
+
+    // id="output_es6" 인 태그를 찾으시오.
     const output_es6 = document.getElementById("output_es6"); // 찾기
     output_es6.innerText = func2015() ;  // 설정
 </script>

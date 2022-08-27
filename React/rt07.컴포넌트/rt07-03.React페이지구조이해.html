@@ -94,7 +94,6 @@
 
 </html>
 
-
 <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin>
     /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
 </script>
@@ -111,7 +110,6 @@
     function Comp(props) {
 
       // 컴포넌트의 상태값 설정
-      //const [변수명, 메서드명] = useState('');
       const [mesg, setMesg] = useState('hi!!!!'); // 상태값이 기본타입인 경우
 
       // 이벤트 핸들러 작성.
@@ -131,15 +129,11 @@
       )
     }
 
-    // 만든 컴포넌트를 화면에 붙인다.
+    // 생성된 컴포넌트 화면에 붙이기. ReactDOM.render( 인자1, 인자2 );
+    // 의미: id='app' 위치에 Comp 컴포넌트를 붙여라.
     ReactDOM.render(
-        <Comp name={'Hello'}></Comp>,
+        <Comp name={"hello"}></Comp>
+        ,
         document.getElementById("app")
     );
-
 </script>
-
-
-
-
-

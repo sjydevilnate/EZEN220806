@@ -43,7 +43,12 @@
                 <br>
                 도전3. Hello, Props!!!
                 <hr />
+                <button onClick={????}> 부모의 callback 메서드 호출</button>
             </div>
+
+        도전. 부모의 callback 메서드 호출 기능을 추가한다.
+            <hr />
+            <button onClick={????}> 부모의 callback 메서드 호출</button>
     </xmp>
     <hr>
 
@@ -54,7 +59,6 @@
 
 </html>
 
-
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"  crossorigin="anonymous">
     /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
 </script>
@@ -63,14 +67,6 @@
 </script>
 <script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
     /* import ReactDOM from 'react-dom' */
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.8/react-redux.js" crossorigin="anonymous">
-    /*  import ReactRedux, {Provider, useDispatch, useSelector} from 'react-redux' */
-</script>
-<script src="http://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js" crossorigin="anonymous">
-    /*  import ReactRouterDOM, {BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useRouteMatch} from 'react-router-dom' */
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
 </script>
 <script type="text/babel">
 
@@ -123,8 +119,11 @@
       )
     }
 
-    ReactDOM.render( <HelloContainer />, document.getElementById("app"));
-
+    // 생성된 HelloContainer 컴포넌트 화면에 붙이기. ReactDOM.render( 인자1, 인자2 );
+    // 의미: id='app' 위치에 HelloContainer 컴포넌트를 붙여라.
+    ReactDOM.render(
+        <HelloContainer></HelloContainer>
+        ,
+        document.getElementById('app')
+    );
 </script>
-
-

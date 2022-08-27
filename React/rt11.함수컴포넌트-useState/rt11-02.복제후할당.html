@@ -101,10 +101,10 @@ const [arr, setArr] = useState([1, 2, 3, 4, 5]);
 
     const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
-    ReactDOM.render( <Comp></Comp>, document.getElementById('app'));
+    ReactDOM.render( <State></State>, document.getElementById('app'));
 
     // const {...props} = props;
-    function Comp({...props}) {
+    function State({...props}) {
 
       // useState 를 사용한 컴포넌트의 상태값 설정
       const [arr, setArr] = useState([1,2,3,4,5]); // 상태값이 참조타입 경우
@@ -173,11 +173,4 @@ const [arr, setArr] = useState([1, 2, 3, 4, 5]);
       )
     }
 
-
 </script>
-
-
-
-
-
-
