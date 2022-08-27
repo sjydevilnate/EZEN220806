@@ -40,7 +40,7 @@
     <xmp>
         CSS로 만든 카드를 컴포넌트로 만들어 본다.
         작업 순서
-        1. 컴포넌트 3개 만들기. Label, Square, Card
+        1. 컴포넌트 3개 만들기. Label, Square, Card, CardContainer
         1-1. Label 컴포넌트 JSX
             return (
                 <div className="label">
@@ -81,13 +81,18 @@
             ...props을 사용하면
             <Square a="1" b="2" c="3"></Square> 처럼 변환되어 실행된다.
 
-        2. ReactDOM 을 사용하여 화면에 붙인다.
-        예시)
-            ReactDOM.render(
+        1-4. CardContainer 컴포넌트 JSX
+            return (
                 <div>
                     <Card color={"#ff6663"}></Card>
                     <Card color={"#ffa737"}></Card>
                 </div>
+        )
+
+        2. ReactDOM 을 사용하여 화면에 붙인다.
+        예시)
+            ReactDOM.render(
+                <CardContainer />
                 ,
                 document.getElementById("app")
             )

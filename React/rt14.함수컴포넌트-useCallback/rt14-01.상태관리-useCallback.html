@@ -40,7 +40,7 @@
             // 콜백 메서드의 연관 배열에는 사용되는 상태명을 기술.
             // 콜백 메서드에서 상태를 한개 사용하면 1개를 적고
             // 콜백 메서드에서 상태를 두개 사용하면 2개를 적으시오.
-            const callbackChildText = useCallback( (text)=> {
+            const  callbackChildMessage = useCallback( (text)=> {
                 console.log(text);
                 setChildMessage(text);
                 setParentText(text);
@@ -49,7 +49,7 @@
             // JSX로 화면 만들기
             return (
                 <div>
-                    <Child callbackChildText={callbackChildText} parentText={parentText}></Child>
+                    <Child  callbackChildMessage={ callbackChildMessage} parentText={parentText}></Child>
                     <br />
                     {childMessage}
                 </div>
@@ -62,7 +62,7 @@
             const [childText, setChildText] = useState('child text'); // 상태값이 기본타입인 경우
 
             function handlerChild() {
-                props.callbackChildText(childText);
+                props. callbackChildMessage(childText);
             }
 
             // JSX로 화면 만들기
@@ -123,6 +123,7 @@
       // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
       const callbackChildText = useCallback( (param)=>{
         // state 변경
+        debugger;
         setChildMessage( param ); // setChildMessage = param;
       }, [
             /* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */
@@ -141,6 +142,15 @@
       )
     }
 
+    Parent.propTypes = {
+    // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+    // 인자명: PropTypes.func.isRequired,
+    };
+    Parent.defaultProps = {
+    // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+    // 인자명: () => {},
+    };
+
 
     // Child 컴포넌트 만들기
     function Child({callbackChildText, parentText }) {
@@ -151,6 +161,7 @@
       const handlerChild = ()=>{
         // 이벤트 핸들러는 화살표 함수로 만든다
         console.log(window.event.target);
+        debugger;
       };
 
       // JSX로 화면 만들기
@@ -176,16 +187,6 @@
       // 인자명: () => {},
       parentText: '',
       callbackChildText:() => {},
-    };
-
-
-    Parent.propTypes = {
-      // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
-      // 인자명: PropTypes.func.isRequired,
-    };
-    Parent.defaultProps = {
-      // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
-      // 인자명: () => {},
     };
 
     ReactDOM.render(<Parent />, document.getElementById('app'));
