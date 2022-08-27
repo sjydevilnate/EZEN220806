@@ -75,4 +75,21 @@
       )
     }
 
+    ReactDOM.render( <Loop4></Loop4>, document.getElementById("wrap4"));
+
+    // 컴포넌트 만들기
+    function Loop4({ ...props }) {
+      // useState 를 사용한 컴포넌트의 상태값 설정
+      const [변수명, set변수명] = useState(['one', 'two', 'three']); // 상태값이 기본타입인 경우
+
+      // JSX로 화면 만들기
+      return (
+        <ul>
+          {
+            변수명.map( (value, index)=>(<li key={index}>{value}</li>))
+          }
+        </ul>
+      )
+    }
+
 </script>

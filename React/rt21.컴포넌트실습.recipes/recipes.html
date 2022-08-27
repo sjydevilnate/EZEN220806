@@ -45,5 +45,107 @@
 </body>
 </html>
 
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.8/react-redux.js" crossorigin="anonymous">
+    /*  import ReactRedux, {Provider, useDispatch, useSelector} from 'react-redux' */
+</script>
+<script src="http://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js" crossorigin="anonymous">
+    /*  import ReactRouterDOM, {BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useRouteMatch} from 'react-router-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
+</script>
+<script type="text/babel">
 
+    const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
+    ReactDOM.render( <App />, document.getElementById("root") );
+
+    function App() {
+
+      const [data, setData] = useState(
+        [
+          {
+            "name": "구운 연어",
+            "ingredients": [
+              { "name": "연어", "amount": 500, "measurement": "그램" },
+              { "name": "잣", "amount": 1, "measurement": "컵" },
+              { "name": "버터 상추", "amount": 2, "measurement": "컵" },
+              { "name": "옐로 스쿼시(Yellow Squash, 호박의 한 종류)", "amount": 1, "measurement": "개" },
+              { "name": "올리브 오일", "amount": 0.5, "measurement": "컵" },
+              { "name": "마늘", "amount": 3, "measurement": "쪽" }
+            ],
+            "steps": [
+              "오븐을 350도로 예열한다.",
+              "유리 베이킹 그릇에 올리브 오일을 두른다.",
+              "연어, 마늘, 잣을 그릇에 담는다.",
+              "오븐에서 15분간 익힌다.",
+              "옐로 스쿼시를 추가하고 다시 30분간 오븐에서 익힌다.",
+              "오븐에서 그릇을 꺼내서 15분간 식힌다음에 상추를 곁들여서 내놓는다."
+            ]
+          },
+          {
+            "name": "생선 타코",
+            "ingredients": [
+              { "name": "흰살생선", "amount": 500, "measurement": "그램" },
+              { "name": "치즈", "amount": 1, "measurement": "컵" },
+              { "name": "아이스버그 상추", "amount": 2, "measurement": "컵" },
+              { "name": "토마토", "amount": 2, "measurement": "개(큰것)"},
+              { "name": "또띠야", "amount": 3, "measurement": "개" }
+            ],
+            "steps": [
+              "생선을 그릴에 익힌다.",
+              "또띠야 3장 위에 생선을 얹는다.",
+              "또띠야에 얹은 생선 위에 상추, 토마토, 치즈를 얹는다."
+            ]
+          }
+        ]
+      );
+
+      return (
+        <Menu recipes={data} title="맛있는 조리법" />
+      )
+    }
+
+    function Menu({ recipes, title }) {
+      return (
+        <article>
+          <header>
+            <h1>{title}</h1>
+          </header>
+          <div className="recipes">
+            {recipes.map((recipe, i) => (
+              <Recipe key={i} {...recipe} />
+            ))}
+          </div>
+        </article>
+      );
+    }
+
+    function Recipe({ name, ingredients, steps }) {
+      return (
+        <section id={name.toLowerCase().replace(/ /g, "-")}>
+          <h1>{name}</h1>
+          <ul className="ingredients">
+            {ingredients.map((ingredient, i) => (
+              <li key={i}>{ingredient.name}</li>
+            ))}
+          </ul>
+          <section className="instructions">
+            <h2>조리 절차</h2>
+            {steps.map((step, i) => (
+              <p key={i}>{step}</p>
+            ))}
+          </section>
+        </section>
+      );
+    }
+
+</script>
