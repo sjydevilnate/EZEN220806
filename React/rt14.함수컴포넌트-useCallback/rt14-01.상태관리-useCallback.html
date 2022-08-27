@@ -114,23 +114,7 @@
     const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
     // Parent 컴포넌트 만들기
-    function Parent({
-      ...props
-    }) {
-      // redux store 와 연동되는 경우에만 useDispatch(), useSelector() 사용
-      // const dispatch = useDispatch();
-      // const { error, isLoading, notis } = useSelector( state => state.notis );
-
-
-      // 페이지에 대한 경로와 query-string 정보를 추출하는 경우 useLocation() 훅 사용
-      // const { pathname, search } = useLocation();
-
-      // path 변수를 추출하는 경우 useParams() 사용. id === match.params.id */
-      // const { id } = useParams();
-
-      // 이전 경로 useHistory() 사용 */
-      // const history = useHistory();
-
+    function Parent({ ...props }) {
 
       // useState 를 사용한 컴포넌트의 상태값 설정
       const [parentText, setParentText] = useState('parent text'); // 상태값이 기본타입인 경우
@@ -145,9 +129,6 @@
             childMessage
         ]
      );
-
-
-      // JSX로 화면 만들기
       return (
         <div>
             <Child
