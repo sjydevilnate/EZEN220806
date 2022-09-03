@@ -164,10 +164,7 @@
     const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
     function App() {
-      // useState 를 사용한 컴포넌트의 상태값 설정
       const [imgImage3, setImgImage3] = useState(null); // 상태값이 기본타입인 경우
-
-      // 이벤트 핸들러 작성.
       const imageclick = (e)=>{
         // 이벤트 핸들러는 화살표 함수로 만든다
         // e  === window.event
@@ -189,6 +186,83 @@
         // window.event.stopPropagation();
       };
 
+
+      const [img_but1, setimg_but1] = useState('../images/but1.gif'); // 상태값이 기본타입인 경우
+      const [img_swap, setimg_swap] = useState('../images/img_swap_off.png'); // 상태값이 기본타입인 경우
+      const imageover = (e)=>{
+        // e  === window.event
+        console.log(e.target);
+
+        // 이미지 위에 마우스를 올리면(mouseover)
+        // ==> ../images/but2.gif , ../images/img_swap_on.png
+        if( e.target.id === "but1") {
+            setimg_but1('../images/but2.gif');
+        }
+        else {
+            setimg_swap('../images/img_swap_on.png');
+        }
+      }
+      const imageout = (e)=>{
+        // e  === window.event
+        console.log(e.target);
+
+        // 이미지 위에 마우스를 내리면(mouseout )
+        // ==> ../images/but1.gif , ../images/img_swap_off.png
+        if( e.target.id === "but1") {
+            setimg_but1('../images/but1.gif');
+        }
+        else {
+            setimg_swap('../images/img_swap_off.png');
+        }
+      }
+
+
+      const spanmouseover = (e)=>{
+        // e  === window.event
+        console.log(e.target);
+
+        // span에 mouseover 이벤트 핸들러를 작성하시오.
+        // ==> spanmouseover. background-color를 yellow로 설정
+        //
+        /*
+            <span style="background-color:yellow;">
+
+            css 를 자바스크립트로 변경 규칙
+            1. 대문자
+            2. 문자열
+            3. 콤마
+        */
+        e.target.style.backgroundColor = 'yellow';
+      }
+      const spanmousedown = (e)=>{
+        // e  === window.event
+        console.log(e.target);
+        // span에 mousedown 이벤트 핸들러를 작성하시오.
+        // ==> spanmousedown. background-color를 blue로 설정
+        e.target.style.backgroundColor = 'blue';
+      }
+      const spanmouseup = (e)=>{
+        // e  === window.event
+        console.log(e.target);
+        // span에 mouseup 이벤트 핸들러를 작성하시오.
+        // ==> spanmouseup.   background-color를 pink로 설정
+        e.target.style.backgroundColor = 'pink';
+      }
+      const spanmouseout = (e)=>{
+        // e  === window.event
+        console.log(e.target);
+        // span에 mouseout 이벤트 핸들러를 작성하시오.
+        // ==> spanmouseout.  background-color를 red로 설정
+        e.target.style.backgroundColor = 'red';
+      }
+
+      const [img_select, setimg_select] = useState('../images/apple.gif'); // 상태값이 기본타입인 경우
+      const selectchange = (e)=>{
+        // e  === window.event
+        console.log(e.target.value); // <option ...>
+        setimg_select( e.target.value );
+      }
+
       // JSX로 화면 만들기
       return (
         <div>
@@ -207,6 +281,35 @@
             <img id="img2" src={imgImage3} />
             <hr />
 
+            <img src={img_but1} id="but1"     onMouseOver={imageover} onMouseOut={imageout} />
+            <img src={img_swap} id="img-swap" onMouseOver={imageover} onMouseOut={imageout} />
+            <hr />
+
+            <span onMouseOver= {spanmouseover}
+                  onMouseDown= {spanmousedown}
+                  onMouseUp  = {spanmouseup}
+                  onMouseOut = {spanmouseout} >
+            </span>
+            <span onMouseOver= {spanmouseover}
+                  onMouseDown= {spanmousedown}
+                  onMouseUp  = {spanmouseup}
+                  onMouseOut = {spanmouseout} >
+            </span>
+            <span onMouseOver= {spanmouseover}
+                  onMouseDown= {spanmousedown}
+                  onMouseUp  = {spanmouseup}
+                  onMouseOut = {spanmouseout} >
+            </span>
+            <hr />
+
+            <select id="sel" onChange={selectchange}>
+                <option value="../images/strawberry.gif">딸기</option>
+                <option value="../images/banana.gif">바나나</option>
+                <option value="../images/apple.gif" selected>사과</option>
+            </select>
+
+            <img id="img" src={img_select} />
+            <hr />
 
         </div>
       )
