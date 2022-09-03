@@ -13,15 +13,6 @@
 
 <body>
     <pre>
-        <dl>
-            <dt>useEffect 훅 이란?</dt>
-            <dd>side effects를 수행하는 훅</dd>
-        </dl>
-        <dl>
-            <dt>side effects 란?</dt>
-            <dd>&nbsp;</dd>
-        </dl>
-
         <div>
             <h3>useEffect 사용법</h3>
             <a href="https://ko.reactjs.org/docs/hooks-overview.html#effect-hook" target="_blank" rel="noopener noreferrer">useEffect OverView</a>
@@ -39,8 +30,42 @@
 
 </html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script type="text/babel">
+    const { useState, useEffect, useRef, useCallback, useMemo, Fragment } = React;
 
+    function App(props) {
+        const [val, set] = useState('');
+        const [phrase, setPhrase] = useState('example phrase');
 
+        useEffect( () => (console.log(`typing "${val}"`)), [val]);
+        useEffect( () => (console.log(`save phrase "${phrase}"`)), [phrase]);
+        useEffect( () => (console.log(`either val or phrase changed`)), [val, phrase]);
+        useEffect( () => (console.log(`only once after initial render`)), []);
 
+        const handler = ()=>{
+            setPhrase('phrase');
+            set('');
+        };
 
-
+        return (
+            <div>
+                <label>Favorite phrase:</label>
+                <input value={val} placeholder={phrase} onChange={(e)=>set(e.target.value)} />
+                <button onClick={handler}>send</button>
+            </div>
+        )
+    }
+
+    ReactDOM.render(<App></App>, document.getElementById("app"));
+</script>

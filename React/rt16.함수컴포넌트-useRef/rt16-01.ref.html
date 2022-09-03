@@ -78,6 +78,8 @@
             HTML 엘리먼트가 아닌 React 컴포넌트에서 ref prop을 사용하려면 React에서 제공하는 forwardRef()라는 함수를 사용해야 합니다.
     </xmp>
 
+    <hr>
+
     <div id="app">
 
     </div>
@@ -85,8 +87,64 @@
 
 </html>
 
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
+</script>
+<script type="text/babel">
+
+    const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
+
+    function TextInputWithFocusButton() {
+      // ref 만들기.
+      // const refInput = useRef();
+      const refInputEl1 = useRef(null);
+      const refInputEl2 = useRef(null);
+
+      // 이벤트 핸들러 작성.
+      const handlerClick = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+        // 두번째 input 태그에 포커스 주기.
+        refInputEl2.current.focus();
+      };
+
+      // 마운트 되었을 때는 첫번째 input 태그에 포커스 주기.
+      useEffect( () => {
+          // componentDidUpdate 또는 componentDidMount');
+          refInputEl1.current.focus();
+
+          return () => {
+            // 언마운트 직전에 한번만 실행됨.
+            // console.log('Untitled-1 >> componentWillUmount');
+          };
+      }, [/* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+
+      // JSX로 화면 만들기
+      return (
+        <div>
+            <input type="text" ref={refInputEl1} />
+            <br />
+            <button onClick={handlerClick}>Focus 2nd input</button>
+            <br />
+            <input type="text" ref={refInputEl2} />
+        </div>
+      )
+    }
+
+    ReactDOM.render( <TextInputWithFocusButton />, document.getElementById('app'));
+</script>
 
 
 
 
-
+
+
