@@ -43,13 +43,10 @@
 <body>
     <pre>
 
-      a 를 클릭하면 href 에 있는 값을 "img2"영역 에 나오게 하시오
+      a 를 클릭하면 href 에 있는 값을 "img#img2"영역 에 나오게 하시오
         1. 클릭된 a 태그의 href 값을 가져온다.
             ==> event.target.href   # a 태그의 href 속성값
-            ==> event.target.value  # input 태그의 value 속성값
-        2. id="img2" 의 src 에 1번에서 얻은 href의 값을 넣는다.
-            ==> img 태그의 src 속성에 데이터 바인딩을 하려고 한다
-                어떤 지시자를 사용하면 될까?
+        2. "img#img2"영역의 src 에 1번에서 얻은 href의 값을 넣는다.
         3. a 태그의 redirect 기능을 취소하시오.
 
       id="but1" 인 엘리먼트에 mouseover, mouseout 효과 넣기
@@ -60,15 +57,16 @@
       id="sel" 엘리먼트에 change 효과 넣기
 
       id="ID" 엘리먼트에 focus, blur 효과 넣기
-
-      참고 : https://kr.vuejs.org/v2/guide/forms.html#header
     </pre>
     <hr />
 
     <div id="app">
         <xmp>
-            글자를 클릭하면 href 에 있는 값을 "img2"영역 에 나오게 하시오
-            a 태그에 click 이벤트 핸들러를 작성하시오. ==> imageclick
+            a 를 클릭하면 href 에 있는 값을 "img#img2"영역 에 나오게 하시오
+            1. 클릭된 a 태그의 href 값을 가져온다.
+                ==> event.target.href   # a 태그의 href 속성값
+            2. "img#img2"영역의 src 에 1번에서 얻은 href의 값을 넣는다.
+            3. a 태그의 redirect 기능을 취소하시오.
         </xmp>
         <ul>
             <li>
@@ -82,7 +80,7 @@
                 </a>
             </li>
         </ul>
-        <img id="img2" src="img_image3" />
+        <img id="img2" src="imgImage3" />
         <hr />
 
         <xmp>
@@ -124,10 +122,6 @@
         <xmp>
             select 에 change 이벤트 핸들러를 작성하시오.
             change 이벤트 핸들러: selectchange
-
-            도전: 기능추가
-            "vue23-01.v-for와배열.html" 를 참조하여 option 부분을 v-for 를 사용하도록 수정하시오.
-
         </xmp>
         <select id="sel" change="selectchange">
             <option value="../images/strawberry.gif">딸기</option>
@@ -152,3 +146,79 @@
 </body>
 
 </html>
+
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.8/react-redux.js" crossorigin="anonymous">
+    /*  import ReactRedux, {Provider, useDispatch, useSelector} from 'react-redux' */
+</script>
+<script src="http://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js" crossorigin="anonymous">
+    /*  import ReactRouterDOM, {BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useRouteMatch} from 'react-router-dom' */
+</script>
+<script type="text/babel">
+
+    const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
+
+    function App() {
+      // useState 를 사용한 컴포넌트의 상태값 설정
+      const [imgImage3, setImgImage3] = useState(null); // 상태값이 기본타입인 경우
+
+      // 이벤트 핸들러 작성.
+      const imageclick = (e)=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        // e  === window.event
+        console.log(window.event.target);
+
+        // a 를 클릭하면 href 에 있는 값을 "img#img2"영역 에 나오게 하시오
+
+        debugger;
+        // 1. 클릭된 a 태그의 href 값을 가져온다.
+        //     ==> event.target.href   # a 태그의 href 속성값
+        //     ==> event.target.value  # input 태그의 value 속성값
+        const href = window.event.target.href;
+
+        // 2. "img#img2"영역의 src 에 1번에서 얻은 href의 값을 넣는다.
+        //     ==> img 태그의 src 속성에 데이터 바인딩을 하려고 한다
+        setImgImage3( href );
+
+        // 3. a 태그의 redirect 기능을 취소하시오.
+        window.event.preventDefault();
+        // window.event.stopPropagation();
+      };
+
+      // JSX로 화면 만들기
+      return (
+        <div>
+            <ul>
+                <li>
+                    <a className="image3" href="../images/image3.jpg" onClick={imageclick}>
+                        강아지 사진
+                    </a>
+                </li>
+                <li>
+                    <a className="image3" href="../images/image4.jpg" onClick={imageclick}>
+                        고양이 사진
+                    </a>
+                </li>
+            </ul>
+            <img id="img2" src={imgImage3} />
+            <hr />
+
+
+        </div>
+      )
+    }
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+
+</script>
