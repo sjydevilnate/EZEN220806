@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vuex Sample</title>
+    <title>counter</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- CSS import -->
@@ -138,7 +138,7 @@
 
       // JSX로 화면 만들기
       return (
-        <div id="app" class="component-parent">
+        <div id="app" className="component-parent">
             Parent counter : {counter} <br />
             <button name="parent" onClick={handlerAddCounter}>+</button>
             <button name="parent" onClick={handlerSubCounter}>-</button>
@@ -175,7 +175,7 @@
 
       // JSX로 화면 만들기
       return (
-        <div class="component-child">
+        <div className="component-child">
             Child counter : {counter} <br />
             <button name="child" onClick={handlerAddCounter}>+</button>
             <button name="child" onClick={handlerSubCounter}>-</button>

@@ -33,3 +33,99 @@
 </body>
 
 </html>
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin="anonymous">
+  /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+  /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+  /* import ReactDOM from 'react-dom' */
+</script>
+<script type="text/babel">
+  const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
+
+  ReactDOM.render(<Greeting />, document.getElementById("app"));
+
+  function Greeting() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // 상태값이 기본타입인 경우
+
+    // 이벤트 핸들러 작성.
+    const handler = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+        setIsLoggedIn( !isLoggedIn ); // true ==> false, false ===> true
+    };
+
+    return (
+        <div>
+            <button onClick={handler}> 상태값 변경</button>
+            { isLoggedIn && (<UserGreeting />) }
+            { !isLoggedIn && (<GuestGreeting />) }
+        </div>
+    );
+  }
+
+  function UserGreeting(props) {
+
+    const [greeting, setGreeting] = useState('기본값'); // 상태값이 기본타입인 경우
+
+    // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
+    const refIsMounted = useRef(false);
+    useEffect( () => {
+      if (refIsMounted.current){
+        // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
+        console.log('UserGreeting >> componentDidUpdate');
+      }
+      else {
+        // 마운트 완료 후에 실행됨. 한번만. focus 줄때
+        console.log('UserGreeting >> componentDidMount');
+        refIsMounted.current = true;
+      }
+      return () => {
+        // 언마운트 직전에 한번만 실행됨.
+        console.log('UserGreeting >> componentWillUmount');
+      };
+    }, [/* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */ greeting]);
+
+
+    // 이벤트 핸들러 작성.
+    const handler = ()=>{
+        // 이벤트 핸들러는 화살표 함수로 만든다
+        console.log(window.event.target);
+        setGreeting( greeting + 'a');
+    };
+    // JSX로 화면 만들기
+    return (
+        <div>
+            <h1>Welcome back!</h1>
+            <div> {greeting} </div>
+            <button onClick={handler}> greeting 상태값 변경</button>
+        </div>
+    );
+  }
+
+  function GuestGreeting(props) {
+    // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
+    const refIsMounted = useRef(false);
+    useEffect( () => {
+      if (refIsMounted.current){
+        // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
+        console.log('GuestGreeting >> componentDidUpdate');
+      }
+      else {
+        // 마운트 완료 후에 실행됨. 한번만. focus 줄때
+        console.log('GuestGreeting >> componentDidMount');
+        refIsMounted.current = true;
+      }
+      return () => {
+        // 언마운트 직전에 한번만 실행됨.
+        console.log('GuestGreeting >> componentWillUmount');
+      };
+    }, [/* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+    // JSX로 화면 만들기
+    return <h1> GuestGreeting </h1>;
+  }
+</script>
