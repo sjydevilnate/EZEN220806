@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8">
+    <title>star-rating</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <xmp>
+
+      colors = [
+          {
+              "id": "8658c1d0-9eda-4a90-95e1-8001e8eb6036",
+              "title": "바닷빛 파랑",
+              "color": "#0070ff",
+              "rating": 3
+          },
+          {
+              "id": "f9005b4e-975e-433d-a646-79df172e1dbb",
+              "title": "토마토",
+              "color": "#d10012",
+              "rating": 2
+          },
+          {
+              "id": "58d9caee-6ea6-4d7b-9984-65b145031979",
+              "title": "잔디",
+              "color": "#67bf4f",
+              "rating": 1
+          },
+          {
+              "id": "a5685c39-6bdc-4727-9188-6c9a00bf7f95",
+              "title": "파티 핑크",
+              "color": "#ff00f7",
+              "rating": 5
+          }
+      ]
+    </xmp>
+    <div id="root"></div>
+</body>
+</html>
+
+
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"  crossorigin="anonymous">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin="anonymous">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin="anonymous">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.8/react-redux.js" crossorigin="anonymous">
+    /*  import ReactRedux, {Provider, useDispatch, useSelector} from 'react-redux' */
+</script>
+<script src="http://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js" crossorigin="anonymous">
+    /*  import ReactRouterDOM, {BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useRouteMatch} from 'react-router-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin="anonymous">
+</script>
+<script type="text/babel">
+
+const { useState, useEffect, useRef, useCallback, useMemo, Fragment } = React;
+
+
+function App() {
+
+  return (
+    <div>
+      <h2>App</h2>
+      <RatingContaier />
+    </div>
+  )
+}
+
+
+function RatingContaier({...props}) {
+  // 컴포넌트의 상태값 설정
+  const [colors, setColors] = useState([
+      {
+          "id": "8658c1d0-9eda-4a90-95e1-8001e8eb6036",
+          "title": "바닷빛 파랑",
+          "color": "#0070ff",
+          "rating": 3
+      },
+      {
+          "id": "f9005b4e-975e-433d-a646-79df172e1dbb",
+          "title": "토마토",
+          "color": "#d10012",
+          "rating": 2
+      },
+      {
+          "id": "58d9caee-6ea6-4d7b-9984-65b145031979",
+          "title": "잔디",
+          "color": "#67bf4f",
+          "rating": 1
+      },
+      {
+          "id": "a5685c39-6bdc-4727-9188-6c9a00bf7f95",
+          "title": "파티 핑크",
+          "color": "#ff00f7",
+          "rating": 5
+      },
+  ]); // 상태값이 참조타입 경우
+
+  // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
+  const callbackRateColor = useCallback( (id, rating)=>{
+    // state 변경
+    const newColors = colors.map( (color)=> (color.id===id)? {...color, rating}: color );
+    setColors(newColors);
+
+  }, [/* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */colors]);
+
+  const callbackRemoveColor = useCallback( (id)=>{
+    // state 변경
+    const newColors = colors.filter( (color)=> (color.id!==id) ? true: false );
+    setColors(newColors);
+
+  }, [/* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */colors]);
+
+  // JSX로 화면 만들기
+  return (
+    <div className="app">
+      <h2>RatingContaier</h2>
+      <ColorList
+        colors={colors}
+        onRateColor={callbackRateColor}
+        onRemoveColor={callbackRemoveColor}>
+      </ColorList>
+    </div>
+  )
+}
+
+RatingContaier.propTypes = {
+  // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: PropTypes.func.isRequired,
+};
+RatingContaier.defaultProps = {
+  // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: () => {},
+};
+
+
+function ColorList({
+  colors,
+  onRateColor,
+  onRemoveColor,
+}) {
+  // JSX로 화면 만들기
+  if (colors.length === 0) {
+    return (<div>색이 없습니다. (색을 추가해 주세요)</div>)
+  }
+
+  return (
+    <div>
+      <h2>ColorList</h2>
+      <div className="color-list">
+        {colors.map( (item) => ( <Color key={item.id} {...item} onRemove={onRemoveColor} onRate={onRateColor}></Color>))}
+      </div>
+    </div>
+  )
+}
+
+ColorList.propTypes = {
+  // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: PropTypes.func.isRequired,
+  colors: PropTypes.array.isRequired,
+  onRateColor: PropTypes.func.isRequired,
+  onRemoveColor: PropTypes.func.isRequired,
+};
+ColorList.defaultProps = {
+  // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: () => {},
+  colors: [],
+  onRateColor: () => {},
+  onRemoveColor: () => {},
+};
+
+
+function Color({
+  id,
+  title,
+  color,
+  rating,
+  onRemove,
+  onRate
+}) {
+  const handlerRemove = (id)=>{
+    console.log(window.event.target);
+    onRemove(id);
+  };
+  const handlerRate = (rating)=>{
+    console.log(window.event.target);
+    onRate(id, rating);
+  };
+
+  return (
+    <section className="color">
+      <h1>{title}</h1>
+      <button onClick={()=>(handlerRemove(id))}>X</button>
+      <div className="color"
+          style={{ backgroundColor: color }}>
+      </div>
+      <div>
+          <StarRating starsSelected={rating} onRate={handlerRate}/>
+      </div>
+    </section>
+  )
+}
+
+Color.propTypes = {
+  // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  onRate: PropTypes.func.isRequired,
+};
+Color.defaultProps = {
+  // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: () => {},
+  id: '',
+  title: '',
+  color: '',
+  rating: 0,
+  onRemove: () => {},
+  onRate: () => {},
+};
+
+
+function StarRating({ starsSelected, totalStars, onRate }) {
+
+  const handlerClick = (i)=>{
+    onRate(i+1);
+  };
+
+  return (
+    <div className="star-rating">
+      {[1,2,3,4,5].map((n, i) =>{
+          return (
+            <Star key={i}
+                selected={i<starsSelected}
+                onClick={()=>handlerClick(i)}/>
+          );
+        }
+      )}
+      <p>별점: {starsSelected} / {totalStars}</p>
+    </div>
+  )
+}
+
+StarRating.propTypes = {
+  // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: PropTypes.func.isRequired,
+  starsSelected: PropTypes.number.isRequired,
+  totalStars: PropTypes.number,
+  onRate: PropTypes.func.isRequired,
+};
+StarRating.defaultProps = {
+  // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: () => {},
+  starsSelected: 0,
+  totalStars: 5,
+  onRate: () => {},
+};
+
+
+function Star({ selected, onClick }) {
+
+  const handler = ()=>{
+    console.log(window.event.target);
+  };
+
+  return (
+    <div className={(selected) ? "star selected" : "star"}
+      onClick={onClick}>
+  </div>
+  )
+}
+
+Star.propTypes = {
+  // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: PropTypes.func.isRequired,
+  selected: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+Star.defaultProps = {
+  // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+  // 인자명: () => {},
+  selected: false,
+  onClick: () => {},
+};
+
+ReactDOM.render( <App />, document.getElementById("root") );
+
+</script>
