@@ -18,7 +18,7 @@
     <div style="margin: 40px 0 0 40px;">
         <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
     </div>
-    <pre>
+    <xmp>
         CRA(create-react-app) 를 사용해서 리액트 프로젝트를 만들고
         start-rating.html 에서 작성한 컴포넌트를 프로젝트에 적용하여 본다.
         * CRA 는 create react app 의 약자.
@@ -126,7 +126,59 @@
 
             Star 의 JSX 추가.
 
-    </pre>
+
+        # Star 컴포넌트의 JSX 추가.
+            <div className={(selected) ? "star selected" : "star"}
+                onClick={onClick}>
+            </div>
+
+
+        # StarRating 컴포넌트의 JSX 추가.
+            <div className="star-rating">
+                {[1,2,3,4,5].map((n, i) =>{
+                    return (
+                    <Star key={i}
+                        selected={i<starsSelected}
+                        onClick={()=>handlerClick(i)}/>
+                    );
+                }
+                )}
+                <p>별점: {starsSelected} / {totalStars}</p>
+            </div>
+
+
+        # Color 컴포넌트의 JSX 추가.
+            <section className="color">
+                <h1>{title}</h1>
+                <button onClick={()=>(handlerRemove(id))}>X</button>
+                <div className="color" style={{ backgroundColor: color }}> </div>
+                <div>
+                    <StarRating starsSelected={rating} onRate={handlerRate}/>
+                </div>
+            </section>
+
+
+        # ColorList 컴포넌트의 JSX 추가.
+            <div>
+                <div className="color-list">
+                {colors.map( (item) => (
+                    <Color
+                        key={item.id}
+                        {...item}
+                        onRemove={onRemoveColor}
+                        onRate={onRateColor}>
+                    </Color>
+                    ))}
+                </div>
+            </div>
+
+
+        # RatingContaier 컴포넌트의 JSX 추가.
+            <div className="app">
+                <h2>RatingContaier</h2>
+                <ColorList colors={colors} onRateColor={callbackRateColor} onRemoveColor={callbackRemoveColor}></ColorList>
+            </div>
+    </xmp>
 
 </body>
 
