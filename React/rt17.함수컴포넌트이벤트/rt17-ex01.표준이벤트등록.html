@@ -80,7 +80,7 @@
                 </a>
             </li>
         </ul>
-        <img id="img2" src="imgImage3" />
+        <img id="img2" src="img_image3" />
         <hr />
 
         <xmp>
@@ -164,7 +164,7 @@
     const { useState, useEffect, useRef, useCallback, useMemo, useReducer, Fragment } = React;
 
     function App() {
-      const [imgImage3, setImgImage3] = useState(null); // 상태값이 기본타입인 경우
+      const [img_image3, setimg_image3] = useState(null); // 상태값이 기본타입인 경우
       const imageclick = (e)=>{
         // 이벤트 핸들러는 화살표 함수로 만든다
         // e  === window.event
@@ -179,7 +179,7 @@
 
         // 2. "img#img2"영역의 src 에 1번에서 얻은 href의 값을 넣는다.
         //     ==> img 태그의 src 속성에 데이터 바인딩을 하려고 한다
-        setImgImage3( href );
+        setimg_image3( href );
 
         // 3. a 태그의 redirect 기능을 취소하시오.
         window.event.preventDefault();
@@ -278,7 +278,7 @@
                     </a>
                 </li>
             </ul>
-            <img id="img2" src={imgImage3} />
+            <img id="img2" src={img_image3} />
             <hr />
 
             <img src={img_but1} id="but1"     onMouseOver={imageover} onMouseOut={imageout} />

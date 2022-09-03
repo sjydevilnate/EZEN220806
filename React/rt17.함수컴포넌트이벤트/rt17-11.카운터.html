@@ -84,7 +84,74 @@
 </html>
 
 
+<script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin>
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="http://unpkg.com/react@17/umd/react.development.js" crossorigin>
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="http://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin>
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js" crossorigin>
+</script>
+<script type="text/babel">
 
+    const {useState} = React;
 
+    function CounterLabel({count}) {
+        // JSX로 화면 만들기
+        return (
+            <div className="styleText">
+                {count}
+            </div>
+        )
+    }
+    CounterLabel.propTypes = {
+      // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+      // 인자명: PropTypes.func.isRequired,
+      count: PropTypes.number.isRequired,
+    };
+    CounterLabel.defaultProps = {
+      // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+      // 인자명: () => {},
+      count: 0,
+    };
 
-
+    function CounterContainer(props) {
+
+        const [count, setCount] = useState(2); // 상태값이 기본타입인 경우
+
+        const handlerIncrease = (event)=>{
+            // 이벤트 핸들러는 화살표 함수로 만들면 this bind()를 생략해도 된다
+            console.log(event.target);
+
+            if( event.shiftKey ){
+                // count = count + 10
+                setCount(count + 10);
+            }
+            else { // '+' 버튼만 클릭하면
+                // count = count + 1
+                setCount(count + 1);
+            }
+        }
+
+        // JSX로 화면 만들기
+        return (
+            <div className="styleBackground">
+                <CounterLabel count={count}></CounterLabel>
+                <button className="styleButton" onClick={handlerIncrease}>+</button>
+            </div>
+        )
+    }
+    CounterContainer.propTypes = {
+      // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+      // 인자명: PropTypes.func.isRequired,
+    };
+    CounterContainer.defaultProps = {
+      // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
+      // 인자명: () => {},
+    };
+
+    ReactDOM.render(<CounterContainer></CounterContainer>, document.getElementById("app"));
+</script>
