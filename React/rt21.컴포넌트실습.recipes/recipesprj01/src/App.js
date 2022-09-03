@@ -1,5 +1,3 @@
-import "./App.css";
-
 import React, {
   useState,
   useEffect,
@@ -11,6 +9,7 @@ import React, {
   forwardRef,
   useImperativeHandle
 } from "react";
+import "./App.css";
 import Menu from "./Menu";
 
 function App() {

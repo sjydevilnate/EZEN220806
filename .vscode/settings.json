@@ -1,9 +1,9 @@
 {
     "terminal.integrated.fontWeightBold": "bold",
-    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.fontSize": 20,
     "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.fontWeight": "normal",
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0.5,
 
     "editor.minimap.enabled": false,
     "editor.tabSize": 2,
@@ -38,7 +38,6 @@
     "html.format.extraLiners": "",
     "html.format.wrapAttributes": "force",
     "html.format.wrapLineLength": 0,
-    "html.format.endWithNewline": true,
     "html.format.indentInnerHtml": true,
     "html.suggest.html5": true,
     "auto-close-tag.activationOnLanguage": [
