@@ -1,70 +1,14 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-  useReducer,
-  Fragment,
-  forwardRef,
-  useImperativeHandle
-} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Styled from "styled-components";
 
 import Star from "./Star";
 
-/* const {aaa, bbb, ...props} = props */
-function StarRating({ ...props }) {
-  // useState 를 사용한 컴포넌트의 상태값 설정
-  const [변수명, set변수명] = useState("기본값"); // 상태값이 기본타입인 경우
-  const [state, setState] = useState({ id: 0, name: "", age: 0 }); // 상태값이 참조타입 경우
-
-  // useReducer 를 사용한 컴포넌트의 상태값 설정. 리듀서는 현재 상태를 받아서 새 상태를 반환하는 함수다
-  const [리듀서, set리듀서] = useReducer(
-    (oldvalue, newvalue) => ({ ...oldvalue, ...newvalue }),
-    { id: 0, name: "", age: 0 }
-  ); // 리듀서(reducer) 방식의 상태값 설정
-
-  // ref 만들기.
-  // const refInput = useRef();
-
-  // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
-  const refIsMounted = useRef(false);
-  useEffect(
-    () => {
-      if (refIsMounted.current) {
-        // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
-        // console.log('StarRating >> componentDidUpdate');
-      } else {
-        // 마운트 완료 후에 실행됨. 한번만. focus 줄때
-        // console.log('StarRating >> componentDidMount');
-        refIsMounted.current = true;
-      }
-      return () => {
-        // 언마운트 직전에 한번만 실행됨.
-        // console.log('StarRating >> componentWillUmount');
-      };
-    },
-    [
-      /* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */
-    ]
-  );
-
-  // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
-  const callback = useCallback(
-    (param) => {
-      // state 변경
-    },
-    [
-      /* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */
-    ]
-  );
-
+function StarRating({ starsSelected, totalStars, callbackOnRate }) {
   // 이벤트 핸들러 작성.
-  const handler = () => {
+  const handlerClick = (i) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(window.event.target);
+    callbackOnRate(i + 1);
   };
 
   // JSX로 화면 만들기
@@ -72,12 +16,18 @@ function StarRating({ ...props }) {
     <div>
       StarRating
       <div class="star-rating">
-        <Star selected={true}></Star>
-        <Star selected={true}></Star>
-        <Star selected={true}></Star>
-        <Star></Star>
-        <Star></Star>
-        <p>별점: 3 / 5</p>
+        {[1, 2, 3, 4, 5].map((value, index) => {
+          return (
+            <Star
+              key={index}
+              selected={index < starsSelected}
+              onClick={() => handlerClick(index)}
+            />
+          );
+        })}
+        <p>
+          별점: {starsSelected} / {totalStars}
+        </p>
       </div>
     </div>
   );
@@ -86,10 +36,16 @@ function StarRating({ ...props }) {
 StarRating.propTypes = {
   // props의 프로퍼티 타입 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
   // 인자명: PropTypes.func.isRequired,
+  starsSelected: PropTypes.number.isRequired,
+  totalStars: PropTypes.number.isRequired,
+  callbackOnRate: PropTypes.func.isRequired
 };
 StarRating.defaultProps = {
   // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
   // 인자명: () => {},
+  starsSelected: 0,
+  totalStars: 5,
+  callbackOnRate: () => {}
 };
 
 export default React.memo(StarRating); // React.memo()는 props 미변경시 컴포넌트 리렌더링 방지 설정
