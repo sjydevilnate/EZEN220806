@@ -71,7 +71,9 @@ function ColorList({ ...props }) {
   return (
     <div>
       ColorList
-      <Color></Color>
+      <div class="color-list">
+        <Color></Color>
+      </div>
     </div>
   );
 }

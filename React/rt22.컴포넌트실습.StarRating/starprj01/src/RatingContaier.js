@@ -71,26 +71,6 @@ function RatingContaier({ ...props }) {
   return (
     <div>
       RatingContaier
-      <div class="color-list">
-        <section class="color">
-          <h1>바닷빛 파랑</h1>
-          <button>X</button>
-          <div
-            class="color"
-            style={{ backgroundColor: "rgb(0, 112, 255)" }}
-          ></div>
-          <div>
-            <div class="star-rating">
-              <div class="star selected"></div>
-              <div class="star selected"></div>
-              <div class="star selected"></div>
-              <div class="star"></div>
-              <div class="star"></div>
-              <p>별점: 3 / 5</p>
-            </div>
-          </div>
-        </section>
-      </div>
       <ColorList></ColorList>
     </div>
   );

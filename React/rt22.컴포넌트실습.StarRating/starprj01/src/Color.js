@@ -71,7 +71,17 @@ function Color({ ...props }) {
   return (
     <div>
       Color
-      <StarRating></StarRating>
+      <section class="color">
+        <h1>바닷빛 파랑</h1>
+        <button>X</button>
+        <div
+          class="color"
+          style={{ backgroundColor: "rgb(0, 112, 255)" }}
+        ></div>
+        <div>
+          <StarRating></StarRating>
+        </div>
+      </section>
     </div>
   );
 }

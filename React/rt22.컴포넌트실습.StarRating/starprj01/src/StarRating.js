@@ -71,7 +71,14 @@ function StarRating({ ...props }) {
   return (
     <div>
       StarRating
-      <Star></Star>
+      <div class="star-rating">
+        <Star selected={true}></Star>
+        <Star selected={true}></Star>
+        <Star selected={true}></Star>
+        <Star></Star>
+        <Star></Star>
+        <p>별점: 3 / 5</p>
+      </div>
     </div>
   );
 }
