@@ -3,7 +3,7 @@
     "terminal.integrated.fontSize": 20,
     "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.fontWeight": "normal",
-    "window.zoomLevel": 0.5,
+    "window.zoomLevel": 1,
 
     "editor.minimap.enabled": false,
     "editor.tabSize": 2,
@@ -21,7 +21,6 @@
     "editor.fontSize": 20,
     "editor.renderWhitespace": "all",
     "editor.codeActionsOnSave": {
-
         // For ESLint
         //"source.fixAll.eslint": true,
         "source.fixAll": true
@@ -63,6 +62,8 @@
     ],
     // files
     "files.autoSave": "afterDelay",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "files.exclude": {
         "**/.git": true,
@@ -102,37 +103,42 @@
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 20
     },
     "[html]": {
         "editor.formatOnSave": false,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 20
     },
     "[javascript]": {
         "editor.formatOnSave": true,
-        "editor.insertSpaces": true,
         "editor.tabSize": 2,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.insertSpaces": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 20
     },
     "[json]": {
         "editor.formatOnSave": true,
-        "editor.insertSpaces": true,
         "editor.tabSize": 2,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.insertSpaces": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 20
     },
     "[vue]": {
         "editor.formatOnSave": true,
-        "editor.insertSpaces": true,
         "editor.tabSize": 2,
-        "editor.defaultFormatter": "octref.vetur"
+        "editor.insertSpaces": true,
+        "editor.defaultFormatter": "octref.vetur",
+        "editor.fontSize": 20
     },
     "[xml]": {
         "editor.formatOnSave": true,
-        "editor.insertSpaces": true,
         "editor.tabSize": 2,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 20
+    }
     "workbench.colorTheme": "Default Light+",
 }
