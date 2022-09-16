@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+        .strong {color:red; font-weight:bold; font-size:1.2em;}
+        label { display: inline-block; width: 80px;}
+        #app > div { margin: 5px 0 ;}
+    </style>
+</head>
+<body>
+    <xmp>
+    리액트에서 CRUD2S 방법을 학습한다.
+
+    생성할 컴포넌트
+        CrudContainer
+        CrudInput
+        CrudList
+        CrudListItem
+
+    CRUD2S 학습을 위해서 아래 사항에 대해서 미리 학습한다.
+        1. array.map() 사용법
+        2. array.reduce() 사용법
+        3. array.filter() 사용법
+
+
+    object array 에서 최대값 id 찾기
+        방법 1. reduce() 메서드 사용해서 최대값을 찾는 방법
+            var maxObj = array.reduce( function(prev, curt){
+                return prev.id > curt.id ? prev:  curt  // 최대값 id가 있는 객체
+                return prev.id < curt.id ? prev:  curt  // 최소값 id가 있는 객체
+            })
+            var newid  = maxObj.id + 1
+
+
+    테스트 기본 데이터
+        const items = [
+            {id:1, name: "슈퍼맨", power: 100},
+            {id:2, name: "아쿠아맨", power: 300},
+            {id:3, name: "스파이더맨", power: 500},
+            {id:4, name: "배트맨", power: 30},
+        ]
+
+
+    작업 순서
+
+    1. html 화면을 컴포넌트 단위로 쪼기기
+        CrudContainer
+        CrudInput
+        CrudList
+
+    1-1. CrudContainer 컴포넌트 만들기
+
+    function CrudContainer(props) {
+
+        // JSX로 화면 만들기
+        return (
+            <div id="app">
+                <h1>Creat Read Update Delete</h1>
+                ... 이하 생략
+            </div>
+        );
+
+    1-2. ReactDOM 사용하여 화면 붙이기
+        ReactDOM.render( <CrudContainer></CrudContainer>, document.getElementById("app") )
+
+
+    1-3. CrudInput 컴포넌트 만들기
+
+        function CrudInput(props) {
+            // JSX로 화면 만들기
+            return (
+                <div>
+                    <div>
+                        <label htmlFor="">Name : </label>
+                        <input type="text"
+                                name="name"
+                                placeholder="이름을 입력하세요"
+                                defaultValue={""}
+                                ref={refInputName}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="">Power : </label>
+                        <input type="number"
+                                name="power"
+                                placeholder="숫자를 입력하세요"
+                                defaultValue={0}
+                                ref={refInputPower}
+                        />
+                    </div>
+                    <button type="button" onClick={handlerAdd}>Add</button>
+                </div>
+            );
+        }
+
+    1-4. CrudContainer 에 CrudInput 컴포넌트 추가하기
+        function CrudContainer(props) {
+
+            // JSX로 화면 만들기
+            return (
+                <div>
+                    <h1>Creat Read Update Delete</h1>
+                    <CrudInput></CrudInput>
+                    <hr/>
+                    <table>
+                        <thead>
+                            ... 중략
+                        <tbody>
+                            ... 중략
+                        </tbody>
+                    </table>
+                </div>
+            )
+        }
+
+    1-5. CrudList 컴포넌트 만들기
+
+        function CrudList(props) {
+
+            // JSX로 화면 만들기
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>POWER</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="strong">
+                            <td>2</td>
+                            <td>아쿠아맨</td>
+                            <td>300</td>
+                            <td>
+                                <button type="button">Del</button>
+                                <button type="button">Power Up</button>
+                                <button type="button">Power Down</button>
+                                <button type="button">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            )
+        }
+
+    1-6. CrudContainer 에 CrudList 컴포넌트 추가하기
+        function CrudContainer(props) {
+
+            // JSX로 화면 만들기
+            return (
+                <div>
+                    <h1>Creat Read Update Delete</h1>
+                    <CrudInput></CrudInput>
+                    <hr/>
+                    <CrudList></CrudList>
+                </div>
+            )
+        }
+
+    1-7. CrudInput 컴포넌트 수정
+
+        function CrudInput(props) {
+
+            // ref 만들기. 예시) const refInput = useRef();
+            const refInputName  = useRef(null);
+            const refInputPower = useRef(null);
+
+            // 이벤트 핸들러 작성.
+            const handlerAdd = ()=>{
+            };
+            // JSX로 화면 만들기
+            return (
+                <div>
+                    <div>
+                        <label htmlFor="">Name : </label>
+                        <input type="text"
+                                name="name"
+                                placeholder="이름을 입력하세요"
+                                defaultValue={""}
+                                ref={refInputName}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="">Power : </label>
+                        <input type="number"
+                                name="power"
+                                placeholder="숫자를 입력하세요"
+                                defaultValue={0}
+                                ref={refInputPower}
+                        />
+                    </div>
+                    <button type="button" onClick={handlerAdd}>Add</button>
+                </div>
+            );
+        }
+
+    2. CrudList 에서 CrudListItem 분리하기
+        CrudList
+        CrudListItem
+
+        2-1. CrudListItem 컴포넌트 만들기
+
+        function CrudListItem( props ) {
+
+            const {item, callbackDel, callbackUp, callbackDown, callbackSave} = props;
+
+            // JSX로 화면 만들기
+            render() {
+                <tr className="">
+                    <td>1</td>
+                    <td>슈퍼맨</td>
+                    <td>100</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+            }
+        }
+
+        2-2. CrudList 에 CrudListItem 추가하기
+
+        function CrudList(props) {
+
+            // JSX로 화면 만들기
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>POWER</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <CrudListItem>
+                        </CrudListItem>
+                    </tbody>
+                </table>
+            )
+        }
+
+        2-3. CrudListItem 은 CrudList 로부터 데이터를 받는 코드를 작성한다.
+             CrudList 에서 CrudListItem 에 props 로 전달하는 코드 만들기
+             props.item 를 통해 {id, name, power} 를 받는 코드를 완성한다.
+
+
+        function CrudList(props) {
+
+            // JSX로 화면 만들기
+            const item = {
+                id: 1,
+                name: '슈퍼맨',
+                power: 100,
+            }
+
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>POWER</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <CrudListItem item={item}>
+                        </CrudListItem>
+                    </tbody>
+                </table>
+            )
+        }
+
+        2-4. CrudListItem 에 props 기능 추가하기
+            power가 300이상인 사람은 글자색을 red, bold 로 출력되게 css를 적용하시오.
+
+            function CrudListItem( props ) {
+
+                const {item, callbackDel, callbackUp, callbackDown, callbackSave} = props;
+
+                // JSX로 화면 만들기
+                const {item} = props;
+                let strong = "";
+                if( item.power >=300 ) strong = "strong";
+                render() {
+                    <tr className={strong}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.power}</td>
+                        <td>
+                            <button type="button" onClick={handlerDel}>Del</button>
+                            <button type="button" onClick={handlerUp}>Power Up</button>
+                            <button type="button" onClick={handlerDown}>Power Down</button>
+                            <button type="button" onClick={handlerEdit}>Edit</button>
+                        </td>
+                    </tr>
+                }
+            }
+
+        2-5. CrudListItem 에 onClick 기능 추가하기
+
+            function CrudListItem( props ) {
+
+                // 이벤트 핸들러 작성.
+                const handlerDel = (event)=>{
+                    // 이벤트 핸들러는 화살표 함수로 만든다
+                    console.log(event.target);
+                };
+                const handlerUp = (event)=>{
+                    // 이벤트 핸들러는 화살표 함수로 만든다
+                    console.log(event.target);
+                };
+                const handlerDown = (event)=>{
+                    // 이벤트 핸들러는 화살표 함수로 만든다
+                    console.log(event.target);
+                };
+                const handlerEdit = (event)=>{
+                    // 이벤트 핸들러는 화살표 함수로 만든다
+                    console.log(event.target);
+                };
+
+                render() {
+                    <tr className={strong}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.power}</td>
+                        <td>
+                            <button type="button" onClick={handlerDel}>Del</button>
+                            <button type="button" onClick={handlerUp}>Power Up</button>
+                            <button type="button" onClick={handlerDown}>Power Down</button>
+                            <button type="button" onClick={handlerEdit}>Edit</button>
+                        </td>
+                    </tr>
+                }
+            }
+
+        2-6. CrudContainer 에 items 상태값(변수)을 정의하고 items 상태값을 props 로 내린다.
+            function CrudContainer(props) {
+
+                const [items, setItems] = useState([
+                    {id:1, name: "슈퍼맨", power: 100},
+                    {id:2, name: "아쿠아맨", power: 300},
+                    {id:3, name: "스파이더맨", power: 500},
+                    {id:4, name: "배트맨", power: 30},
+                ]);
+                ...중략
+                return (
+                    <div id="app">
+                        <h1>Creat Read Update Delete</h1>
+                        <CrudInput></CrudInput>
+                        <hr/>
+                        <CrudList {...props}
+                                  items={items}
+                        >
+                        </CrudList>
+                    </div>
+                )
+            }
+
+        2-7. CrudList 에 JSX 반복문 코드를 추가 추가하기
+
+        "rt12-11.JSX.반복문.html"를 참고하여 JSX 반복문 코드를 추가 하시오.
+
+        function CrudList(props) {
+
+            // JSX로 화면 만들기
+            const {items, callbackDel, callbackUp, callbackDown, callbackSave} = props;
+            const arrs = items.map( (item)=>{
+                return (
+                    <CrudListItem
+                        {...props}
+                        item={item}
+                        key={item.id}
+                    >
+                    </CrudListItem>
+                )
+            });
+
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>POWER</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {arrs}
+                    </tbody>
+                </table>
+            )
+        }
+
+
+    3. CrudContainer 컴포넌트 수정하기
+
+        3-1. CrudListItem 에 callback 호출 기능을 추가하기
+
+        function CrudListItem( props ) {
+
+            const {item, callbackDel, callbackUp, callbackDown, callbackSave} = props;
+
+            // 이벤트 핸들러 작성.
+            const handlerDel = (event)=>{
+                ...중략
+            };
+            const handlerUp = (event)=>{
+                ...중략
+            };
+            const handlerDown = (event)=>{
+                ...중략
+            };
+            const handlerEdit = (event)=>{
+                ...중략
+            };
+
+            // JSX로 화면 만들기
+            let strong = "";
+            if( props.item.power >=300 ) strong = "strong";
+            render() {
+                <tr className={strong}>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.power}</td>
+                    <td>
+                        <button type="button" onClick={handlerDel}>Del</button>
+                        <button type="button" onClick={handlerUp}>Power Up</button>
+                        <button type="button" onClick={handlerDown}>Power Down</button>
+                        <button type="button" onClick={handlerEdit}>Edit</button>
+                    </td>
+                </tr>
+            }
+        }
+
+
+        3-2. CrudList 에 에 callback 호출 기능을 추가하기
+
+        function CrudList(props) {
+
+            const {items, callbackDel, callbackUp, callbackDown, callbackSave} = props;
+
+            // JSX로 화면 만들기
+            const arrs = items.map( (item)=>{
+                return (
+                    <CrudListItem
+                        {...props}
+                        item={item}
+                        key={item.id}
+                        callbackDel={callbackDel}
+                        callbackUp={callbackUp}
+                        callbackDown={callbackDown}
+                        callbackSave={callbackSave}
+                    >
+                    </CrudListItem>
+                )
+            });
+
+            return (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>POWER</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {arrs}
+                    </tbody>
+                </table>
+            )
+        }
+
+
+        3-3. CrudContainer 콜백 메서드 정의
+        function CrudContainer(props) {
+
+            const callbackDel = useCallback( (item) => {
+                // items 배열에서 삭제. Array.filter() 를 사용한다
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            const callbackUp = useCallback( (item) => {
+                //100씩 증가. Array.map() 을 사용한다
+                // item.power = item.power + 100;
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            const callbackDown = useCallback( (item) => {
+                // 50씩 감소.  Array.map() 을 사용한다
+                // item.power = item.power - 50;
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            const callbackSave = useCallback( (item) => {
+                // newitem 으로 바뀐 새로운 배열 만들기. Array.map() 을 사용한다
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            const callbackAdd = useCallback( (newitem) => {
+                // items에서 최대 id 값을 구하는 방법.
+                // 방법1. todoItems.map()과 todoItems.reduce()를 사용하여 max id를 찾는 방법
+                // items.push(param);
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            ...이하 중략
+        }
+
+        3-5. CrudContainer 에서 5개의 callback 메서드 props 내림 설정한다.
+        function CrudContainer(props) {
+
+            return (
+                <div id="app">
+                    <h1>Creat Read Update Delete</h1>
+                    <CrudInput callbackAdd={callbackAdd}>
+                    </CrudInput>
+                    <hr/>
+                    <CrudList {...props}
+                              items={items}
+                              callbackDel={callbackDel}
+                              callbackUp={callbackUp}
+                              callbackDown={callbackDown}
+                              callbackSave={callbackSave}
+                    >
+                    </CrudList>
+                </div>
+            )
+        }
+
+        3-6. CrudInput 에서callback 메서드 호출 기능을 구현한다.
+        function CrudInput(props) {
+            ...중략
+            // 이벤트 핸들러 작성.
+            const handlerAdd = (event)=>{
+                // 부모 콜백 메서드 호출
+                props.callbackAdd();
+            };
+            ...중략
+        }
+
+        3-7. CrudListItem 에서 callback 메서드 호출 기능을 구현한다.
+        function CrudListItem(props) {
+
+            ...중략
+
+            // 이벤트 핸들러 작성.
+            const handlerDel = (event)=>{
+                // 부모의 콜백 메서드 호출.
+                props.callbackDel();
+            };
+            const handlerUp = (event)=>{
+                // 부모의 콜백 메서드 호출.
+                props.callbackUp();
+            };
+            const handlerDown = (event)=>{
+                // 부모의 콜백 메서드 호출.
+                props.callbackDown();
+            };
+            const handlerEdit = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만든다
+                console.log(event.target);
+            };
+        }
+
+        3-8. 이벤트 핸들러 작동 여부 확인하다.
+
+
+
+    5. CrudInput 컴포넌트 기능 추가
+
+        5-1. CrudContainer 컴포넌트 JSX 수정
+            변경 전
+            <CrudInput></CrudInput>
+
+            변경 후
+            <CrudInput callbackAdd={callbackAdd}></CrudInput>
+
+        5-2. CrudInput 컴포넌트에 input 태그 관련 설정.
+            ref 설정. input 태그에 입력된 값을 가져오기 위해서
+            refInputName
+            refInputPower
+
+            function CrudInput(props) {
+
+                // ref 만들기. 예시) const refInput = useRef();
+                const refInputName = useRef(null);
+                const refInputPower = useRef(null);
+
+                // JSX로 화면 만들기
+                return (
+                    <div>
+                        <div>
+                            <label htmlFor="">Name : </label>
+                            <input type="text"
+                                    name="name"
+                                    placeholder="이름을 입력하세요"
+                                    defaultValue={""}
+                                    ref={refInputName}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="">Power : </label>
+                            <input type="number"
+                                    name="power"
+                                    placeholder="숫자를 입력하세요"
+                                    defaultValue={0}
+                                    ref={refInputPower}
+                            />
+                        </div>
+                        <button type="button" onClick={handlerAdd}>Add</button>
+                    </div>
+                );
+            }
+
+        5-3. CrudInput 컴포넌트의 "Add" 버튼에 클릭 이벤트 핸들러 설정. handlerAdd
+            Name 유효성 검사
+            Power 유효성 검사
+            부모 메서드 props.callbackAdd() 호출
+            input 태그에 남아있는 입력값 지우기.
+
+        5-4. CrudContainer 컴포넌트에 콜백 메서드 callbackAdd 만들기
+
+            items에서 최대 id 값을 구하는 방법.
+            items.push(param);
+
+            const callbackAdd = useCallback( (newitem)=>{
+                // items에서 최대 id 값을 구하는 방법.
+                // 방법1. todoItems.map()과 todoItems.reduce()를 사용하여 max id를 찾는 방법
+                let maxid = 0;
+                if( items.length>0){
+                    maxid = items.map( item=>item.id )
+                                 .reduce( (pvalue,cvalue)=> pvalue>= cvalue ? pvalue: cvalue, -1 );
+                }
+                else {
+                    maxid = 0;
+                }
+                const newid = maxid + 1;
+
+                // param 에  id값 추가
+                param.id = newid ;
+
+                /// items.push(param);
+                setItems( [...items, param] );
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */items]);
+
+
+    6. CrudListItem 컴포넌트 만들기
+
+        6-1. power가 300이상인 사람은 글자색을 red로 bold스타일로 출력하세요.
+
+        6-2. 편집여부를 확인하기 위한 상태값(state) isEditMode 만들기
+            const [isEditMode, setIsEditMode] = useState(false);
+
+        6-3. formView: 데이터 표시용 JSX 만들기
+            const formView = (
+                <tr className={strong}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.power}</td>
+                        <td>
+                            <button type="button" onClick={handlerDel}>Del</button>
+                            <button type="button" onClick={handlerUp}>Power Up</button>
+                            <button type="button" onClick={handlerDown}>Power Down</button>
+                            <button type="button" onClick={handlerEdit}>Edit</button>
+                        </td>
+                </tr>
+            );
+
+        6-4. formEdit:  데이터 편집용 JSX 만들기
+            const formEdit = (
+                <tr className={strong}>
+                    <td>{item.id}</td>
+                    <td>
+                        <input
+                            type="text"
+                            name="name"
+                            ref={refInputName }
+                            defaultValue={item.name}
+                        />
+                    </td>
+                    <td>
+                        <input
+                            type="number"
+                            name="power"
+                            ref={refInputPower }
+                            defaultValue={item.power}
+                        />
+                    </td>
+                    <td>
+                        <button type="button" onClick={handlerUp}>Power Up</button>
+                        <button type="button" onClick={handlerDown}>Power Down</button>
+                        <button type="button" onClick={handlerSave}>Save</button>
+                    </td>
+                </tr>
+            );
+
+        6-5. CrudListItem에 handlerSave 이벤트 핸들러 만들기.
+
+
+        6-6. CrudListItem.isEditMode  === true 이면 formEdit 리턴하고 아니면 formView 리턴한다.
+
+            const formView = (
+                ...중략
+            );
+            const formEdit = (
+                ...중략
+            );
+
+            if( isEditMode )
+                return formEdit;
+            else
+                return formView;
+
+
+        6-7. CrudListItem 의 handlerEdit 수정한다.
+            function CrudListItem(props) {
+
+                ...중략
+
+                // ref 만들기. 예시) const refInput = useRef();
+                const refInputName  = useRef(null);
+                const refInputPower = useRef(null); //
+
+                const handlerEdit = (event)=>{
+                    // 이벤트 핸들러는 화살표 함수로 만든다
+                    console.log(event.target);
+                    setIsEditMode( !isEditMode );
+                };
+
+                const handlerSave = (event)=>{
+
+                    // formEdid 를 formView로 바꾸기.
+                    // isEditMode = !isEditMode;
+                    setIsEditMode( !isEditMode );
+
+                    // 유효성 검사
+                    if(refInputName.current.value.trim() === ''){
+                        alert('이름을 입력하세요')
+                        refInputName.current.focus();
+                        event.preventDefault();
+                        event.stopPropagation();
+                        return false;
+                    }
+                    if(refInputPower.current.value.trim() === ''){
+                        alert('파워를 입력하세요')
+                        refInputPower.current.focus();
+                        event.preventDefault();
+                        event.stopPropagation();
+                        return false;
+                    }
+                    if( isNaN( Number(refInputPower.current.value) ) ){
+                        alert('파워에 숫자를 입력하세요')
+                        refInputPower.current.value=""
+                        refInputPower.current.focus()
+                        event.preventDefault()
+                        return false
+                    }
+
+                    // 입력된 값을 이용해서 newitem 객체를 만든다.
+                    const newItem = {
+                        id: item.id, /* { id, name, power} */
+                        name: refInputName.current.value,
+                        power: Number( refInputPower.current.value),
+                    }
+                    // 부모 콜백 메서드 호출
+                    callbackSave( newItem );
+                };
+
+                ...중략
+            }
+
+
+        6-8. CrudListItem 의 handlerEdit 수정한다.
+            function CrudListItem(props) {
+
+                ... 중략
+
+                // 이벤트 핸들러 작성.
+                const handlerDel = (event)=>{
+                    // 부모의 콜백 메서드 호출.
+                    props.callbackDel(item.id);
+                };
+                const handlerUp = (event)=>{
+                    // 부모의 콜백 메서드 호출.
+                    props.callbackUp(item.id);
+                };
+                const handlerDown = (event)=>{
+                    // 부모의 콜백 메서드 호출.
+                    props.callbackDown(item.id);
+                };
+
+                ... 중략
+            }
+
+    </xmp>
+    <hr>
+    <div id="app">
+        <h1>Creat Read Update Delete</h1>
+        <div>
+            <div>
+                <label for="">Name : </label>
+                <input type="text" name="name" placeholder="이름을 입력하세요" />
+            </div>
+            <div>
+                <label for="">Power : </label>
+                <input type="number" name="power" placeholder="숫자를 입력하세요"  />
+            </div>
+            <button type="button">Add</button>
+        </div>
+        <hr/>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>POWER</th>
+                    <th>CRUD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td>1</td>
+                    <td>슈퍼맨</td>
+                    <td>100</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+                <tr class="strong">
+                    <td>2</td>
+                    <td>아쿠아맨</td>
+                    <td>300</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+                <tr class="strong">
+                    <td>3</td>
+                    <td>스파이더맨</td>
+                    <td>500</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+                <tr class="strong">
+                    <td>4</td>
+                    <td>배트맨</td>
+                    <td>30</td>
+                    <td>
+                        <button type="button">Del</button>
+                        <button type="button">Power Up</button>
+                        <button type="button">Power Down</button>
+                        <button type="button">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+
+
+

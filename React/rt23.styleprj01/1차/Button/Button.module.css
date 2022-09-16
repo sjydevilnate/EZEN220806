@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: column;
+  gap: 8px;
+
+  margin: 12px;
+}
+
+.primary {}
+.secondary {}
