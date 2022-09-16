@@ -18,6 +18,9 @@
     </style>
 </head>
 <body>
+    <div style="margin: 40px 0 0 40px;">
+        <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
+    </div>
     <xmp>
     리액트에서 CRUD2S 방법을 학습한다.
 
@@ -51,7 +54,41 @@
         ]
 
 
-    작업 순서
+
+
+    ##################################
+    # 프로젝트 생성
+    ##################################
+    $ npx create-react-app crudprj01
+
+    # 폴더 이동
+    $ cd crudprj01
+
+
+    # package.json 파일이 있는지 확인
+    $ ls
+
+
+    # prop-types 설치(필수)
+    # prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
+    $ npm install --save prop-types
+
+
+    # styled-component
+    # styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
+    $ npm install --save styled-components
+
+
+    # package.json 파일이 있는지 확인
+    $ ls
+
+
+    # 리액트 프로젝트 서버 실행하기
+    $ npm run start
+
+    ##################################
+    작업 1
+    ##################################
 
     1. html 화면을 컴포넌트 단위로 쪼기기
         CrudContainer
@@ -206,6 +243,9 @@
             );
         }
 
+    ##################################
+    작업 2
+    ##################################
     2. CrudList 에서 CrudListItem 분리하기
         CrudList
         CrudListItem
@@ -410,7 +450,9 @@
         }
 
 
-    3. CrudContainer 컴포넌트 수정하기
+    ##################################
+    작업 3 CrudContainer 컴포넌트 수정하기
+    ##############################
 
         3-1. CrudListItem 에 callback 호출 기능을 추가하기
 
@@ -586,7 +628,9 @@
 
 
 
-    5. CrudInput 컴포넌트 기능 추가
+    ##################################
+    작업 5. CrudInput 컴포넌트 기능 추가
+    ##############################
 
         5-1. CrudContainer 컴포넌트 JSX 수정
             변경 전
@@ -664,7 +708,10 @@
             }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */items]);
 
 
-    6. CrudListItem 컴포넌트 만들기
+
+    ##################################
+    작업 6. CrudListItem 컴포넌트 만들기
+    ##############################
 
         6-1. power가 300이상인 사람은 글자색을 red로 bold스타일로 출력하세요.
 
@@ -888,6 +935,4 @@
 
 </body>
 </html>
-
-
 

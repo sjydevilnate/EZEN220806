@@ -611,18 +611,27 @@
         }
 
     4-6. jsconfig.json 설정
-        NODE_ENV의 절대 경로 설정.
-        컴포넌트 조합할 때 상대 경로 대신 절대 경로를 사용하여 컴포넌트를 조합
+        컴포넌트 경로를 설정할 때 상대 경로 대신 절대 경로를 사용하여 설정하는 방법
+
+        경로 종류
+          1. 절대 경로. ex) import App from 'App';
+          2. 상대 경로. ex) import App from './src/App';
+          3. 별칭 경로. ex) import App from '@/App';
+
         "baseUrl": "./src" ==> 절대 경로 설정
         "include": ["src"] ==> import 시 해당 루트를 자동으로 포함 설정. ex) import 'src/Comp'; 대신 import 'Comp'; 을 사용
 
-        $ echo -e "{\n  \"compilerOptions\": {\n    \"baseUrl\": \"./src\"\n  },\n  "include": ["src"]\n}" >> jsconfig.json
+        https://code.visualstudio.com/docs/languages/jsconfig
+        https://velog.io/@kcj_dev96/jsconfig.json
+        https://stackoverflow.com/questions/58577554/reactjs-module-not-found-when-specifying-paths-in-jsconfig-json
 
-        jsconfig.json  파일 내용 확인
+        $ echo -e "{\n  \"compilerOptions\": {\n    \"baseUrl\": \"./src\"\n  },\n  \"include\": [\"src\"]\n}" >> jsconfig.json
+
+        jsconfig.json 파일 내용 확인
         $ cat jsconfig.json
         {
           "compilerOptions": {
-            "baseUrl": "./src"
+            "baseUrl": "src"
           },
           "include": ["src"]
         }
@@ -737,7 +746,7 @@
         webpack compiled successfully
 
     ##################################
-    6. Jest 테스트 와 디버깅 설정
+    6. Jest 테스트 와 디버깅 방법
     ##################################
 
     https://tod2.tistory.com/214

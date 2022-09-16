@@ -7,7 +7,7 @@ import CrudInput from '../components/crud/CrudInput';
 import CrudList from '../components/crud/CrudList';
 
 
-function CrudApp(props) {
+function CrudContainer(props) {
 
     // 컴포넌트의 상태값 설정
     const [list, setList] = useState([
@@ -125,11 +125,11 @@ function CrudApp(props) {
     )
 }
 
-CrudApp.propsTypes = {
+CrudContainer.propsTypes = {
     /* props의 프로퍼티 타입 설정 */
 };
-CrudApp.defaultProps = {
+CrudContainer.defaultProps = {
     /* props의 디폴트 값 설정 */
 };
 
-export default CrudApp;
+export default CrudContainer;

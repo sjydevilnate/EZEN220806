@@ -19,194 +19,194 @@
         <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
     </div>
     <xmp>
-        CRA(create-react-app) 를 사용해서 리액트 프로젝트를 만들고
-        start-rating.html 에서 작성한 컴포넌트를 프로젝트에 적용하여 본다.
-        * CRA 는 create react app 의 약자.
+    CRA(create-react-app) 를 사용해서 리액트 프로젝트를 만들고
+    start-rating.html 에서 작성한 컴포넌트를 프로젝트에 적용하여 본다.
+    * CRA 는 create react app 의 약자.
 
-        # 프로젝트 생성
-        $ npx create-react-app starprj01
+    # 프로젝트 생성
+    $ npx create-react-app starprj01
 
-        # 폴더 이동
-        $ cd starprj01
-
-
-        # package.json 파일이 있는지 확인
-        $ ls
+    # 폴더 이동
+    $ cd starprj01
 
 
-        # prop-types 설치(필수)
-        # prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
-        $ npm install --save prop-types
+    # package.json 파일이 있는지 확인
+    $ ls
 
 
-        # styled-component
-        # styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
-        $ npm install --save styled-components
+    # prop-types 설치(필수)
+    # prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
+    $ npm install --save prop-types
 
 
-        # package.json 파일이 있는지 확인
-        $ ls
+    # styled-component
+    # styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
+    $ npm install --save styled-components
 
 
-        # 리액트 프로젝트 서버 실행하기
-        $ npm run start
+    # package.json 파일이 있는지 확인
+    $ ls
 
 
-        # App.test.js 삭제
+    # 리액트 프로젝트 서버 실행하기
+    $ npm run start
 
 
-        # src/App.css 수정. style.css 파일의 css 내용을 App.css 에 복사하여 붙여넣기.
-        $ cp ../style.css ./src/App.css
+    # App.test.js 삭제
 
 
-        # src/App.js 수정
-            import 설정
-                import RatingContaier from "./RatingContaier"; 추가
-
-            App 의 JSX를 변경한다.
-                <div>
-                    <h2>App</h2>
-                    <RatingContaier />
-                </div>
+    # src/App.css 수정. style.css 파일의 css 내용을 App.css 에 복사하여 붙여넣기.
+    $ cp ../style.css ./src/App.css
 
 
-        # RatingContaier 컴포넌트
-            RatingContaier.js 파일 생성
-                $ touch src/RatingContaier.js
+    # src/App.js 수정
+        import 설정
+            import RatingContaier from "./RatingContaier"; 추가
 
-            RatingContaier 컴포넌트 만들기
-
-            import 설정
-                import ColorList from "./ColorList";
-
-            RatingContaier 의 JSX 추가.
-
-
-            RatingContaier 에 상태값 추가.
-                colors = [
-                {
-                    "id": "8658c1d0-9eda-4a90-95e1-8001e8eb6036",
-                    "title": "바닷빛 파랑",
-                    "color": "#0070ff",
-                    "rating": 3
-                },
-                {
-                    "id": "f9005b4e-975e-433d-a646-79df172e1dbb",
-                    "title": "토마토",
-                    "color": "#d10012",
-                    "rating": 2
-                },
-                {
-                    "id": "58d9caee-6ea6-4d7b-9984-65b145031979",
-                    "title": "잔디",
-                    "color": "#67bf4f",
-                    "rating": 1
-                },
-                {
-                    "id": "a5685c39-6bdc-4727-9188-6c9a00bf7f95",
-                    "title": "파티 핑크",
-                    "color": "#ff00f7",
-                    "rating": 5
-                }
-            ]
-
-
-        # ColorList 컴포넌트
-            ColorList.js 파일 생성
-                $ touch src/ColorList.js
-
-            ColorList 컴포넌트 만들기
-
-            import 설정
-                import Color from "./Color";
-
-            ColorList 의 JSX 추가.
-
-
-        # Color 컴포넌트
-            Color.js 파일 생성
-                $ touch src/Color.js
-
-            Color 컴포넌트 만들기
-
-            import 설정
-                import StarRating from "./StarRating";
-
-            Color 의 JSX 추가.
-
-
-        # StarRating 컴포넌트
-            StarRating.js 파일 생성
-                $ touch src/StarRating.js
-
-            StarRating 컴포넌트 만들기
-
-            import 설정
-                import Star from "./Star";
-
-            StarRating 의 JSX 추가.
-
-
-        # Star 컴포넌트
-            Star.js 파일 생성
-                $ touch src/Star.js
-
-            Star 컴포넌트 만들기
-
-            Star 의 JSX 추가.
-
-
-        # Star 컴포넌트의 JSX 추가.
-            <div className={(selected) ? "star selected" : "star"}
-                onClick={onClick}>
-            </div>
-
-
-        # StarRating 컴포넌트의 JSX 추가.
-            <div className="star-rating">
-                {[1,2,3,4,5].map((n, i) =>{
-                    return (
-                        <Star key={i}
-                            selected={i<starsSelected}
-                            onClick={()=>handlerClick(i)}/>
-                    );
-                }
-                )}
-                <p>별점: {starsSelected} / {totalStars}</p>
-            </div>
-
-
-        # Color 컴포넌트의 JSX 추가.
-            <section className="color">
-                <h1>{title}</h1>
-                <button onClick={()=>(handlerRemove(id))}>X</button>
-                <div className="color" style={{ backgroundColor: color }}> </div>
-                <div>
-                    <StarRating starsSelected={rating} onRate={handlerRate}/>
-                </div>
-            </section>
-
-
-        # ColorList 컴포넌트의 JSX 추가.
+        App 의 JSX를 변경한다.
             <div>
-                <div className="color-list">
-                {colors.map( (item) => (
-                    <Color
-                        key={item.id}
-                        {...item}
-                        onRemove={onRemoveColor}
-                        onRate={onRateColor}>
-                    </Color>
-                    ))}
-                </div>
+                <h2>App</h2>
+                <RatingContaier />
             </div>
 
 
-        # RatingContaier 컴포넌트의 JSX 추가.
-            <div className="app">
-                <h2>RatingContaier</h2>
-                <ColorList colors={colors} onRateColor={callbackRateColor} onRemoveColor={callbackRemoveColor}></ColorList>
+    # RatingContaier 컴포넌트
+        RatingContaier.js 파일 생성
+            $ touch src/RatingContaier.js
+
+        RatingContaier 컴포넌트 만들기
+
+        import 설정
+            import ColorList from "./ColorList";
+
+        RatingContaier 의 JSX 추가.
+
+
+        RatingContaier 에 상태값 추가.
+            colors = [
+            {
+                "id": "8658c1d0-9eda-4a90-95e1-8001e8eb6036",
+                "title": "바닷빛 파랑",
+                "color": "#0070ff",
+                "rating": 3
+            },
+            {
+                "id": "f9005b4e-975e-433d-a646-79df172e1dbb",
+                "title": "토마토",
+                "color": "#d10012",
+                "rating": 2
+            },
+            {
+                "id": "58d9caee-6ea6-4d7b-9984-65b145031979",
+                "title": "잔디",
+                "color": "#67bf4f",
+                "rating": 1
+            },
+            {
+                "id": "a5685c39-6bdc-4727-9188-6c9a00bf7f95",
+                "title": "파티 핑크",
+                "color": "#ff00f7",
+                "rating": 5
+            }
+        ]
+
+
+    # ColorList 컴포넌트
+        ColorList.js 파일 생성
+            $ touch src/ColorList.js
+
+        ColorList 컴포넌트 만들기
+
+        import 설정
+            import Color from "./Color";
+
+        ColorList 의 JSX 추가.
+
+
+    # Color 컴포넌트
+        Color.js 파일 생성
+            $ touch src/Color.js
+
+        Color 컴포넌트 만들기
+
+        import 설정
+            import StarRating from "./StarRating";
+
+        Color 의 JSX 추가.
+
+
+    # StarRating 컴포넌트
+        StarRating.js 파일 생성
+            $ touch src/StarRating.js
+
+        StarRating 컴포넌트 만들기
+
+        import 설정
+            import Star from "./Star";
+
+        StarRating 의 JSX 추가.
+
+
+    # Star 컴포넌트
+        Star.js 파일 생성
+            $ touch src/Star.js
+
+        Star 컴포넌트 만들기
+
+        Star 의 JSX 추가.
+
+
+    # Star 컴포넌트의 JSX 추가.
+        <div className={(selected) ? "star selected" : "star"}
+            onClick={onClick}>
+        </div>
+
+
+    # StarRating 컴포넌트의 JSX 추가.
+        <div className="star-rating">
+            {[1,2,3,4,5].map((n, i) =>{
+                return (
+                    <Star key={i}
+                        selected={i<starsSelected}
+                        onClick={()=>handlerClick(i)}/>
+                );
+            }
+            )}
+            <p>별점: {starsSelected} / {totalStars}</p>
+        </div>
+
+
+    # Color 컴포넌트의 JSX 추가.
+        <section className="color">
+            <h1>{title}</h1>
+            <button onClick={()=>(handlerRemove(id))}>X</button>
+            <div className="color" style={{ backgroundColor: color }}> </div>
+            <div>
+                <StarRating starsSelected={rating} onRate={handlerRate}/>
             </div>
+        </section>
+
+
+    # ColorList 컴포넌트의 JSX 추가.
+        <div>
+            <div className="color-list">
+            {colors.map( (item) => (
+                <Color
+                    key={item.id}
+                    {...item}
+                    onRemove={onRemoveColor}
+                    onRate={onRateColor}>
+                </Color>
+                ))}
+            </div>
+        </div>
+
+
+    # RatingContaier 컴포넌트의 JSX 추가.
+        <div className="app">
+            <h2>RatingContaier</h2>
+            <ColorList colors={colors} onRateColor={callbackRateColor} onRemoveColor={callbackRemoveColor}></ColorList>
+        </div>
     </xmp>
 
 </body>
