@@ -194,16 +194,16 @@
 
 
     11-01. App.js 파일에 'styled-components' import
-        import Styled from 'styled-components';
+        import styled from 'styled-components';
 
     11-02. App.js 파일 안의 내용을 StyledApp 만들기
 
-        const StyledApp = Styled.div`
+        const StyledApp = styled.div`
 
         `;
 
     11-03. App.css 파일 안의 내용을 StyledApp 안에 넣기
-        const StyledApp = Styled.div`
+        const StyledApp = styled.div`
             text-align: center;
 
             .App-logo {
@@ -255,7 +255,7 @@
     # https://react.vlpt.us/styling/03-styled-components.html
     ####################################
 
-        const Circle = Styled.div`
+        const Circle = styled.div`
             width: 5rem;
             height: 5rem;
             background: ${(props) => props.color || "black"};
