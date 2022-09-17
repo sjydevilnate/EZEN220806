@@ -16,11 +16,13 @@
     <xmp>
     Basic Routing 기법에 대해서 학습한다
 
-    https://reactrouter.com/web/guides/quick-start 사이트 참조.
+    v6: https://reactrouter.com/en/main/getting-started/overview 사이트 참조.
+    v5: https://v5.reactrouter.com/web/guides/quick-start 사이트 참조.
 
-
+    https://velog.io/@velopert/react-router-v6-tutorial
     https://velog.io/@soryeongk/ReactRouterDomV6
     https://velog.io/@ksmfou98/React-Router-v6-업데이트-정리
+    https://basemenks.tistory.com/248
 
     1. 컴포넌트 만들기
         Menu
@@ -30,14 +32,13 @@
         App
 
     2. 메뉴 설정 예제
-    Link나 NavLink 컴포넌트를 사용하여 작성.
-    새로고침이 발생하면 안된다. a 태그 사용 불가.
+    Link나 NavLink 컴포넌트를 사용하여 작성. a 태그 사용 불가.
 
     <div>
         <ul>
-            <li><NavLink activeClassName={'active'} activeStyle={{color:'red'}} exact to="/">Home</NavLink></li>
-            <li><NavLink activeClassName={'active'} activeStyle={{color:'red'}} exact to="/memo">Memo</NavLink></li>
-            <li><NavLink activeClassName={'active'} activeStyle={{color:'red'}} exact to="/topics">Topics</NavLink></li>
+            <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/">Home</NavLink></li>
+            <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/memo">Memo</NavLink></li>
+            <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/topics">Topics</NavLink></li>
         </ul>
     </div>
 
@@ -45,12 +46,19 @@
     <BrowserRouter>
         <Menu />
         <Switch>
-            <Route exact path="/" exact component={Home} />
-            <Route exact path="/memo" component={Memo} />
-            <Route exact path="/topics" component={Topics} />
+            <Route path="/" element={<Home />} />
+            <Route path="/memo" element={<Memo />} />
+            {/* 중첩 라우트(Nested Routing) 설정. 컴포넌트 안에서 중첩 Route 를 하고 싶다면 아래 코드처럼, 와일드카드를 써야 한다. */}
+            <Route path="/topics/*" element={<Topics />} />
             <Redirect path="*" to="/" />
         </Switch>
     </BrowserRouter>
+
+    4.
+
+
+
+
     </xmp>
 
     <hr>
@@ -59,11 +67,3 @@
     </div>
 </body>
 </html>
-
-
-
-
-
-
-
-

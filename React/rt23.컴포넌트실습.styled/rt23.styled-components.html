@@ -81,6 +81,12 @@
         $ npx -v                           #  npx(=npm extension) 버전 확인
         8.18.0
 
+        $ npm install -g npm@latest        #  npm 최신 버전 설치
+
+        $ npm install -g yarn@latest              #  yarn 설치. yarn은 페이스북에서 만든 npm.
+        $ yarn -v                          #  yarn 버전 확인
+        1.22.19
+
 
     step 1-02. 프로젝트 생성
 
@@ -98,32 +104,11 @@
 
         $ ls                                       # package.json 파일이 보이는지 확인
 
-        $ npm ls react                             # 설치된 react 버전 확인
-        ├─┬ @testing-library/react@13.3.0
-        │ └── react@18.2.0 deduped
-        ├─┬ react-dom@18.2.0
-        │ └── react@18.2.0 deduped
-        ├─┬ react-scripts@5.0.1
-        │ └── react@18.2.0 deduped
-        └── react@18.2.0
-
         $ npm run start                            # package.json 파일이 보이면 서버 실행
 
 
     step 1-03. 실행 중인 서버 중지하기
         터미널에서 "ctrl + c" 눌러 실행된 서버를 중지한다
-
-
-    step 1-04. 프로젝트 소스 커밋
-        $ ls                                  # package.json 파일이 보이는지 확인
-        $ git status                          # 파일 상태 확인
-        $ git add -AN                         #
-        $ git status                          # 파일 상태 확인
-        $ git commit -a -m '프로젝트 시작하기'     # 파일 commit
-        $ git status                          # 파일 상태 확인
-        $ git push                            #
-
-        github 사이트에서 소스가 올라갔는지 확인한다.
 
 
     step 1-22. prop-types 설치(필수)
@@ -168,25 +153,25 @@
 
 
     ##################################
-    10. 기능 설명
+    11. 기능 설명
     ##################################
     App.css 대신 styled-components 을 사용하는 인라인 스타링으로 바꾸어 보기
 
     ##################################
-    11. import css 방식을 styled-components 방식으로 바꾸기.
+    12. import css 방식을 styled-components 방식으로 바꾸기.
     ##################################
 
 
-    11-01. App.js 파일에 'styled-components' import
+    12-01. App.js 파일에 'styled-components' import
         import styled from 'styled-components';
 
-    11-02. App.js 파일 안의 내용을 StyledApp 만들기
+    12-02. App.js 파일 안의 내용을 StyledApp 만들기
 
         const StyledApp = styled.div`
 
         `;
 
-    11-03. App.css 파일 안의 내용을 StyledApp 안에 넣기
+    12-03. App.css 파일 안의 내용을 StyledApp 안에 넣기
         const StyledApp = styled.div`
             text-align: center;
 
@@ -226,35 +211,42 @@
             }
         `;
 
-    11-04. 실행 화면 확인
+    12-04. 실행 화면 확인
 
-    11-05. App.js 파일에서  css를 import 하는 부분을 찾아 삭제하도록 한다.
+    12-05. App.js 파일에서  css를 import 하는 부분을 찾아 삭제하도록 한다.
         import'./App.css'; 삭제
 
-    11-06. App.css 파일 삭제
+    12-06. App.css 파일 삭제
 
 
     ####################################
-    # 12. 아래 사이트를 참조하여 Circle 을 만들어 본다.
+    # 13. StyledCircle 컴포넌트를 만든다.
     ####################################
 
-        const Circle = styled.div`
-            width: 5rem;
-            height: 5rem;
-            background: ${(props) => props.color || "black"};
-            border-radius: 50%;
+        const StyledCircle = styled.div`
+          background: ${(props) => props.color || "black"};
+          border-radius: 50%;
 
-            ${(props) =>
+          width: 5rem;
+          height: 5rem;
+
+          ${(props) =>
             props.huge &&
             css`
-                width: 10rem;
-                height: 10rem;
+              width: 10rem;
+              height: 10rem;
             `}
         `;
 
-
-        <Circle color="red" huge />
-
+        function Circle() {
+          return (
+            <div>
+              <StyledCircle></StyledCircle>
+              <StyledCircle color={"aqua"} huge={false}></StyledCircle>
+              <StyledCircle color={"red"} huge={true}></StyledCircle>
+            </div>
+          );
+        }
 
     </xmp>
 

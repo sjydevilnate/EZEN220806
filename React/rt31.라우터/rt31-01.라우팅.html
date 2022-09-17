@@ -133,7 +133,7 @@
                     <tbody>
                         <tr>
                             <td rowspan="7">ReactRouter</td>
-                            <td>Router</td>
+                            <td>Router ★</td>
                             <td>히스토리 API를 사용하지 않는 라우터</td>
                         </tr>
                         <tr>
@@ -141,17 +141,24 @@
                             <td>요청 경로와 렌더링할 컴포넌트를 설정한다
                                 <xmp class="langjs">
 
-    <Route path='/login' component={Login}/>
-        <Route path='/login'>
-            Login />
+    <Route path='login' element={<Login />}/>
+        <Route path='login'>
+            Login
         </Route>
     <Route path="/login" render={(props) => (<Login authState={false} {...props} />)}/>
                                 </xmp>
                             </td>
                         </tr>
                         <tr>
-                            <td>IndexRoute</td>
-                            <td></td>
+                            <td>NavLink ★</td>
+                            <td>
+                                라우트 이동 + 새로고침 방지 기능 + active 기능<br>
+                                활성화된 Route 표시<br>
+                                activeStyle. ex) activeStyle={activeStyle}<br>
+                                activeClassName.
+                                ex) activeClassName={activeClassName}<br>
+                                &lt;NavLink to="url" activeClassName={activeClassName} activeStyle={activeStyle}&gt;&lt;/NavLink&gt;
+                            </td>
                         </tr>
                         <tr>
                             <td>Link</td>
@@ -161,23 +168,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>NavLink ★</td>
-                            <td>
-                                라우트 이동 + 새로고침 방지 기능 + 스타일이나 클래스 지정 기능<br>
-                                활성화된 Route 표시<br>
-                                activeStyle. ex) activeStyle={activeStyle}<br>
-                                activeClassName.
-                                ex) activeClassName={activeClassName}<br>
-                                &lt;NavLink to="url" activeClassName={activeClassName} activeStyle={activeStyle}&gt;&lt;/NavLink&gt;
-                            </td>
-                        </tr>
-                        <tr>
                             <td>IndexLink</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>Redirect  ★</td>
-                            <td>요청 경로를 다른 경로로 리다이렉션한다. 기본 Route 정의</td>
+                            <td>IndexRoute</td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td colspan="3" style="text-align:center;">
@@ -199,7 +195,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td>Switch ★</td>
+                            <td>Routes ★</td>
                             <td>하위에 라우터 중 하나를 선택한다</td>
                         </tr>
                         <tr>
@@ -215,11 +211,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td>useRouteMatch()</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>withRouter()</td>
+                            <td>useNavigate()</td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -313,6 +305,10 @@
                             <td>useHistory()</td>
                             <td></td>
                         </tr>
+                        <tr>
+                            <td>useNavigate()</td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </li>
@@ -330,9 +326,9 @@
                     <code class="langjs"><xmp class="langjs">
     <div>
         <ul>
-            <li><NavLink activeClassName={} activeStyle={} exact to="/">Home</NavLink></li>
-            <li><NavLink activeClassName={} activeStyle={} exact to="/memo">Memo</NavLink></li>
-            <li><NavLink activeClassName={} activeStyle={} exact to="/trash">Trash</NavLink></li>
+            <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} exact to="/">Home</NavLink></li>
+            <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} exact to="/memo">Memo</NavLink></li>
+            <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} exact to="/trash">Trash</NavLink></li>
         </ul>
     </div></xmp></code>
                 </pre>
@@ -342,21 +338,21 @@
                 <pre class="langjs">
                     <code class="langjs"><xmp class="langjs">
     <BrowserRouter>
-        <Switch>
-            <Route exact path="/" exact component={Home} />
-            <Route exact path="/memo" component={Memo} />
-            <Route exact path="/trash" component={Trash} />
-            <Redirect path="*" to="/" />
-        </Switch>
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/memo" element={<Memo />} />
+            <Route path="/trash" element={<Trash />} />
+            <Route path="*" to="/" />
+        </Routes>
     </BrowserRouter>
 
     <BrowserRouter>
-        <Switch>
-            <Route exact path="/"> <Home/> </Route>
-            <Route exact path="/memo"><Memo/></Route>
-            <Route exact path="/trash"><Trash/></Route>
-            <Redirect path="*" to="/" />
-        </Switch>
+        <Routes>
+            <Route path="/"> <Home/> </Route>
+            <Route path="/memo"><Memo/></Route>
+            <Route path="/trash"><Trash/></Route>
+            <Route path="*" to="/" />
+        </Routes>
     </BrowserRouter> </xmp> </code>
                 </pre>
             </li>
@@ -366,7 +362,7 @@
                     <li>url 에 인자를 넘기는 방법</li>
                     <li>
                         예시) /about/value/value2 형태<br>
-                        &lt;Route path="/about/:key/:key2" component={About} /&gt; <br>
+                        &lt;Route path="/about/:key/:key2" element={<About />} /&gt; <br>
                         props.match.params.key, props.match.params.key2 로 접근 가능
                     </li>
                 </ul>
@@ -375,7 +371,7 @@
                 </ul>
                 <pre class="langjs">
                     <code class="langjs">
-    &lt;Route path="/about/:name?/:city?" component={About}&gt;&lt;/Route&gt;
+    &lt;Route path="/about/:name?/:city?" element={<About />}&gt;&lt;/Route&gt;
 
     예시)
     http://localhost:3000/about

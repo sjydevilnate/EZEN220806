@@ -22,7 +22,7 @@
 
 
     프로젝트 생성 :
-        npx create-react-app 프로젝트명 --scripts-version 16.14.0
+        npx create-react-app 프로젝트명
 
 
     모듈(패키지) 추가
@@ -33,124 +33,85 @@
     ##################################
     step 1 create-react-app 프로젝트 생성 및 설정 작업
     ##################################
-        step 1-1. npx create-react-app -V                 # create-react-app 버전 확인
-        4.0.3
+        step 1-01. npx create-react-app -V                   # create-react-app 버전 확인
+        5.0.1
 
-        step 1-2. npx create-react-app routerprj01 --scripts-version 16.14.0              # React 프로젝트 생성. package.json 생성.
+        step 1-02. npx create-react-app routerprj01          # React 프로젝트 생성. package.json 생성.
             Creating a new React app.
             Installing packages. This might take a couple of minutes.
             Installing react, react-dom, and react-scripts with cra-template...
 
-        step 1-3. cd routerprj01                            # 폴더 이동
+        step 1-03. cd routerprj01                            # 폴더 이동
 
+        step 1-04. prop-types 설치(필수)
+            prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
 
-        step 1-4. package.json 수정
-            변경 전:
-            "dependencies": {
-                "react": "^17.0.1",
-                "react-dom": "^17.0.1",
-                "react-scripts": "4.0.3",
-            },
-            변경 후:
-            "dependencies": {
-                "react": "^16.8.6",
-                "react-dom": "^16.8.6",
-                "react-scripts": "4.0.3",
-            },
+            $ npm install --save prop-types
 
-        step 1-5. npm install                         # 다운로드 & node_modules 폴더 생성
+        step 1-05. styled-component
+            styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
 
+            $ npm install --save styled-components
 
-        step 1-6. install the Bootstrap 4
-            $ npm install bootstrap --save
-
-
-        step 1-7. 웹용 라우터 react-router-dom 패키지 설치
-            $ npm install react-router-dom --save
-
-
-        step 1-8. install React redux
-            $ npm install react-redux --save
-            $ npm install redux-thunk --save
-            $ npm install redux-saga --save
-            $ npm install --save-dev redux-devtools
-
-
-        step 1-9. Axios
+        step 1-06. Axios
             $ npm install axios --save
 
+        step 1-07. 웹용 라우터 react-router-dom 패키지 설치
+            $ npm install react-router-dom --save
 
-        step 1-10. npm install                         # 다운로드 & node_modules 폴더 생성
+        step 1-08. npm install                         # 다운로드 & node_modules 폴더 생성
 
-        step 1-11. npm run start                       # 프로젝트 실행
+        step 1-09. npm run start                       # 프로젝트 실행
 
-        step 1-12. npm run build                       # 웹팩 빌드. /dist/ 에 파일 만들어짐.
-
-
-        step 1-14.  NODE_PATH 설정.
-        프로젝트의 소스 루트 경로를 지정하는 설정
-        NODE_PATH 를 설정하면 import 할 때 상대 경로 대신 절대 경로를 사용할 수 있다.
-        이런 설정은 webpack의 resolve 기능을 사용하는데 , create-react-app 로 만든 프로젝트에서는
-        NODE_PATH로 설정된 경로를 자동으로 resolve하기 때문에 별도로 webpack 설정을 변경할 필요가 없습니다.
-
-        1-14-1. cross-env 설치
-        $ npm install --save cross-env
-
-        1-14-2. package.json 수정
-        변경 전:
-            "start": "react-scripts start",
-            "build": "react-scripts build",
-
-        변경 후:
-            "start": "cross-env NODE_PATH=src react-scripts start",
-            "build": "cross-env NODE_PATH=src react-scripts build",
-
-
-        step 1-16. 환경 설정
-            프로젝트 root에 .env 파일을 만들고 아래 내용을 추가 한다.
-            $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
-
-            .env 파일 내용 확인
-            $ cat .env
-            SKIP_PREFLIGHT_CHECK=true
-            PORT=15109
+        step 1-10. npm run build                       # 웹팩 빌드. /dist/ 에 파일 만들어짐.
 
 
     ##################################
     step 2. 프로젝트 폴더 구조
     ##################################
-        ├─ dist                     # 빌드 결과물 폴더
-        ├─ node_modules             # npm 모듈(패키지) 저장 폴더
-        ├─ public                   # 배포 버전을 빌드할 때 사용하는 파일
-        │   ├── favicon.ico
-        │   ├── index.html
-        │   ├── logo192.png
-        │   ├── logo512.png
-        │   ├── manifest.json
-        │   └── robots.txt
-        └── src                      # 소스 코드 폴더
-        │   ├── components           <== 폴더 추가
-        │   ├── pages                <== 폴더 추가
-        │   ├── App.css              <== 파일 삭제
-        │   ├── App.js
-        │   ├── App.test.js          <== 파일 삭제
-        │   ├── index.css
-        │   ├── index.js
-        │   ├── logo.svg             <== 파일 삭제
-        │   ├── reportWebVitals.js
-        │   └── setupTests.js
-        ├── README.md
-        ├── package.json
-        └── package-lock.json
+        |-- dist                     # 빌드 결과물 폴더
+        |-- node_modules             # npm 모듈(패키지) 저장 폴더
+        |-- public                   # 배포 버전을 빌드할 때 사용하는 파일
+        |   |---- favicon.ico
+        |   |---- index.html
+        |   |---- logo192.png
+        |   |---- logo512.png
+        |   |---- manifest.json
+        |   `---- robots.txt
+        |---- src                      # 소스 코드 폴더
+        |   |---- components           <== 폴더 추가
+        |   |---- pages                <== 폴더 추가
+        |   |---- App.css              <== 파일 삭제
+        |   |---- App.js
+        |   |---- App.test.js          <== 파일 삭제
+        |   |---- index.css
+        |   |---- index.js
+        |   |---- logo.svg             <== 파일 삭제
+        |   |---- reportWebVitals.js
+        |   `---- setupTests.js
+        |---- package.json
+        `---- README.md
 
-        $ mkdir src/components
-        $ mkdir src/pages
-        $ rm src/App.css
-        $ rm src/App.test.js
-        $ rm src/logo.svg
+        # 폴더 생성
+        $ mkdir -p src/components \
+                   src/pages
+
+        # 사용하지 않는 파일 삭제
+        $ rm src/App.css \
+             src/App.test.js \
+             src/logo.svg
+
+        # 파일 생성
+        $ touch src/components/About.js \
+                src/components/Home.js \
+                src/components/Memo.js \
+                src/components/Topics.js \
+                src/components/TopicDetail.js \
+                src/components/MenuHome.js \
+                src/pages/PageHome.js
 
     ##################################
-    step 3. create-react-app 프로젝트 routerprj03 생성 재실습
+    step 3. create-react-app 라우팅 설정 실습
     ##################################
 
     step 3-1. src/index.js 수정
@@ -166,9 +127,11 @@
         변경 후
         import { BrowserRouter } from "react-router-dom";
         ReactDOM.render(
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>,
+            <React.StrictMode>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </React.StrictMode>,
             document.getElementById("root")
         );
 
@@ -176,56 +139,107 @@
         function App() {
             return (
                 <div>
-                    리액트 라우터를 배워 봅니다.
+                    <PageHome />
                 </div>
             );
         }
 
 
     step 4. 컴포넌트 만들기
-    step 4-1. src/components/Home 컴포넌트 만들기
+        About
+        Home
+        Memo
+        Topics
+        TopicDetail
+        MenuHome
+        PageHome
+        App
 
+    step 4-1. About 컴포넌트 만들기
+        <div>
+            <h2 style={{}}> About</h2>
+            <p>
+                안녕하세요. 저는 "{this.props.match.params.name}" 입니다.
+            </p>
+        </div>
+
+    step 4-2. Home 컴포넌트 만들기
         <div>
             <h2>Home</h2>
         </div>
 
-    step 4-2. src/components/About 컴포넌트 만들기
-        PathVariable 과 QueryString 적용.
+    step 4-3. Memo 컴포넌트 만들기
         <div>
-            <h2> style={style1}> About</h2>
+            <h2>Memo</h2>
             <p>
                 안녕하세요. 저는 {this.props.match.params.name} 입니다.
             </p>
         </div>
 
-    step 4-3. src/components/Menu 컴포넌트 만들기
-        Link 와 NavLink 컴포넌트 학습
-        Link 컴포넌트는 라우트 이동과 새로고침 방지를 위해서 사용되는 컴포넌트다.
-        NavLink 컴포넌트는 Link 컴포넌트에 activeStyle 이나 activeClassName 을 적용할 수 있는 컴포넌트다.
+    step 4-4. Topics 컴포넌트 만들기
+        src/components/Topics
+
+        <div>
+            <h2>Topics</h2>
+        </div>
+
+    step 4-5. TopicDetail 컴포넌트 만들기
+        src/components/TopicDetail
+
+        <div>
+            <h2>Home</h2>
+        </div>
+
+    step 4-6. MenuHome 컴포넌트 만들기
+        src/components/Menu
+        메뉴 설정을 할 때는 Link나 NavLink 컴포넌트를 사용해야 한다. a 태그 사용하면 안됨
+        NavLink 컴포넌트는 Link 컴포넌트에 active를 적용할 수 있는 컴포넌트다.
+
         <div>
             <ul>
-                <li><Link to="/">홈</Link></li>
-                <li><Link to="/about">소개</Link></li>
-                <li><Link to="/about/react">소개 >> react</Link></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/">Home</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/memo">Memo</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/topics">Topics</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/about">소개</NavLink></li>
+                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/about/react">소개 >> react</NavLink></li>
             </ul>
+            <div>
+                <p>메뉴 설정을 할 때는 Link나 NavLink 컴포넌트를 사용해야 한다. a 태그를 사용하면 안됨</p>
+                <p>NavLink 컴포넌트는 Link 컴포넌트에 active 기능이 추가된 컴포넌트다.</p>
+            </div>
         </div>
 
 
-    step 4-4. src/App 컴포넌트 수정
+    step 4-7. PageHome 컴포넌트 수정
+        src/pages/PageHome
+        <div>
+            <MenuHome />
+            <ul>
+                <h2>URL 테스트</h2>
+                <li><a rel="noreferrer" target="_blank" href="/">http://localhost:3000/</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about">http://localhost:3000/about</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about/first">http://localhost:3000/about/first</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about/first/second">http://localhost:3000/about/first/second</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about/first/second/third">http://localhost:3000/about/first/second/third</a></li>
+                <li><a rel="noreferrer" target="_blank" href="/about/name?color=red">http://localhost:3000/about/name?color=red</a></li>
+            </ul>
+
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/memo" element={<Memo />} />
+                <Route path="/topics/*" element={<Topics />} />
+                <Route path="/about/:name/:name2" element={<About />}></Route>
+                <Route path="*" to="/" />
+            </Routes>
+        </div>
+
+
+    step 4-8. App.js 수정
+
     <div>
-        <Menu />
-        <Route exact path="/" component={Home}></Route>
-        <Route path="/about/:name?/:name2?" component={About}></Route>\
+        <PageHome />
     </div>
 
-
-    step 4-5. URL 테스트
-    http://localhost:3000/
-    http://localhost:3000/about
-    http://localhost:3000/about/first
-    http://localhost:3000/about/first/second
-    http://localhost:3000/about/first/second/third
-    http://localhost:3000/about/name?color=red;
 
     </xmp>
 

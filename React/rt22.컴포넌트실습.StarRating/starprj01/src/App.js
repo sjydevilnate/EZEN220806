@@ -1,13 +1,11 @@
-import './App.css';
-import RatingContaier from "./RatingContaier";
+import "./App.css";
+import RatingContainer from "./components/rating/RatingContainer";
 
 function App() {
   return (
-    <div>
-        <h2>App</h2>
-        <RatingContaier />
+    <div className="App">
+      <RatingContainer></RatingContainer>
     </div>
-
   );
 }
 

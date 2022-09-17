@@ -94,7 +94,7 @@
         CrudList
     ##################################
 
-    1-1. crud 컴포넌트 폴더 및 파일 만들기
+    1-01. crud 컴포넌트 폴더 및 파일 만들기
 
         # crud 컴포넌트 폴더 만들기
         $ mkdir -p src/components/crud
@@ -105,21 +105,20 @@
         $ touch src/components/crud/CrudList.js
 
 
-    1-2. crud 컴포넌트 트리 만들기
+    1-02. crud 컴포넌트 트리 만들기
         CrudContainer
             |-- CrudInput
             `-- CrudList
 
         실행 화면 확인
+        
 
-    1-3. CrudContainer 컴포넌트 만들기
+    1-03. 1차 폴더에 있는 reset.css 파일을 프로젝트폴더/public 으로 복사
 
-        1차 폴더에 있는 reset.css 파일을 프로젝트폴더/public 으로 복사
+    1-04. index.html 파일에 reset.css link 설정하기
+        <link rel="stylesheet" href="%PUBLIC_URL%/reset.css">
 
-        index.html 을 열고 아래 코드 추가
-            <link rel="stylesheet" href="%PUBLIC_URL%/reset.css">
-
-        function CrudContainer(props) {
+    1-05. CrudContainer 컴포넌트 만들기
 
             // JSX로 화면 만들기
             return (
@@ -130,9 +129,9 @@
             );
         }
 
-    1-4. CrudInput 컴포넌트 만들기
+    1-06. CrudInput 컴포넌트 만들기
 
-        function CrudInput(props) {
+        function CrudInput({}) {
             // JSX로 화면 만들기
             return (
                 <div>
@@ -159,12 +158,12 @@
             );
         }
 
-    1-5. CrudContainer 에 CrudInput 컴포넌트 추가하기
-        function CrudContainer(props) {
+    1-07. CrudContainer 에 CrudInput 컴포넌트 추가하기
+        function CrudContainer({}) {
 
             // JSX로 화면 만들기
             return (
-                <div>
+                <div id="app">
                     <h1>Creat Read Update Delete</h1>
                     <CrudInput></CrudInput>
                     <hr/>
@@ -179,9 +178,9 @@
             )
         }
 
-    1-6. CrudList 컴포넌트 만들기
+    1-08. CrudList 컴포넌트 만들기
 
-        function CrudList(props) {
+        function CrudList({}) {
 
             // JSX로 화면 만들기
             return (
@@ -211,8 +210,8 @@
             )
         }
 
-    1-7. CrudContainer 에 CrudList 컴포넌트 추가하기
-        function CrudContainer(props) {
+    1-09. CrudContainer 에 CrudList 컴포넌트 추가하기
+        function CrudContainer({}) {
 
             // JSX로 화면 만들기
             return (
@@ -225,9 +224,9 @@
             )
         }
 
-    1-8. CrudInput 컴포넌트 수정
+    1-10. CrudInput 컴포넌트 수정
 
-        function CrudInput(props) {
+        function CrudInput({}) {
 
             // ref 만들기. 예시) const refInput = useRef();
             const refInputName  = useRef(null);
@@ -263,21 +262,13 @@
         }
 
     ##################################
-    작업 2
-    ##################################
-    2. CrudList 에서 CrudListItem 분리하기
+    작업 2. CrudList 에서 CrudListItem 분리하기
         CrudList
         CrudListItem
-
+    ##################################
         2-1. CrudListItem 컴포넌트 만들기
 
-        function CrudListItem( {
-            item,
-            callbackDel,
-            callbackUp,
-            callbackDown,
-            callbackSave
-        } ) {
+        function CrudListItem({ }) {
 
             // JSX로 화면 만들기
             render() {
@@ -297,7 +288,7 @@
 
         2-2. CrudList 에 CrudListItem 추가하기
 
-        function CrudList(props) {
+        function CrudList({ }) {
 
             // JSX로 화면 만들기
             return (
@@ -323,7 +314,7 @@
              props.item 를 통해 {id, name, power} 를 받는 코드를 완성한다.
 
 
-        function CrudList(props) {
+        function CrudList({ }) {
 
             // JSX로 화면 만들기
             const item = {
@@ -355,10 +346,6 @@
 
             function CrudListItem({
                 item,
-                callbackDel,
-                callbackUp,
-                callbackDown,
-                callbackSave
             }) {
 
                 // JSX로 화면 만들기
@@ -379,9 +366,9 @@
                 }
             }
 
-        2-5. CrudListItem 에 onClick 기능 추가하기
+        2-5. CrudListItem 에 onClick 이벤트 핸들러 추가하기
 
-            function CrudListItem( props ) {
+            function CrudListItem({ items }) {
 
                 // 이벤트 핸들러 작성.
                 const handlerDel = (event)=>{
@@ -443,10 +430,6 @@
 
         function CrudList({
             items,
-            callbackDel,
-            callbackUp,
-            callbackDown,
-            callbackSave
         }) {
             const arrs = items.map( (item)=>{
                 return (
@@ -482,51 +465,72 @@
     작업 3 CrudContainer 컴포넌트 수정하기
     ##############################
 
-        3-1. CrudListItem 에 callback 호출 기능을 추가하기
+        3-1. CrudContainer 에 상태값( items ) 과 콜백 메서드 정의하기 
+        function CrudContainer(props) {
 
-        function CrudListItem({
-            item,
-            callbackDel,
-            callbackUp,
-            callbackDown,
-            callbackSave
-        }) {
+            const [items, setItems] = useState([
+                {id:1, name: "슈퍼맨", power: 100},
+                {id:2, name: "아쿠아맨", power: 300},
+                {id:3, name: "스파이더맨", power: 500},
+                {id:4, name: "배트맨", power: 30},
+            ]);
 
-            // 이벤트 핸들러 작성.
-            const handlerDel = (event)=>{
-                ...중략
-            };
-            const handlerUp = (event)=>{
-                ...중략
-            };
-            const handlerDown = (event)=>{
-                ...중략
-            };
-            const handlerEdit = (event)=>{
-                ...중략
-            };
+            const callbackDel = useCallback( (item) => {
+                // items 배열에서 삭제. Array.filter() 를 사용한다
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            const callbackUp = useCallback( (item) => {
+                //100씩 증가. Array.map() 을 사용한다
+                // item.power = item.power + 100;
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            const callbackDown = useCallback( (item) => {
+                // 50씩 감소.  Array.map() 을 사용한다
+                // item.power = item.power - 50;
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            const callbackSave = useCallback( (item) => {
+                // newitem 으로 바뀐 새로운 배열 만들기. Array.map() 을 사용한다
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            const callbackAdd = useCallback( (newitem) => {
+                // items에서 최대 id 값을 구하는 방법.
+                // 방법1. items.map()과 items.reduce()를 사용하여 max id를 찾는 방법
+                // items.push(param);
+                // ...생략
+            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+
+            ...이하 생략 
+        }
+
+        3-2. CrudContainer 에서 5개의 callback 메서드 props 내림 설정한다.
+        function CrudContainer() {
+            ... 중략
 
             // JSX로 화면 만들기
-            let strong = "";
-            if( props.item.power >=300 ) strong = "strong";
-            render() {
-                <tr className={strong}>
-                    <td>{item.id}</td>
-                    <td>{item.name}</td>
-                    <td>{item.power}</td>
-                    <td>
-                        <button type="button" onClick={handlerDel}>Del</button>
-                        <button type="button" onClick={handlerUp}>Power Up</button>
-                        <button type="button" onClick={handlerDown}>Power Down</button>
-                        <button type="button" onClick={handlerEdit}>Edit</button>
-                    </td>
-                </tr>
-            }
+            return (
+                <div id="app">
+                  <h1>Creat Read Update Delete</h1>
+                  <CrudInput callbackAdd={callbackAdd}></CrudInput>
+                  <hr />
+                  <CrudList
+                    items={items}
+                    callbackDel={callbackDel}
+                    callbackUp={callbackUp}
+                    callbackDown={callbackDown}
+                    callbackSave={callbackSave}
+                  ></CrudList>
+                </div>
+            );
+
         }
 
 
-        3-2. CrudList 에 callback 호출 기능을 추가하기
-
+        3-3. CrudList 에 callback 메서드 props 내림 기능 추가하기
         function CrudList({
             items,
             callbackDel,
@@ -566,62 +570,65 @@
             )
         }
 
+        3-4. CrudListItem 컴포넌트에 callback 메서드 호출 기능을 추가하기
+        function CrudListItem({
+            item,
+            callbackDel,
+            callbackUp,
+            callbackDown,
+            callbackSave
+        }) {
 
-        3-3. CrudContainer 콜백 메서드 정의
-        function CrudContainer(props) {
+            // 이벤트 핸들러 작성.
+            const handlerDel = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만든다
+                console.log(event.target);
 
-            const callbackDel = useCallback( (item) => {
-                // items 배열에서 삭제. Array.filter() 를 사용한다
-                // ...생략
-            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+                // 부모의 콜백 메서드 호출.
+                // CrudContainer.callbackDel();
+                callbackDel();
+            };
+            const handlerUp = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만든다
+                console.log(event.target);
 
-            const callbackUp = useCallback( (item) => {
-                //100씩 증가. Array.map() 을 사용한다
-                // item.power = item.power + 100;
-                // ...생략
-            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+                // 부모의 콜백 메서드 호출.
+                // CrudContainer.callbackUp();
+                callbackUp();
+            };
+            const handlerDown = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만든다
+                console.log(event.target);
 
-            const callbackDown = useCallback( (item) => {
-                // 50씩 감소.  Array.map() 을 사용한다
-                // item.power = item.power - 50;
-                // ...생략
-            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
+                // 부모의 콜백 메서드 호출.
+                // CrudContainer.callbackDown();
+                callbackDown();
+            };
+            const handlerEdit = (event)=>{
+                // 이벤트 핸들러는 화살표 함수로 만든다
+                console.log(event.target);
+            };
 
-            const callbackSave = useCallback( (item) => {
-                // newitem 으로 바뀐 새로운 배열 만들기. Array.map() 을 사용한다
-                // ...생략
-            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
-
-            const callbackAdd = useCallback( (newitem) => {
-                // items에서 최대 id 값을 구하는 방법.
-                // 방법1. items.map()과 items.reduce()를 사용하여 max id를 찾는 방법
-                // items.push(param);
-                // ...생략
-            }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
-
-            ...이하 중략
+            // JSX로 화면 만들기
+            let strong = "";
+            if( props.item.power >=300 ) strong = "strong";
+            render() {
+                <tr className={strong}>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.power}</td>
+                    <td>
+                        <button type="button" onClick={handlerDel}>Del</button>
+                        <button type="button" onClick={handlerUp}>Power Up</button>
+                        <button type="button" onClick={handlerDown}>Power Down</button>
+                        <button type="button" onClick={handlerEdit}>Edit</button>
+                    </td>
+                </tr>
+            }
         }
 
-        3-5. CrudContainer 에서 5개의 callback 메서드 props 내림 설정한다.
-        function CrudContainer() {
-            return (
-                <div id="app">
-                    <h1>Creat Read Update Delete</h1>
-                    <CrudInput callbackAdd={callbackAdd}>
-                    </CrudInput>
-                    <hr/>
-                    <CrudList items={items}
-                              callbackDel={callbackDel}
-                              callbackUp={callbackUp}
-                              callbackDown={callbackDown}
-                              callbackSave={callbackSave}
-                    >
-                    </CrudList>
-                </div>
-            )
-        }
 
-        3-6. CrudInput 에서callback 메서드 호출 기능을 구현한다.
+        3-5. CrudInput 에 callback 메서드 호출 기능 추가하기
         function CrudInput({
             callbackAdd,
         }) {
@@ -634,31 +641,8 @@
             ...중략
         }
 
-        3-7. CrudListItem 에서 callback 메서드 호출 기능을 구현한다.
-        function CrudListItem(props) {
 
-            ...중략
-
-            // 이벤트 핸들러 작성.
-            const handlerDel = (event)=>{
-                // 부모의 콜백 메서드 호출.
-                callbackDel();
-            };
-            const handlerUp = (event)=>{
-                // 부모의 콜백 메서드 호출.
-                callbackUp();
-            };
-            const handlerDown = (event)=>{
-                // 부모의 콜백 메서드 호출.
-                callbackDown();
-            };
-            const handlerEdit = (event)=>{
-                // 이벤트 핸들러는 화살표 함수로 만든다
-                console.log(event.target);
-            };
-        }
-
-        3-8. 이벤트 핸들러 작동 여부 확인하다.
+        3-6. 이벤트 핸들러 동작 여부 확인하다.
 
 
 
@@ -666,15 +650,8 @@
     작업 5. CrudInput 컴포넌트 기능 추가
     ##############################
 
-        5-1. CrudContainer 컴포넌트 JSX 수정
-            변경 전
-            <CrudInput></CrudInput>
-
-            변경 후
-            <CrudInput callbackAdd={callbackAdd}></CrudInput>
-
-        5-2. CrudInput 컴포넌트에 input 태그 관련 설정.
-            ref 설정. input 태그에 입력된 값을 가져오기 위해서
+        5-1. CrudInput 컴포넌트의 input 태그에 ref 설정. 
+            ref 는 input 태그에 입력된 값을 가져오기 위해서 사용된다
             refInputName
             refInputPower
 
@@ -710,13 +687,13 @@
                 );
             }
 
-        5-3. CrudInput 컴포넌트의 "Add" 버튼에 클릭 이벤트 핸들러 설정. handlerAdd
+        5-2. CrudInput 컴포넌트의 "Add" 버튼에 클릭 이벤트 핸들러 설정. handlerAdd
             Name 유효성 검사
             Power 유효성 검사
             부모 메서드 props.callbackAdd() 호출
             input 태그에 남아있는 입력값 지우기.
 
-        5-4. CrudContainer 컴포넌트에 콜백 메서드 callbackAdd 만들기
+        5-3. CrudContainer 컴포넌트에 콜백 메서드 callbackAdd 만들기
 
             items에서 최대 id 값을 구하는 방법.
             items.push(param);
@@ -747,7 +724,9 @@
     작업 6. CrudListItem 컴포넌트 만들기
     ##############################
 
-        6-1. power가 300이상인 사람은 글자색을 red로 bold스타일로 출력하세요.
+        6-1. power가 300 이상인 사람은 글자색을 red, bold 로 출력되게 css를 적용하시오.
+            let strong = "";
+            if( item.power >=300 ) strong = "strong";
 
         6-2. 편집여부를 확인하기 위한 상태값(state) isEditMode 만들기
             const [isEditMode, setIsEditMode] = useState(false);
