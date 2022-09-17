@@ -12,6 +12,9 @@
 
     <!-- CSS import -->
     <link rel="stylesheet" href="../css/reset.css">
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
@@ -67,6 +70,16 @@ d
     $ touch src/components/rating/Color.js
     $ touch src/components/rating/StarRating.js
     $ touch src/components/rating/Star.js
+
+
+    # rating 컴포넌트 트리 만들기
+
+
+    # 중복 태그를 컴포넌트로 만들기
+    Color 컴포넌트
+    Start 컴포넌트
+
+
 
     # src/App.js 수정
         import 설정
@@ -218,6 +231,79 @@ d
         </div>
     </xmp>
 
+    <hr />
+
+    <div id="root">
+        <div class="app">
+          <div class="rating-container">
+            <div class="color-list">
+            <section class="color">
+              <h1>바닷빛 파랑</h1>
+              <button>X</button>
+              <div class="color" style="background-color: rgb(0, 112, 255)"></div>
+              <div>
+                <div class="star-rating">
+                  <div class="star selected"></div>
+                  <div class="star selected"></div>
+                  <div class="star selected"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <p>별점: 3 / 5</p>
+                </div>
+              </div>
+            </section>
+            <section class="color">
+              <h1>토마토</h1>
+              <button>X</button>
+              <div class="color" style="background-color: rgb(209, 0, 18)"></div>
+              <div>
+                <div class="star-rating">
+                  <div class="star selected"></div>
+                  <div class="star selected"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <p>별점: 2 / 5</p>
+                </div>
+              </div>
+            </section>
+            <section class="color">
+              <h1>잔디</h1>
+              <button>X</button>
+              <div
+                class="color"
+                style="background-color: rgb(103, 191, 79)"
+              ></div>
+              <div>
+                <div class="star-rating">
+                  <div class="star selected"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <div class="star"></div>
+                  <p>별점: 1 / 5</p>
+                </div>
+              </div>
+            </section>
+            <section class="color">
+              <h1>파티 핑크</h1>
+              <button>X</button>
+              <div class="color" style="background-color: rgb(255, 0, 247)"></div>
+              <div>
+                <div class="star-rating">
+                  <div class="star selected"></div>
+                  <div class="star selected"></div>
+                  <div class="star selected"></div>
+                  <div class="star selected"></div>
+                  <div class="star selected"></div>
+                  <p>별점: 5 / 5</p>
+                </div>
+              </div>
+            </section>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 
 </html>
