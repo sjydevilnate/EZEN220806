@@ -88,8 +88,7 @@
 
 
     ##################################
-    작업 1
-        html 화면을 컴포넌트 단위로 쪼기기
+    작업 1. html 화면을 컴포넌트 단위로 쪼개기
         CrudContainer
         CrudInput
         CrudList
@@ -108,10 +107,17 @@
 
     1-2. crud 컴포넌트 트리 만들기
         CrudContainer
-        CrudInput
-        CrudList
+            |-- CrudInput
+            `-- CrudList
+
+        실행 화면 확인
 
     1-3. CrudContainer 컴포넌트 만들기
+
+        1차 폴더에 있는 reset.css 파일을 프로젝트폴더/public 으로 복사
+
+        index.html 을 열고 아래 코드 추가
+            <link rel="stylesheet" href="%PUBLIC_URL%/reset.css">
 
         function CrudContainer(props) {
 
@@ -265,9 +271,13 @@
 
         2-1. CrudListItem 컴포넌트 만들기
 
-        function CrudListItem( props ) {
-
-            const {item, callbackDel, callbackUp, callbackDown, callbackSave} = props;
+        function CrudListItem( {
+            item,
+            callbackDel,
+            callbackUp,
+            callbackDown,
+            callbackSave
+        } ) {
 
             // JSX로 화면 만들기
             render() {
@@ -343,12 +353,15 @@
         2-4. CrudListItem 에 props 기능 추가하기
             power가 300이상인 사람은 글자색을 red, bold 로 출력되게 css를 적용하시오.
 
-            function CrudListItem( props ) {
-
-                const {item, callbackDel, callbackUp, callbackDown, callbackSave} = props;
+            function CrudListItem({
+                item,
+                callbackDel,
+                callbackUp,
+                callbackDown,
+                callbackSave
+            }) {
 
                 // JSX로 화면 만들기
-                const {item} = props;
                 let strong = "";
                 if( item.power >=300 ) strong = "strong";
                 render() {
@@ -404,7 +417,7 @@
             }
 
         2-6. CrudContainer 에 items 상태값(변수)을 정의하고 items 상태값을 props 로 내린다.
-            function CrudContainer(props) {
+            function CrudContainer({}) {
 
                 const [items, setItems] = useState([
                     {id:1, name: "슈퍼맨", power: 100},
@@ -418,9 +431,7 @@
                         <h1>Creat Read Update Delete</h1>
                         <CrudInput></CrudInput>
                         <hr/>
-                        <CrudList {...props}
-                                  items={items}
-                        >
+                        <CrudList items={items}>
                         </CrudList>
                     </div>
                 )
@@ -428,12 +439,15 @@
 
         2-7. CrudList 에 JSX 반복문 코드를 추가 추가하기
 
-        "rt12-11.JSX.반복문.html"를 참고하여 JSX 반복문 코드를 추가 하시오.
+        "rt12-17.JSX.반복문.html"를 참고하여 JSX 반복문 코드를 추가 하시오.
 
-        function CrudList(props) {
-
-            // JSX로 화면 만들기
-            const {items, callbackDel, callbackUp, callbackDown, callbackSave} = props;
+        function CrudList({
+            items,
+            callbackDel,
+            callbackUp,
+            callbackDown,
+            callbackSave
+        }) {
             const arrs = items.map( (item)=>{
                 return (
                     <CrudListItem
@@ -445,6 +459,7 @@
                 )
             });
 
+            // JSX로 화면 만들기
             return (
                 <table>
                     <thead>
@@ -469,9 +484,13 @@
 
         3-1. CrudListItem 에 callback 호출 기능을 추가하기
 
-        function CrudListItem( props ) {
-
-            const {item, callbackDel, callbackUp, callbackDown, callbackSave} = props;
+        function CrudListItem({
+            item,
+            callbackDel,
+            callbackUp,
+            callbackDown,
+            callbackSave
+        }) {
 
             // 이벤트 핸들러 작성.
             const handlerDel = (event)=>{
@@ -506,19 +525,21 @@
         }
 
 
-        3-2. CrudList 에 에 callback 호출 기능을 추가하기
+        3-2. CrudList 에 callback 호출 기능을 추가하기
 
-        function CrudList(props) {
-
-            const {items, callbackDel, callbackUp, callbackDown, callbackSave} = props;
-
+        function CrudList({
+            items,
+            callbackDel,
+            callbackUp,
+            callbackDown,
+            callbackSave
+        }) {
             // JSX로 화면 만들기
             const arrs = items.map( (item)=>{
                 return (
                     <CrudListItem
-                        {...props}
-                        item={item}
                         key={item.id}
+                        item={item}
                         callbackDel={callbackDel}
                         callbackUp={callbackUp}
                         callbackDown={callbackDown}
@@ -573,7 +594,7 @@
 
             const callbackAdd = useCallback( (newitem) => {
                 // items에서 최대 id 값을 구하는 방법.
-                // 방법1. todoItems.map()과 todoItems.reduce()를 사용하여 max id를 찾는 방법
+                // 방법1. items.map()과 items.reduce()를 사용하여 max id를 찾는 방법
                 // items.push(param);
                 // ...생략
             }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
@@ -582,16 +603,14 @@
         }
 
         3-5. CrudContainer 에서 5개의 callback 메서드 props 내림 설정한다.
-        function CrudContainer(props) {
-
+        function CrudContainer() {
             return (
                 <div id="app">
                     <h1>Creat Read Update Delete</h1>
                     <CrudInput callbackAdd={callbackAdd}>
                     </CrudInput>
                     <hr/>
-                    <CrudList {...props}
-                              items={items}
+                    <CrudList items={items}
                               callbackDel={callbackDel}
                               callbackUp={callbackUp}
                               callbackDown={callbackDown}
@@ -603,12 +622,14 @@
         }
 
         3-6. CrudInput 에서callback 메서드 호출 기능을 구현한다.
-        function CrudInput(props) {
+        function CrudInput({
+            callbackAdd,
+        }) {
             ...중략
             // 이벤트 핸들러 작성.
             const handlerAdd = (event)=>{
                 // 부모 콜백 메서드 호출
-                props.callbackAdd();
+                callbackAdd();
             };
             ...중략
         }
@@ -621,15 +642,15 @@
             // 이벤트 핸들러 작성.
             const handlerDel = (event)=>{
                 // 부모의 콜백 메서드 호출.
-                props.callbackDel();
+                callbackDel();
             };
             const handlerUp = (event)=>{
                 // 부모의 콜백 메서드 호출.
-                props.callbackUp();
+                callbackUp();
             };
             const handlerDown = (event)=>{
                 // 부모의 콜백 메서드 호출.
-                props.callbackDown();
+                callbackDown();
             };
             const handlerEdit = (event)=>{
                 // 이벤트 핸들러는 화살표 함수로 만든다
@@ -702,7 +723,7 @@
 
             const callbackAdd = useCallback( (newitem)=>{
                 // items에서 최대 id 값을 구하는 방법.
-                // 방법1. todoItems.map()과 todoItems.reduce()를 사용하여 max id를 찾는 방법
+                // 방법1. items.map()과 items.reduce()를 사용하여 max id를 찾는 방법
                 let maxid = 0;
                 if( items.length>0){
                     maxid = items.map( item=>item.id )
