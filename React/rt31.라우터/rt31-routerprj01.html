@@ -111,10 +111,14 @@
                 src/pages/PageHome.js
 
     ##################################
-    step 3. create-react-app 라우팅 설정 실습
+    step 3. 라우팅 설정
     ##################################
 
-    step 3-1. src/index.js 수정
+    step 3-1. 폴더 및 파일 생성
+    $ mkdir -p ./src/pages
+    $ touch src/pages/PageHome.js
+
+    step 3-2. src/index.js 수정
         변경 전
         ReactDOM.render(
             <React.StrictMode>
@@ -135,7 +139,8 @@
             document.getElementById("root")
         );
 
-    step 3-2. src/App.js 수정
+    step 3-3. src/App.js 수정
+        import PageHome from './pages/PageHome';
         function App() {
             return (
                 <div>
@@ -145,7 +150,9 @@
         }
 
 
+    ##################################
     step 4. 컴포넌트 만들기
+    ##################################
         About
         Home
         Memo

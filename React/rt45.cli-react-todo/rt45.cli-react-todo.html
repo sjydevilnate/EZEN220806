@@ -25,6 +25,8 @@
     1. 작업 개요
     ##################################
 
+
+
     ##################################
     2. 프로젝트 생성 작업
        소요시간: 20분
@@ -44,14 +46,6 @@
 
     step 1-02. 프로젝트 생성
 
-        $ npm uninstall -g create-react-app        # 전역으로 설치된 create-react-app 모듈 삭제하기
-
-        $ npx clear-npx-cache                      # npx 로 다운로드된 캐쉬되어 있는 모듈 삭제
-        Need to install the following packages:
-          clear-npx-cache
-        Ok to proceed? (y) y
-        ....
-
         $ npx create-react-app todoprj01        # 프로젝트명은 소문자로 만들어야 함.
         Need to install the following packages:
           create-react-app
@@ -60,65 +54,8 @@
         5분 소요
         ...
 
-        $ ls                                       # todoprj01 폴더가 보이는지 확인
-        $ cd todoprj01                             # todoprj01 폴더로 이동
-        $ ls                                       # package.json 파일이 보이는지 확인
-        $ npm install --save react@17.0.2          # react 17 버전으로 다운사이징. 최신 react 버전 18
-        $ npm install --save react-dom@17.0.2      # react 17 버전으로 다운사이징. 최신 react 버전 18
-        $ npm ls react                             # 설치된 react 버전 확인
-        $ npm run start                            # package.json 파일이 보이면 서버 실행
-
     step 1-03. 실행 중인 프로세스 중지
         터미널에서 "ctrl + c" 눌러 실행된 서버를 중지한다
-
-
-    step 1-04. 프로젝트 소스 커밋
-        $ ls                                  # package.json 파일이 보이는지 확인
-        $ git status                          # 파일 상태 확인
-        $ git add -AN                         #
-        $ git status                          # 파일 상태 확인
-        $ git commit -a -m '프로젝트 시작하기'     # 파일 commit
-        $ git status                          # 파일 상태 확인
-        $ git push                            #
-
-        github 사이트에서 소스가 올라갔는지 확인한다.
-
-    step 1-11. babel 모듈 설치
-        https://babeljs.io/docs/en/babel-preset-env-standalone
-        https://babeljs.io/docs/en/babel-preset-react
-        https://webpack.js.org/loaders/
-
-        $ npm install --save-dev @babel/core @babel/cli
-        $ npm install --save-dev @babel/preset-env
-        $ npm install --save-dev @babel/preset-react
-        $ npm install --save-dev babel-loader
-
-
-    step 1-12. Jasmine 기반의 테스트 프레임워크 jest 설치
-        https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/
-        https://github.com/facebook/jest/issues/3750
-        https://testing-library.com/docs/react-testing-library/intro/
-
-        jest 는 코드가 제대로 동작하는지 확인하는 Jasmine 기반의 '테스팅 프레임워크' 입니다.
-        jest-cli 는 단일 파일만 테스트 하는 경우에 사용합니다.
-        @testing-library는 실제 react-dom 위에서 동작하는 DOM 테스팅 라이브러리 (DOM Testing Library) 이다.
-
-        $ npm install --save-dev jest
-        $ npm install --save-dev jest-cli
-        $ npm install --save-dev @types/jest
-        $ npm install --save-dev babel-jest
-        $ npm install --save-dev @testing-library/react
-        $ npm install --save-dev @testing-library/jest-dom
-        $ npm install --save-dev @testing-library/user-event
-
-    step 1-13. supertest 모듈 설치
-        $ npm install --save-dev supertest
-
-    step 1-14. superagent 모듈 설치
-        $ npm install --save-dev supertest superagent
-
-    step 1-15. nodemon 모듈 설치
-        $ npm install --save-dev nodemon
 
 
     step 1-21. prop-types 설치(필수)
@@ -139,36 +76,6 @@
         react-router-dom: 브라우저에서 사용되는 react-router 라이브러리. 필수
 
         $ npm install --save react-router react-router-dom
-
-
-    step 1-24. 리덕스 설치(필수)
-        redux : redux를 사용할 수있게 하는 라이브러리
-        react-redux : react에서 redux를 사용할 수있게 하는 라이브러리
-        redux-actions : redux용 action을 정의하기 위한 라이브러리
-        redux-logger : redux용 로깅 처리를 위한 미들웨어 라이브러리
-
-        $ npm install --save redux react-redux redux-logger redux-actions
-
-
-    step 1-25. redux-saga 설치(필수)
-        redux-saga : redux에서 비동기로 액션을 처리하는 미들웨어
-
-        $ npm install --save redux-saga
-
-
-    step 1-26. 비동기 처리(필수)
-        axios : rest api 호출 라이브러리
-
-        $ npm install --save axios
-
-
-    step 1-27. immer 설치(필수)
-        immer : 리덕스 store state 를 불변 객체(읽기 전용)로 처리할 때 사용되는 라이브러리
-
-        $ npm install --save immer
-
-
-
 
 
 
@@ -192,6 +99,7 @@
         "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
 
 
+
     ##################################
     3. 프로젝트 폴더 구조
        소요시간: 05분
@@ -201,10 +109,6 @@
     |-- build                    # 빌드된 결과물이 저장되는 폴더. 서버로 배포되는 파일들.
     |-- node_modules             # npm 모듈(패키지) 저장 폴더
     |-- public                   # 배포 버전을 빌드할 때 사용하는 파일.
-    |   |-- assets (기타 자원)
-    |   |   |-- images (이미지)
-    |   |   |-- styles (스타일시트)
-    |   |   `-- text
     |   |-- favicon.ico
     |   |-- index.html
     |   |-- logo192.png
@@ -216,25 +120,16 @@
     |   |-- components (공통 프리젠테이션 컴포넌트)
     |   |-- containers           # 폴더 생성
     |   |    `-- todo
-    |   |       |-- components   (CrudContainer 에서만 사용되는 프리젠테이션 컴포넌트 폴더)
-    |   |       |   |-- TodoHeader.js       # 파일 생성.
-    |   |       |   |-- TodoInput.js        # 파일 생성.
-    |   |       |   |-- TodoList.js         # 파일 생성.
-    |   |       |   `-- TodoFooter.js       # 파일 생성.
-    |   |       |-- action.js    (액션상수,액션함수 정의)
-    |   |       |-- api.js       (외부 API 호출)
-    |   |       |-- saga.js      (외부 API 호출 saga)
-    |   |       |-- reducer.js   (리덕스 리듀서)
-    |   |       |-- TodoContainer.js     (컴포넌트 UI )
-    |   |       `-- TodoContainer.css   (CrudContainer 에서만 사용되는 css 파일)
+    |   |       |-- components   (todo 에서만 사용되는 프리젠테이션 컴포넌트 폴더)
+    |   |       |   |-- TodoHeader.js       # 컴포넌트 파일 생성.
+    |   |       |   |-- TodoInput.js        # 컴포넌트 파일 생성.
+    |   |       |   |-- TodoList.js         # 컴포넌트 파일 생성.
+    |   |       |   `-- TodoFooter.js       # 컴포넌트 파일 생성.
+    |   |       `-- TodoContainer.js     (컴포넌트 UI )
     |   |-- constant (상수)
-    |   |-- models (데이터 모델 변수, 타입)
     |   |-- pages (페이지 컴포넌트)
-    |   |-- reducers (리듀서)
     |   |   `-- index.js
     |   |-- routes (라우팅)
-    |   |   `-- index.js
-    |   |-- store (라우팅)
     |   |   `-- index.js
     |   |-- utils (유틸리티 모듈)
     |   |-- App.css
@@ -245,367 +140,30 @@
     |   |-- logo.svg
     |   |-- reportWebVitals.js
     |   `-- setupTests.js
-    |-- .babelrc
     |-- .gitignore
-    |-- .env
-    |-- .prettierrc
-    |-- eslintrc.json
-    |-- jsconfig.json
     |-- package.json
     `-- README.md
 
 
     3-1. 프로젝트용 공통 폴더 생성
-      $ mkdir -p ./public/assets \
-              ./public/assets/images \
-              ./public/assets/styles \
-              ./public/assets/text
-
-      $ mkdir -p ./src/common \
-              ./src/components \
-              ./src/containers \
-              ./src/constant \
-              ./src/models \
-              ./src/pages \
-              ./src/reducers \
-              ./src/routes \
-              ./src/store \
-              ./src/utils
-
-    3-2. 프로젝트용 공통 파일 생성
-      $ touch  .babelrc  .env  .prettierrc  eslintrc.json  jsconfig.json
-
-      $ touch ./src/reducers/index.js \
-              ./src/routes/index.js \
-              ./src/store/index.js
-
-    3-3. .babelrc 파일 생성 후 내용 추가
-      $ echo -e "{\n}" > .babelrc
-      $ cat .babelrc
-
-    3-4. .env 파일 생성 후 내용 추가
-      $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
-      $ cat .env
-
-    3-5. .prettierrc 파일 생성 후 내용 추가
-      $ echo -e "{\n}" > .prettierrc
-      $ cat .prettierrc
-
-    3-6. eslintrc.json 파일 생성 후 내용 추가
-      $ echo -e "{\n}" > eslintrc.json
-      $ cat eslintrc.json
-
-    3-7. jsconfig.json 파일 생성 후 내용 추가
-      $ echo -e "{\n}" > jsconfig.json
-      $ cat jsconfig.json
-
-
-    ##################################
-    4. 프로젝트 환경 설정
-       소요시간: 15분
-    ##################################
-
-    프로젝트
-    |-- ... 생략
-    |-- .babelrc
-    |-- .gitignore
-    |-- .env
-    |-- .prettierrc
-    |-- eslintrc.json
-    |-- package.json
-    `-- README.md
-
-    4-1 .babelrc 설정
-
-        .babelrc 파일을 프로젝트 루트에 만들기
-        $ touch .babelrc
-
-        {
-            "presets": [
-                [
-                    "react-app",
-                ],
-                [
-                    "@babel/preset-env",
-                    {
-                        "modules": false,
-                        "targets": {
-                            "node": "current",
-                            "chrome": "79", // 크롬 79까지 지원하는 코드를 만든다
-                        }
-                    }
-                ],
-                [
-                    "@babel/preset-react",
-                    {
-                        "development": process.env.BABEL_ENV === "development",
-                        "pragma": "dom", // default pragma is React.createElement (only in classic runtime)
-                        "pragmaFrag": "DomFrag", // default is React.Fragment (only in classic runtime)
-                        "throwIfNamespace": false, // defaults to true
-                        "runtime": "classic" // defaults to classic
-                        // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
-                    }
-                ]
-            ]
-        }
-
-    4-2. 포트 변경 설정
-        react는 기본적으로 포트 3000 을 사용하는데 다른 포트로 변경할 수 있다.
-        기본 포트 3000 대신 15109 포트를 사용하도록 설정
-
-        현재 작업하는 폴더 위치 확인
-        $ pwd
-
-        파일 목록 출력
-        $ ls    # package.json 파일이 보이는지 확인
-
-        .env 파일을 프로젝트 루트에 만들기
-        $ touch .env
-
-        .env  파일에 아래 내용 추가
-        $ cat .env
-        SKIP_PREFLIGHT_CHECK=true
-        PORT=15109
-
-
-    4-3. eslint 모듈
-        ESlint는 문법 오류를 잡아내고 특정 문법 요소를 사용하여 코드를 수정하기 위해 사용되는 모듈 입니다.
-
-        airbnb ESLint 규칙을 사용하려면 아래 5개의 패키지들은 필수로 설치해야 합니다.
-          . eslint
-          . eslint-plugin-import
-          . eslint-plugin-react
-          . eslint-plugin-react-hooks
-          . eslint-plugin-jsx-a11y
-
-        eslint-config-airbnb 는 airbnb 스타일 가이드의 코드 규칙을 적용할 수 있는 모듈
-
-        babel-eslint : 정식 표준이 아닌 자바스크립트, 즉 ES6 이상의 최신 자바스크립트 문법을 사용하는 경우 설치 필요
-
-
-        $ pwd     # 현재 작업하는 폴더 위치 확인
-
-        $ ls      # package.json 보이는지 확인
-
-        $ npm init @eslint/config
-
-        $ npm install --save-dev eslint  eslint-plugin-import  eslint-plugin-react  eslint-plugin-react-hooks  eslint-plugin-jsx-a11y
-        $ npm install --save-dev eslint-config-airbnb
-
-        $ npm install --save-dev babel-eslint
-
-        $ cat package.json    # package.json 에 ESLint 모듈들이 추가되었는지 확인한다.
-
-
-    4-4. Prettier 설정
-        Prettier는 코드 포맷터(Code Formatter)다
-        prettier 사용되는 예시
-            . 한 줄의 최대 길이는 얼마로 할 것인가?
-            . 들여쓰기에 tab을 쓸 것인가? space를 쓸 것인가?
-            . 문자 리터럴로  ' 를 쓸 것인가? " 쓸 것인가?
-        Prettier는 소스 코드를 저장하거나 git 커밋할 때 정의된 규칙에 따라 코드의 형식을 자동으로 수정한다.
-
-        prettier : Prettier 모듈을 설치할 때는 --save-exact 옵션을 사용하세요. --save-exact 은 Prettier 버전이 달라져도 코드 스타일 변화가 생기지 않도록 하는 옵션입니다.
-        eslint-config-react: react 프로젝트에 맞춰진 ESLint 규칙을 추가합니다.
-        eslint-plugin-prettier: 코드 코맷할 때 Prettier를 사용하게 만드는 규칙을 추가합니다.
-        eslint-config-prettier: Prettier와 충돌할 설정들을 비활성화합니다.
-
-        $ npm install --save-dev --save-exact prettier
-        $ npm install --save-dev eslint-config-react
-        $ npm install --save-dev eslint-plugin-prettier
-        $ npm install --save-dev eslint-config-prettier
-
-        .prettierrc 파일을 프로젝트 루트에 만들기
-        $ touch .prettierrc
-
-        .prettierrc 파일에 아래 내용을 추가
-
-        $ cat .prettierrc
-        {
-          "printWidth": 130,
-          "tabWidth": 2,
-          "singleQuote": true,
-          "semi": true,
-          "useTabs": false,
-          "trailingComma": "all",
-          "proseWrap": "always",
-          "requireConfig": false,
-          "bracketSpacing": true,
-          "jsxBracketSameLine": false,
-          "jsxSingleQuote": false,
-          "quoteProps": "as-needed",
-          "endOfLine": "crlf"
-        }
-
-
-    4-5. eslint 설정
-        eslintrc.json 파일에 아래 내용을 추가
-        https://poiemaweb.com/eslint
-        https://yrnana.dev/post/2021-09-02-eslint
-        https://eslint.org/docs/user-guide/configuring/rules
-
-        ESLint의 핵심 구성 정보는 env, globals, rules세가지 영역으로 나누어져 구성되어 있습니다.
-          . env는 실행 환경에 대한 설정, 사전 전역 변수 설정. 브라우저, node, es6 환경이 활성화
-          . globals는 사용자가 추가하는 전역 변수 설정.
-          . extends 설치한 플러그인들의 적용과 설정에 관한 것들.
-          . plugins 설치한 플러그인들의 적용과 설정에 관한 것들.
-          . rules 설치한 플러그인들의 적용, 활성화 규칙 및 오류 설정에 관한 것들.
-
-
-        eslintrc.json 파일을 프로젝트 루트에 만들기
-        $ touch eslintrc.json
-
-        $ cat eslintrc.json
-        {
-            "parserOptions": {
-                "ecmaVersion": 12
-            },
-            "env": {
-                "browser": true,
-                "commonjs": true,
-                "node": true,
-                "jest": true,
-                "es6": true,
-                "es2021": true
-            },
-            "globals": {
-                "_": false
-            },
-            "extends": [
-                "react-app",
-                "prettier",
-                "airbnb"
-            ],
-            "parser": "babel-eslint",
-            "parserOptions": {
-                "ecmaVersion": 12
-            },
-            "plugins": ["import", "html"],
-            "rules": {
-                // "off" or 0 - turn the rule off
-                // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
-                // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
-
-                // windows linebreaks when not in production environment
-                "linebreak-style": [ "error", "unix" ],
-                // suppress errors for missing 'import React' in files
-                "react/react-in-jsx-scope": "off",
-                // allow jsx syntax in js files (for next.js project)
-                "react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ], //should add ".ts" if typescript project
-                "jsx-a11y/label-has-associated-control": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
-                "jsx-a11y/label-has-for": [ "error", { "required": { "some": [ "nesting", "id" ] } } ],
-
-                "no-param-reassign": [ "error", { "props": false } ],
-                "arrow-parens": ["error", "always"], // () => {}
-                "arrow-body-style": ["error", "always"],
-                "consistent-return": "off",
-                "func-names": "off",
-                "no-shadow": "off",
-                "no-alert": "off",
-                "no-var": "error",
-                "no-console": "off",
-                "no-debugger": "off"
-            }
-        }
-
-    4-6. jsconfig.json 설정
-        NODE_ENV의 절대 경로 설정.
-        컴포넌트 조합할 때 상대 경로 대신 절대 경로를 사용하여 컴포넌트를 조합
-        "baseUrl": "./src" ==> 절대 경로 설정
-        "include": ["src"] ==> import 시 해당 루트를 자동으로 포함 설정. ex) import 'src/Comp'; 대신 import 'Comp'; 을 사용
-
-        $ echo -e "{\n  \"compilerOptions\": {\n    \"baseUrl\": \"./src\"\n  },\n  "include": ["src"]\n}" >> jsconfig.json
-
-        jsconfig.json  파일 내용 확인
-        $ cat jsconfig.json
-        {
-          "compilerOptions": {
-            "baseUrl": "./src"
-          },
-          "include": ["src"]
-        }
-
-
-    4-7. githook 설정
-        githook은 깃에 특정 이벤트(커밋, 푸시 등)를 감지하여
-        이벤트를 실행하기 전에 특정 동작을 수행할 수 있도록 도와주는 플러그인 입니다.
-
-        husky와 lint-staged의역할은 다음과 같다.
-        . husky: packages.json 파일에서 githook를 사용할 수 있게 해준다.
-        . lint-staged: git 의 stage된 파일들에 특정 동작을 수행할 수 있도록 해준다.
-        . lint-staged와 husky를 사용하여 git 이벤트에 Prettier 명령어를 연동 설정.
-
-        $ npm install --save-dev husky  lint-staged
-
-        ############
-        commit 전에 자동으로 prettier 적용하기
-        ############
-
-        packages.json 에 아래 내용 추가
-
-        $ cat packages.json
-        {
-          ...중략 ,
-          "husky": {
-              "hooks": {
-                  "pre-commit" : "lint-staged"
-              }
-          },
-          "lint-staged": {
-              "src/**/*.{js,jsx,ts,tsx,json,css,scss,md} ": [
-                  "prettier --write"
-              ]
-          }
-        }
-
-    4-8. package.json 에 jest 실행 스크립트 추가
-        변경 전
-        {
-            ...중략
-            "scripts": {
-                "start": "react-scripts start",
-                "build": "react-scripts build",
-                "test": "react-scripts test",
-                "eject": "react-scripts eject",
-            },
-        }
-
-        변경 후
-        {
-            ...중략
-            "scripts": {
-                "start": "react-scripts start",
-                "build": "react-scripts build",
-                "test": "react-scripts test",
-                "eject": "react-scripts eject",
-
-                "test:watch": "jest --watch --env=jsdom",
-                "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=jsdom"
-            },
-            ...중략
-        }
-
-    4-9. 프로젝트 소스 커밋
-        $ pwd               # 현재 작업 디렉토리 확인
-        $ ls                # package.json 보이는지 확인
-        $ git status        # 파일 상태 확인
-        $ git add -AN       # 신규 파일 추가 추가
-        $ git status        # 파일 상태 확인
-        $ git commit -a -m '프로젝트 시작하기'
-        $ git status        # 파일 상태 확인
-        $ git push          #
-
-
-    4-10. react 프로젝트 설정 파일 추출하기
-        프로젝트 설정 파일 추출하기 전에 반드시 소스 commit 을 해야만 eject 가 가능하다.
-        eject를 하게 되면 package.json 파일의 내용이 변경된다.
-
-        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
-
-        $ cat package.json
-        $ npm run eject
-        $ cat package.json
-
+        $ mkdir -p ./src/common \
+                   ./src/components \
+                   ./src/containers \
+                   ./src/constant \
+                   ./src/pages \
+                   ./src/routes \
+                   ./src/utils
+
+
+    3-2. 프로젝트용 공통 폴더 생성
+        $ touch ./src/pages/index.js \
+               ./src/routes/index.js
+
+
+    3-3. 사용하지 않는 파일 삭제
+        $ rm src/App.css \
+            src/App.test.js \
+            src/logo.svg
 
     ##################################
     5. 서버 실행
@@ -634,21 +192,17 @@
 
         webpack compiled successfully
 
-    ##################################
-    6. Jest 테스트 와 디버깅 설정
-    ##################################
+
+
 
     ##################################
     10. 기능 설명
     ##################################
-    "vue29-01.ToDo.qs05-12.html" 예제를 react로 구현하여 본다.
 
     선 학습 필요 사항:
-        array.reduce() 사용법
         array.map() 사용법
         array.filter() 사용법
-        array.findIndex() 사용법
-        array.splice() 사용법
+        array.reduce() 사용법
 
     todoItems 는 아래와 같다고 가정한다
         todoItems = [
@@ -700,14 +254,15 @@
 
 
     ##################################
-    12. 프로젝트에 컴포넌트 추가
+    12. 프로젝트에 todo 컴포넌트 추가
     ##################################
 
-    12-1. 파일 생성
+    12-1. todo 컴포넌트 폴더 및 파일 생성
     $ ls    # packages.json 이 보이는지 확인.
 
     $ mkdir -p ./src/containers/todo
     $ touch ./src/containers/todo/TodoContainer.js
+    $ touch ./src/containers/todo/TodoContainer.css
 
     $ mkdir ./src/containers/todo/components
     $ touch ./src/containers/todo/components/TodoHeader.js
@@ -716,65 +271,108 @@
     $ touch ./src/containers/todo/components/TodoFooter.js
 
 
-    (액션상수,액션함수 정의)
-    $ touch ./src/containers/todo/action.js
-
-    (외부 API 호출)
-    $ touch ./src/containers/todo/api.js
-
-    (외부 API 호출 saga)
-    $ touch ./src/containers/todo/saga.js
-
-    (리덕스 리듀서)
-    $ touch ./src/containers/todo/reducer.js
-
-    (todo 에서만 사용되는 css 파일)
-    $ touch ./src/containers/todo/TodoContainer.css
+    12-2. 사용하지 않는 파일 삭제
+    $ rm src/App.css \
+         src/App.test.js \
+         src/logo.svg
 
 
     ##################################
     13. 라우팅 설정
     ##################################
 
-    13-1. 라우팅 수정
-        $ ~/src/index.js 수정
-        변경 전 : import App from './App';
-        변경 후 : import App from './containers/CrudContainer/CrudContainer';
+    13-1. 라우팅 폴더 및 파일 생성
+        $ mkdir -p ./src/pages
+        $ touch src/pages/PageHome.js
 
-    13-2. 실행 화면 확인하고 개발자 모드에서 오류 확인
+
+    13-2. src/index.js 수정
+        변경 전
+        ReactDOM.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>,
+            document.getElementById('root')
+        );
+
+
+        변경 후
+        import { BrowserRouter } from "react-router-dom";
+        ReactDOM.render(
+            <React.StrictMode>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </React.StrictMode>,
+            document.getElementById("root")
+        );
+
+    13-3. src/App.js 수정
+        import PageHome from './pages/PageHome';
+        function App() {
+            return (
+                <div>
+                    <PageHome />
+                </div>
+            );
+        }
+
+    13-4. 실행 화면 확인하고 개발자 모드에서 오류 확인
         ==> 빈 화면이 나오면 정상.
 
+
+    13-5. PageHome 컴포넌트 만들기
+        $ touch src/pages/PageHome.js
+
+
+        import { Routes, Route, NavLink } from 'react-router-dom';
+        import TodoContainer from '../containers/todo/TodoContainer';
+
+        <div>
+            <div>
+                <ul>
+                    <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/">Home</NavLink></li>
+                    <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/todo">Todo</NavLink></li>
+                </ul>
+            </div>
+
+            <Routes>
+                <Route path="/todo" element={<TodoContainer />} />
+                <Route path="*" to="/" />
+            </Routes>
+        </div>
+
     ##################################
-    14. TodoContainer 컴포넌트 구현
+    21. TodoContainer 컴포넌트 구현
     ##################################
 
-    step 14-1. TodoContainer.css 파일에 css 추가
+
+    step 21-1. TodoContainer.css 파일 만들기
+        $ touch ./src/containers/todo/TodoContainer.css
+
+    step 21-2. TodoContainer.css 파일에 css 추가
         style.css 파일의 내용을 TodoContainer.css 파일에 추가한다.
         $ cp ../1차/style.css ./src/containers/todo/TodoContainer.css
 
-
-    step 14-2. src/components/todo/TodoContainer.js 기능완성
+    step 21-3. src/components/todo/TodoContainer.js 기능완성
         rt61.Todo/1차/todo.html 내용을 참고하여 TodoContainer.js 에 style 과 html 추가하시오
 
-    step 14-3. src/index.js 수정
-        수정 전: import App from './App';
-        수정 후: import App from './components/todo/TodoContainer';
+    step 21-4. 실행 화면 확인
 
-    step 14-4. 실행 화면 확인
-
-    step 14-5. modal 창 숨기기
+    step 21-5. modal 창 숨기기
         변경 전: <div class="modal-mask">
         변경 후: <div class="modal-mask" style={{ display: 'none' }}>
 
-    step 14-6. JSX 수정
+    step 21-6. JSX 수정
         . class ===> className
         . for ===> htmlFor
 
+
     ##################################
-    step 15. TodoContainer 에 공유 상태값 만들고 props 설정
+    step 22. TodoContainer 에 공유 상태값 만들고 props 설정
     ##################################
 
-    step 15-1. TodoContainer 에 공유 상태값, todoItems 만들기
+    step 22-1. TodoContainer 에 공유 상태값, todoItems 만들기
         const [todoItems, setTodoItems] = useState([
             { id: 1, todo: '영화보기', done: false },
             { id: 2, todo: '주말 산책', done: true },
@@ -782,7 +380,134 @@
             { id: 4, todo: '잠실 야구장', done: false }
         ]);
 
-    step 15-2. TodoContainer 상태값 todoItems 를 TodoList 로 props 내림 설정한다.
+
+    ##################################
+    step 23. TodoHeader 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
+    ##################################
+    step 23-1 TodoHeader 컴포넌트 만든다.
+    
+    step 23-2 TodoHeader JSX 를 작성한다. class ==> className 바꾸기
+    
+    step 23-3 TodoContainer 컴포넌트의 JSX에 TodoHeader 컴포넌트 태그를 추가한다.
+        <TodoHeader></TodoHeader>
+        
+    step 23-4 TodoHeader 컴포넌트를 TodoContainer 컴포넌트에 import한다.
+        import TodoHeader from './TodoHeader';
+        
+    step 23-5 styled 태그 StyledTodoHeader 만들기. 
+        1차 폴더 아래의 TodoHeader.css 를 참조하여 
+
+        const StyledTodoHeader = styled.div`
+          ... 중략
+        `;
+        
+    step 23-6 TodoHeader JSX 를 수정한다. 
+      JSX 수정 전
+      <header>
+        ... 중략
+      </header>
+      
+      JSX 수정 후
+      <StyledTodoHeader>
+        ... 중략
+      </StyledTodoHeader>
+
+
+    ##################################
+    step 24. TodoFooter 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
+    ##################################
+    step 24-01 TodoFooter 컴포넌트 만든다.
+    
+    step 24-02 TodoFooter JSX 를 작성한다. class ==> className 바꾸기
+        <div className="clearAllContainer">
+            <span className="clearAllBtn">
+                Clear All
+            </span>
+        </div>
+        
+    step 24-03 TodoFooter JSX 의 span.clearAllBtn 에 onclick 이벤트 핸들러 추가
+        <div className="clearAllContainer">
+            <span className="clearAllBtn" onClick={handlerClearAll}>
+                Clear All
+            </span>
+        </div>
+        
+    step 24-04 TodoFooter 의 handlerClearAll 메서드 작성
+        const handlerClearAll = () => {
+            // 부모 콜백 메서드 호출
+            callbackClearAll();
+        };
+        
+    step 24-05 styled 태그 StyledTodoFooter 만들기. 
+        1차 폴더 아래의 TodoFooter.css 를 참조하여 
+
+        const StyledTodoFooter = styled.div`
+          ... 중략
+        `;
+        
+    step 24-06 TodoFooter JSX 를 수정한다. 
+        JSX 수정 전
+        <div className="clearAllContainer">
+          ... 중략
+        </div>
+        
+        JSX 수정 후
+        <StyledTodoFooter>
+          ... 중략
+        </StyledTodoFooter>
+        
+    step 24-07 TodoContainer 컴포넌트 JSX에 TodoFooter 컴포넌트 태그를 추가한다.
+        <TodoFooter></TodoFooter>
+        
+    step 24-08 TodoContainer 컴포넌트에 TodoFooter 컴포넌트 import 설정한다.
+        import TodoFooter from './TodoFooter';
+        
+    step 24-09 TodoContainer 컴포넌트에 callbackClearAll 메서드 추가한다
+        const callbackClearAll = useCallback(() => {
+            // state 변경
+            setTodoItems([]);
+        }, [todoItems]);
+        
+    step 24-10 TodoContainer 컴포넌트 JSX에 callbackClearAll props 내림 설정을 추가한다.
+        <TodoInput callbackClearAll={callbackClearAll}></TodoInput>
+
+
+    ##################################
+    step 25. TodoList 컴포넌트 만들고 기능 완성한다.
+    ##################################
+    step 25-01 TodoList 컴포넌트 만든다.
+    step 25-02 TodoList JSX 를 작성한다. class ==> className 바꾸기
+        <section>
+            <ul>
+                <li className="checked">
+                    <i aria-hidden="true" className="checkBtn fas fa-check"></i>
+                    주말 산책
+                    <span type="button" className="removeBtn">
+                        <i aria-hidden="true" className="far fa-trash-alt"></i>
+                    </span>
+                </li>
+            </ul>
+        </section>
+        
+    step 25-03 styled 태그 StyledTodoList 만들기. 
+        1차 폴더 아래의 TodoList.css 를 참조하여 
+
+        const StyledTodoFooter = styled.div`
+          ... 중략
+        `;
+        
+    step 25-04 TodoList JSX 를 수정한다. 
+        JSX 수정 전
+        <section>
+          ... 중략
+        </section>
+        
+        JSX 수정 후
+        <StyledTodoList>
+          ... 중략
+        </StyledTodoList>
+
+    step 25-05 TodoContainer 컴포넌트 JSX에 상태값 todoItems 를 TodoList 로 props 내림 설정한다.
         // TodoContainer JSX로 화면 만들기
         return (
             <div id="app">
@@ -795,66 +520,10 @@
             </div>
         );
 
-    ##################################
-    step 16. TodoHeader 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
-    ##################################
-    step 16-1 TodoHeader 컴포넌트 만든다.
-    step 16-2 TodoHeader JSX 를 작성한다. class ==> className 바꾸기
-    step 16-3 TodoHeader 컴포넌트 태그를 TodoContainer 컴포넌트의 템플릿에 등록한다.
-        <TodoHeader></TodoHeader>
-    step 16-4 TodoHeader 컴포넌트를 TodoContainer 컴포넌트에 import한다.
-        import TodoHeader from './TodoHeader';
+    step 25-06  TodoContainer 컴포넌트에 TodoList 컴포넌트 import 설정한다.
+        import TodoList from './components/TodoList';
 
-
-    ##################################
-    step 17. TodoFooter 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
-    ##################################
-    step 17-1 TodoFooter 컴포넌트 만든다.
-    step 17-2 TodoFooter JSX 를 작성한다. class ==> className 바꾸기
-        <div className="clearAllContainer">
-            <span className="clearAllBtn" onClick={handlerClearAll}>
-                Clear All
-            </span>
-        </div>
-    step 17-3 TodoFooter 컴포넌트 태그를 TodoContainer 컴포넌트의 템플릿에 등록한다.
-        <TodoHeader></TodoHeader>
-    step 17-4 TodoFooter 컴포넌트를 TodoContainer 컴포넌트에 import한다.
-        import TodoFooter from './TodoFooter';
-    step 17-5 TodoFooter 의 handlerClearAll 메서드 작성
-        const handlerClearAll = () => {
-            // 부모 콜백 메서드 호출
-            callbackClearAll();
-        };
-    step 17-6 TodoContainer 컴포넌트에 callbackClearAll 메서드 작성
-        const callbackClearAll = useCallback(() => {
-            // state 변경
-            setTodoItems([]);
-        }, [todoItems]);
-    step 17-7 TodoContainer 컴포넌트 JSX에 callbackClearAll props 설정
-        <TodoInput callbackClearAll={callbackClearAll}></TodoInput>
-
-
-    ##################################
-    step 18. TodoList 컴포넌트 만들고 기능 완성한다.
-    ##################################
-    step 18-1 TodoList 컴포넌트 만든다.
-    step 18-2 TodoList JSX 를 작성한다. class ==> className 바꾸기
-        <section>
-            <ul>
-                <li className="checked">
-                    <i aria-hidden="true" className="checkBtn fas fa-check"></i>
-                    주말 산책
-                    <span type="button" className="removeBtn">
-                        <i aria-hidden="true" className="far fa-trash-alt"></i>
-                    </span>
-                </li>
-            </ul>
-        </section>
-    step 18-3 TodoList 컴포넌트 태그를 TodoContainer 컴포넌트의 템플릿에 등록한다.
-        <TodoList todoItems={todoItems}></TodoList>
-    step 18-4 TodoList 컴포넌트를 TodoContainer 컴포넌트에 import 한다.
-        import TodoList from './TodoList';
-    step 18-5 TodoList 를 map 을 사용하여 JSX 반복문을 코드 작성
+    step 25-07 TodoList 컴포넌트 에서 map 을 사용하여 JSX 반복문 코드를 작성하시오.
         const lis = todoItems && todoItems.map((item) => {
             return (
                 <li key={item.id} className={item.done ? 'checked' : null}>
@@ -866,14 +535,12 @@
                 </li>
             );
         });
-    step 18-6 TodoContainer 컴포넌트 JSX에 todoItems props 설정
-        <TodoList todoItems={todoItems}></TodoList>
 
     ##################################
-    step 19. TodoList 의 doneToggle 기능 완성한다.
+    step 26. TodoList 의 doneToggle 기능 완성한다.
     ##################################
 
-    step 19-1. TodoList 의 JSX에 DoneToggle onClick 설정한다.
+    step 26-1. TodoList 의 JSX에 DoneToggle onClick 설정한다.
         <li
             key={item.id}
             className={item.done ? 'checked' : null}
@@ -889,20 +556,20 @@
             </span>
         </li>
 
-    step 19-2. TodoList 에 handlerDoneToggle(id) handler 작성  ==> vue22-01디렉티브v-if.html 참조
+    step 26-2. TodoList 에 handlerDoneToggle(id) handler 작성  ==> vue22-01디렉티브v-if.html 참조
 
         const handlerDoneToggle = (id) => {
             callbackDoneToggle(id);
         };
 
-    step 19-3. TodoContainer 컴포넌트 JSX에 callbackDoneToggle props 설정
+    step 26-3. TodoContainer 컴포넌트 JSX에 callbackDoneToggle props 설정
             <TodoList
                 todoItems={todoItems}
                 callbackDoneToggle={callbackDoneToggle}
             >
             </TodoList>
 
-    step 19-4. TodoContainer 컴포넌트에 callbackDoneToggle 메서드 작성
+    step 26-4. TodoContainer 컴포넌트에 callbackDoneToggle 메서드 작성
         const callbackDoneToggle = useCallback(
             (id) => {
                 // state 변경
@@ -922,10 +589,10 @@
 
 
     ##################################
-    step 20. TodoList 의 removeTodo 기능 완성한다.
+    step 27. TodoList 의 removeTodo 기능 완성한다.
     ##################################
 
-    step 20-1. TodoList 의 JSX에 RemoveTodo onClick 설정한다.
+    step 27-1. TodoList 의 JSX에 RemoveTodo onClick 설정한다.
         <li
             key={item.id}
             className={item.done ? 'checked' : null}
@@ -948,12 +615,12 @@
             </span>
         </li>
 
-    step 20-2. TodoList 에 handlerRemoveTodo(id) handler 작성 ==> ap03-11.객체배열.html 참조
+    step 27-2. TodoList 에 handlerRemoveTodo(id) handler 작성 ==> ap03-11.객체배열.html 참조
         const handlerRemoveTodo = (id) => {
             callbackRemoveTodo(id);
         };
 
-    step 20-3. TodoContainer 컴포넌트 JSX에 callbackRemoveTodo props 설정
+    step 27-3. TodoContainer 컴포넌트 JSX에 callbackRemoveTodo props 설정
         <TodoList
             todoItems={todoItems}
             callbackDoneToggle={callbackDoneToggle}
@@ -961,7 +628,7 @@
         >
         </TodoList>
 
-    step 20-4. TodoContainer 컴포넌트에 callbackRemoveTodo 메서드 작성
+    step 27-4. TodoContainer 컴포넌트에 callbackRemoveTodo 메서드 작성
         const callbackRemoveTodo = useCallback(
             (id) => {
                 // state 변경
@@ -981,18 +648,37 @@
 
 
     ##################################
-    step 21. TodoInput 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
+    step 28. TodoInput 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
     ##################################
-    step 21-1. TodoInput 컴포넌트 만든다.
-    step 21-2. TodoInput JSX 를 작성한다. class ==> className 바꾸기
-    step 21-3. TodoInput 컴포넌트 태그를 TodoContainer 컴포넌트의 템플릿에 등록한다.
+    step 28-01. TodoInput 컴포넌트 만든다.
+    step 28-02. TodoInput JSX 를 작성한다. class ==> className 바꾸기
+    step 28-03. TodoInput 컴포넌트 태그를 TodoContainer 컴포넌트의 JSX 에 등록한다.
         <TodoInput></TodoInput>
-    step 21-4. TodoInput 컴포넌트를 TodoContainer 컴포넌트에 import한다.
+    step 28-04. TodoInput 컴포넌트를 TodoContainer 컴포넌트에 import한다.
         import TodoInput from './TodoInput';
-    step 21-5. TodoInput 컴포넌트에 상태값 isShowModal 추가.
+        
+    step 28-05 styled 태그 StyledTodoInput 만들기. 
+        1차 폴더 아래의 TodoInput.css 를 참조하여 
+
+        const StyledTodoInput = styled.div`
+          ... 중략
+        `;
+        
+    step 28-06 TodoInput JSX 를 수정한다. 
+        JSX 수정 전
+        <div className="inputBox shadow">
+          ... 중략
+        </div>
+        
+        JSX 수정 후
+        <StyledTodoInput>
+          ... 중략
+        </StyledTodoList>
+        
+    step 28-5. TodoInput 컴포넌트에 상태값 isShowModal 추가.
         const [isShowModal, setIsShowModal] = useState(false); // 상태값이 기본타입인 경우
 
-    step 21-6. TodoInput 컴포넌트 JSX 에 onClick 기능 추가
+    step 28-6. TodoInput 컴포넌트 JSX 에 onClick 기능 추가
         {isShowModal && (
             <div className="modal-mask">
                 <div className="modal-wrapper">
@@ -1014,12 +700,12 @@
                 </div>
             </div>
         )}
-    step 21-7. TodoInput 컴포넌트 handlerShowModal 핸들러 추가
+    step 28-7. TodoInput 컴포넌트 handlerShowModal 핸들러 추가
         const handlerShowModal = () => {
             setIsShowModal(!isShowModal);
         };
 
-    step 21-8. TodoInput 컴포넌트 JSX 에 onKeyUp 기능 추가
+    step 28-8. TodoInput 컴포넌트 JSX 에 onKeyUp 기능 추가
         <input
             type="text"
             placeholder="Type what you have to do"
@@ -1030,15 +716,15 @@
             <i aria-hidden="true" className="addBtn fas fa-plus"></i>
         </span>
 
-    step 21-9. TodoInput 컴포넌트 handlerAddTodo 메서드 작성
+    step 28-9. TodoInput 컴포넌트 handlerAddTodo 메서드 작성
         // TodoContainer의 callbackAddTodo 메서드 호출 기능 추가
         // input 태그에 빈 문자일이 입력 되는 경우는 배열에 추가되지 않게.
         // add 후에 input 태그의 입력 값 지우기.
 
-    step 21-10. TodoContainer 컴포넌트 JSX에 callbackAddTodo props 설정
+    step 28-10. TodoContainer 컴포넌트 JSX에 callbackAddTodo props 설정
         <TodoInput callbackAddTodo={callbackAddTodo}></TodoInput>
 
-    step 21-11. TodoContainer 컴포넌트에 callbackAddTodo 메서드 작성
+    step 28-11. TodoContainer 컴포넌트에 callbackAddTodo 메서드 작성
         // ap03-11.객체배열.html 참조
         // map과 reduce 를 사용하여 max id 구하기 ==> newid 만들기
         // todoItems 추가할 객체 만들기
@@ -1047,12 +733,11 @@
 
 
 
-
     ##################################
-    step 22. styled-components 를 사용한 컴포넌트 스타일링 구현
+    step 29. styled-components 를 사용한 컴포넌트 스타일링 구현
     ##################################
 
-    step 22-1. TodoContainer 에 StyledContainer 추가
+    step 29-1. TodoContainer 에 StyledContainer 추가
         ... 중략
         import styled from 'styled-components';
 
@@ -1097,7 +782,7 @@
         );
 
 
-    step 22-2. TodoHeader 에 styled 기능 추가
+    step 29-2. TodoHeader 에 styled 기능 추가
         import styled from 'styled-components';
 
         const StyledTodoHeader = styled.header`
@@ -1116,7 +801,7 @@
         );
 
 
-    step 22-3. TodoInput 에 styled 기능 추가
+    step 29-3. TodoInput 에 styled 기능 추가
 
         import styled from 'styled-components';
 
@@ -1212,10 +897,10 @@
         );
 
 
-    step 22-4. TodoList 에 styled 기능 추가
+    step 29-4. TodoList 에 styled 기능 추가
 
 
-    step 22-5. TodoFooter 에 styled 기능 추가
+    step 29-5. TodoFooter 에 styled 기능 추가
 
 
 
