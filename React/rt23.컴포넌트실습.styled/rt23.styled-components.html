@@ -148,15 +148,10 @@
     5. 서버 실행
     ##################################
         $ ls                                       # styleprj01 폴더가 보이는지 확인
+
         $ cd styleprj01                            # styleprj01 폴더로 이동
+
         $ ls                                       # package.json 파일이 보이는지 확인
-        $ npm run start                            # package.json 파일이 보이면 서버 실행
-
-        5-1. 서버 중지
-        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
-
-        5-2. 서버 시작
-        $ ls                # package.json 보이는지 확인
 
         $ npm run start     # package.json 보이면 서버 실행
         Compiled successfully!
@@ -234,14 +229,13 @@
     11-04. 실행 화면 확인
 
     11-05. App.js 파일에서  css를 import 하는 부분을 찾아 삭제하도록 한다.
-        import App from './App'; 삭제
+        import'./App.css'; 삭제
 
     11-06. App.css 파일 삭제
 
 
     ####################################
     # 12. 아래 사이트를 참조하여 Circle 을 만들어 본다.
-    # https://react.vlpt.us/styling/03-styled-components.html
     ####################################
 
         const Circle = styled.div`
@@ -249,6 +243,7 @@
             height: 5rem;
             background: ${(props) => props.color || "black"};
             border-radius: 50%;
+
             ${(props) =>
             props.huge &&
             css`
