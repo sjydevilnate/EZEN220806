@@ -22,12 +22,12 @@
     CRA(create-react-app) 를 사용해서 리액트 프로젝트를 만들고
     start-rating.html 에서 작성한 컴포넌트를 프로젝트에 적용하여 본다.
     * CRA 는 create react app 의 약자.
-
+d
     # 프로젝트 생성
-    $ npx create-react-app starprj01
+    $ npx create-react-app starprj03
 
     # 폴더 이동
-    $ cd starprj01
+    $ cd starprj03
 
 
     # package.json 파일이 있는지 확인
@@ -58,6 +58,15 @@
     # src/App.css 수정. style.css 파일의 css 내용을 App.css 에 복사하여 붙여넣기.
     $ cp ../style.css ./src/App.css
 
+    # 컴포넌트 폴더 만들기
+    $ mkdir -p src/components/rating
+
+    # 컴포넌트 파일 만들기
+    $ touch src/components/rating/RatingContainer
+    $ touch src/components/rating/ColorList
+    $ touch src/components/rating/Color
+    $ touch src/components/rating/StarRating
+    $ touch src/components/rating/Star
 
     # src/App.js 수정
         import 설정
