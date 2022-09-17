@@ -36,14 +36,6 @@
         3. array.filter() 사용법
 
 
-    object array 에서 최대값 id 찾기
-        방법 1. reduce() 메서드 사용해서 최대값을 찾는 방법
-            var maxObj = array.reduce( function(prev, curt){
-                return prev.id > curt.id ? prev:  curt  // 최대값 id가 있는 객체
-                return prev.id < curt.id ? prev:  curt  // 최소값 id가 있는 객체
-            })
-            var newid  = maxObj.id + 1
-
 
     테스트 기본 데이터
         const items = [
@@ -52,6 +44,14 @@
             {id:3, name: "스파이더맨", power: 500},
             {id:4, name: "배트맨", power: 30},
         ]
+
+    object array 에서 id 최대값 찾기
+        방법 1. reduce() 메서드 사용해서 최대값을 찾는 방법
+            var maxObj = array.reduce( function(prev, curt){
+                return prev.id > curt.id ? prev:  curt  // 최대값 id가 있는 객체
+                return prev.id < curt.id ? prev:  curt  // 최소값 id가 있는 객체
+            })
+            var newid  = maxObj.id + 1
 
 
 
@@ -86,32 +86,45 @@
     # 리액트 프로젝트 서버 실행하기
     $ npm run start
 
+
     ##################################
     작업 1
+        html 화면을 컴포넌트 단위로 쪼기기
+        CrudContainer
+        CrudInput
+        CrudList
     ##################################
 
-    1. html 화면을 컴포넌트 단위로 쪼기기
+    1-1. crud 컴포넌트 폴더 및 파일 만들기
+
+        # crud 컴포넌트 폴더 만들기
+        $ mkdir -p src/components/crud
+
+        # crud 컴포넌트 관련 파일 만들기
+        $ touch src/components/crud/CrudContainer.js
+        $ touch src/components/crud/CrudInput.js
+        $ touch src/components/crud/CrudList.js
+
+
+    1-2. crud 컴포넌트 트리 만들기
         CrudContainer
         CrudInput
         CrudList
 
-    1-1. CrudContainer 컴포넌트 만들기
+    1-3. CrudContainer 컴포넌트 만들기
 
-    function CrudContainer(props) {
+        function CrudContainer(props) {
 
-        // JSX로 화면 만들기
-        return (
-            <div id="app">
-                <h1>Creat Read Update Delete</h1>
-                ... 이하 생략
-            </div>
-        );
+            // JSX로 화면 만들기
+            return (
+                <div id="app">
+                    <h1>Creat Read Update Delete</h1>
+                    ... 이하 생략
+                </div>
+            );
+        }
 
-    1-2. ReactDOM 사용하여 화면 붙이기
-        ReactDOM.render( <CrudContainer></CrudContainer>, document.getElementById("app") )
-
-
-    1-3. CrudInput 컴포넌트 만들기
+    1-4. CrudInput 컴포넌트 만들기
 
         function CrudInput(props) {
             // JSX로 화면 만들기
@@ -140,7 +153,7 @@
             );
         }
 
-    1-4. CrudContainer 에 CrudInput 컴포넌트 추가하기
+    1-5. CrudContainer 에 CrudInput 컴포넌트 추가하기
         function CrudContainer(props) {
 
             // JSX로 화면 만들기
@@ -160,7 +173,7 @@
             )
         }
 
-    1-5. CrudList 컴포넌트 만들기
+    1-6. CrudList 컴포넌트 만들기
 
         function CrudList(props) {
 
@@ -192,7 +205,7 @@
             )
         }
 
-    1-6. CrudContainer 에 CrudList 컴포넌트 추가하기
+    1-7. CrudContainer 에 CrudList 컴포넌트 추가하기
         function CrudContainer(props) {
 
             // JSX로 화면 만들기
@@ -206,7 +219,7 @@
             )
         }
 
-    1-7. CrudInput 컴포넌트 수정
+    1-8. CrudInput 컴포넌트 수정
 
         function CrudInput(props) {
 
@@ -935,4 +948,3 @@
 
 </body>
 </html>
-
