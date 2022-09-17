@@ -1,40 +1,9 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-  useReducer,
-  Fragment,
-  forwardRef,
-  useImperativeHandle
-} from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import React, { useState, useCallback } from "react";
 import ColorList from "./ColorList";
 
 import Color from "./Color";
 
-// import { useDispatch, useSelector } from 'react-redux';
-// import { BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
-
-// import { action함수 as actions, action상수 as types } from './action';
-
-/* const {aaa, bbb, ...props} = props */
 function RatingContainer({ ...props }) {
-  // redux store 와 연동되는 경우에만 useDispatch(), useSelector() 사용
-  // const dispatch = useDispatch();
-  // const { error, isLoading, notis } = useSelector( state => state.notis );
-
-  // 페이지에 대한 경로와 query-string 정보를 추출하는 경우 useLocation() 훅 사용
-  // const { pathname, search } = useLocation();
-
-  // path 변수를 추출하는 경우 useParams() 사용. id === match.params.id */
-  // const { id } = useParams();
-
-  // 이전 경로 useHistory() 사용 */
-  // const history = useHistory();
-
   // useState 를 사용한 컴포넌트의 상태값 설정
   const [colors, setColors] = useState([
     {
@@ -65,9 +34,15 @@ function RatingContainer({ ...props }) {
 
   // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
   const callbackRateColor = useCallback(
-    (param) => {
+    (id, rating) => {
       // state 변경
-      debugger;
+      const newColors = colors.map((item) => {
+        if (item.id === id) {
+          item.rating = rating;
+        }
+        return item;
+      });
+      setColors(newColors); // colors = newColors;
     },
     [
       /* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */
@@ -75,9 +50,10 @@ function RatingContainer({ ...props }) {
     ]
   );
   const callbackRemoveColor = useCallback(
-    (param) => {
+    (id) => {
       // state 변경
-      debugger;
+      const newColors = colors.filter((color) => color.id !== id);
+      setColors(newColors); // colors = newColors;
     },
     [
       /* 조건 제어: 메서드와 연관되는 상태(변수)명들을 기술 */
