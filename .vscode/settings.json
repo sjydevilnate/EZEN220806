@@ -1,9 +1,9 @@
 {
     "terminal.integrated.fontWeightBold": "bold",
-    "terminal.integrated.fontSize": 20,
+    "terminal.integrated.fontSize": 16,
     "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.fontWeight": "normal",
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 3,
 
     "editor.minimap.enabled": false,
     "editor.tabSize": 2,
@@ -18,7 +18,7 @@
     /* 기본 Formatter 설정 */
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.snippetSuggestions": "top",
-    "editor.fontSize": 20,
+    "editor.fontSize": 16,
     "editor.renderWhitespace": "all",
     "editor.codeActionsOnSave": {
         // For ESLint
@@ -104,41 +104,41 @@
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.fontSize": 20
+        "editor.fontSize": 16
     },
     "[html]": {
         "editor.formatOnSave": false,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.fontSize": 20
+        "editor.fontSize": 16
     },
     "[javascript]": {
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.fontSize": 20
+        "editor.fontSize": 16
     },
     "[json]": {
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.fontSize": 20
+        "editor.fontSize": 16
     },
     "[vue]": {
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
         "editor.defaultFormatter": "octref.vetur",
-        "editor.fontSize": 20
+        "editor.fontSize": 16
     },
     "[xml]": {
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.fontSize": 20
-    }
+        "editor.fontSize": 16
+    },
     "workbench.colorTheme": "Default Light+",
 }
