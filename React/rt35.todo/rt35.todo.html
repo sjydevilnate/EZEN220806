@@ -26,172 +26,11 @@
     ##################################
 
 
-
     ##################################
     2. 프로젝트 생성 작업
        소요시간: 20분
     ##################################
-    step 1-01. node / npm 버전 업그레이드
-        $ node -v                          #  node 버전 확인
-        v16.14.2
-
-        $ npm install -g npm@latest        #  npm 최신 버전 설치
-
-        $ npm -v                           #  npm 버전 확인
-        8.13.2
-
-        $ npx -v                           #  npx(=npm extension) 버전 확인
-        8.13.2
-
-
-    step 1-02. 프로젝트 생성
-
-        $ npx create-react-app todoprj01        # 프로젝트명은 소문자로 만들어야 함.
-        Need to install the following packages:
-          create-react-app
-        Ok to proceed? (y) y
-        ...
-        5분 소요
-        ...
-
-    step 1-03. 실행 중인 프로세스 중지
-        터미널에서 "ctrl + c" 눌러 실행된 서버를 중지한다
-
-
-    step 1-21. prop-types 설치(필수)
-        prop-types는 컴포넌트 속성값, props 의 타입을 정의할 때 사용되는 라이브러리.
-
-        $ npm install --save prop-types
-
-
-    step 1-22. styled-component
-        styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리.
-
-        $ npm install --save styled-components
-        $ npm install --save-dev @types/styled-components jest-styled-components
-
-
-    step 1-23. 리액트 라우터 설치(필수)
-        react-router:
-        react-router-dom: 브라우저에서 사용되는 react-router 라이브러리. 필수
-
-        $ npm install --save react-router react-router-dom
-
-
-
-    ##################################
-    2. 배포 테스트
-    ##################################
-
-    2-1. 배포 테스트
-        배포용 파일을 만들고 nginx 에 배포하여 본다.
-        "npm run build" 을 실행하면 /build/ 폴더에 배포용 파일들이 만들어진다.
-
-        $ ls     # build/ 폴더가 보이는지 확인. 없으면 정상
-        node_modules/  package.json  package-lock.json  public/  README.md  src/
-
-        $ npm run build
-
-        $ ls    # build/ 폴더가 보이는지 확인. 있으면 정상
-        build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
-
-        nginx 에 배포 테스트
-        "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
-
-
-
-    ##################################
-    3. 프로젝트 폴더 구조
-       소요시간: 05분
-    ##################################
-
-    프로젝트
-    |-- build                    # 빌드된 결과물이 저장되는 폴더. 서버로 배포되는 파일들.
-    |-- node_modules             # npm 모듈(패키지) 저장 폴더
-    |-- public                   # 배포 버전을 빌드할 때 사용하는 파일.
-    |   |-- favicon.ico
-    |   |-- index.html
-    |   |-- logo192.png
-    |   |-- logo512.png
-    |   |-- manifest.json
-    |   `-- robots.txt
-    |-- src                      # 소스 코드 폴더
-    |   |-- common (공통)
-    |   |-- components (공통 프리젠테이션 컴포넌트)
-    |   |-- containers           # 폴더 생성
-    |   |    `-- todo
-    |   |       |-- components   (todo 에서만 사용되는 프리젠테이션 컴포넌트 폴더)
-    |   |       |   |-- TodoHeader.js       # 컴포넌트 파일 생성.
-    |   |       |   |-- TodoInput.js        # 컴포넌트 파일 생성.
-    |   |       |   |-- TodoList.js         # 컴포넌트 파일 생성.
-    |   |       |   `-- TodoFooter.js       # 컴포넌트 파일 생성.
-    |   |       `-- TodoContainer.js     (컴포넌트 UI )
-    |   |-- constant (상수)
-    |   |-- pages (페이지 컴포넌트)
-    |   |   `-- index.js
-    |   |-- routes (라우팅)
-    |   |   `-- index.js
-    |   |-- utils (유틸리티 모듈)
-    |   |-- App.css
-    |   |-- App.js
-    |   |-- App.test.js
-    |   |-- index.css
-    |   |-- index.js
-    |   |-- logo.svg
-    |   |-- reportWebVitals.js
-    |   `-- setupTests.js
-    |-- .gitignore
-    |-- package.json
-    `-- README.md
-
-
-    3-1. 프로젝트용 공통 폴더 생성
-        $ mkdir -p ./src/common \
-                   ./src/components \
-                   ./src/containers \
-                   ./src/constant \
-                   ./src/pages \
-                   ./src/routes \
-                   ./src/utils
-
-
-    3-2. 프로젝트용 공통 폴더 생성
-        $ touch ./src/pages/index.js \
-               ./src/routes/index.js
-
-
-    3-3. 사용하지 않는 파일 삭제
-        $ rm src/App.css \
-            src/App.test.js \
-            src/logo.svg
-
-    ##################################
-    5. 서버 실행
-    ##################################
-        $ ls                                       # reactprj01 폴더가 보이는지 확인
-        $ cd reactprj01                            # reactprj01 폴더로 이동
-        $ ls                                       # package.json 파일이 보이는지 확인
-        $ npm run start                            # package.json 파일이 보이면 서버 실행
-
-        5-1. 서버 중지
-        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
-
-        5-2. 서버 시작
-        $ ls                # package.json 보이는지 확인
-
-        $ npm run start     # package.json 보이면 서버 실행
-        Compiled successfully!
-
-        You can now view counterprj06 in the browser.
-
-          Local:            http://localhost:15109
-          On Your Network:  http://192.168.56.1:15109
-
-        Note that the development build is not optimized.
-        To create a production build, use npm run build.
-
-        webpack compiled successfully
-
+    "rt30.cli-react-project.html"을 참조하여 프로젝트를 만드시오.
 
 
 
@@ -385,28 +224,28 @@
     step 23. TodoHeader 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
     ##################################
     step 23-1 TodoHeader 컴포넌트 만든다.
-    
+
     step 23-2 TodoHeader JSX 를 작성한다. class ==> className 바꾸기
-    
+
     step 23-3 TodoContainer 컴포넌트의 JSX에 TodoHeader 컴포넌트 태그를 추가한다.
         <TodoHeader></TodoHeader>
-        
+
     step 23-4 TodoHeader 컴포넌트를 TodoContainer 컴포넌트에 import한다.
         import TodoHeader from './TodoHeader';
-        
-    step 23-5 styled 태그 StyledTodoHeader 만들기. 
-        1차 폴더 아래의 TodoHeader.css 를 참조하여 
+
+    step 23-5 styled 태그 StyledTodoHeader 만들기.
+        1차 폴더 아래의 TodoHeader.css 를 참조하여
 
         const StyledTodoHeader = styled.div`
           ... 중략
         `;
-        
-    step 23-6 TodoHeader JSX 를 수정한다. 
+
+    step 23-6 TodoHeader JSX 를 수정한다.
       JSX 수정 전
       <header>
         ... 중략
       </header>
-      
+
       JSX 수정 후
       <StyledTodoHeader>
         ... 중략
@@ -417,57 +256,57 @@
     step 24. TodoFooter 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
     ##################################
     step 24-01 TodoFooter 컴포넌트 만든다.
-    
+
     step 24-02 TodoFooter JSX 를 작성한다. class ==> className 바꾸기
         <div className="clearAllContainer">
             <span className="clearAllBtn">
                 Clear All
             </span>
         </div>
-        
+
     step 24-03 TodoFooter JSX 의 span.clearAllBtn 에 onclick 이벤트 핸들러 추가
         <div className="clearAllContainer">
             <span className="clearAllBtn" onClick={handlerClearAll}>
                 Clear All
             </span>
         </div>
-        
+
     step 24-04 TodoFooter 의 handlerClearAll 메서드 작성
         const handlerClearAll = () => {
             // 부모 콜백 메서드 호출
             callbackClearAll();
         };
-        
-    step 24-05 styled 태그 StyledTodoFooter 만들기. 
-        1차 폴더 아래의 TodoFooter.css 를 참조하여 
+
+    step 24-05 styled 태그 StyledTodoFooter 만들기.
+        1차 폴더 아래의 TodoFooter.css 를 참조하여
 
         const StyledTodoFooter = styled.div`
           ... 중략
         `;
-        
-    step 24-06 TodoFooter JSX 를 수정한다. 
+
+    step 24-06 TodoFooter JSX 를 수정한다.
         JSX 수정 전
         <div className="clearAllContainer">
           ... 중략
         </div>
-        
+
         JSX 수정 후
         <StyledTodoFooter>
           ... 중략
         </StyledTodoFooter>
-        
+
     step 24-07 TodoContainer 컴포넌트 JSX에 TodoFooter 컴포넌트 태그를 추가한다.
         <TodoFooter></TodoFooter>
-        
+
     step 24-08 TodoContainer 컴포넌트에 TodoFooter 컴포넌트 import 설정한다.
         import TodoFooter from './TodoFooter';
-        
+
     step 24-09 TodoContainer 컴포넌트에 callbackClearAll 메서드 추가한다
         const callbackClearAll = useCallback(() => {
             // state 변경
             setTodoItems([]);
         }, [todoItems]);
-        
+
     step 24-10 TodoContainer 컴포넌트 JSX에 callbackClearAll props 내림 설정을 추가한다.
         <TodoInput callbackClearAll={callbackClearAll}></TodoInput>
 
@@ -488,20 +327,20 @@
                 </li>
             </ul>
         </section>
-        
-    step 25-03 styled 태그 StyledTodoList 만들기. 
-        1차 폴더 아래의 TodoList.css 를 참조하여 
+
+    step 25-03 styled 태그 StyledTodoList 만들기.
+        1차 폴더 아래의 TodoList.css 를 참조하여
 
         const StyledTodoFooter = styled.div`
           ... 중략
         `;
-        
-    step 25-04 TodoList JSX 를 수정한다. 
+
+    step 25-04 TodoList JSX 를 수정한다.
         JSX 수정 전
         <section>
           ... 중략
         </section>
-        
+
         JSX 수정 후
         <StyledTodoList>
           ... 중략
@@ -656,29 +495,29 @@
         <TodoInput></TodoInput>
     step 28-04. TodoInput 컴포넌트를 TodoContainer 컴포넌트에 import한다.
         import TodoInput from './TodoInput';
-        
-    step 28-05 styled 태그 StyledTodoInput 만들기. 
-        1차 폴더 아래의 TodoInput.css 를 참조하여 
+
+    step 28-05 styled 태그 StyledTodoInput 만들기.
+        1차 폴더 아래의 TodoInput.css 를 참조하여
 
         const StyledTodoInput = styled.div`
           ... 중략
         `;
-        
-    step 28-06 TodoInput JSX 를 수정한다. 
+
+    step 28-06 TodoInput JSX 를 수정한다.
         JSX 수정 전
         <div className="inputBox shadow">
           ... 중략
         </div>
-        
+
         JSX 수정 후
         <StyledTodoInput>
           ... 중략
         </StyledTodoList>
-        
-    step 28-5. TodoInput 컴포넌트에 상태값 isShowModal 추가.
+
+    step 28-07. TodoInput 컴포넌트에 상태값 isShowModal 추가.
         const [isShowModal, setIsShowModal] = useState(false); // 상태값이 기본타입인 경우
 
-    step 28-6. TodoInput 컴포넌트 JSX 에 onClick 기능 추가
+    step 28-08. TodoInput 컴포넌트 JSX 에 onClick 기능 추가
         {isShowModal && (
             <div className="modal-mask">
                 <div className="modal-wrapper">
@@ -700,12 +539,12 @@
                 </div>
             </div>
         )}
-    step 28-7. TodoInput 컴포넌트 handlerShowModal 핸들러 추가
+    step 28-09. TodoInput 컴포넌트 handlerShowModal 핸들러 추가
         const handlerShowModal = () => {
             setIsShowModal(!isShowModal);
         };
 
-    step 28-8. TodoInput 컴포넌트 JSX 에 onKeyUp 기능 추가
+    step 28-10. TodoInput 컴포넌트 JSX 에 onKeyUp 기능 추가
         <input
             type="text"
             placeholder="Type what you have to do"
@@ -716,15 +555,15 @@
             <i aria-hidden="true" className="addBtn fas fa-plus"></i>
         </span>
 
-    step 28-9. TodoInput 컴포넌트 handlerAddTodo 메서드 작성
+    step 28-11. TodoInput 컴포넌트 handlerAddTodo 메서드 작성
         // TodoContainer의 callbackAddTodo 메서드 호출 기능 추가
         // input 태그에 빈 문자일이 입력 되는 경우는 배열에 추가되지 않게.
         // add 후에 input 태그의 입력 값 지우기.
 
-    step 28-10. TodoContainer 컴포넌트 JSX에 callbackAddTodo props 설정
+    step 28-12. TodoContainer 컴포넌트 JSX에 callbackAddTodo props 설정
         <TodoInput callbackAddTodo={callbackAddTodo}></TodoInput>
 
-    step 28-11. TodoContainer 컴포넌트에 callbackAddTodo 메서드 작성
+    step 28-13. TodoContainer 컴포넌트에 callbackAddTodo 메서드 작성
         // ap03-11.객체배열.html 참조
         // map과 reduce 를 사용하여 max id 구하기 ==> newid 만들기
         // todoItems 추가할 객체 만들기

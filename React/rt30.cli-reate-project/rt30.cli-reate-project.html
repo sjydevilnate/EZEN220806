@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>React Project 만들기</title>
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="../css/reset.css" />
+
+</head>
+<body>
+
+    <div style="margin-top: 40px;">
+        <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
+    </div>
+
+    <xmp>
+    React CLI 을 사용하여 reactprj01 어플리케이션을 만들어 본다.
+
+
+
+    ##################################
+    1. 작업 개요
+        소요시간: 40분
+    ##################################
+
+
+
+    ##################################
+    2. 프로젝트 생성 작업
+       소요시간: 20분
+    ##################################
+    step 1-01. node / npm 버전 업그레이드
+        $ node -v                          #  node 버전 확인
+        v16.16.0
+
+        $ npm -v                           #  npm 버전 확인
+        8.19.2
+
+        $ npx -v                           #  npx(=npm extension) 버전 확인
+        8.19.2
+
+        $ npm install -g npm@latest        #  npm 최신 버전 설치
+
+        $ npm install -g yarn              #  yarn 설치. yarn은 페이스북에서 만든 npm.
+        $ yarn -v                          #  yarn 버전 확인
+        1.22.19
+
+
+    step 1-02. 프로젝트 생성
+
+        $ npm uninstall -g create-react-app        # 전역으로 설치된 create-react-app 모듈 삭제하기
+
+        $ npx clear-npx-cache                      # npx 로 다운로드된 캐쉬되어 있는 모듈 삭제
+        Need to install the following packages:
+          clear-npx-cache
+        Ok to proceed? (y) y
+        ....
+
+        $ npx create-react-app reactprj01        # 프로젝트명은 소문자로 만들어야 함.
+        Need to install the following packages:
+          create-react-app
+        Ok to proceed? (y) y
+        ...
+        5분 소요
+        ...
+
+        $ ls                                       # reactprj01 폴더가 보이는지 확인
+
+        $ cd reactprj01                            # reactprj01 폴더로 이동
+
+        $ ls                                       # package.json 파일이 보이는지 확인
+
+        $ npm help
+
+        $ npm help install
+
+        $ npm install -h
+
+        $ npm help ls
+
+        $ npm ls -h
+
+        $ npm ls react                             # 설치된 react 버전 확인
+        ├─┬ @testing-library/react@13.4.0
+        │ └── react@18.2.0 deduped
+        ├─┬ react-dom@18.2.0
+        │ └── react@18.2.0 deduped
+        ├─┬ react-scripts@5.0.1
+        │ └── react@18.2.0 deduped
+        └── react@18.2.0
+
+        $ npm run start                            # package.json 파일이 보이면 서버 실행
+
+    step 1-03. 터미널에서 실행 중인 프로세스 중지
+        "ctrl + c" 눌러 실행된 서버를 중지한다
+
+
+    step 1-04. 프로젝트 소스 커밋
+        $ pwd                                   # 현재 작업하는 폴더 위치 확인
+        $ ls                                    # package.json 파일이 보이는지 확인
+        $ git add -AN                           # 신규 파일 추가
+        $ git commit -a -m '프로젝트 시작하기'      # 파일 commit
+        $ git push                              #
+
+        github 사이트에서 소스가 올라갔는지 확인한다.
+
+
+    step 1-11. babel 모듈 설치
+        https://babeljs.io/docs/en/babel-preset-env-standalone
+        https://babeljs.io/docs/en/babel-preset-react
+        https://webpack.js.org/loaders/
+
+        $ npm install --save-dev @babel/core @babel/cli
+        $ npm install --save-dev @babel/preset-env @babel/preset-react
+        $ npm install --save-dev babel-loader
+
+
+    <script type="text/x-template">
+    step 1-13. nodemon 모듈 설치
+        nodemon은 디렉토리의 파일 변경이 감지되면 노드 응용 프로그램을 자동으로 다시 시작하여 프로그램을 개발하는 데 도움이 되는 도구입니다.
+        $ npm install --save-dev nodemon
+
+    step 1-15. react 17 버전으로 다운사이징. 필요시에만
+        react 18 부터는 IE11 지원이 중단됩니다.
+        react 17 버전으로 다운사이징하려면 아래 작업을 수행하면 됩니다.
+        CRA(create-react-app)로 만들어진 프로젝트는 react 18 이상 버전을 기준으로 만들어졌기 때문에 버전 다운사이징 할 때는 소스 수정이 필요합니다.
+
+        $ npm install --save react@17.0.2          # react 17 버전으로 다운사이징. 최신 react 버전 18
+        $ npm install --save react-dom@17.0.2      # react 17 버전으로 다운사이징. 최신 react 버전 18
+
+        소스 변경
+        수정 전: ~/src/index.js
+            import ReactDOM from 'react-dom/client';
+
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>,
+            );
+
+        수정 후:
+            import ReactDOM from 'react-dom';
+
+            const root = ReactDOM.render( <App />, document.getElementById('root'));
+    </script>
+
+
+    @@@@@@@@@@@@@@@@@@@@@@@@@
+    @ 필수 라이브러리 설치
+    @@@@@@@@@@@@@@@@@@@@@@@@@
+    step 1-21. prop-types 설치(필수)
+        prop-types는 컴포넌트의 props 타입을 정의할 때 사용되는 라이브러리.
+
+        $ npm install --save prop-types
+
+
+    step 1-22. styled-component
+        styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 CSS-IN-JS 라이브러리.
+
+        $ npm install --save styled-components @types/styled-components
+
+
+    step 1-23. 리액트 라우터 설치(필수)
+        react-router:
+        react-router-dom: 브라우저에서 사용되는 라우팅 라이브러리. 필수
+        react-router-native: 모바일 리액트에서 사용되는 라우팅 라이브러리
+
+        $ npm install --save react-router react-router-dom
+
+
+    step 1-24. 리덕스 설치(필수)
+        redux : redux를 사용할 수있게 하는 라이브러리
+        react-redux : react에서 redux를 사용할 수있게 하는 라이브러리
+        redux-actions : redux용 action을 정의하기 위한 라이브러리
+        redux-logger : redux용 로깅 처리를 위한 미들웨어 라이브러리
+
+        $ npm install --save redux react-redux redux-logger redux-actions
+
+
+    step 1-25. redux-saga 설치(필수)
+        redux-saga : redux에서 비동기로 액션을 처리하는 미들웨어
+
+        $ npm install --save redux-saga
+
+
+    step 1-26. 비동기 처리(필수)
+        axios : rest api 호출 라이브러리
+
+        $ npm install --save axios
+
+
+    step 1-27. immer 설치(필수)
+        immer : 리덕스 store state 를 불변 객체(읽기 전용)로 처리할 때 사용되는 라이브러리
+
+        $ npm install --save immer
+
+
+    step 1-28. react-virtualized 라이브러리 설치
+        windowing 기법을 처리하는 라이브러리.
+        windowing 기법이란 보이는 부분만 렌더링하고 보이지 않는 부분은 렌더링하지 않는 처리 방식을 말한다.
+        ==> 보이는 영역만 DOM 에 만들어라
+
+        $ npm install --save react-virtualized
+
+
+    step 1-29. reselect 설치
+
+        $ npm install --save reselect
+
+
+
+    @@@@@@@@@@@@@@@@@@@@@@@@@
+    @ 디자인 라이브러리 설치
+    @@@@@@@@@@@@@@@@@@@@@@@@@
+    step 1-31. install material-ui
+        안드로이드에서 사용하는 UI 기능과 디자인을 제공하는 라이브러리
+        홈페이지 : https://material-ui.com/
+
+        $ npm install --save  @material-ui/core  @material-ui/icons  @material-ui/pickers  @material-ui/styles
+
+
+    step 1-32. install Semantic UI
+        디자인을 제공하는 라이브러리
+        홈페이지 : https://react.semantic-ui.com/
+
+        $ npm install --save semantic-ui-react semantic-ui-css
+
+
+    step 1-33. install Ant Design
+        홈페이지 : https://ant.design/docs/react/getting-started
+
+        $ npm install --save antd
+
+
+    step 1-34. install the Bootstrap 4
+        $ npm install --save bootstrap reactstrap
+
+
+
+
+
+
+    ##################################
+    2. 배포 테스트
+        소요시간: 5분
+    ##################################
+
+        배포용 파일을 만들고 nginx 에 배포하여 본다.
+        "npm run build" 을 실행하면 /build/ 폴더에 배포용 파일들이 만들어진다.
+
+        $ ls     # build/ 폴더가 보이는지 확인. 없으면 정상
+        node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        $ npm run build
+
+        $ ls    # build/ 폴더가 보이는지 확인. 있으면 정상
+        build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
+
+        nginx 에 배포 테스트
+        "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
+
+
+    ##################################
+    3. 프로젝트 환경 설정
+       소요시간: 15분
+    ##################################
+
+    프로젝트
+    |-- build                    # 빌드된 결과물이 저장되는 폴더. 서버로 배포되는 파일들.
+    |-- node_modules             # npm 모듈(패키지) 저장 폴더
+    |-- public                   # 배포 버전을 빌드할 때 사용하는 파일.
+    |   |-- favicon.ico
+    |   |-- index.html
+    |   |-- logo192.png
+    |   |-- logo512.png
+    |   |-- manifest.json
+    |   `-- robots.txt
+    |-- src                      # 소스 코드 폴더
+    |   |-- App.css
+    |   |-- App.js
+    |   |-- App.test.js
+    |   |-- index.css
+    |   |-- index.js
+    |   |-- logo.svg
+    |   |-- reportWebVitals.js
+    |   `-- setupTests.js
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc.js
+    |-- .eslintrc.js
+    |-- package.json
+    `-- README.md
+
+    4-1 .babelrc 설정
+        babel 설정 파일.
+
+        # .babelrc 파일을 프로젝트 루트에 만들기
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+        $ ls      # package.json 파일이 보이는지 확인
+        $ touch .babelrc
+        $ echo -e "{\n}" > .babelrc
+        $ cat .babelrc
+
+        # .babelrc 파일을 열고 아래 내용을 추가한다.
+        {
+            "presets": [
+                ["react-app"],
+                [
+                    "@babel/preset-env",
+                    {
+                        "modules": false,
+                        "targets": {
+                            "node": "current",
+                            "chrome": "79" // 크롬 79까지 지원하는 코드를 만든다
+                        }
+                    }
+                ],
+                [
+                    "@babel/preset-react",
+                    {
+                        "development": "development",
+                        "pragma": "dom", // default pragma is React.createElement (only in classic runtime)
+                        "pragmaFrag": "DomFrag", // default is React.Fragment (only in classic runtime)
+                        "throwIfNamespace": false, // defaults to true
+                        "runtime": "classic" // defaults to classic
+                        // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
+                    }
+                ]
+            ]
+        }
+
+    4-2. 포트 변경 설정
+        react는 기본적으로 포트 3000 을 사용하는데 다른 포트로 변경할 수 있다.
+        기본 포트 3000 대신 15109 포트를 사용하도록 설정
+
+        # .env 파일을 프로젝트 루트에 만들기
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+        $ ls      # package.json 파일이 보이는지 확인
+        $ touch .env
+        $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+
+        # .env  파일에 아래 내용 추가
+        $ cat .env
+        SKIP_PREFLIGHT_CHECK=true
+        PORT=15109
+
+
+    4-3. Prettier 설정
+        Prettier는 코드 포맷터(Code Formatter)다.
+        스타일을 교정하려면 포맷터를 사용하자.
+
+        prettier 사용되는 예시
+            . 한 줄의 최대 길이는 얼마로 할 것인가?
+            . 들여쓰기에 tab을 쓸 것인가? space를 쓸 것인가?
+            . 문자 리터럴로  ' 를 쓸 것인가? " 쓸 것인가?
+
+        Prettier는 소스 코드를 저장하거나 git 커밋할 때 정의된 규칙에 따라 코드의 형식을 자동으로 수정한다.
+
+        prettier : Prettier 모듈
+        eslint-config-react: react 프로젝트에 맞춰진 ESLint 규칙을 추가합니다.
+        eslint-plugin-prettier: 코드 코맷할 때 Prettier를 사용하게 만드는 규칙을 추가합니다.
+        eslint-config-prettier: Prettier와 충돌할 설정들을 비활성화합니다.
+
+        # prettier 모듈 설치
+        $ npm install --save-dev prettier \
+                    eslint-config-react \
+                    eslint-plugin-prettier \
+                    eslint-config-prettier
+
+        # .prettierrc.js 파일을 프로젝트 루트에 만들기
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+        $ ls      # package.json 파일이 보이는지 확인
+        $ touch .prettierrc.js
+        $ echo -e "module.exports = {\n}" > .prettierrc.js
+        $ cat .prettierrc.js
+
+        # .prettierrc.js 파일에 아래 내용을 추가
+        $ cat .prettierrc.js
+        module.exports = {
+            /* https://prettier.io/docs/en/options.html */
+            printWidth: 130,/* 할 줄에 130컬럼까지 허용 */
+            tabWidth: 2, /* tab을 누르면 2칸 들여쓰기 */
+            singleQuote: true, /*문자열 리터럴로 " 대신 ' 을 사용 */
+            semi: true, /* 문장 마지막에 ; 추가설정 */
+            useTabs: false, /* 탭 대신 spacebar 를 사용 설정 */
+            trailingComma: "all",
+            proseWrap: "always",
+            bracketSpacing: true,
+            jsxSingleQuote: false,
+            quoteProps: "as-needed",
+        };
+
+
+    4-4. eslint 모듈
+        ESlint는 문법 오류를 잡아내고 특정 문법 요소를 사용하여 코드를 수정하기 위해 사용되는 모듈 입니다.
+
+        airbnb ESLint 규칙을 사용하려면 아래 5개의 패키지들은 필수로 설치해야 합니다.
+          . eslint
+          . eslint-plugin-import
+          . eslint-plugin-react
+          . eslint-plugin-react-hooks
+          . eslint-plugin-jsx-a11y
+
+        eslint-config-airbnb 는 airbnb 스타일 가이드의 코드 규칙을 적용할 수 있는 모듈
+
+        babel-eslint : 정식 표준이 아닌 자바스크립트, 즉 ES6 이상의 최신 자바스크립트 문법을 사용하는 경우 설치 필요
+
+
+        # .eslintrc.js 파일을 프로젝트 루트에 만들기
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+        $ ls      # package.json 파일이 보이는지 확인
+
+        설정 방법에는 npm init 을 사용하는 설정 방식과 수동 설정 방식 2가지가 있다.
+
+        # 방법1. npm init 을 사용하는 설정 방식(비추천)
+        $ npm init @eslint/config       #eslint설정
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # 방법2. 수동 설정 방식(추천 방식)
+        $ npm install --save-dev eslint-plugin-react  \
+                                 eslint-config-airbnb  \
+                                 eslint  \
+                                 eslint-plugin-import  \
+                                 eslint-plugin-jsx-a11y  \
+                                 eslint-plugin-react-hooks
+
+        # .eslintrc.js 파일 생성 후 내용 추가
+        $ echo -e "module.exports = {\n}" > .eslintrc.js
+
+
+
+    4-5. eslint 설정
+        eslint는 linter이다. 오류를 잡을 떄 사용한다.
+
+
+        ESLint의 핵심 구성 정보는 env, globals, rules세가지 영역으로 나누어져 구성되어 있습니다.
+          . env는 실행 환경에 대한 설정, 사전 전역 변수 설정. 브라우저, node, es6 환경이 활성화
+          . globals는 사용자가 추가하는 전역 변수 설정.
+          . extends 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . plugins 설치한 플러그인들의 적용과 설정에 관한 것들.
+          . rules 설치한 플러그인들의 적용, 활성화 규칙 및 오류 설정에 관한 것들.
+
+
+        ESLint 규칙과 관련하여 참조할 만한 사이트
+          https://velog.io/@kyusung/eslint-config-2
+          https://eslint.org/demo
+          https://github.com/typescript-eslint/typescript-eslint#what-about-babel-and-babel-eslint
+          https://www.robertcooper.me/using-eslint-and-prettier-in-a-typescript-project
+          https://poiemaweb.com/eslint
+          https://yrnana.dev/post/2021-09-02-eslint
+          https://velog.io/@_jouz_ryul/ESLint-Prettier-Airbnb-Style-Guide로-설정하기
+
+        # .eslintrc.js 파일을 프로젝트 루트에 만들기
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+        $ ls      # package.json 파일이 보이는지 확인
+        $ touch .eslintrc.js
+        $ echo -e "module.exports = {\n}" > .eslintrc.js
+        $ cat .eslintrc.js
+
+        # .eslintrc.js 파일에 아래 내용을 추가
+        module.exports = {
+            /* https://eslint.org/docs/user-guide/configuring/rules
+             * https://eslint.org/docs/rules/
+             * https://eslint.org/docs/user-guide/configuring/
+             */
+            env: {
+                browser: true,
+                es2021: true,
+                commonjs: true,
+                node: true,
+                jest: true,
+                es6: true,
+            },
+            extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier'],
+            overrides: [],
+            globals: {
+                _: false,
+            },
+            parserOptions: {
+                ecmaVersion: 'latest',
+                sourceType: 'module',
+            },
+            plugins: ['prettier'],
+            rules: {
+                // "off" or 0 - turn the rule off
+                // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+                // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
+
+                // windows linebreaks when not in production environment
+                'linebreak-style': [ 'error', 'unix' ],
+                // suppress errors for missing 'import React' in files
+                'react/react-in-jsx-scope' : 'off',
+                // allow jsx syntax in js files (for next.js project)
+                'react/jsx-filename-extension': [ 1, { extensions: [ '.js', '.jsx' ] } ], //should add ".ts" if typescript project
+                'jsx-a11y/label-has-associated-control': [ 'error', { required: { some: [ 'nesting', 'id' ] } } ],
+                'jsx-a11y/label-has-for': [ 'error', { required: { some: [ 'nesting', 'id' ] } } ],
+
+                'no-param-reassign': [ 'error', { props: false } ],
+                'arrow-parens': ['error', 'always'], // () => {}
+                'arrow-body-style': ['error', 'always'],
+                'consistent-return': 'off',
+                'func-names': 'off',
+                'no-shadow': 'off',
+                'no-alert': 'off',
+                'no-var': 'error',
+                'no-console': 'off',
+                'no-debugger': 'off',
+                'prettier/prettier': [
+                  'error',
+                  {
+                      endOfLine: 'auto',
+                  },
+                ],
+                'object-curly-newline':[
+                  'error',
+                  {
+                      ObjectExpression: 'always',
+                      ObjectPattern: { multiline: true},
+                      ImportDeclaration: 'always',
+                      ExportDeclaration: { multiline: true, minProperties:3},
+                  },
+                ],
+                'react/jsx-one-expression-per-line': 0,
+                'no-debugger': 1,
+                'no-unused-vars': 1,
+                'react/prop-types': 1,
+                'react/no-unused-prop-types': 1,
+            },
+        };
+
+
+    4-6. 전체 소스 포맷팅하기
+        정의한 ESLint 룰을 지키고 있지 않은 파일과 내용을 확인하고
+        prettier 의 룰에 맞게 코드를 수정 할 수 있습니다.
+
+        $ npx prettier --check ./src    # ESLint 룰 체크
+        $ npx prettier --write ./src    # ESLint 룰에 맞게 코드 수정
+
+
+
+    4-7. githook 설정
+        githook은 깃에 특정 이벤트(커밋, 푸시 등)를 감지하여
+        이벤트를 실행하기 전에 특정 동작을 수행할 수 있도록 도와주는 플러그인 입니다.
+
+        husky와 lint-staged의역할은 다음과 같다.
+        . husky: packages.json 파일에서 githook를 사용할 수 있게 해준다.
+        . lint-staged: git 의 stage된 파일들에 특정 동작을 수행할 수 있도록 해준다.
+        . lint-staged와 husky를 사용하여 git 이벤트에 Prettier 명령어를 연동 설정.
+
+        $ npm install --save-dev husky  lint-staged
+
+        ############
+        commit 전에 자동으로 prettier 적용하기
+        ############
+
+        packages.json 파일 맨 아래에 내용 추가
+
+        $ cat packages.json
+        {
+          ...중략   ,
+          "husky": {
+              "hooks": {
+                  "pre-commit" : "lint-staged"
+              }
+          },
+          "lint-staged": {
+              "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+                  "prettier --write",
+                  "git add"
+              ]
+          }
+        }
+
+    <script type="text/x-template">
+    4-8. jsconfig.json 설정
+        컴포넌트 경로를 설정할 때 상대 경로 대신 절대 경로를 사용하여 설정하는 방법
+
+        경로 종류
+          1. 절대 경로. ex) import App from 'App';
+          2. 상대 경로. ex) import App from './src/App';
+          3. 별칭 경로. ex) import App from '@/App';
+
+        "baseUrl": "./src" ==> 절대 경로 설정
+        "include": ["src"] ==> import 시 해당 루트를 자동으로 포함 설정. ex) import 'src/Comp'; 대신 import 'Comp'; 을 사용
+
+        https://code.visualstudio.com/docs/languages/jsconfig
+        https://velog.io/@kcj_dev96/jsconfig.json
+        https://stackoverflow.com/questions/58577554/reactjs-module-not-found-when-specifying-paths-in-jsconfig-json
+
+
+        # jsconfig.json 파일을 프로젝트 루트에 만들기
+        $ pwd     # 현재 작업하는 폴더 위치 확인
+        $ ls      # package.json 파일이 보이는지 확인
+        $ touch jsconfig.json
+        $ echo -e "{\n  \"compilerOptions\": {\n    \"baseUrl\": \"./src\"\n  },\n  \"include\": [\"src\"]\n}" >> jsconfig.json
+
+        jsconfig.json 파일 내용 확인
+        $ cat jsconfig.json
+        {
+          "compilerOptions": {
+            "baseUrl": "src"
+          },
+          "include": ["src"]
+        }
+    </script>
+
+
+    4-9. 프로젝트 소스 커밋
+        $ pwd                                   # 현재 작업 디렉토리 확인
+        $ ls                                    # package.json 파일이 보이는지 확인
+        $ git add -AN                           # 신규 파일 추가 추가
+        $ git commit -a -m '프로젝트 설정'          # 파일 commit
+        $ git push                              #
+
+
+    <script type="text/x-template">
+    4-10. react 프로젝트 설정 파일 추출하기
+        프로젝트 설정 파일 추출하기 전에 반드시 소스 commit 을 해야만 eject 가 가능하다.
+        eject를 하게 되면 package.json 파일의 내용이 변경된다.
+
+        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        $ cat package.json
+        $ npm run eject
+        $ cat package.json
+    </script>
+
+
+    ##################################
+    5. 서버 실행
+    ##################################
+
+        5-1. 터미널에서 실행중인 서버 중지
+        서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
+
+        5-2. 서버 시작
+        $ ls                # package.json 파일이 보이는지 확인
+        $ npm run start     # package.json 보이면 서버 실행
+
+        Compiled successfully!
+
+        You can now view counterprj06 in the browser.
+
+          Local:            http://localhost:15109
+          On Your Network:  http://192.168.56.1:15109
+
+        Note that the development build is not optimized.
+        To create a production build, use npm run build.
+
+        webpack compiled successfully
+
+
+    ##################################
+    6. 프로젝트 폴더 구조
+       소요시간: 05분
+    ##################################
+
+    프로젝트
+    |-- build                    # 빌드된 결과물이 저장되는 폴더. 서버로 배포되는 파일들.
+    |-- node_modules             # npm 모듈(패키지) 저장 폴더
+    |-- public                   # 배포 버전을 빌드할 때 사용하는 파일.
+    |   |-- assets (기타 자원)
+    |   |   |-- images (이미지)
+    |   |   |-- styles (스타일시트)
+    |   |   `-- text
+    |   |-- favicon.ico
+    |   |-- index.html
+    |   |-- logo192.png
+    |   |-- logo512.png
+    |   |-- manifest.json
+    |   `-- robots.txt
+    |-- src                      # 소스 코드 폴더
+    |   |-- common (공통)
+    |   |-- components (공통 프리젠테이션 컴포넌트)
+    |   |-- containers (컨테이너 컴포넌트)
+    |   |   |-- 컨테이너컴포넌트1
+    |   |   |   |-- components   (컨테이너컴포넌트1 에서만 사용되는 프리젠테이션 컴포넌트 폴더)
+    |   |   |   |-- action.js    (액션상수,액션함수 정의)
+    |   |   |   |-- api.js       (외부 API 호출)
+    |   |   |   |-- saga.js      (외부 API 호출 saga)
+    |   |   |   |-- reducer.js   (리덕스 리듀서)
+    |   |   |   |-- 컨테이너컴포넌트1.js     (컴포넌트 UI )
+    |   |        `-- 컨테이너컴포넌트1.css   (컨테이너컴포넌트1 에서만 사용되는 css 파일)
+    |   |   `-- 컨테이너컴포넌트2
+    |   |        |-- components   (컨테이너컴포넌트2 에서만 사용되는 프리젠테이션 컴포넌트 폴더)
+    |   |        |-- action.js    (액션상수,액션함수 정의)
+    |   |        |-- api.js       (외부 API 호출)
+    |   |        |-- saga.js      (외부 API 호출 saga)
+    |   |        |-- reducer.js   (리덕스 리듀서)
+    |   |        |-- 컨테이너컴포넌트2.js    (컴포넌트 UI )
+    |   |        `-- 컨테이너컴포넌트2.css   (컨테이너컴포넌트2 에서만 사용되는 css 파일)
+    |   |-- constant (상수)
+    |   |-- models (데이터 모델 변수, 타입)
+    |   |-- pages (페이지 컴포넌트)
+    |   |   `-- index.js
+    |   |-- reducers (리듀서)
+    |   |   `-- index.js
+    |   |-- store (라우팅)
+    |   |   `-- index.js
+    |   |-- utils (유틸리티 모듈)
+    |   |-- App.css
+    |   |-- App.js
+    |   |-- App.test.js
+    |   |-- index.css
+    |   |-- index.js
+    |   |-- logo.svg
+    |   |-- reportWebVitals.js
+    |   `-- setupTests.js
+    |-- .babelrc
+    |-- .gitignore
+    |-- .env
+    |-- .prettierrc.js
+    |-- .eslintrc.js
+    |-- jsconfig.json
+    |-- package.json
+    `-- README.md
+
+
+    6-1. 프로젝트용 공통 폴더 생성
+      $ mkdir -p ./public/assets \
+              ./public/assets/images \
+              ./public/assets/styles \
+              ./public/assets/text
+
+      $ mkdir -p ./src/common \
+              ./src/components \
+              ./src/containers \
+              ./src/constant \
+              ./src/models \
+              ./src/pages \
+              ./src/reducers \
+              ./src/store \
+              ./src/utils
+
+    6-2. 프로젝트용 공통 파일 생성
+      $ touch ./src/reducers/index.js \
+              ./src/pages/index.js \
+              ./src/store/index.js
+
+    ##################################
+    11. 기능 설명
+    ##################################
+
+    ##################################
+    12. 프로젝트 초기 설정
+    ##################################
+
+
+    ##################################
+    13. 프로젝트에 컴포넌트 추가
+    ##################################
+
+
+
+
+
+    </xmp>
+
+</body>
+</html>

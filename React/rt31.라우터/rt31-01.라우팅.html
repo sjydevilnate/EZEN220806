@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/reset.css" />
 </head>
 <body>
-    
+
     <div>
         <h2>리액트의 라우팅 기법에 대해서 학습한다.</h2>
         <ul>
@@ -49,32 +49,55 @@
             <li class="langjs">
                 <h3 class="langjs">라우팅 설정 방식</h3>
                 <ul>
-                    <li>컴포넌트 방식</li>
-                    <li>프로그래밍 방식</li>
+                    <li class="langjs">
+                        <h3 class="langjs">프로그래밍 방식</h3>
+                        <xmp class="langjs">
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+    { path: "/", element: <Home /> },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <RouterProvider router={router} />
+);
+                        </xmp>
+                    </li>
+                    <li class="langjs">
+                        <h3 class="langjs">컴포넌트 방식 </h3>
+
+                        <xmp class="langjs">
+import { BrowserRouter, NavLink, Routes, Route } from "react-router-dom";
+
+const App = () => (
+    <BrowserRouter>
+    <div>
+        <nav>
+            <NavLink to="/dashboard">Dashboard </NavLink>
+        </nav>
+        <Routes>
+            <Route path="/dashboard" element={ <Dashboard />} />
+        </Routes>
+    </div>
+    </BrowserRouter>
+);
+                        </xmp>
+                    </li>
                 </ul>
             </li>
             <li class="langjs">
-                <h3 class="langjs">라우팅 구분 </h3>
-                <ul>
-                    <li>
-                        정적 라우팅(Basic Routing)
-                    </li>
-                    <li>
-                        동적 라우팅(Dynamic Routing)
-                        <a href="https://reactrouter.com/web/guides/philosophy/dynamic-routing" target="_blank" rel="noopener noreferrer">https://reactrouter.com/web/guides/philosophy/dynamic-routing</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="langjs">
-                <h3 class="langjs">라우팅 종류 </h3>
+                <h3 class="langjs">라우팅 기법</h3>
                 <ul>
                     <li>
                         단순 라우팅(Basic Routing)
-                        <a href="https://reactrouter.com/web/guides/quick-start" target="_blank" rel="noopener noreferrer">https://reactrouter.com/web/guides/quick-start</a><br>
+                        <a href="https://reactrouter.com/web/guides/quick-start/1st-example-basic-routing" target="_blank" rel="noopener noreferrer">https://reactrouter.com/web/guides/quick-start/1st-example-basic-routing</a><br>
                     </li>
                     <li>
                         중첩 라우팅(Nested Routing)
-                        <a href="https://velopert.com/3417" target="_blank" rel="noopener noreferrer">https://velopert.com/3417</a>
+                        <a href="https://reactrouter.com/web/guides/philosophy/nested-routes" target="_blank" rel="noopener noreferrer">https://reactrouter.com/web/guides/philosophy/nested-routes</a>
                     </li>
                 </ul>
             </li>
@@ -115,108 +138,6 @@
                     </tbody>
                 </table>
             </li>
-            <li class="langjs">
-                <h3 class="langjs"> </h3>
-                <table>
-                    <colgroup>
-                        <col width="150px;" ></col>
-                        <col width="180px;" ></col>
-                        <col></col>
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>네임스페이스</th>
-                            <th>컴포넌트명</th>
-                            <th>설명</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="7">ReactRouter</td>
-                            <td>Router ★</td>
-                            <td>히스토리 API를 사용하지 않는 라우터</td>
-                        </tr>
-                        <tr>
-                            <td>Route ★</td>
-                            <td>요청 경로와 렌더링할 컴포넌트를 설정한다
-                                <xmp class="langjs">
-
-    <Route path='login' element={<Login />}/>
-        <Route path='login'>
-            Login
-        </Route>
-    <Route path="/login" render={(props) => (<Login authState={false} {...props} />)}/>
-                                </xmp>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>NavLink ★</td>
-                            <td>
-                                라우트 이동 + 새로고침 방지 기능 + active 기능<br>
-                                활성화된 Route 표시<br>
-                                activeStyle. ex) activeStyle={activeStyle}<br>
-                                activeClassName.
-                                ex) activeClassName={activeClassName}<br>
-                                &lt;NavLink to="url" activeClassName={activeClassName} activeStyle={activeStyle}&gt;&lt;/NavLink&gt;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Link</td>
-                            <td>
-                                라우트 이동 + 새로고침 방지 기능<br>
-                                &lt;Link to="url" &gt;&lt;/Link&gt;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>IndexLink</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>IndexRoute</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" style="text-align:center;">
-                                <span style="margin-left: 50px; font-weight: 900; ">↓</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>네임스페이스</th>
-                            <th>컴포넌트명</th>
-                            <th>설명</th>
-                        </tr>
-                        <tr>
-                            <td rowspan="8">ReactRouterDOM</td>
-                            <td>BrowserRouter ★</td>
-                            <td>히스토리 API를 사용하여 주소를 관리하는 라우터(해쉬뱅 모드 사용 안함)</td>
-                        </tr>
-                        <tr>
-                            <td>HashRouter</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Routes ★</td>
-                            <td>하위에 라우터 중 하나를 선택한다</td>
-                        </tr>
-                        <tr>
-                            <td>useParams()</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>useLocation()</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>useHistory()</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>useNavigate()</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
 
             <li class="langjs">
                 <h3 class="langjs">중요 라우트 객체</h3>
@@ -224,9 +145,9 @@
 
                 </p>
                 <ul>
-                    <li>props.match 객체</li>
-                    <li>props.location 객체</li>
-                    <li>props.history 객체</li>
+                    <li>match 객체</li>
+                    <li>location 객체</li>
+                    <li>history 객체</li>
                 </ul>
                 <table>
                     <colgroup>
@@ -243,17 +164,17 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>props.match</td>
+                            <td>match</td>
                             <td>params</td>
                             <td>PathVarable 을 받을 때</td>
                         </tr>
                         <tr>
-                            <td>props.location</td>
+                            <td>location</td>
                             <td>search</td>
                             <td>QueryString을 받을 때</td>
                         </tr>
                         <tr>
-                            <td rowspan="5">props.history</td>
+                            <td rowspan="5">history</td>
                             <td>go()</td>
                             <td></td>
                         </tr>
@@ -276,33 +197,95 @@
                     </tbody>
                 </table>
             </li>
-            <li class="langjs">
-                <h3 class="langjs">중요 라우트 훅</h3>
-                <p class="langjs">
 
-                </p>
+            <li class="langjs">
+                <h3 class="langjs"> </h3>
                 <table>
                     <colgroup>
                         <col width="150px;" ></col>
+                        <col width="180px;" ></col>
                         <col></col>
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>훅</th>
+                            <th>네임스페이스</th>
+                            <th>컴포넌트명</th>
                             <th>설명</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td rowspan="5">ReactRouter</td>
+                            <td>Routes ★</td>
+                            <td>여러 Route를 감싸서 그 중 규칙이 일치하는 라우트 단 하나만을 렌더링 시켜주는 역할을 한다</td>
+                        </tr>
+                        <tr>
+                            <td>Route ★</td>
+                            <td>요청 경로와 렌더링할 컴포넌트를 설정한다
+                                <xmp class="langjs">
+<Route path='login' element={<Login />} />
+<Route path='login'>
+    Login
+</Route>
+                                </xmp>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>NavLink ★</td>
+                            <td>
+                                라우트 이동 + 새로고침 방지 + active 기능<br>
+                                활성화된 Route 표시<br>
+                                &lt;NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/"&gt;&lt;/NavLink&gt;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Link</td>
+                            <td>
+                                라우트 이동 + 새로고침 방지 기능<br>
+                                &lt;Link to="url" &gt;&lt;/Link&gt;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Redirect ★</td>
+                            <td>
+                                요청 경로를 다른 경로로 리다이렉션 한다. <br />
+                                <Redirect from="service" to="about/service" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align:center;">
+                                <span style="margin-left: 50px; font-weight: 900; ">↓</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>네임스페이스</th>
+                            <th>컴포넌트명</th>
+                            <th>설명</th>
+                        </tr>
+                        <tr>
+                            <td rowspan="8">ReactRouterDOM</td>
+                            <td>BrowserRouter ★</td>
+                            <td>
+                                <p>히스토리 API를 사용하여 주소를 관리하는 라우터</p>
+                                <p>&lt;Link&gt; 태그를 통해 to 속성에 이동할 경로를 추가하여 이동시킨다</p>
+                                <p>주로 동적인 페이지에서 사용된다.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>HashRouter</td>
+                            <td>
+                                <p>주소에 해쉬태그가 붙는다(#). 예시) index.html#</p>
+                                <p>새로고침하여도 에러가 발생하지 않는다.</p>
+                                <p>검색 엔진이 찾지를 못한다.</p>
+                                <p>주로 정적인 페이지에서 사용된다.</p>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>useParams()</td>
-                            <td>PathVarable 을 받을 때</td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>useLocation()</td>
-                            <td>QueryString을 받을 때</td>
-                        </tr>
-                        <tr>
-                            <td>useHistory()</td>
                             <td></td>
                         </tr>
                         <tr>
@@ -315,49 +298,61 @@
         </ul>
     </div>
     <div>
+        <h2>라우팅 코딩 절차</h2>
         <ul>
             <li class="langjs">
-                <h3 class="langjs">1. 메뉴 설정 예제 </h3>
+                <h3 class="langjs">1. BrowserRouter 설정 </h3>
+                <p class="langjs">
+
+                </p>
+                <ul>
+
+                </ul>
+                <xmp class="langjs">
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+        <BrowserRouter>
+          <App />
+      </BrowserRouter>
+    </React.StrictMode>
+);
+                </xmp>
+            </li>
+            <li class="langjs">
+                <h3>2. 라우팅(Route) 설정</h3>
+                <xmp class="langjs">
+
+<Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/about" element={<About />} />
+    <Redirect from="/service" to="/about" />
+</Routes>
+
+<Routes>
+    <Route path="/"> <Home /> </Route>
+    <Route path="/about"><About /></Route>
+    <Redirect from="/service" to="/about" />
+</Routes>
+                </xmp>
+            </li>
+            <li class="langjs">
+                <h3 class="langjs">3. 메뉴(NavLink) 설정 </h3>
                 <ul>
                     <li>Link나 NavLink 컴포넌트를 사용하여 작성.</li>
                     <li>새로고침이 발생하면 안된다. a 태그 사용 불가.</li>
                 </ul>
-                <pre class="langjs">
-                    <code class="langjs"><xmp class="langjs">
-    <div>
-        <ul>
-            <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} exact to="/">Home</NavLink></li>
-            <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} exact to="/memo">Memo</NavLink></li>
-            <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} exact to="/trash">Trash</NavLink></li>
-        </ul>
-    </div></xmp></code>
-                </pre>
+                <xmp class="langjs">
+<div>
+    <ul>
+        <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} to="/">Home</NavLink></li>
+        <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} to="/memo">Memo</NavLink></li>
+        <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} to="/trash">Trash</NavLink></li>
+    </ul>
+</div>
+                </xmp>
             </li>
             <li class="langjs">
-                <h3>2. 라우팅 설정 예제</h3>
-                <pre class="langjs">
-                    <code class="langjs"><xmp class="langjs">
-    <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/memo" element={<Memo />} />
-            <Route path="/trash" element={<Trash />} />
-            <Route path="*" to="/" />
-        </Routes>
-    </BrowserRouter>
-
-    <BrowserRouter>
-        <Routes>
-            <Route path="/"> <Home/> </Route>
-            <Route path="/memo"><Memo/></Route>
-            <Route path="/trash"><Trash/></Route>
-            <Route path="*" to="/" />
-        </Routes>
-    </BrowserRouter> </xmp> </code>
-                </pre>
-            </li>
-            <li class="langjs">
-                <h3 class="langjs">3. PathVariable</h3>
+                <h3 class="langjs">4. PathVariable</h3>
                 <ul>
                     <li>url 에 인자를 넘기는 방법</li>
                     <li>
@@ -383,7 +378,7 @@
                 </pre>
             </li>
             <li class="langjs">
-                <h3 class="langjs">4. QueryString</h3>
+                <h3 class="langjs">5. QueryString</h3>
                 <ul>
                     <li>url 의 ? 다음에 인자를 넘기는 방법</li>
                     <li>
@@ -418,20 +413,6 @@
     for(var key in obj ){
         console.log(key, obj[key]);
     }
-                    </code>
-                </pre>
-            </li>
-            <li class="langjs">
-                <h3 class="langjs">5. Router를 사용하여 path 마다 컴포넌트를 뿌려줄 때, props는 어떻게 넘겨야 하나? </h3>
-                <p class="langjs">
-
-                </p>
-                <ul>
-
-                </ul>
-                <pre class="langjs">
-                    <code class="langjs">
-
                     </code>
                 </pre>
             </li>
