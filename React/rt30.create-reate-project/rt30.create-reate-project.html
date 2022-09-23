@@ -118,35 +118,7 @@
         $ npm install --save-dev babel-loader
 
 
-    <script type="text/x-template">
-    step 1-13. nodemon 모듈 설치
-        nodemon은 디렉토리의 파일 변경이 감지되면 노드 응용 프로그램을 자동으로 다시 시작하여 프로그램을 개발하는 데 도움이 되는 도구입니다.
-        $ npm install --save-dev nodemon
 
-    step 1-15. react 17 버전으로 다운사이징. 필요시에만
-        react 18 부터는 IE11 지원이 중단됩니다.
-        react 17 버전으로 다운사이징하려면 아래 작업을 수행하면 됩니다.
-        CRA(create-react-app)로 만들어진 프로젝트는 react 18 이상 버전을 기준으로 만들어졌기 때문에 버전 다운사이징 할 때는 소스 수정이 필요합니다.
-
-        $ npm install --save react@17.0.2          # react 17 버전으로 다운사이징. 최신 react 버전 18
-        $ npm install --save react-dom@17.0.2      # react 17 버전으로 다운사이징. 최신 react 버전 18
-
-        소스 변경
-        수정 전: ~/src/index.js
-            import ReactDOM from 'react-dom/client';
-
-            const root = ReactDOM.createRoot(document.getElementById('root'));
-            root.render(
-            <React.StrictMode>
-                <App />
-            </React.StrictMode>,
-            );
-
-        수정 후:
-            import ReactDOM from 'react-dom';
-
-            const root = ReactDOM.render( <App />, document.getElementById('root'));
-    </script>
 
 
     @@@@@@@@@@@@@@@@@@@@@@@@@
@@ -549,7 +521,7 @@
                   },
                 ],
                 'object-curly-newline':[
-                  'error',
+                  'warn',
                   {
                       ObjectExpression: 'always',
                       ObjectPattern: { multiline: true},
@@ -608,38 +580,6 @@
           }
         }
 
-    <script type="text/x-template">
-    4-8. jsconfig.json 설정
-        컴포넌트 경로를 설정할 때 상대 경로 대신 절대 경로를 사용하여 설정하는 방법
-
-        경로 종류
-          1. 절대 경로. ex) import App from 'App';
-          2. 상대 경로. ex) import App from './src/App';
-          3. 별칭 경로. ex) import App from '@/App';
-
-        "baseUrl": "./src" ==> 절대 경로 설정
-        "include": ["src"] ==> import 시 해당 루트를 자동으로 포함 설정. ex) import 'src/Comp'; 대신 import 'Comp'; 을 사용
-
-        https://code.visualstudio.com/docs/languages/jsconfig
-        https://velog.io/@kcj_dev96/jsconfig.json
-        https://stackoverflow.com/questions/58577554/reactjs-module-not-found-when-specifying-paths-in-jsconfig-json
-
-
-        # jsconfig.json 파일을 프로젝트 루트에 만들기
-        $ pwd     # 현재 작업하는 폴더 위치 확인
-        $ ls      # package.json 파일이 보이는지 확인
-        $ touch jsconfig.json
-        $ echo -e "{\n  \"compilerOptions\": {\n    \"baseUrl\": \"./src\"\n  },\n  \"include\": [\"src\"]\n}" >> jsconfig.json
-
-        jsconfig.json 파일 내용 확인
-        $ cat jsconfig.json
-        {
-          "compilerOptions": {
-            "baseUrl": "src"
-          },
-          "include": ["src"]
-        }
-    </script>
 
 
     4-9. 프로젝트 소스 커밋
@@ -650,17 +590,7 @@
         $ git push                              #
 
 
-    <script type="text/x-template">
-    4-10. react 프로젝트 설정 파일 추출하기
-        프로젝트 설정 파일 추출하기 전에 반드시 소스 commit 을 해야만 eject 가 가능하다.
-        eject를 하게 되면 package.json 파일의 내용이 변경된다.
 
-        터미널에서 실행중인 서버 중지하려면 "ctrl + c" 눌러 프로세스 강제 종료
-
-        $ cat package.json
-        $ npm run eject
-        $ cat package.json
-    </script>
 
 
     ##################################
