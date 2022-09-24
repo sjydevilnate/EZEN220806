@@ -20,6 +20,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  ignorePatterns: ['node_modules/'],
   plugins: ['prettier'],
   rules: {
     // "off" or 0 - turn the rule off
@@ -53,8 +54,8 @@ module.exports = {
     'no-shadow': 'off',
     'no-alert': 'off',
     'no-var': 'error',
-    'no-console': 'off',
-    'no-debugger': 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'prettier/prettier': [
       'error',
       {
@@ -68,7 +69,10 @@ module.exports = {
         ObjectPattern: {
           multiline: true,
         },
-        ImportDeclaration: 'always',
+        ImportDeclaration: {
+          multiline: true,
+          minProperties: 3,
+        },
         ExportDeclaration: {
           multiline: true,
           minProperties: 3,

@@ -10,4 +10,5 @@ module.exports = {
   bracketSpacing: true,
   jsxSingleQuote: false /*JSX 안에서는 " 을 사용 */,
   quoteProps: 'as-needed',
+  endOfLine: 'crlf',
 };

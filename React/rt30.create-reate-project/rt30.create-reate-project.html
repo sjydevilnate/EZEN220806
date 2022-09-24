@@ -378,6 +378,7 @@
             bracketSpacing: true,
             jsxSingleQuote: false /*JSX 안에서는 " 을 사용 */,
             quoteProps: 'as-needed',
+            endOfLine: 'crlf'
         };
 
 
@@ -408,38 +409,42 @@
         # 방법1. npm init 을 사용하는 설정 방식(비추천)
         $ npm init @eslint/config  # .eslintrc.js 파일을 생성.
             ? How would you like to use ESLint? ...
-            To check syntax only
-            > To check syntax and find problems
-            To check syntax, find problems, and enforce code style
+                To check syntax only
+              > To check syntax and find problems
+                To check syntax, find problems, and enforce code style
             ? What type of modules does your project use? ...
-            > JavaScript modules (import/export)
-            CommonJS (require/exports)
-            None of these
-            ? Which framework does your project use? ...
-            > React
-            Vue.js
-            None of these
-            √ Does your project use TypeScript? · No / Yes
+              > JavaScript modules (import/export)
+                CommonJS (require/exports)
+                None of these
+              ? Which framework does your project use? ...
+              > React
+                Vue.js
+                None of these
+            ? Does your project use TypeScript?
+              > No
+                Yes
             ? Where does your code run? ...  (Press <space> to select, <a> to toggle all, <i> to invert selection)
-            √ Browser
-            √ Node
+              > Browser
+                Node
             ? How would you like to define a style for your project? ...
-            > Use a popular style guide
-            Answer questions about your style
+              > Use a popular style guide
+                Answer questions about your style
             ? Which style guide do you want to follow? ...
-            > Airbnb: https://github.com/airbnb/javascript
-            Standard: https://github.com/standard/standard
-            Google: https://github.com/google/eslint-config-google
-            XO: https://github.com/xojs/eslint-config-xo
+              > Airbnb: https://github.com/airbnb/javascript
+                Standard: https://github.com/standard/standard
+                Google: https://github.com/google/eslint-config-google
+                XO: https://github.com/xojs/eslint-config-xo
             ? What format do you want your config file to be in? ...
-            > JavaScript
-            YAML
-            JSON
-            ? Would you like to install them now? » No / Yes
+              > JavaScript
+                YAML
+                JSON
+            ? Would you like to install them now?
+                No
+              > Yes
             ? Which package manager do you want to use? ...
-            > npm
-            yarn
-            pnpm
+              > npm
+                yarn
+                pnpm
 
 
         # 방법2. npm install 을 사용하는 설정 방식(추천)
@@ -448,7 +453,8 @@
                                  eslint-plugin-import  \
                                  eslint-plugin-jsx-a11y  \
                                  eslint-plugin-react  \
-                                 eslint-plugin-react-hooks
+                                 eslint-plugin-react-hooks  \
+                                 babel-eslint
 
         # .eslintrc.js 파일 생성 후 내용 추가
         $ echo -e "module.exports = {\n}" > .eslintrc.js
@@ -507,6 +513,7 @@
                 sourceType: 'module',
             },
             plugins: ['prettier'],
+            ignorePatterns: ['node_modules/'],
             rules: {
                 // "off" or 0 - turn the rule off
                 // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
@@ -529,8 +536,8 @@
                 'no-shadow': 'off',
                 'no-alert': 'off',
                 'no-var': 'error',
-                'no-console': 'off',
-                'no-debugger': 'off',
+                'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+                'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
                 'prettier/prettier': [
                   'error',
                   {
@@ -542,7 +549,7 @@
                   {
                       ObjectExpression: 'always',
                       ObjectPattern: { multiline: true},
-                      ImportDeclaration: 'always',
+                      ImportDeclaration: 'never',
                       ExportDeclaration: { multiline: true, minProperties:3},
                   },
                 ],

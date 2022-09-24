@@ -1,12 +1,6 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-  useReducer
-} from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+
 function CrudInput({ callbackAdd }) {
   // ref 만들기.
   const refInputName = useRef();
@@ -38,7 +32,7 @@ function CrudInput({ callbackAdd }) {
     const power = Number(refInputPower.current.value);
     const newItem = {
       name: refInputName.current.value,
-      power: power
+      power: power,
     };
 
     // CrudContainer.callbackAdd(obj) 호출.
@@ -55,23 +49,11 @@ function CrudInput({ callbackAdd }) {
       <h2>CrudInput Component</h2>
       <div>
         <label htmlFor="">Name : </label>
-        <input
-          type="text"
-          name="name"
-          placeholder="이름을 입력하세요"
-          defaultValue={''}
-          ref={refInputName}
-        />
+        <input type="text" name="name" placeholder="이름을 입력하세요" defaultValue={''} ref={refInputName} />
       </div>
       <div>
         <label htmlFor="">Power : </label>
-        <input
-          type="number"
-          name="power"
-          placeholder="숫자를 입력하세요"
-          defaultValue={0}
-          ref={refInputPower}
-        />
+        <input type="number" name="power" placeholder="숫자를 입력하세요" defaultValue={0} ref={refInputPower} />
       </div>
       <button type="button" onClick={handlerAdd}>
         Add
@@ -85,14 +67,14 @@ CrudInput.propTypes = {
   // 인자명: PropTypes.func.isRequired,
   // 인자명: PropTypes.string,
   // 인자명: PropTypes.oneOf(['News', 'Photos']),
-  callbackAdd: PropTypes.func.isRequired
+  callbackAdd: PropTypes.func.isRequired,
 };
 CrudInput.defaultProps = {
   // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
   // 인자명: () => {},
   // 인자명: '',
   // 인자명: 'News',
-  callbackAdd: () => {}
+  callbackAdd: () => {},
 };
 
 export default React.memo(CrudInput); // React.memo()는 props 미변경시 컴포넌트 리렌더링 방지 설정

@@ -22,13 +22,21 @@
 <body>
     <xmp>
         컴포넌트 스타일링 기법을 학습한다.
-        리액트의 핵심 원칙은 컴포넌트는 독립적이며 재사용 가능해야 한다는 것이다.
-        리액트가 html, style, javascript를 한 곳에서 지정하는 것을 권장한다.
+        컴포넌트의 작성 원칙은 수정없이 재사용 가능해야 한다.
+        컴포넌트의 html, style, javascript를 한 곳에 저장하는 것을 권장한다.
 
-        React의 스타일링 기법
-        1. CSS module
-        2. sass
-        3. styled-component
+        React의 스타일링 방식
+        1. inline css 방식
+            JS 표기법을 사용하여 컴포넌트 안에서 style을 만드는 방법
+        2. import css 방식(★)
+            import './파일명.css';
+        3. styled-components 모듈(★★)
+            CSS-in-JS 방식
+            tagged-template-literal 을 이용
+            import styled, { css } from 'styled-components';
+        4. module css 방식
+            import 모듈명 from './파일명.modules.css';
+
 
         아래의 CSS를 사용한다
         {
@@ -43,11 +51,14 @@
 
     <h2>스타일로 만든 </h2>
     <div class="App">
+        스타일로 만든
     </div>
     <hr>
 
-    <h2>컴포넌트로 만든 </h2>
-    <div id="app"></div>
+    <h2>styled-components 로 만든 컴포넌트</h2>
+    <div id="app">
+        styled-components 로 만든
+    </div>
 </body>
 
 </html>

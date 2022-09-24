@@ -1,30 +1,8 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-  useReducer,
-  Fragment,
-  forwardRef,
-  useImperativeHandle
-} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
 import CrudListItem from './CrudListItem';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
 
-// import { action함수 as actions, action상수 as types } from './action';
-
-/* const {aaa, bbb, ...props} = props */
-function CrudList({
-  items,
-  callbackDel,
-  callbackUp,
-  callbackDown,
-  callbackSave
-}) {
+function CrudList({ items, callbackDel, callbackUp, callbackDown, callbackSave }) {
   // const item = {
   //   id: 1,
   //   name: "슈퍼맨",
@@ -72,7 +50,7 @@ CrudList.propTypes = {
   callbackDel: PropTypes.func.isRequired,
   callbackUp: PropTypes.func.isRequired,
   callbackDown: PropTypes.func.isRequired,
-  callbackSave: PropTypes.func.isRequired
+  callbackSave: PropTypes.func.isRequired,
 };
 
 CrudList.defaultProps = {
@@ -84,7 +62,7 @@ CrudList.defaultProps = {
   callbackDel: () => {},
   callbackUp: () => {},
   callbackDown: () => {},
-  callbackSave: () => {}
+  callbackSave: () => {},
 };
 
 export default React.memo(CrudList); // React.memo()는 props 미변경시 컴포넌트 리렌더링 방지 설정

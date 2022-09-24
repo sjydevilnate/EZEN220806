@@ -1,16 +1,5 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-  useReducer,
-  Fragment,
-  forwardRef,
-  useImperativeHandle
-} from 'react';
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import React, { useState, useCallback } from 'react';
+import styled from 'styled-components';
 
 import CrudInput from './CrudInput';
 import CrudList from './CrudList';
@@ -38,7 +27,7 @@ function CrudContainer({}) {
     { id: 1, name: '슈퍼맨', power: 100 },
     { id: 2, name: '아쿠아맨', power: 300 },
     { id: 3, name: '스파이더맨', power: 500 },
-    { id: 4, name: '배트맨', power: 30 }
+    { id: 4, name: '배트맨', power: 30 },
   ]);
 
   // ref 만들기.
@@ -59,8 +48,8 @@ function CrudContainer({}) {
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
-      items
-    ]
+      items,
+    ],
   );
 
   const callbackUp = useCallback(
@@ -77,8 +66,8 @@ function CrudContainer({}) {
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
-      items
-    ]
+      items,
+    ],
   );
 
   const callbackDown = useCallback(
@@ -95,8 +84,8 @@ function CrudContainer({}) {
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
-      items
-    ]
+      items,
+    ],
   );
 
   const callbackSave = useCallback(
@@ -113,8 +102,8 @@ function CrudContainer({}) {
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
-      items
-    ]
+      items,
+    ],
   );
 
   const callbackAdd = useCallback(
@@ -131,7 +120,7 @@ function CrudContainer({}) {
       const obj = {
         id: maxid + 1,
         name: newitem.name,
-        power: newitem.power
+        power: newitem.power,
       };
 
       // items.push(obj) === [...items, obj]
@@ -139,8 +128,8 @@ function CrudContainer({}) {
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
-      items
-    ]
+      items,
+    ],
   );
 
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html

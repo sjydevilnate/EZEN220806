@@ -41,9 +41,6 @@
         <div>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/memo" element={<Memo />} />
-                {/* 중첩 라우트(Nested Routing) 설정. 컴포넌트 안에서 중첩 Route 를 하고 싶다면 아래 코드처럼, 와일드카드를 써야 한다. */}
-                <Route path="/topics/*" element={<Topics />} />
             </Routes>
         </div>
 
