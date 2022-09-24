@@ -46,37 +46,59 @@ function CrudContainer({}) {
 
   // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
   const callbackDel = useCallback(
-    (item) => {
+    (param) => {
       // items 배열에서 삭제. Array.filter() 를 사용한다
-      // ...생략
       debugger;
+      const newItems = items.filter((item) => {
+        if (item.id === param.id) {
+          return false; // 빼라
+        } else {
+          return true; // 넣어라.
+        }
+      });
+      setItems(newItems); // items = newItems;
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
+      items
     ]
   );
 
   const callbackUp = useCallback(
-    (item) => {
+    (param) => {
       //100씩 증가. Array.map() 을 사용한다
       // item.power = item.power + 100;
-      // ...생략
       debugger;
+      const newItems = items.map((item) => {
+        if (item.id === param.id) {
+          item.power = item.power + 100;
+        }
+        return item;
+      });
+      setItems(newItems); // items = newItems;
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
+      items
     ]
   );
 
   const callbackDown = useCallback(
-    (item) => {
+    (param) => {
       // 50씩 감소.  Array.map() 을 사용한다
       // item.power = item.power - 50;
-      // ...생략
       debugger;
+      const newItems = items.map((item) => {
+        if (item.id === param.id) {
+          item.power = item.power - 50;
+        }
+        return item;
+      });
+      setItems(newItems); // items = newItems;
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
+      items
     ]
   );
 
@@ -95,12 +117,25 @@ function CrudContainer({}) {
     (newitem) => {
       // items에서 최대 id 값을 구하는 방법.
       // 방법1. items.map()과 items.reduce()를 사용하여 max id를 찾는 방법
-      // items.push(param);
-      // ...생략
-      debugger;
+      const maxid = items
+        .map((item) => item.id) // [1,2,3,4]
+        .reduce((pvalue, cvalue) => {
+          if (pvalue > cvalue) return pvalue;
+          else return cvalue;
+        }, 0); // 4
+
+      const obj = {
+        id: maxid + 1,
+        name: newitem.name,
+        power: newitem.power
+      };
+
+      // items.push(obj) === [...items, obj]
+      setItems([...items, obj]);
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
+      items
     ]
   );
 

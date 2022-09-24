@@ -23,7 +23,7 @@ function CrudInput({ doIns }) {
     });
 
     // 이벤트 핸들러 작성.
-    const handlerIns = (event)=>{
+    const handlerAdd = (event)=>{
         // 이벤트 핸들러는 화살표 함수로 만들면 this bind()를 생략해도 된다
         console.log(event.target);
 
@@ -80,14 +80,14 @@ function CrudInput({ doIns }) {
             </div>
             <div>
                 <label htmlFor="">Power : </label>
-                <input type="text"
+                <input type="number"
                     name="power"
                     ref={refUserPower}
                     defaultValue={0}
                     placeholder="숫자만 입력하세요"
                 />
             </div>
-            <button onClick={handlerIns}>Add</button>
+            <button onClick={handlerAdd}>Add</button>
         </div>
     )
 }

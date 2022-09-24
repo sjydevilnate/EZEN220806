@@ -689,8 +689,13 @@
 
         5-2. CrudInput 컴포넌트의 "Add" 버튼에 클릭 이벤트 핸들러 설정. handlerAdd
             Name 유효성 검사
+                포커스 주기
+                이벤트 취소
             Power 유효성 검사
-            부모 메서드 props.callbackAdd() 호출
+                포커스 주기
+                이벤트 취소
+            Power 값을 숫자로 바꾸시오.(문자열를 숫자로)
+            부모 메서드 CrudContainer.callbackAdd() 호출
             input 태그에 남아있는 입력값 지우기.
 
         5-3. CrudContainer 컴포넌트에 콜백 메서드 callbackAdd 만들기
@@ -712,7 +717,7 @@
                 const newid = maxid + 1;
 
                 // param 에  id값 추가
-                param.id = newid ;
+                newitem.id = newid ;
 
                 /// items.push(param);
                 setItems( [...items, param] );
@@ -731,7 +736,7 @@
         6-2. 편집여부를 확인하기 위한 상태값(state) isEditMode 만들기
             const [isEditMode, setIsEditMode] = useState(false);
 
-        6-3. formView: 데이터 표시용 JSX 만들기
+        6-3. 데이터 표시용 JSX 만들기: formView:
             const formView = (
                 <tr className={strong}>
                         <td>{item.id}</td>
@@ -754,16 +759,18 @@
                         <input
                             type="text"
                             name="name"
-                            ref={refInputName }
+                            placeholder="이름을 입력하세요"
                             defaultValue={item.name}
+                            ref={refInputName }
                         />
                     </td>
                     <td>
                         <input
                             type="number"
                             name="power"
-                            ref={refInputPower }
+                            placeholder="숫자를 입력하세요"
                             defaultValue={item.power}
+                            ref={refInputPower }
                         />
                     </td>
                     <td>
@@ -774,10 +781,8 @@
                 </tr>
             );
 
-        6-5. CrudListItem에 handlerSave 이벤트 핸들러 만들기.
 
-
-        6-6. CrudListItem.isEditMode  === true 이면 formEdit 리턴하고 아니면 formView 리턴한다.
+        6-5. CrudListItem.isEditMode  === true 이면 formEdit 리턴하고 아니면 formView 리턴한다.
 
             const formView = (
                 ...중략
@@ -792,62 +797,68 @@
                 return formView;
 
 
-        6-7. CrudListItem 의 handlerEdit 수정한다.
-            function CrudListItem(props) {
-
-                ...중략
-
-                // ref 만들기. 예시) const refInput = useRef();
-                const refInputName  = useRef(null);
-                const refInputPower = useRef(null); //
+        6-6. CrudListItem 의 handlerEdit 수정한다.
 
                 const handlerEdit = (event)=>{
                     // 이벤트 핸들러는 화살표 함수로 만든다
                     console.log(event.target);
                     setIsEditMode( !isEditMode );
                 };
-
-                const handlerSave = (event)=>{
-
-                    // formEdid 를 formView로 바꾸기.
-                    // isEditMode = !isEditMode;
-                    setIsEditMode( !isEditMode );
-
-                    // 유효성 검사
-                    if(refInputName.current.value.trim() === ''){
-                        alert('이름을 입력하세요')
-                        refInputName.current.focus();
-                        event.preventDefault();
-                        event.stopPropagation();
-                        return false;
-                    }
-                    if(refInputPower.current.value.trim() === ''){
-                        alert('파워를 입력하세요')
-                        refInputPower.current.focus();
-                        event.preventDefault();
-                        event.stopPropagation();
-                        return false;
-                    }
-                    if( isNaN( Number(refInputPower.current.value) ) ){
-                        alert('파워에 숫자를 입력하세요')
-                        refInputPower.current.value=""
-                        refInputPower.current.focus()
-                        event.preventDefault()
-                        return false
-                    }
-
-                    // 입력된 값을 이용해서 newitem 객체를 만든다.
-                    const newItem = {
-                        id: item.id, /* { id, name, power} */
-                        name: refInputName.current.value,
-                        power: Number( refInputPower.current.value),
-                    }
-                    // 부모 콜백 메서드 호출
-                    callbackSave( newItem );
-                };
-
                 ...중략
             }
+
+        6-7. CrudListItem에 handlerSave 이벤트 핸들러 만들기.
+        
+            formEdid 를 formView로 바꾸기. isEditMode = !isEditMode;
+            유효성 검사. CrudInput 참조하여 코드를 완성하시오
+                Name 유효성 검사
+                    포커스 주기
+                    이벤트 취소
+                Power 유효성 검사
+                    포커스 주기
+                    이벤트 취소
+                Power 값을 숫자로 바꾸시오.(문자열를 숫자로)
+            변경할 객체 정보를 만든다
+            부모 콜백 메서드 호출. CrudContainer.callbackSave();
+
+            const handlerSave = (event)=>{
+
+                // formEdid 를 formView로 바꾸기. isEditMode = !isEditMode;
+                setIsEditMode( !isEditMode );
+
+                // 유효성 검사
+                if(refInputName.current.value.trim() === ''){
+                    alert('이름을 입력하세요')
+                    refInputName.current.focus();
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
+                if(refInputPower.current.value.trim() === ''){
+                    alert('파워를 입력하세요')
+                    refInputPower.current.focus();
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
+                if( isNaN( Number(refInputPower.current.value) ) ){
+                    alert('파워에 숫자를 입력하세요')
+                    refInputPower.current.value=""
+                    refInputPower.current.focus()
+                    event.preventDefault()
+                    return false
+                }
+
+                // 입력된 값을 이용해서 newitem 객체를 만든다.
+                const newItem = {
+                    id: item.id, /* { id, name, power} */
+                    name: refInputName.current.value,
+                    power: Number( refInputPower.current.value),
+                }
+
+                // 부모 콜백 메서드 호출. CrudContainer.callbackSave();
+                callbackSave( newItem );
+            };
 
 
         6-8. CrudListItem 의 handlerEdit 수정한다.
