@@ -3,7 +3,7 @@
     "terminal.integrated.fontSize": 16,
     "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.fontWeight": "normal",
-    "window.zoomLevel": 3,
+    "window.zoomLevel": 2.5,
 
     "editor.minimap.enabled": false,
     "editor.tabSize": 2,
