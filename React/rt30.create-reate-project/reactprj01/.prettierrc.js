@@ -8,6 +8,7 @@ module.exports = {
   trailingComma: 'all',
   proseWrap: 'always',
   bracketSpacing: true,
+  jsxBracketSameLine: false,
   jsxSingleQuote: false /*JSX 안에서는 " 을 사용 */,
   quoteProps: 'as-needed',
   endOfLine: 'crlf',

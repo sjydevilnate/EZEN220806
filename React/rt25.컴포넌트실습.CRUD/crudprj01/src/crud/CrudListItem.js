@@ -7,23 +7,17 @@ import React, {
   useReducer,
   Fragment,
   forwardRef,
-  useImperativeHandle
+  useImperativeHandle,
 } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 // import { useDispatch, useSelector } from 'react-redux';
-// import { BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
+// import { BrowserRouter, Routes, Route, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
 
 // import { action함수 as actions, action상수 as types } from './action';
 
 /* const {aaa, bbb, ...props} = props */
-function CrudListItem({
-  item,
-  callbackDel,
-  callbackUp,
-  callbackDown,
-  callbackSave
-}) {
+function CrudListItem({ item, callbackDel, callbackUp, callbackDown, callbackSave }) {
   const [isEditMode, setIsEditMode] = useState(false); // 상태값이 기본타입인 경우
 
   // ref 만들기.
@@ -71,7 +65,7 @@ function CrudListItem({
     const newitem = {
       id: item.id,
       name: refInputName.current.value,
-      power: Number(refInputPower.current.value)
+      power: Number(refInputPower.current.value),
     };
 
     // 부모 콜백 메서드 호출. CrudContainer.callbackSave();
@@ -112,22 +106,10 @@ function CrudListItem({
     <tr className={strong}>
       <td>{item.id}</td>
       <td>
-        <input
-          type="text"
-          name="name"
-          placeholder="이름을 입력하세요"
-          defaultValue={item.name}
-          ref={refInputName}
-        />
+        <input type="text" name="name" placeholder="이름을 입력하세요" defaultValue={item.name} ref={refInputName} />
       </td>
       <td>
-        <input
-          type="number"
-          name="power"
-          placeholder="숫자를 입력하세요"
-          defaultValue={item.power}
-          ref={refInputPower}
-        />
+        <input type="number" name="power" placeholder="숫자를 입력하세요" defaultValue={item.power} ref={refInputPower} />
       </td>
       <td>
         <button type="button" onClick={handlerUp}>
@@ -156,7 +138,7 @@ CrudListItem.propTypes = {
   callbackDel: PropTypes.func.isRequired,
   callbackUp: PropTypes.func.isRequired,
   callbackDown: PropTypes.func.isRequired,
-  callbackSave: PropTypes.func.isRequired
+  callbackSave: PropTypes.func.isRequired,
 };
 CrudListItem.defaultProps = {
   // props의 디폴트 값 설정. https://ko.reactjs.org/docs/typechecking-with-proptypes.html
@@ -167,7 +149,7 @@ CrudListItem.defaultProps = {
   callbackDel: () => {},
   callbackUp: () => {},
   callbackDown: () => {},
-  callbackSave: () => {}
+  callbackSave: () => {},
 };
 
 export default React.memo(CrudListItem); // React.memo()는 props 미변경시 컴포넌트 리렌더링 방지 설정

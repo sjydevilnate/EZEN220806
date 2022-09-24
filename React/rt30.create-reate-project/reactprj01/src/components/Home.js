@@ -12,7 +12,7 @@ import React, {
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 // import { useDispatch, useSelector } from 'react-redux';
-// import { BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
+// import { BrowserRouter, Routes, Route, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
 
 // import { action함수 as actions, action상수 as types } from './action';
 

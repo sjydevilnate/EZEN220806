@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 // import PropTypes from 'prop-types';
 // import ReactRedux, { Provider, useDispatch, useSelector } from 'react-redux';
-// import ReactRouterDOM, { BrowserRouter, Switch, Route, Redirect, Link, NavLink, useParams, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
+// import ReactRouterDOM, { BrowserRouter, Routes, Route, NavLink, useParams, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 // import { takeEvery, put, call, all, fork, spawn } from 'redux-saga/effects';
-import CrudInput from "../components/crud/CrudInput";
-import CrudList from "../components/crud/CrudList";
-
+import CrudInput from '../components/crud/CrudInput';
+import CrudList from '../components/crud/CrudList';
 
 function CrudContainer(props) {
   // 컴포넌트의 상태값 설정
   const [list, setList] = useState([
-    { id: 1, name: "슈퍼맨", power: 100 },
-    { id: 2, name: "아쿠아맨", power: 300 },
-    { id: 3, name: "스파이더맨", power: 500 },
-    { id: 4, name: "배트맨", power: 30 }
+    { id: 1, name: '슈퍼맨', power: 100 },
+    { id: 2, name: '아쿠아맨', power: 300 },
+    { id: 3, name: '스파이더맨', power: 500 },
+    { id: 4, name: '배트맨', power: 30 },
   ]);
 
   // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
@@ -21,10 +20,10 @@ function CrudContainer(props) {
   useEffect(() => {
     if (refIsMounted.current) {
       // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
-      console.log("componentDidUpdate");
+      console.log('componentDidUpdate');
     } else {
       // 마운트 완료 후에 실행됨. 한번만. focus 줄때
-      console.log("componentDidMount");
+      console.log('componentDidMount');
       refIsMounted.current = true;
     }
   });
@@ -67,12 +66,12 @@ function CrudContainer(props) {
       const newlist = [...list, newitem];
       setList(newlist);
     },
-    [list]
+    [list],
   );
 
   const doDel = useCallback(
     (item) => {
-      const r = window.confirm("정말로 삭제하시겠습니까?");
+      const r = window.confirm('정말로 삭제하시겠습니까?');
       if (!r) return;
 
       // 배열에서 삭제. splice 나 filter 를 사용한다
@@ -83,7 +82,7 @@ function CrudContainer(props) {
       });
       setList(newlist);
     },
-    [list]
+    [list],
   );
   const doUp = useCallback(
     (item) => {
@@ -97,7 +96,7 @@ function CrudContainer(props) {
       });
       setList(newlist);
     },
-    [list]
+    [list],
   );
   const doDown = useCallback(
     (item) => {
@@ -111,7 +110,7 @@ function CrudContainer(props) {
       });
       setList(newlist);
     },
-    [list]
+    [list],
   );
   const doSave = useCallback(
     (newitem) => {
@@ -124,7 +123,7 @@ function CrudContainer(props) {
       });
       setList(newlist);
     },
-    [list]
+    [list],
   );
 
   // JSX로 화면 만들기
@@ -132,13 +131,7 @@ function CrudContainer(props) {
     <div>
       <CrudInput doIns={doIns}></CrudInput>
       <hr />
-      <CrudList
-        list={list}
-        doDel={doDel}
-        doUp={doUp}
-        doDown={doDown}
-        doSave={doSave}
-      ></CrudList>
+      <CrudList list={list} doDel={doDel} doUp={doUp} doDown={doDown} doSave={doSave}></CrudList>
     </div>
   );
 }

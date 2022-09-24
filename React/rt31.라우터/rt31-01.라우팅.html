@@ -246,13 +246,6 @@ const App = () => (
                             </td>
                         </tr>
                         <tr>
-                            <td>Redirect ★</td>
-                            <td>
-                                요청 경로를 다른 경로로 리다이렉션 한다. <br />
-                                <Redirect from="service" to="about/service" />
-                            </td>
-                        </tr>
-                        <tr>
                             <td colspan="3" style="text-align:center;">
                                 <span style="margin-left: 50px; font-weight: 900; ">↓</span>
                             </td>
@@ -325,13 +318,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/about" element={<About />} />
-    <Redirect from="/service" to="/about" />
 </Routes>
 
 <Routes>
     <Route path="/"> <Home /> </Route>
     <Route path="/about"><About /></Route>
-    <Redirect from="/service" to="/about" />
 </Routes>
                 </xmp>
             </li>
@@ -419,4 +410,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </ul>
     </div>
 </body>
-</html>
+</html>

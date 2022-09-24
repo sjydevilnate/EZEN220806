@@ -240,8 +240,8 @@ $ touch ./src/pages/Home.js \
                 <li>Home, Memo,  Trash 컴포넌트를 만든다</li>
                 <li>App 컴포넌트를 만들다
                     <ol>
-                        <li>라우팅 기능을 추가 한다. BrowserRouter, Switch, Route, Redirect 컴포넌트</li>
-                        <li>메뉴 기능을 추가한다. Link, NavLink 컴포넌트 </li>
+                        <li>라우팅 기능을 추가 한다. BrowserRouter, Routes, Route 컴포넌트</li>
+                        <li>메뉴 기능을 추가한다. NavLink 컴포넌트 </li>
                     </ol>
                 </li>
                 <li>/ 요청으로 들어오면: Home 컴포넌트를 렌더링 한다</li>
@@ -264,28 +264,27 @@ $ touch ./src/pages/Home.js \
                 <xmp class="langjs">
 # src/routes/RouterHome.js
 <BrowserRouter>
-    <Switch>
+    <Routes>
         <Route path="/" exact component={Home} />
         <Route path="/memo" component={Memo} />
         <Route path="/trash" component={Trash} />
-        <Redirect path="*" to="/" />
-    </Switch>
+    </Routes>
 </BrowserRouter>
 
 
 # src/routes/RouterMemo.js
-<Switch>
+<Routes>
     <Route path={`${match.url}/add`} exact component={AddMemo} />
     <Route path={`${match.url}/:id`} exact component={Memo} />
     <Route path={`${match.url}/`} exact component={() => <div>메모가 없습니다. 새로운 메모를 만들어 보세요.</div>} />
-</Switch>
+</Routes>
 
 
 # src/routes/RouterTrash.js
-<Switch>
+<Routes>
     <Route path={`${match.url}/:id`} exact component={RemovedMemo} />
     <Route path={`${match.url}/`} exact component={() => <div>휴지통이 비었습니다.</div>} />
-</Switch>
+</Routes>
                 </xmp>
             </pre>
 
@@ -365,7 +364,7 @@ $ touch ./src/routes/RouterHome.js \
     ##################################
     1. 프로젝트 생성 작업
     ##################################
-    
+
 
 
     ##################################
@@ -419,17 +418,16 @@ $ touch ./src/routes/RouterHome.js \
 
     12-5. App.js 수정
         import './App.css';
-        import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+        import {BrowserRouter, Routes, Route} from 'react-router-dom';
         import Home from "./pages/Home";
 
         function App(props) {
             // JSX로 화면 만들기
             return (
               <BrowserRouter>
-                <Switch>
+                <Routes>
                   <Route path="/" exact component={Home} />
-                  <Redirect path="*" to="/" />
-                </Switch>
+                </Routes>
               </BrowserRouter>
             )
         }
@@ -472,7 +470,7 @@ $ touch ./src/routes/RouterHome.js \
    14. Memo 관련 페이지, 컴포넌트 작성
        14-1. App.js 수정
             import './App.css';
-            import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+            import {BrowserRouter, Routes, Route} from 'react-router-dom';
             import Home from "./pages/Home";
             import Memo from "./pages/Memo";
             import store from "./store";
@@ -484,7 +482,6 @@ $ touch ./src/routes/RouterHome.js \
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/memo" element={() => <Memo store={store} />} />
-                      <Redirect path="*" to="/" />
                     </Routes>
                   </BrowserRouter>
                 )
@@ -496,4 +493,4 @@ $ touch ./src/routes/RouterHome.js \
     </xmp>
 
 </body>
-</html>
+</html>
