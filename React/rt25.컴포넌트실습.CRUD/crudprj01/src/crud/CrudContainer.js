@@ -8,12 +8,12 @@ import React, {
   Fragment,
   forwardRef,
   useImperativeHandle
-} from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+} from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 
-import CrudInput from "./CrudInput";
-import CrudList from "./CrudList";
+import CrudInput from './CrudInput';
+import CrudList from './CrudList';
 
 // import styled, { css } from 'styled-components';
 // https://styled-components.com/docs/basics#adapting-based-on-props
@@ -35,10 +35,10 @@ const StyledCrudContainer = styled.div`
 
 function CrudContainer({}) {
   const [items, setItems] = useState([
-    { id: 1, name: "슈퍼맨", power: 100 },
-    { id: 2, name: "아쿠아맨", power: 300 },
-    { id: 3, name: "스파이더맨", power: 500 },
-    { id: 4, name: "배트맨", power: 30 }
+    { id: 1, name: '슈퍼맨', power: 100 },
+    { id: 2, name: '아쿠아맨', power: 300 },
+    { id: 3, name: '스파이더맨', power: 500 },
+    { id: 4, name: '배트맨', power: 30 }
   ]);
 
   // ref 만들기.
@@ -143,7 +143,7 @@ function CrudContainer({}) {
     ]
   );
 
-  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   return (
     <StyledCrudContainer>
       <h1>Creat Read Update Delete</h1>

@@ -8,9 +8,9 @@ import React, {
   Fragment,
   forwardRef,
   useImperativeHandle
-} from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+} from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
 
@@ -52,15 +52,15 @@ function CrudListItem({
     console.log(event.target);
 
     // 유효성 검사. CrudInput 참조하여 코드를 완성하시오
-    if (refInputName.current.value.trim() === "") {
-      alert("이름을 입력하세요");
+    if (refInputName.current.value.trim() === '') {
+      alert('이름을 입력하세요');
       refInputName.current.focus();
       event.preventDefault();
       event.stopPropagation();
       return false;
     }
-    if (refInputPower.current.value.trim() === "") {
-      alert("파워를 입력하세요");
+    if (refInputPower.current.value.trim() === '') {
+      alert('파워를 입력하세요');
       refInputPower.current.focus();
       event.preventDefault();
       event.stopPropagation();
@@ -81,10 +81,10 @@ function CrudListItem({
     setIsEditMode(!isEditMode);
   };
 
-  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   // power가 300이상인 사람은 글자색을 red, bold 로 출력되게 css를 적용하시오.
-  let strong = "";
-  if (item.power >= 300) strong = "strong";
+  let strong = '';
+  if (item.power >= 300) strong = 'strong';
 
   const formView = (
     <tr className={strong}>

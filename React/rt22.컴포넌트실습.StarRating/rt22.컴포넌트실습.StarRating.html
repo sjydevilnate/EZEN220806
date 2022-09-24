@@ -62,14 +62,14 @@
     $ cp ../style.css ./src/App.css
 
     # rating 컴포넌트 폴더 만들기
-    $ mkdir -p src/components/rating
+    $ mkdir -p src/components/starrating
 
     # rating 컴포넌트 관련 파일 만들기
-    $ touch src/components/rating/RatingContainer.js
-    $ touch src/components/rating/ColorList.js
-    $ touch src/components/rating/Color.js
-    $ touch src/components/rating/StarRating.js
-    $ touch src/components/rating/Star.js
+    $ touch src/components/starrating/RatingContainer.js
+    $ touch src/components/starrating/ColorList.js
+    $ touch src/components/starrating/Color.js
+    $ touch src/components/starrating/StarRating.js
+    $ touch src/components/starrating/Star.js
 
 
     # rating 컴포넌트 트리 만들기
@@ -83,7 +83,7 @@
 
     # src/App.js 수정
         import 설정
-            import RatingContaier from "./RatingContaier"; 추가
+            import RatingContaier from "./components/starrating/RatingContaier"; 추가
 
         App 의 JSX를 변경한다.
             <div>
@@ -94,7 +94,7 @@
 
     # RatingContaier 컴포넌트
         RatingContaier.js 파일 생성
-            $ touch src/RatingContaier.js
+            $ touch src/components/starrating/RatingContaier.js
 
         RatingContaier 컴포넌트 만들기
 

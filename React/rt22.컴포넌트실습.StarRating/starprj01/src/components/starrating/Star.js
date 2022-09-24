@@ -8,9 +8,9 @@ import React, {
   Fragment,
   forwardRef,
   useImperativeHandle
-} from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+} from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ function Star({ index, selected, callbackClick }) {
     callbackClick(index);
   };
 
-  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   if (selected) {
     return <div className="star selected" onClick={handler}></div>;
   }

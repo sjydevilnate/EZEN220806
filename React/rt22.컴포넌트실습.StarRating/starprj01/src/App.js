@@ -1,5 +1,5 @@
-import "./App.css";
-import RatingContainer from "./components/rating/RatingContainer";
+import './App.css';
+import RatingContainer from './components/starrating/RatingContainer';
 
 function App() {
   return (

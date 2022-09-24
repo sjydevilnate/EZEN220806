@@ -8,11 +8,11 @@ import React, {
   Fragment,
   forwardRef,
   useImperativeHandle
-} from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+} from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 
-import Star from "./Star";
+import Star from './Star';
 
 function StarRating({ starsSelected, handlerRate, totalStars }) {
   const handlerClick = (i) => {
@@ -20,7 +20,7 @@ function StarRating({ starsSelected, handlerRate, totalStars }) {
     handlerRate(i + 1);
   };
 
-  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
 
   const arr = [...Array(totalStars).keys()].map((val) => val + 1);
   return (

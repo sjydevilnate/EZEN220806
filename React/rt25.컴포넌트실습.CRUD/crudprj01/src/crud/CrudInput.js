@@ -5,8 +5,8 @@ import React, {
   useCallback,
   useMemo,
   useReducer
-} from "react";
-import PropTypes from "prop-types";
+} from 'react';
+import PropTypes from 'prop-types';
 function CrudInput({ callbackAdd }) {
   // ref 만들기.
   const refInputName = useRef();
@@ -18,7 +18,7 @@ function CrudInput({ callbackAdd }) {
 
     // name 유효성 검사
     if (!refInputName.current.value || !refInputName.current.value.trim()) {
-      alert("name 입력 하시오");
+      alert('name 입력 하시오');
       refInputName.current.focus();
       event.stopPropagation();
       event.preventDefault();
@@ -27,7 +27,7 @@ function CrudInput({ callbackAdd }) {
 
     // Power 유효성 검사
     if (!refInputPower.current.value || !refInputPower.current.value.trim()) {
-      alert("power 입력 하시오");
+      alert('power 입력 하시오');
       refInputPower.current.focus();
       event.stopPropagation();
       event.preventDefault();
@@ -49,7 +49,7 @@ function CrudInput({ callbackAdd }) {
     refInputPower.current.value = null;
   };
 
-  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   return (
     <div>
       <h2>CrudInput Component</h2>
@@ -59,7 +59,7 @@ function CrudInput({ callbackAdd }) {
           type="text"
           name="name"
           placeholder="이름을 입력하세요"
-          defaultValue={""}
+          defaultValue={''}
           ref={refInputName}
         />
       </div>

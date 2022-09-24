@@ -8,11 +8,11 @@ import React, {
   Fragment,
   forwardRef,
   useImperativeHandle
-} from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import StarRating from "./StarRating";
-import Star from "./Star";
+} from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+import StarRating from './StarRating';
+import Star from './Star';
 
 // import { useDispatch, useSelector } from 'react-redux';
 // import { BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
@@ -39,11 +39,11 @@ function Color({
     callbackRateColor(id, rating);
   };
 
-  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   return (
     <section className="color">
       <h1>{title}</h1>
-      <button onClick={handlerRemove}>X</button>{" "}
+      <button onClick={handlerRemove}>X</button>{' '}
       <div className="color" style={{ backgroundColor: color }}></div>
       <div>
         <StarRating
@@ -72,9 +72,9 @@ Color.defaultProps = {
   // 인자명: () => {},
   // 인자명: '',
   // 인자명: 'News',
-  id: "",
-  titlte: "",
-  color: "",
+  id: '',
+  titlte: '',
+  color: '',
   rating: 0,
   callbackRateColor: () => {},
   callbackRemoveColor: () => {}

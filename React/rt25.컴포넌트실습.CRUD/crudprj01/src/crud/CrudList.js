@@ -8,10 +8,10 @@ import React, {
   Fragment,
   forwardRef,
   useImperativeHandle
-} from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import CrudListItem from "./CrudListItem";
+} from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+import CrudListItem from './CrudListItem';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { BrowserRouter, Routes, Route, Link, NavLink, useParams, useLocation, useHistory, useNavigate } from 'react-router-dom';
 
@@ -44,7 +44,7 @@ function CrudList({
     );
   });
 
-  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+  // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   return (
     <table>
       <caption>
