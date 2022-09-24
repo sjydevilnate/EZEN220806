@@ -809,7 +809,6 @@
             }
 
         6-7. CrudListItem에 handlerSave 이벤트 핸들러 만들기.
-            formEdid 를 formView로 바꾸기. isEditMode = !isEditMode;
             유효성 검사. CrudInput 참조하여 코드를 완성하시오
                 Name 입력 여부 유효성 검사
                     포커스 주기
@@ -821,11 +820,9 @@
                 Power의 입력값을 숫자로 바꾸시오.(문자열를 숫자로)
             입력된 값을 이용해서 변경할 객체(newItem)를 만든다
             부모 콜백 메서드 호출. CrudContainer.callbackSave();
+            formEdid 를 formView로 바꾸기. isEditMode = !isEditMode;
 
             const handlerSave = (event)=>{
-
-                // formEdid 를 formView로 바꾸기. isEditMode = !isEditMode;
-                setIsEditMode( !isEditMode );
 
                 // 유효성 검사. CrudInput 참조하여 코드를 완성하시오
                 if(refInputName.current.value.trim() === ''){
@@ -859,6 +856,9 @@
 
                 // 부모 콜백 메서드 호출. CrudContainer.callbackSave();
                 callbackSave( newItem );
+
+                // formEdid 를 formView로 바꾸기. isEditMode = !isEditMode;
+                setIsEditMode( !isEditMode );
             };
 
 
@@ -880,6 +880,31 @@
               items
             ]
           );
+
+
+    ##################################
+    작업 7. CrudInput 과 CrudListItem 에서 중복되는 
+        입력되는 부분을 공통 컴포넌트로 분리하기.
+    ##############################
+        
+        7-1. CrudInputPower
+            <input
+              type="number"
+              name="power"
+              placeholder="숫자를 입력하세요"
+              defaultValue={0}
+              ref={refInputPower}
+            />
+
+        7-2. CrudInputPower
+            <input
+              type="text"
+              name="name"
+              placeholder="이름을 입력하세요"
+              defaultValue={""}
+              ref={refInputName}
+            />
+
 
     </xmp>
     <hr>

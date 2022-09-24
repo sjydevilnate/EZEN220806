@@ -51,9 +51,6 @@ function CrudListItem({
   const handlerSave = (event) => {
     console.log(event.target);
 
-    // isEditMode 값 변경하기
-    setIsEditMode(!isEditMode);
-
     // 유효성 검사. CrudInput 참조하여 코드를 완성하시오
     if (refInputName.current.value.trim() === "") {
       alert("이름을 입력하세요");
@@ -79,6 +76,9 @@ function CrudListItem({
 
     // 부모 콜백 메서드 호출. CrudContainer.callbackSave();
     callbackSave(newitem);
+
+    // isEditMode 값 변경하기
+    setIsEditMode(!isEditMode);
   };
 
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
