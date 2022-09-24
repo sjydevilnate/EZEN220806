@@ -14,9 +14,8 @@ function CrudInput({ callbackAdd }) {
 
   // 이벤트 핸들러 작성.
   const handlerAdd = (event) => {
-    // 이벤트 핸들러는 화살표 함수로 만든다
-    console.log(window.event.target);
-    debugger;
+    console.log(event.target);
+
     // name 유효성 검사
     if (!refInputName.current.value || !refInputName.current.value.trim()) {
       alert("name 입력 하시오");

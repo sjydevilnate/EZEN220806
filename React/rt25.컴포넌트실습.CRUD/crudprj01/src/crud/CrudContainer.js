@@ -48,7 +48,6 @@ function CrudContainer({}) {
   const callbackDel = useCallback(
     (param) => {
       // items 배열에서 삭제. Array.filter() 를 사용한다
-      debugger;
       const newItems = items.filter((item) => {
         if (item.id === param.id) {
           return false; // 빼라
@@ -68,7 +67,6 @@ function CrudContainer({}) {
     (param) => {
       //100씩 증가. Array.map() 을 사용한다
       // item.power = item.power + 100;
-      debugger;
       const newItems = items.map((item) => {
         if (item.id === param.id) {
           item.power = item.power + 100;
@@ -87,7 +85,6 @@ function CrudContainer({}) {
     (param) => {
       // 50씩 감소.  Array.map() 을 사용한다
       // item.power = item.power - 50;
-      debugger;
       const newItems = items.map((item) => {
         if (item.id === param.id) {
           item.power = item.power - 50;
@@ -104,12 +101,19 @@ function CrudContainer({}) {
 
   const callbackSave = useCallback(
     (newitem) => {
-      // newitem 으로 바뀐 새로운 배열 만들기. Array.map() 을 사용
-      debugger;
-      // ...생략
+      // newitem 으로 바뀐 새로운 배열 만들기.
+      // Array.map() 을 사용
+      const newItems = items.map((item) => {
+        if (item.id === newitem.id) {
+          return newitem;
+        }
+        return item;
+      });
+      setItems(newItems); // items = newItems;
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
+      items
     ]
   );
 

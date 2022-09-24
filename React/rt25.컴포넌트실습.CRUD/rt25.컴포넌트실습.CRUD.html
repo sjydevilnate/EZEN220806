@@ -809,7 +809,6 @@
             }
 
         6-7. CrudListItem에 handlerSave 이벤트 핸들러 만들기.
-        
             formEdid 를 formView로 바꾸기. isEditMode = !isEditMode;
             유효성 검사. CrudInput 참조하여 코드를 완성하시오
                 Name 입력 여부 유효성 검사
@@ -863,14 +862,22 @@
             };
 
 
-        6-8. CrudContainer 의 callbackSave 수정한다.
+        6-8. CrudContainer 의 callbackSave 완성한다.
           const callbackSave = useCallback(
             (newitem) => {
-              // newitem 으로 바뀐 새로운 배열 만들기. Array.map() 을 사용한다
-              
+              // newitem 으로 바뀐 새로운 배열 만들기.
+              // Array.map() 을 사용
+              const newItems = items.map((item) => {
+                if (item.id === newitem.id) {
+                  return newitem;
+                }
+                return item;
+              });
+              setItems(newItems); // items = newItems;
             },
             [
               /* 메서드와 연관되는 상태(변수)명들을 기술 */
+              items
             ]
           );
 
