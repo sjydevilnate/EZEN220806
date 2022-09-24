@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import ColorList from './ColorList';
-
-import Color from './Color';
+import './App.css';
 
 function RatingContainer({ ...props }) {
   // useState 를 사용한 컴포넌트의 상태값 설정

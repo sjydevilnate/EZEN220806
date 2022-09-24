@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+/* 테이블 설정 */
+table {
+  margin: 0 -1px;
+  /* table-layout: fixed; */
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table,
+th,
+td {
+  border: 1px solid #7c7c7c;
+}
+th,
+td {
+  padding: 0.2em;
+  text-align: left;
+  line-height: 1.3em;
+}
+caption {
+  visibility: hidden;
+  height: 1px;
+}
+
+xmp {
+  line-height: 1.2em;
+  margin: 0 0 0 -30px;
+}
+
+pre {
+  line-height: 1.2em;
+  box-sizing: border-box;
+}
+div > table {
+  margin: 0 45px 0 0;
+  width: 95%;
+}
+
+body > div {
+  margin: 0 45px 50px 45px;
+}
+
+body > h1,
+body > h2,
+body > h3,
+body > h4,
+body > h5,
+body > h6 {
+  margin: 0 0 50px 45px;
+}

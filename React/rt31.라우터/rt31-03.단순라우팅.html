@@ -44,20 +44,20 @@
                 <Route path="/memo" element={<Memo />} />
                 {/* 중첩 라우트(Nested Routing) 설정. 컴포넌트 안에서 중첩 Route 를 하고 싶다면 아래 코드처럼, 와일드카드를 써야 한다. */}
                 <Route path="/topics/*" element={<Topics />} />
-                <Redirect from="service" to="about/service" />
             </Routes>
         </div>
 
     3. 메뉴 설정
         Link나 NavLink 컴포넌트를 사용하여 작성. a 태그 사용 불가.
-        작업 파일:
+        작업파일: src/App.js
 
         <div>
             <ul>
                 <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/">Home</NavLink></li>
-                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/memo">Memo</NavLink></li>
-                <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/topics">Topics</NavLink></li>
             </ul>
+            <Routes>
+                <Route path="/" element={<Home />} />
+            </Routes>
         </div>
 
     4. 컴포넌트 만들기
@@ -75,58 +75,53 @@
 
 
     5. recipes 예제 추가
-    "rt21.컴포넌트실습.recipes"의 소스를 현재 프로젝트에 추가
+        "rt21.컴포넌트실습.recipes"의 소스를 현재 프로젝트에 추가
 
-    5-1. containers 폴더에 recipes 폴더 만들기
-        $ mkdir -p src/containers/recipes
+        5-1. containers 폴더에 recipes 폴더 만들기
+            $ mkdir -p src/containers/recipes
 
-    5-2. recipes 관련 소스를 src/containers/recipes 폴더에 추가
+        5-2. recipes 관련 소스를 src/containers/recipes 폴더에 추가
 
-    5-3. 라우팅 설정
-        <Route path="/recipes" element={<RecipesContainer />} />
+        5-3. 라우팅 설정
+            <Route path="/recipes" element={<RecipesContainer />} />
 
-    5-4. 메뉴 설정
-        <li>
-            <NavLink to="/recipes">Recipes 예제</NavLink>
-        </li>
+        5-4. 메뉴 설정
+            <li>
+                <NavLink to="/recipes">Recipes 예제</NavLink>
+            </li>
 
 
     6. StarRating 예제 추가
-    "rt22.컴포넌트실습.StarRating"의 소스를 현재 프로젝트에 추가
+        "rt22.컴포넌트실습.StarRating"의 소스를 현재 프로젝트에 추가
 
-    6-1. containers 폴더에 starrating 폴더 만들기
-        $ mkdir -p src/containers/starrating
+        6-1. containers 폴더에 starrating 폴더 만들기
+            $ mkdir -p src/containers/starrating
 
-    6-2. starrating 관련 소스를 src/containers/starrating 폴더에 추가
+        6-2. starrating 관련 소스를 src/containers/starrating 폴더에 추가
 
-    6-3. 라우팅 설정
-        <Route path="/starrating" element={<StarRatingContainer />} />
+        6-3. 라우팅 설정
+            <Route path="/starrating" element={<StarRatingContainer />} />
 
-    6-4. 메뉴 설정
-        <li>
-            <NavLink to="/starrating">StarRating  예제</NavLink>
-        </li>
+        6-4. 메뉴 설정
+            <li>
+                <NavLink to="/starrating">StarRating  예제</NavLink>
+            </li>
 
     7. CRUD 예제 추가
-    "rt25.컴포넌트실습.CRUD"의 소스를 현재 프로젝트에 추가
+        "rt25.컴포넌트실습.CRUD"의 소스를 현재 프로젝트에 추가
 
-    7-1. containers 폴더에 crud 폴더 만들기
-        $ mkdir -p src/containers/crud
+        7-1. containers 폴더에 crud 폴더 만들기
+            $ mkdir -p src/containers/crud
 
-    7-2. crud 관련 소스를 src/containers/crud 폴더에 추가
+        7-2. crud 관련 소스를 src/containers/crud 폴더에 추가
 
-    7-3. 라우팅 설정
-        <Route path="/crud" element={<CrudContainer />} />
+        7-3. 라우팅 설정
+            <Route path="/crud" element={<CrudContainer />} />
 
-    7-4. 메뉴 설정
-        <li>
-            <NavLink to="/crud">Crud 예제</NavLink>
-        </li>
+        7-4. 메뉴 설정
+            <li>
+                <NavLink to="/crud">Crud 예제</NavLink>
+            </li>
     </xmp>
-
-    <hr>
-    <div id="app">
-
-    </div>
 </body>
 </html>
