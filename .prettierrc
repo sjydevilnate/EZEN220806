@@ -1,16 +1,13 @@
 {
-  "printWidth": 80,
+  "printWidth": 130,
   "tabWidth": 2,
   "singleQuote": true,
   "semi": true,
   "useTabs": false,
   "trailingComma": "all",
   "proseWrap": "always",
-  "requireConfig": false,
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
   "jsxSingleQuote": false,
   "quoteProps": "as-needed",
-  "endOfLine": "crlf",
-  "editor.formatOnSave": true
+  "endOfLine": "crlf"
 }
