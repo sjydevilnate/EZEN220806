@@ -28,36 +28,53 @@ function CrudListItem({
 
   // 이벤트 핸들러 작성.
   const handlerDel = () => {
-    // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(window.event.target);
     debugger;
     callbackDel(/* 삭제될 정보를 넘긴다 */ item);
   };
   const handlerUp = () => {
-    // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(window.event.target);
     debugger;
     callbackUp(/* 변경될 정보를 넘긴다 */ item);
   };
   const handlerDown = () => {
-    // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(window.event.target);
     debugger;
     callbackDown(/* 변경될 정보를 넘긴다 */ item);
   };
-  const handlerEdit = () => {
-    // 이벤트 핸들러는 화살표 함수로 만든다
-    console.log(window.event.target);
+  const handlerEdit = (event) => {
+    console.log(event.target);
     // isEditMode 값 변경하기
     setIsEditMode(!isEditMode);
   };
-  const handlerSave = () => {
-    // 이벤트 핸들러는 화살표 함수로 만든다
+  const handlerSave = (event) => {
+    console.log(event.target);
     console.log(window.event.target);
     // isEditMode 값 변경하기
     setIsEditMode(!isEditMode);
 
     // 유효성 검사. CrudInput 참조하여 코드를 완성하시오
+    if(refInputName.current.value.trim() === ''){
+      alert('이름을 입력하세요')
+      refInputName.current.focus();
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+  }
+  if(refInputPower.current.value.trim() === ''){
+      alert('파워를 입력하세요')
+      refInputPower.current.focus();
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+  }
+  if( isNaN( Number(refInputPower.current.value) ) ){
+      alert('파워에 숫자를 입력하세요')
+      refInputPower.current.value=""
+      refInputPower.current.focus()
+      event.preventDefault()
+      return false
+  }
 
     // 변경할 객체 정보를 만든다
     const newitem = {

@@ -103,10 +103,10 @@ function CrudContainer({}) {
   );
 
   const callbackSave = useCallback(
-    (item) => {
-      // newitem 으로 바뀐 새로운 배열 만들기. Array.map() 을 사용한다
-      // ...생략
+    (newitem) => {
+      // newitem 으로 바뀐 새로운 배열 만들기. Array.map() 을 사용
       debugger;
+      // ...생략
     },
     [
       /* 메서드와 연관되는 상태(변수)명들을 기술 */
@@ -138,12 +138,6 @@ function CrudContainer({}) {
       items
     ]
   );
-
-  // 이벤트 핸들러 작성.
-  const handler = () => {
-    // 이벤트 핸들러는 화살표 함수로 만든다
-    console.log(window.event.target);
-  };
 
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   return (

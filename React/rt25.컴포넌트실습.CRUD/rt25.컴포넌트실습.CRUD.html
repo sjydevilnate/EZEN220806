@@ -492,7 +492,7 @@
                 // ...생략
             }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
 
-            const callbackSave = useCallback( (item) => {
+            const callbackSave = useCallback( (newitem) => {
                 // newitem 으로 바뀐 새로운 배열 만들기. Array.map() 을 사용한다
                 // ...생략
             }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
@@ -688,13 +688,14 @@
             }
 
         5-2. CrudInput 컴포넌트의 "Add" 버튼에 클릭 이벤트 핸들러 설정. handlerAdd
-            Name 유효성 검사
+            Name 입력 여부 유효성 검사
                 포커스 주기
                 이벤트 취소
-            Power 유효성 검사
+            Power 입력 여부 유효성 검사
                 포커스 주기
                 이벤트 취소
-            Power 값을 숫자로 바꾸시오.(문자열를 숫자로)
+            Power의 입력값이 숫자인지 유효성 검사.
+            Power의 입력값을 숫자로 바꾸시오.(문자열를 숫자로)
             부모 메서드 CrudContainer.callbackAdd() 호출
             input 태그에 남아있는 입력값 지우기.
 
@@ -811,14 +812,15 @@
         
             formEdid 를 formView로 바꾸기. isEditMode = !isEditMode;
             유효성 검사. CrudInput 참조하여 코드를 완성하시오
-                Name 유효성 검사
+                Name 입력 여부 유효성 검사
                     포커스 주기
                     이벤트 취소
-                Power 유효성 검사
+                Power 입력 여부 유효성 검사
                     포커스 주기
                     이벤트 취소
-                Power 값을 숫자로 바꾸시오.(문자열를 숫자로)
-            변경할 객체 정보를 만든다
+                Power의 입력값이 숫자인지 유효성 검사.
+                Power의 입력값을 숫자로 바꾸시오.(문자열를 숫자로)
+            입력된 값을 이용해서 변경할 객체(newItem)를 만든다
             부모 콜백 메서드 호출. CrudContainer.callbackSave();
 
             const handlerSave = (event)=>{
@@ -826,7 +828,7 @@
                 // formEdid 를 formView로 바꾸기. isEditMode = !isEditMode;
                 setIsEditMode( !isEditMode );
 
-                // 유효성 검사
+                // 유효성 검사. CrudInput 참조하여 코드를 완성하시오
                 if(refInputName.current.value.trim() === ''){
                     alert('이름을 입력하세요')
                     refInputName.current.focus();
@@ -861,27 +863,16 @@
             };
 
 
-        6-8. CrudListItem 의 handlerEdit 수정한다.
-            function CrudListItem(props) {
-
-                ... 중략
-
-                // 이벤트 핸들러 작성.
-                const handlerDel = (event)=>{
-                    // 부모의 콜백 메서드 호출.
-                    props.callbackDel(item.id);
-                };
-                const handlerUp = (event)=>{
-                    // 부모의 콜백 메서드 호출.
-                    props.callbackUp(item.id);
-                };
-                const handlerDown = (event)=>{
-                    // 부모의 콜백 메서드 호출.
-                    props.callbackDown(item.id);
-                };
-
-                ... 중략
-            }
+        6-8. CrudContainer 의 callbackSave 수정한다.
+          const callbackSave = useCallback(
+            (newitem) => {
+              // newitem 으로 바뀐 새로운 배열 만들기. Array.map() 을 사용한다
+              
+            },
+            [
+              /* 메서드와 연관되는 상태(변수)명들을 기술 */
+            ]
+          );
 
     </xmp>
     <hr>
