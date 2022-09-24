@@ -109,35 +109,29 @@
 
 
 
-    step 1-11. babel 모듈 설치
-        https://babeljs.io/docs/en/babel-preset-env-standalone
-        https://babeljs.io/docs/en/babel-preset-react
-        https://webpack.js.org/loaders/
-
-        $ npm install --save-dev @babel/core @babel/cli
-        $ npm install --save-dev @babel/preset-env @babel/preset-react
-        $ npm install --save-dev babel-loader
-
-
     @@@@@@@@@@@@@@@@@@@@@@@@@
     @ 필수 라이브러리 설치
     @@@@@@@@@@@@@@@@@@@@@@@@@
     step 1-21. prop-types 설치(필수)
         prop-types는 컴포넌트의 props 타입을 정의할 때 사용되는 라이브러리.
+        Runtime type checking for React props and similar objects.
+        https://www.npmjs.com/package/prop-types
 
         $ npm install --save prop-types
 
 
-    step 1-22. styled-component
-        styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 CSS-IN-JS 라이브러리.
+    step 1-22. styled-components(필수)
+        styled-components 는 CSS 표기법을 사용하여
+        인라인 스타일링을 만들 수 있게 해주는 CSS-IN-JS 라이브러리.
+        https://www.npmjs.com/package/styled-components
 
         $ npm install --save styled-components @types/styled-components
 
 
     step 1-23. 리액트 라우터 설치(필수)
         react-router:
-        react-router-dom: 브라우저에서 사용되는 라우팅 라이브러리. 필수
-        react-router-native: 모바일 리액트에서 사용되는 라우팅 라이브러리
+        react-router-dom: 웹용. 브라우저에서 사용되는 라우팅 라이브러리. 필수
+        react-router-native: 모바일용. 리액트 네이티트에서 사용되는 라우팅 라이브러리
 
         $ npm install --save react-router react-router-dom
 
@@ -152,34 +146,37 @@
 
 
     step 1-25. redux-saga 설치(필수)
-        redux-saga : redux에서 비동기로 액션을 처리하는 미들웨어
+        redux-saga : redux에서 비동기로 외부 api를 호출하는 미들웨어
+        https://redux-saga.js.org/
 
         $ npm install --save redux-saga
 
 
     step 1-26. 비동기 처리(필수)
-        axios : rest api 호출 라이브러리
+        axios : rest api  외부 api를 실행하는 라이브러리
+        Promise based HTTP client for the browser and node.js
+        https://www.npmjs.com/package/axios
 
         $ npm install --save axios
 
 
     step 1-27. immer 설치(필수)
         immer : 리덕스 store state 를 불변 객체(읽기 전용)로 처리할 때 사용되는 라이브러리
+        Create the next immutable state tree by simply modifying the current tree
+        https://www.npmjs.com/package/immer
 
         $ npm install --save immer
 
 
     step 1-28. react-virtualized 라이브러리 설치
         windowing 기법을 처리하는 라이브러리.
-        windowing 기법이란 보이는 부분만 렌더링하고 보이지 않는 부분은 렌더링하지 않는 처리 방식을 말한다.
+        windowing 기법이란 보이는 부분만 렌더링하고
+                           보이지 않는 부분은 렌더링하지 않는 처리 방식을 말한다.
         ==> 보이는 영역만 DOM 에 만들어라
+        React components for efficiently rendering large lists and tabular data.
+        https://www.npmjs.com/package/react-virtualized
 
         $ npm install --save react-virtualized
-
-
-    step 1-29. reselect 설치
-
-        $ npm install --save reselect
 
 
 
@@ -210,6 +207,12 @@
         $ npm install --save bootstrap reactstrap
 
 
+
+    step 1-35. install react-icons
+        Include popular icons in your React projects easily with react-icons,
+        https://www.npmjs.com/package/react-icons
+
+        $ npm install --save react-icons
 
 
 
@@ -258,8 +261,8 @@
     |   |-- logo.svg
     |   |-- reportWebVitals.js
     |   `-- setupTests.js
-    |-- .babelrc
     |-- .gitignore
+    |-- .babelrc
     |-- .env
     |-- .prettierrc.js
     |-- .eslintrc.js
@@ -280,7 +283,7 @@
 
         # .babelrc 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
-        $ ls      # package.json 파일이 보이는지 확인
+        $ ls -a   # package.json 파일이 보이는지 확인
         $ touch .babelrc
         $ echo -e "{\n}" > .babelrc
         $ cat .babelrc
@@ -319,9 +322,10 @@
 
         # .env 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
-        $ ls      # package.json 파일이 보이는지 확인
+        $ ls -a   # package.json 파일이 보이는지 확인
         $ touch .env
         $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+        $ cat .env
 
         # .env  파일에 아래 내용 추가
         $ cat .env
@@ -330,15 +334,17 @@
 
 
     4-3. Prettier 설정
+        코드 스타일을 교정하려면 포맷터를 사용하자.
         Prettier는 코드 포맷터(Code Formatter)다.
-        스타일을 교정하려면 포맷터를 사용하자.
 
         prettier 사용되는 예시
             . 한 줄의 최대 길이는 얼마로 할 것인가?
             . 들여쓰기에 tab을 쓸 것인가? space를 쓸 것인가?
             . 문자 리터럴로  ' 를 쓸 것인가? " 쓸 것인가?
 
-        Prettier는 소스 코드를 저장하거나 git 커밋할 때 정의된 규칙에 따라 코드의 형식을 자동으로 수정한다.
+        Prettier는 소스 코드를 저장할 때나
+                   git 커밋할 때
+                   정의된 규칙에 따라 코드의 형식을 자동으로 수정한다.
 
         prettier : Prettier 모듈
         eslint-config-react: react 프로젝트에 맞춰진 ESLint 규칙을 추가합니다.
@@ -353,7 +359,7 @@
 
         # .prettierrc.js 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
-        $ ls      # package.json 파일이 보이는지 확인
+        $ ls -a   # package.json 파일이 보이는지 확인
         $ touch .prettierrc.js
         $ echo -e "module.exports = {\n}" > .prettierrc.js
         $ cat .prettierrc.js
@@ -362,21 +368,22 @@
         $ cat .prettierrc.js
         module.exports = {
             /* https://prettier.io/docs/en/options.html */
-            printWidth: 130,/* 할 줄에 130컬럼까지 허용 */
-            tabWidth: 2, /* tab을 누르면 2칸 들여쓰기 */
-            singleQuote: true, /*문자열 리터럴로 " 대신 ' 을 사용 */
-            semi: true, /* 문장 마지막에 ; 추가설정 */
-            useTabs: false, /* 탭 대신 spacebar 를 사용 설정 */
-            trailingComma: "all",
-            proseWrap: "always",
+            printWidth: 130 /* 할 줄에 130컬럼까지 허용 */,
+            tabWidth: 2 /* tab을 누르면 2칸 들여쓰기 */,
+            singleQuote: true /*문자열 리터럴로 " 대신 ' 을 사용 */,
+            semi: true /* 문장 마지막에 ; 추가설정 */,
+            useTabs: false /* 탭 대신 spacebar 를 사용 설정 */,
+            trailingComma: 'all',
+            proseWrap: 'always',
             bracketSpacing: true,
-            jsxSingleQuote: false,
-            quoteProps: "as-needed",
+            jsxSingleQuote: false /*JSX 안에서는 " 을 사용 */,
+            quoteProps: 'as-needed',
         };
 
 
     4-4. eslint 모듈
-        ESlint는 문법 오류를 잡아내고 특정 문법 요소를 사용하여 코드를 수정하기 위해 사용되는 모듈 입니다.
+        ESlint는 문법 오류를 잡아내기 위해 사용되는 모듈 입니다.
+        오류 수정은 Prettier 로 한다.
 
         airbnb ESLint 규칙을 사용하려면 아래 5개의 패키지들은 필수로 설치해야 합니다.
           . eslint
@@ -387,57 +394,60 @@
 
         eslint-config-airbnb 는 airbnb 스타일 가이드의 코드 규칙을 적용할 수 있는 모듈
 
-        babel-eslint : 정식 표준이 아닌 자바스크립트, 즉 ES6 이상의 최신 자바스크립트 문법을 사용하는 경우 설치 필요
-
+        babel-eslint : 정식 표준이 아닌 자바스크립트.
+                       ES6 이상의 최신 자바스크립트 문법을 사용하는 경우 설치 필요
 
         # .eslintrc.js 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
         $ ls      # package.json 파일이 보이는지 확인
 
-        설정 방법에는 npm init 을 사용하는 설정 방식과 수동 설정 방식 2가지가 있다.
+        eslint 설정 방법에는 2가지가 있다.
+            * npm init 을 사용하는 설정 방식(비추천)
+            * npm install 을 사용하는 설정 방식(추천)
 
         # 방법1. npm init 을 사용하는 설정 방식(비추천)
-        $ npm init @eslint/config       #eslint설정
+        $ npm init @eslint/config  # .eslintrc.js 파일을 생성.
+            ? How would you like to use ESLint? ...
+            To check syntax only
+            > To check syntax and find problems
+            To check syntax, find problems, and enforce code style
+            ? What type of modules does your project use? ...
+            > JavaScript modules (import/export)
+            CommonJS (require/exports)
+            None of these
+            ? Which framework does your project use? ...
+            > React
+            Vue.js
+            None of these
+            √ Does your project use TypeScript? · No / Yes
+            ? Where does your code run? ...  (Press <space> to select, <a> to toggle all, <i> to invert selection)
+            √ Browser
+            √ Node
+            ? How would you like to define a style for your project? ...
+            > Use a popular style guide
+            Answer questions about your style
+            ? Which style guide do you want to follow? ...
+            > Airbnb: https://github.com/airbnb/javascript
+            Standard: https://github.com/standard/standard
+            Google: https://github.com/google/eslint-config-google
+            XO: https://github.com/xojs/eslint-config-xo
+            ? What format do you want your config file to be in? ...
+            > JavaScript
+            YAML
+            JSON
+            ? Would you like to install them now? » No / Yes
+            ? Which package manager do you want to use? ...
+            > npm
+            yarn
+            pnpm
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # 방법2. 수동 설정 방식(추천 방식)
-        $ npm install --save-dev eslint-plugin-react  \
+        # 방법2. npm install 을 사용하는 설정 방식(추천)
+        $ npm install --save-dev eslint  \
                                  eslint-config-airbnb  \
-                                 eslint  \
                                  eslint-plugin-import  \
                                  eslint-plugin-jsx-a11y  \
+                                 eslint-plugin-react  \
                                  eslint-plugin-react-hooks
 
         # .eslintrc.js 파일 생성 후 내용 추가
@@ -468,7 +478,7 @@
 
         # .eslintrc.js 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
-        $ ls      # package.json 파일이 보이는지 확인
+        $ ls -a   # package.json 파일이 보이는지 확인
         $ touch .eslintrc.js
         $ echo -e "module.exports = {\n}" > .eslintrc.js
         $ cat .eslintrc.js
@@ -503,17 +513,17 @@
                 // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
 
                 // windows linebreaks when not in production environment
-                'linebreak-style': [ 'error', 'unix' ],
+                'linebreak-style': [ 'warn', 'unix' ],
                 // suppress errors for missing 'import React' in files
                 'react/react-in-jsx-scope' : 'off',
                 // allow jsx syntax in js files (for next.js project)
                 'react/jsx-filename-extension': [ 1, { extensions: [ '.js', '.jsx' ] } ], //should add ".ts" if typescript project
-                'jsx-a11y/label-has-associated-control': [ 'error', { required: { some: [ 'nesting', 'id' ] } } ],
-                'jsx-a11y/label-has-for': [ 'error', { required: { some: [ 'nesting', 'id' ] } } ],
+                // 'jsx-a11y/label-has-associated-control': [ 'warn', { required: { some: [ 'nesting', 'id' ] } } ],
+                // 'jsx-a11y/label-has-for': [ 'warn', { required: { some: [ 'nesting', 'id' ] } } ],
 
                 'no-param-reassign': [ 'error', { props: false } ],
-                'arrow-parens': ['error', 'always'], // () => {}
-                'arrow-body-style': ['error', 'always'],
+                'arrow-parens': ['warn', 'always'], // () => {}
+                'arrow-body-style': ['warn', 'always'],
                 'consistent-return': 'off',
                 'func-names': 'off',
                 'no-shadow': 'off',
@@ -545,7 +555,7 @@
         };
 
 
-    4-6. 전체 소스 포맷팅하기
+    4-6. 전체 소스를 eslint 규칙에 맞게 포맷팅 변경하기
         정의한 ESLint 룰을 지키고 있지 않은 파일과 내용을 확인하고
         prettier 의 룰에 맞게 코드를 수정 할 수 있습니다.
 
@@ -555,7 +565,7 @@
 
 
     4-7. githook 설정
-        githook은 깃에 특정 이벤트(커밋, 푸시 등)를 감지하여
+        githook은 git 에 특정 이벤트(커밋, 푸시 등)를 감지하여
         이벤트를 실행하기 전에 특정 동작을 수행할 수 있도록 도와주는 플러그인 입니다.
 
         husky와 lint-staged의역할은 다음과 같다.
@@ -563,14 +573,10 @@
         . lint-staged: git 의 stage된 파일들에 특정 동작을 수행할 수 있도록 해준다.
         . lint-staged와 husky를 사용하여 git 이벤트에 Prettier 명령어를 연동 설정.
 
+        commit 전에 자동으로 prettier 적용하기
         $ npm install --save-dev husky  lint-staged
 
-        ############
-        commit 전에 자동으로 prettier 적용하기
-        ############
-
         packages.json 파일 맨 아래에 내용 추가
-
         $ cat packages.json
         {
           ...중략   ,
@@ -685,7 +691,6 @@
     |-- .env
     |-- .prettierrc.js
     |-- .eslintrc.js
-    |-- jsconfig.json
     |-- package.json
     `-- README.md
 

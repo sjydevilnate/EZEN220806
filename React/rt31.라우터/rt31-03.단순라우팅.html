@@ -26,7 +26,8 @@
     1. BrowserRouter 설정
         작업파일: src/index.js
 
-        ReactDOM.createRoot(document.getElementById("root")).render(
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(
             <React.StrictMode>
                 <BrowserRouter>
                   <App />
@@ -38,7 +39,6 @@
     2. 라우팅 설정
         작업파일: src/App.js
         <div>
-            <MenuHome />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/memo" element={<Memo />} />
@@ -74,8 +74,54 @@
                 src/components/Topics
 
 
+    5. recipes 예제 추가
+    "rt21.컴포넌트실습.recipes"의 소스를 현재 프로젝트에 추가
+
+    5-1. containers 폴더에 recipes 폴더 만들기
+        $ mkdir -p src/containers/recipes
+
+    5-2. recipes 소스를 src/containers/recipes 폴더에 추가
+
+    5-3. 라우팅 설정
+        <Route path="/recipes" element={<RecipesContainer />} />
+
+    5-4. 메뉴 설정
+        <li>
+            <NavLink to="/recipes">Recipes 예제</NavLink>
+        </li>
 
 
+    6. StarRating 예제 추가
+    "rt22.컴포넌트실습.StarRating"의 소스를 현재 프로젝트에 추가
+
+    6-1. containers 폴더에 starrating 폴더 만들기
+        $ mkdir -p src/containers/starrating
+
+    6-2. starrating 소스를 src/containers/starrating 폴더에 추가
+
+    6-3. 라우팅 설정
+        <Route path="/starrating" element={<StarRatingContainer />} />
+
+    6-4. 메뉴 설정
+        <li>
+            <NavLink to="/starrating">StarRating  예제</NavLink>
+        </li>
+
+    7. CRUD 예제 추가
+    "rt25.컴포넌트실습.CRUD"의 소스를 현재 프로젝트에 추가
+
+    7-1. containers 폴더에 crud 폴더 만들기
+        $ mkdir -p src/containers/crud
+
+    7-2. crud 소스를 src/containers/crud 폴더에 추가
+
+    7-3. 라우팅 설정
+        <Route path="/crud" element={<CrudContainer />} />
+
+    7-4. 메뉴 설정
+        <li>
+            <NavLink to="/crud">Crud 예제</NavLink>
+        </li>
     </xmp>
 
     <hr>
