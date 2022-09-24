@@ -93,18 +93,30 @@
 
     step 1-03. 터미널에서 실행 중인 프로세스 중지
         "ctrl + c" 눌러 실행된 서버를 중지한다
+        모든 OS 에 동일
 
 
     step 1-04. 프로젝트 소스 커밋
-        $ pwd                                   # 현재 작업하는 폴더 위치 확인
-        $ ls                                    # package.json 파일이 보이는지 확인
-        $ git add -AN                           # 신규 파일 추가
+        $ pwd           # 현재 작업하는 폴더 위치 확인
+        $ ls            # package.json 파일이 보이는지 확인
+        $ git status    # 파일의 추가, 변경, 삭제 확인
+        $ git add -AN   # 신규 파일 추가
+        $ git status    # 파일의 추가, 변경, 삭제 확인
         $ git commit -a -m '프로젝트 시작하기'      # 파일 commit
-        $ git push                              #
+        $ git push      #
 
         github 사이트에서 소스가 올라갔는지 확인한다.
 
 
+
+    step 1-11. babel 모듈 설치
+        https://babeljs.io/docs/en/babel-preset-env-standalone
+        https://babeljs.io/docs/en/babel-preset-react
+        https://webpack.js.org/loaders/
+
+        $ npm install --save-dev @babel/core @babel/cli
+        $ npm install --save-dev @babel/preset-env @babel/preset-react
+        $ npm install --save-dev babel-loader
 
 
     @@@@@@@@@@@@@@@@@@@@@@@@@
