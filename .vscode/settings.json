@@ -7,10 +7,10 @@
 
     "editor.minimap.enabled": false,
     "editor.tabSize": 2,
-    "editor.fontFamily": "나눔고딕코딩",
+    "editor.fontFamily": "Courier New",
     "editor.fontLigatures": true,
     /* 저장 시 해당 파일 전체 포맷 여부 */
-    "editor.formatOnSavesettings.json": false,
+    "editor.formatOnSave": false,
     /* 해당값 true로 설정 시 ; 을 입력하면 해당 라인이 파일에 설정된 포맷에 따라 가게됩니다.  */
     "editor.formatOnType": false,
     /* 붙여넣기 시 해당 텍스트 포맷 여부. */
@@ -103,36 +103,42 @@
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 16
     },
     "[html]": {
         "editor.formatOnSave": false,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 16
     },
     "[javascript]": {
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 16
     },
     "[json]": {
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 16
     },
     "[vue]": {
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
         "editor.insertSpaces": true,
-        "editor.defaultFormatter": "octref.vetur"
+        "editor.defaultFormatter": "octref.vetur",
+        "editor.fontSize": 16
     },
     "[xml]": {
         "editor.formatOnSave": true,
         "editor.tabSize": 2,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontSize": 16
     },
     "workbench.colorTheme": "Default Light+",
 }
