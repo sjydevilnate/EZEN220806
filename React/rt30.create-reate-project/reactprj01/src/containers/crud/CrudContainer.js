@@ -15,11 +15,35 @@ import styled, { css } from 'styled-components';
 import CrudInput from './CrudInput';
 import CrudList from './CrudList';
 
-import './reset.css';
+// import './reset.css';
 
 // import styled, { css } from 'styled-components';
 // https://styled-components.com/docs/basics#adapting-based-on-props
 const StyledCrudContainer = styled.div`
+  /* 테이블 설정 */
+  table {
+    margin: 0 -1px;
+    /* table-layout: fixed; */
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  table,
+  th,
+  td {
+    border: 1px solid #7c7c7c;
+  }
+  th,
+  td {
+    padding: 0.2em;
+    text-align: left;
+    line-height: 1.3em;
+  }
+  caption {
+    visibility: hidden;
+    height: 1px;
+  }
+
   .strong {
     color: red;
     font-weight: bold;

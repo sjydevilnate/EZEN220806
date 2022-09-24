@@ -27,7 +27,7 @@ module.exports = {
     // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
 
     // windows linebreaks when not in production environment
-    'linebreak-style': ['warn', 'unix'],
+    'linebreak-style': ['off', 'unix'],
     // suppress errors for missing 'import React' in files
     'react/react-in-jsx-scope': 'off',
     // allow jsx syntax in js files (for next.js project)

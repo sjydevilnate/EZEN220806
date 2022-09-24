@@ -9,11 +9,30 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from 'react';
-import './App.css';
+import styled from 'styled-components';
 import Menu from './Menu';
 
+// import './App.css';
+// https://styled-components.com/docs/basics#adapting-based-on-props
+const StyledApp = styled.div`
+  article > header {
+    font-family: Verdana, sans-serif;
+    font-size: 1.2em;
+    color: darkslateblue;
+    border-bottom: solid 2px goldenrod;
+    margin-bottom: 1em;
+  }
+
+  div.recipes > section {
+    border: double 4px saddlebrown;
+    padding: 1em;
+    background-color: white;
+    margin-bottom: 1em;
+  }
+`;
+
 function App() {
-  const [data, setData] = useState([
+  const [data] = useState([
     {
       name: '구운 연어',
       ingredients: [
@@ -91,7 +110,11 @@ function App() {
   ]);
 
   // JSX
-  return <Menu recipes={data} title="맛있는 조리법" />;
+  return (
+    <StyledApp>
+      <Menu recipes={data} title="맛있는 조리법" />
+    </StyledApp>
+  );
 }
 
 App.propTypes = {
