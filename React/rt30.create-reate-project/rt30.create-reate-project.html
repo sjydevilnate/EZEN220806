@@ -51,9 +51,9 @@
 
     step 1-02. 프로젝트 생성
 
-        $ npm uninstall -g create-react-app        # 전역으로 설치된 create-react-app 모듈 삭제하기
+        $ npm uninstall -g create-react-app    # 전역으로 설치된 create-react-app 모듈 삭제하기
 
-        $ npx clear-npx-cache                      # npx 로 다운로드된 캐쉬되어 있는 모듈 삭제
+        $ npx clear-npx-cache                  # npx 로 다운로드된 캐쉬되어 있는 모듈 삭제
         Need to install the following packages:
           clear-npx-cache
         Ok to proceed? (y) y
@@ -65,6 +65,7 @@
         Ok to proceed? (y) y
         ...
         5분 소요
+        책 읽기
         ...
 
         $ ls                                       # reactprj01 폴더가 보이는지 확인
@@ -74,16 +75,12 @@
         $ ls                                       # package.json 파일이 보이는지 확인
 
         $ npm help
-
         $ npm help install
-
         $ npm install -h
 
         $ npm help ls
-
         $ npm ls -h
-
-        $ npm ls react                             # 설치된 react 버전 확인
+        $ npm ls react       # 설치된 react 버전 확인
         ├─┬ @testing-library/react@13.4.0
         │ └── react@18.2.0 deduped
         ├─┬ react-dom@18.2.0
@@ -92,7 +89,7 @@
         │ └── react@18.2.0 deduped
         └── react@18.2.0
 
-        $ npm run start                            # package.json 파일이 보이면 서버 실행
+        $ npm run start   # package.json 파일이 보이면 서버 실행
 
     step 1-03. 터미널에서 실행 중인 프로세스 중지
         "ctrl + c" 눌러 실행된 서버를 중지한다
@@ -106,17 +103,6 @@
         $ git push                              #
 
         github 사이트에서 소스가 올라갔는지 확인한다.
-
-
-    step 1-11. babel 모듈 설치
-        https://babeljs.io/docs/en/babel-preset-env-standalone
-        https://babeljs.io/docs/en/babel-preset-react
-        https://webpack.js.org/loaders/
-
-        $ npm install --save-dev @babel/core @babel/cli
-        $ npm install --save-dev @babel/preset-env @babel/preset-react
-        $ npm install --save-dev babel-loader
-
 
 
 
@@ -270,6 +256,15 @@
 
     4-1 .babelrc 설정
         babel 설정 파일.
+
+        babel 모듈 설치
+        https://babeljs.io/docs/en/babel-preset-env-standalone
+        https://babeljs.io/docs/en/babel-preset-react
+        https://webpack.js.org/loaders/
+
+        $ npm install --save-dev @babel/core @babel/cli
+        $ npm install --save-dev @babel/preset-env @babel/preset-react
+        $ npm install --save-dev babel-loader
 
         # .babelrc 파일을 프로젝트 루트에 만들기
         $ pwd     # 현재 작업하는 폴더 위치 확인
