@@ -23,30 +23,3 @@ caption {
   visibility: hidden;
   height: 1px;
 }
-
-xmp {
-  line-height: 1.2em;
-  margin: 0 0 0 -30px;
-}
-
-pre {
-  line-height: 1.2em;
-  box-sizing: border-box;
-}
-div > table {
-  margin: 0 45px 0 0;
-  width: 95%;
-}
-
-body > div {
-  margin: 0 45px 50px 45px;
-}
-
-body > h1,
-body > h2,
-body > h3,
-body > h4,
-body > h5,
-body > h6 {
-  margin: 0 0 50px 45px;
-}
