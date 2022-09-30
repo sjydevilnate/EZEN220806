@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
     <title>React Project 만들기</title>
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet"
+      href="../css/reset.css" />
 
-</head>
-<body>
+  </head>
+  <body>
 
     <div style="margin-top: 40px;">
-        <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
+      <a href="#"
+        onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;"
+        rel="nofollow">npm 사용법</a>
     </div>
 
     <xmp>
@@ -368,15 +373,16 @@
         $ cat .prettierrc.js
         module.exports = {
             /* https://prettier.io/docs/en/options.html */
-            printWidth: 130 /* 할 줄에 130컬럼까지 허용 */,
+            printWidth: 130 /* 한 줄에 130컬럼까지 허용 */,
             tabWidth: 2 /* tab을 누르면 2칸 들여쓰기 */,
             singleQuote: true /*문자열 리터럴로 " 대신 ' 을 사용 */,
-            semi: true /* 문장 마지막에 ; 추가설정 */,
-            useTabs: false /* 탭 대신 spacebar 를 사용 설정 */,
+            semi: true /* 문장 마지막에 ; 추가 */,
+            useTabs: false /* 탭 대신 공백을 사용 */,
             trailingComma: 'all',
             proseWrap: 'always',
             bracketSpacing: true,
-            jsxSingleQuote: false /*JSX 안에서는 " 을 사용 */,
+            jsxBracketSameLine: false,
+            jsxSingleQuote: false /* JSX 안에서는 " 을 사용 */,
             quoteProps: 'as-needed',
             endOfLine: 'crlf'
         };
@@ -742,5 +748,5 @@
 
     </xmp>
 
-</body>
+  </body>
 </html>

@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+* {
+  box-sizing: border-box;
+}
+
 /* CSS 초기화 : 모든 요소 공간 0, 서체 크기 100%, 세로정렬 baseline, 배경색 투명 */
 html,
 body,
@@ -45,9 +49,7 @@ b,
 u,
 i,
 center,
-dl,
-dt,
-dd,
+/* dl, dt, dd, */
 ol,
 ul,
 li,
@@ -89,13 +91,13 @@ pre {
   vertical-align: baseline;
   background: transparent;
   font-size: 16px;
-  font-family: "나눔고딕코딩", "나눔 고딕", "Nanum Gothic", 돋움, Dotum,
-    Sans-Serief;
+  font-family: '나눔고딕코딩', '나눔 고딕', 'Nanum Gothic', 돋움, Dotum, Sans-Serief;
 }
 
 /* 본문 기본 설정, 리스트 블릿 제거, 인용 구문 제거 */
 body {
   color: #323232;
+  padding: 20px;
 }
 
 /* HTML5 새 요소 초기화 */
@@ -118,6 +120,7 @@ ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
@@ -143,30 +146,37 @@ h6 {
   font-weight: normal;
   color: #111;
 }
+
 h1 {
   margin-bottom: 0.5em;
   line-height: 1;
   font-size: 36px;
 }
+
 h2 {
   margin-bottom: 0.75em;
   font-size: 24px;
 }
+
 h3 {
   margin-bottom: 1em;
   line-height: 1;
   font-size: 18px;
 }
+
 h4 {
   font-size: 14px;
 }
+
 h5 {
   margin-bottom: 1.5em;
 }
+
 h5,
 h6 {
   font-weight: bold;
 }
+
 h1 img,
 h2 img,
 h3 img,
@@ -178,7 +188,7 @@ h6 img {
 
 /* 제목, 단락 상 하 공간 설정 */
 p {
-  margin: 0 0 1.5em;
+  margin: 0 0 0.1em 0;
 }
 
 /* :active, :focus 가상클래스 아웃라인 설정 제거 */
@@ -195,6 +205,7 @@ a:visited {
   color: #7c7c7c;
   border-bottom: 1px dotted #7c7c7c;
 }
+
 a:hover,
 a:active {
   color: #424242;
@@ -211,6 +222,7 @@ a img {
 ins {
   text-decoration: none;
 }
+
 del {
   text-decoration: line-through;
 }
@@ -223,17 +235,20 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 table,
 th,
 td {
   border: 1px solid #7c7c7c;
 }
+
 th,
 td {
   padding: 0.2em;
   text-align: left;
   line-height: 1.3em;
 }
+
 caption {
   visibility: hidden;
   height: 1px;
@@ -241,13 +256,14 @@ caption {
 
 xmp {
   line-height: 1.2em;
-  margin: 0 0 0 -30px;
+  margin: 10px 0 0 10px;
 }
 
 pre {
   line-height: 1.2em;
   box-sizing: border-box;
 }
+
 div > table {
   margin: 0 45px 0 0;
   width: 95%;
