@@ -22,7 +22,7 @@
     </div>
 
     <xmp>
-    React CLI 을 사용하여 ToDo 어플리케이션을 만들어 본다.
+    React CRA 을 사용하여 ToDo 어플리케이션을 만들어 본다.
 
 
 
@@ -35,19 +35,24 @@
     2. 프로젝트 생성 작업
        소요시간: 20분
     ##################################
-    "rt30.create-react-project.html"을 참조하여 프로젝트를 만들거나 만들어진 프로젝트에 추가하시오.
+    "rt30.create-react-project.html"을 참조하여 프로젝트를 만들거나
+    기존에 만들어진 reactprj01 프로젝트에 추가하시오.
 
 
     ##################################
     3. 서버 시작
     ##################################
-        $ ls                # package.json 파일이 보이는지 확인
+        $ ls                # package.json 파일 과 node_modules 폴더가 보이는지 확인
+        $ npm install       # package.json 에 등록된 라이브러리(모듈) 재설치. node_modules 폴더가 생성됨
         $ npm run start     # package.json 보이면 서버 실행
 
 
     ##################################
     4. 앱 요구사항
     ##################################
+
+        0. 퍼블리싱될 화면 만들기.
+
         1. 컴포넌트 트리 만들기
             1-1. TodoContainer 컴포넌트
             1-2. TodoHeader 컴포넌트
@@ -160,25 +165,29 @@
          src/logo.svg \
          src/index.css
 
+    12-3. 실행된 화면 확인.
+        에러 있음. 어러를 처리하시오
+
 
     ##################################
     13. 라우팅 설정
       1. BrowserRouter 추가
       2. 라우팅 설정
-      3. 링크 설정
+      3. 링크(메뉴) 설정
       4. 스타일링 설정
     ##################################
 
     13-1. 라우팅 관련 폴더 및 파일 생성
-        $ mkdir -p ./src/containers/home
-        $ touch ./src/containers/home/HomeContainer.js
-
         $ mkdir -p ./src/pages
         $ touch ./src/pages/PageHome.js
+
+        $ mkdir -p ./src/containers/home
+        $ touch ./src/containers/home/HomeContainer.js
 
 
     13-2. BrowserRouter 추가
         작업파일: src/index.js 수정
+
         변경 전
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(
@@ -239,7 +248,7 @@
             </Routes>
         </div>
 
-    13-8. PageHome 에 라우팅 설정
+    13-8. PageHome 에 링크 설정
         작업파일: src/pages/PageHome.js
 
         변경 전
@@ -255,7 +264,7 @@
         <div>
             <div>
                 <ul>
-                    <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/">Home</NavLink></li>
+                    <li><NavLink to="/">Home</NavLink></li>
                     <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/todo">Todo</NavLink></li>
                 </ul>
             </div>
@@ -329,10 +338,11 @@
 
     ##################################
     step 23. TodoHeader 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
+        소요시간: 5분
     ##################################
-    step 23-1 TodoHeader 컴포넌트 만든다.
+    step 23-01. TodoHeader 컴포넌트 만든다.
 
-    step 23-2 TodoHeader JSX 를 작성한다.
+    step 23-02. TodoHeader JSX 를 작성한다.
         . class 속성 ===> className
         . for 속성 ===> htmlFor
         . value 속성 ===> defaultValue
@@ -341,19 +351,20 @@
           <h1>TODO it! Component</h1>
         </header>
 
-    step 23-3 TodoContainer 컴포넌트의 JSX에 TodoHeader 컴포넌트 태그를 추가한다.
+    step 23-03. TodoContainer 컴포넌트의 JSX 에
+        TodoHeader 컴포넌트 태그를 추가한다.
         <TodoHeader></TodoHeader>
 
-    step 23-4 TodoHeader 컴포넌트를 TodoContainer 컴포넌트에 import한다.
+    step 23-04. TodoHeader 컴포넌트를 TodoContainer 컴포넌트에 import한다.
         import TodoHeader from './TodoHeader';
 
-    step 23-5 StyledTodoHeader 컴포넌트 스타일링하기
+    step 23-05. StyledTodoHeader 컴포넌트 스타일링하기
 
-        const StyledTodoHeader = styled.header`
+        const StyledTodoHeader = styled.div`
           ... 중략
         `;
 
-    step 23-6 TodoHeader JSX 를 수정한다.
+    step 23-06. TodoHeader JSX 를 수정한다.
       JSX 수정 전
       <header>
         ... 중략
@@ -369,9 +380,9 @@
     step 24. TodoFooter 컴포넌트 만들고 컴포넌트 등록하고 태그 작성한다.
         소요시간: 10분
     ##################################
-    step 24-01 TodoFooter 컴포넌트 만든다.
+    step 24-01. TodoFooter 컴포넌트 만든다.
 
-    step 24-02 TodoFooter 컴포넌트의 JSX 를 작성한다.
+    step 24-02. TodoFooter 컴포넌트의 JSX 를 작성한다.
         . class 속성 ===> className
         . for 속성 ===> htmlFor
         . value 속성 ===> defaultValue
@@ -382,24 +393,12 @@
             </span>
         </div>
 
-    step 24-03 TodoFooter 컴포넌트 스타일링하기
+    step 24-03. TodoFooter 컴포넌트 스타일링하기
         const StyledTodoFooter = styled.div`
-          .clearAllContainer {
-            width: 16rem;
-            height: 50px;
-            line-height: 50px;
-            background-color: white;
-            border-radius: 5px;
-            margin: 0 auto;
-          }
-
-          .clearAllBtn {
-            color: #e20303;
-            display: block;
-          }
+          ... 중략
         `;
 
-    step 24-04 TodoFooter JSX 를 수정한다.
+    step 24-04. TodoFooter JSX 를 수정한다.
         JSX 수정 전
         <div className="clearAllContainer">
           ... 중략
@@ -410,20 +409,21 @@
           ... 중략
         </StyledTodoFooter>
 
-    step 24-05 TodoFooter 컴포넌트 JSX 의 span.clearAllBtn 에 onclick 이벤트 핸들러 추가
+    step 24-05. TodoFooter 컴포넌트 JSX 의 
+        span.clearAllBtn 에 onclick 이벤트 핸들러 추가
         <div className="clearAllContainer">
             <span className="clearAllBtn" onClick={handlerClearAll}>
                 Clear All
             </span>
         </div>
 
-    step 24-06 TodoFooter 의 handlerClearAll 메서드 작성
+    step 24-06. TodoFooter 의 handlerClearAll 메서드 작성
         const handlerClearAll = () => {
             // 부모 콜백 메서드 호출
             callbackClearAll();
         };
 
-    step 24-07 TodoFooter 에 props 설정
+    step 24-07. TodoFooter 에 props 설정
         function TodoFooter({
           callbackClearAll
         }) {
@@ -432,29 +432,46 @@
         TodoFooter.propTypes 수정
         TodoFooter.defaultProps 수정
 
-    step 24-08 TodoContainer 컴포넌트 JSX에 TodoFooter 컴포넌트 태그를 추가한다.
+    step 24-08. TodoContainer 컴포넌트 JSX에 TodoFooter 컴포넌트 태그를 추가한다.
         <TodoFooter></TodoFooter>
 
-    step 24-09 TodoContainer 컴포넌트에 TodoFooter 컴포넌트 import 설정한다.
+    step 24-09. TodoContainer 컴포넌트에 TodoFooter 컴포넌트 import 설정한다.
         import TodoFooter from './TodoFooter';
 
-    step 24-10 TodoContainer 컴포넌트에 callbackClearAll 메서드 추가한다
+    step 24-10. TodoContainer 컴포넌트 JSX에서
+        TodoFooter 컴포넌트로 callbackClearAll props 내림 설정을 추가한다.
+        <TodoFooter callbackClearAll={callbackClearAll}>
+        </TodoFooter>
+
+    step 24-11. TodoContainer 컴포넌트에 callbackClearAll 메서드 추가한다
+        주의!!! 
+          useCallback 을 사용하는 경우연관배열을 작성에 주의하시오. 
+          useCallback 상태값이 변경되면 메서드를 다시 만들고
+          자식들에게 변경된 함수(메서드)를 다시 내려준다
+        
         const callbackClearAll = useCallback(() => {
             // state 변경
             debugger;
+            
+            // 직접 코드를 완성하시오.
+            // setTodoItems 는  todoItems 상태를 바꾸기 위한 setter 메서드
+            // todoItems = [];
+            
         }, []);
 
-    step 24-11 TodoContainer 컴포넌트 JSX에 callbackClearAll props 내림 설정을 추가한다.
-        <TodoInput callbackClearAll={callbackClearAll}></TodoInput>
-
-
+    step 24-11. TodoContainer 상태값 확인
+        F12 를 눌러 개발자 모드로 들어가서 
+        components 탭을 누르시오.
+        TodoContainer 를 선택하고 컴포넌트의 상태값을 확인한다.
+    
+    
     ##################################
     step 25. TodoList 컴포넌트 만들고 기능 완성한다.
         소요시간: 10분
     ##################################
-    step 25-01 TodoList 컴포넌트 만든다.
+    step 25-01. TodoList 컴포넌트 만든다.
 
-    step 25-02 TodoList 컴포넌트의 JSX 를 작성한다.
+    step 25-02. TodoList 컴포넌트의 JSX 를 작성한다.
         . class 속성 ===> className
         . for 속성 ===> htmlFor
         . value 속성 ===> defaultValue
@@ -471,7 +488,7 @@
             </ul>
         </section>
 
-    step 25-03 TodoContainer 컴포넌트 JSX에 TodoList 컴포넌트 태그를 추가한다.
+    step 25-03. TodoContainer 컴포넌트 JSX에 TodoList 컴포넌트 태그를 추가한다.
         // TodoContainer JSX 화면
         return (
             <StyledTodoContainer>
@@ -483,16 +500,16 @@
             </StyledTodoContainer>
         );
 
-    step 25-04  TodoContainer 컴포넌트에 TodoList 컴포넌트 import 설정한다.
+    step 25-04. TodoContainer 컴포넌트에 TodoList 컴포넌트 import 설정한다.
         import TodoList from './components/TodoList';
 
-    step 25-05 StyledTodoList 컴포넌트 스타일링하기
+    step 25-05. StyledTodoList 컴포넌트 스타일링하기
 
-        const StyledTodoList = styled.div`
+        const StyledTodoList = styled.section`
           ... 중략
         `;
 
-    step 25-06 TodoList JSX 를 수정한다.
+    step 25-06. TodoList JSX 를 수정한다.
         JSX 수정 전
         <section>
           ... 중략
@@ -503,7 +520,8 @@
           ... 중략
         </StyledTodoList>
 
-    step 25-07 TodoContainer 컴포넌트에 상태값 todoItems props 내림 설정
+    step 25-07. TodoContainer 컴포넌트에서
+        TodoList 컴포넌트에 상태값 todoItems props 내림 설정을 추가한다.
         // TodoContainer JSX 화면
         return (
             <StyledTodoContainer>
@@ -515,7 +533,7 @@
             </StyledTodoContainer>
         );
 
-    step 25-08 TodoList 에 props 설정
+    step 25-08. TodoList 에 props 설정
         function TodoList({
           todoItems
         }) {
@@ -524,7 +542,7 @@
         TodoList.propTypes 수정
         TodoList.defaultProps 수정
 
-    step 25-09 TodoList 컴포넌트 에서 map 을 사용하여 JSX 반복문 코드를 작성하시오.
+    step 25-09. TodoList 컴포넌트 에서 map 을 사용하여 JSX 반복문 코드를 작성하시오.
         const lis = todoItems && todoItems.map((item) => {
             return (
                 <li key={item.id} className={item.done ? 'checked' : null}>
@@ -540,26 +558,44 @@
 
     ##################################
     step 26. TodoList 의 doneToggle 기능 완성한다.
-        소요시간: 20분
+        소요시간: 10분
     ##################################
 
-    step 26-1. TodoList 의 JSX에 DoneToggle onClick 설정한다.
-        <li
-            key={item.id}
-            className={item.done ? 'checked' : null}
-            onClick={(e) => {
+    step 26-1. TodoList 의 JSX에
+        li 태그에 DoneToggle onClick 설정한다.  
+    
+        const handler = (e) => {
+            // click 이벤트 취소. 버블링 방지
+            // 
+            const id = Number(e.target.dataset.id);  // data-id
+            e.stopPropagation();
+
+            handlerDoneToggle(item.id);
+        };
+        
+        const lis = todoItems && todoItems.map((item) => {
+        return (
+          <li
+              key={item.id}
+              className={item.done ? 'checked' : null}
+              data-id={item.id} 
+              data-item={JSON.stringify(item)} 
+              onClick={handler}
+              onClick={(e) => {
                 // click 이벤트 취소. 버블링 방지
                 e.stopPropagation();
 
                 handlerDoneToggle(item.id);
             }}
-        >
-            <i aria-hidden="true" className="checkBtn fas fa-check"></i>
-            {item.todo}
-            <span type="button" className="removeBtn">
-                <i aria-hidden="true" className="far fa-trash-alt"></i>
-            </span>
-        </li>
+          >
+              <i aria-hidden="true" className="checkBtn fas fa-check"></i>
+              {item.todo}
+              <span type="button" className="removeBtn">
+                  <i aria-hidden="true" className="far fa-trash-alt"></i>
+              </span>
+          </li>
+            );
+        });
 
     step 26-2. TodoList 에 handlerDoneToggle handler 작성
 
@@ -587,16 +623,9 @@
         const callbackDoneToggle = useCallback(
             (id) => {
                 // state 변경
-                const newTodos =
-                    todoItems &&
-                    todoItems.map((item) => {
-                        if (item.id === id) {
-                            item.done = !item.done;
-                        }
-                        return item;
-                    });
-
-                setTodoItems(newTodos);
+                debugger;
+                
+                // 직접 코드를 완성하시오.
             },
             [todoItems]
         );
@@ -604,9 +633,10 @@
 
     ##################################
     step 27. TodoList 의 removeTodo 기능 완성한다.
+        소요시간: 10분
     ##################################
 
-    step 27-1. TodoList 의 JSX에 RemoveTodo onClick 설정한다.
+    step 27-01. TodoList 의 JSX에 RemoveTodo onClick 설정한다.
             <span
                 type="button"
                 className="removeBtn"
@@ -618,13 +648,13 @@
                 <i aria-hidden="true" className="far fa-trash-alt"></i>
             </span>
 
-    step 27-2. TodoList 에 handlerRemoveTodo(id) handler 작성 ==> ap03-11.객체배열.html 참조
+    step 27-02. TodoList 에 handlerRemoveTodo(id) handler 작성 ==> ap03-11.객체배열.html 참조
         const handlerRemoveTodo = (id) => {
             // 부모 컴포넌트의 콜백 메서드 호출
             callbackRemoveTodo(id);
         };
 
-    step 27-3. TodoList 컴포넌트에 props 설정
+    step 27-03. TodoList 컴포넌트에 props 설정
         function TodoList({
           todoItems,
           callbackDoneToggle,
@@ -635,7 +665,7 @@
         TodoList.propTypes 수정
         TodoList.defaultProps 수정
 
-    step 27-4. TodoContainer 컴포넌트 JSX에 callbackRemoveTodo props 내림 설정
+    step 27-04. TodoContainer 컴포넌트 JSX에 callbackRemoveTodo props 내림 설정
         <TodoList
             todoItems={todoItems}
             callbackDoneToggle={callbackDoneToggle}
@@ -643,20 +673,13 @@
         >
         </TodoList>
 
-    step 27-5. TodoContainer 컴포넌트에 callbackRemoveTodo 메서드 작성
+    step 27-05. TodoContainer 컴포넌트에 callbackRemoveTodo 메서드 작성
         const callbackRemoveTodo = useCallback(
             (id) => {
                 // state 변경
-                const newTodos =
-                    todoItems &&
-                    todoItems.filter((item) => {
-                        if (item.id === id) {
-                            return false;
-                        }
-                        return true;
-                    });
-
-                setTodoItems(newTodos);
+                debugger;
+                
+                // 직접 코드를 완성하시오.
             },
             [todoItems]
         );
@@ -664,6 +687,7 @@
 
     ##################################
     step 28. TodoInput 컴포넌트 만들고 기능 완성한다.
+        소요시간: 30분
     ##################################
     step 28-01. TodoInput 컴포넌트 만든다.
 
@@ -749,6 +773,23 @@
         // todoItems 추가할 객체 만들기
         // 배열에 추가
 
+
+
+    ##################################
+    step 31. 검색 기능을 추가한다. 
+        TodoSearch 컴포넌트 만들고 기능 완성한다.
+        소요시간: 30분
+    ##################################
+    
+    
+
+
+    ##################################
+    step 32. todo 제목을 수정하는 기능을 추가한다.
+        소요시간: 30분
+    ##################################
+    
+    
     </xmp>
 
   </body>
