@@ -723,7 +723,7 @@
     step 28-04. TodoInput 컴포넌트를 TodoContainer 컴포넌트에 import한다.
         import TodoInput from './TodoInput';
 
-    step 28-05 TodoInput 컴포넌트 스타일링하기
+    step 28-05 TodoInput 컴포넌트 스타일링 작성하기
 
         const StyledTodoInput = styled.div`
           ... 중략
@@ -734,7 +734,11 @@
 
         const [isShowModal, setIsShowModal] = useState(false); // 상태값이 기본타입인 경우
 
-    step 28-07. TodoInput 컴포넌트 JSX 에 onClick 기능 추가
+    step 28-07. TodoInput 컴포넌트 JSX 에 조건부 렌더링 기능 추가
+        조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+        
+        주의사항: style={{ display: 'none' }} 을 삭제하시오. 
+        
         {isShowModal && (
             <div className="modal-mask">
                 <div className="modal-wrapper">
@@ -756,16 +760,30 @@
                 </div>
             </div>
         )}
+        
+    step 28-08. <div className="modal-footer"> 에 onclick 이벤트를 추가하시오.
+        변경전:
+        <div className="modal-footer">
+            ... 중략
+        </div>
+        
+        
+        변경후:
+        <div className="modal-footer" onClick={handlerShowModal}>
+            ... 중략
+        </div>
 
-    step 28-08. TodoInput 컴포넌트 handlerShowModal 핸들러 추가
+
+    step 28-08. TodoInput 컴포넌트 handlerShowModal 이벤트 핸들러 추가
         const handlerShowModal = () => {
+            // isShowModal === true  ===> isShowModal = false
+            // isShowModal === false ===> isShowModal = true
             setIsShowModal(!isShowModal);
         };
 
     step 28-09. TodoInput 컴포넌트 JSX 의 input 에 ref 설정하기
         ref 는 Real DOM 에 접근하여 input 태그의 value 속성값을 가져오기 위해서 사용
-            <input value="abc" />
-            
+            <input value="abc" />            
         ref 사용법: ref명.current.value 
         
         변경 전
@@ -774,7 +792,7 @@
                 placeholder="Type what you have to do"
             />
         
-        변경 후
+        변경 후 : ref={refInputTodo} 추가됨. 
             <input
                 type="text"
                 placeholder="Type what you have to do"
@@ -782,6 +800,7 @@
             />
 
     step 28-09. TodoInput 컴포넌트 JSX 에 onKeyUp 기능 추가
+        input 태그에서 enter 가 입력되면 
         <input
             type="text"
             placeholder="Type what you have to do"
@@ -798,14 +817,15 @@
         </span>
 
     step 28-11. TodoInput 컴포넌트 handlerAddTodo 메서드 작성
-        // input 에 입력된 값을 가져오려면 어떻게 해야 하나?
+        // click 이벤트 취소. 버블링 방지
+        // input 에 입력된 값을 가져오기. 어떻게 해야 하나? ==> ref명.current.value 
         // input 태그에 빈 문자열이 입력 되는 경우는 modal 창이 출력되게
         // TodoContainer 의 callbackAddTodo 메서드 호출 기능 추가
         // add 후에 input 태그의 입력 값 지우기.
-        // click 이벤트 취소. 버블링 방지
 
     step 28-12.  TodoContainer 컴포넌트 JSX에 callbackAddTodo props 설정
-        <TodoInput callbackAddTodo={callbackAddTodo}></TodoInput>
+        <TodoInput callbackAddTodo={callbackAddTodo}>
+        </TodoInput>
 
     step 28-13. TodoContainer 컴포넌트에 callbackAddTodo 메서드 작성
         // ap03-11.객체배열.html 참조
