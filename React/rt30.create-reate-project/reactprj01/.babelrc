@@ -1,27 +1,26 @@
-
-  {
-    "presets": [
-        ["react-app"],
-        [
-            "@babel/preset-env",
-            {
-                "modules": false,
-                "targets": {
-                    "node": "current",
-                    "chrome": "79" // 크롬 79까지 지원하는 코드를 만든다
-                }
-            }
-        ],
-        [
-            "@babel/preset-react",
-            {
-                "development": "development",
-                "pragma": "dom", // default pragma is React.createElement (only in classic runtime)
-                "pragmaFrag": "DomFrag", // default is React.Fragment (only in classic runtime)
-                "throwIfNamespace": false, // defaults to true
-                "runtime": "classic" // defaults to classic
-                // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
-            }
-        ]
+{
+  "presets": [
+    ["react-app"],
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "node": "current",
+          "chrome": "79" // 크롬 79까지 지원하는 코드를 만든다
+        }
+      }
+    ],
+    [
+      "@babel/preset-react",
+      {
+        "development": "development",
+        "pragma": "dom", // default pragma is React.createElement (only in classic runtime)
+        "pragmaFrag": "DomFrag", // default is React.Fragment (only in classic runtime)
+        "throwIfNamespace": false, // defaults to true
+        "runtime": "classic" // defaults to classic
+        // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
+      }
     ]
+  ]
 }
