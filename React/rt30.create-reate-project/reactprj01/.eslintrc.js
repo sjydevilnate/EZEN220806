@@ -11,6 +11,7 @@ module.exports = {
     jest: true,
     es6: true,
   },
+  plugins: ['prettier'],
   extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier'],
   overrides: [],
   globals: {
@@ -21,7 +22,6 @@ module.exports = {
     sourceType: 'module',
   },
   ignorePatterns: ['node_modules/'],
-  plugins: ['prettier'],
   rules: {
     // "off" or 0 - turn the rule off
     // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
@@ -57,7 +57,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'prettier/prettier': [
-      'error',
+      'warn',
       {
         endOfLine: 'auto',
       },

@@ -261,7 +261,8 @@ function TodoContainer({ ...props }) {
         <TodoList
           todoItems={todoItems}
           callbackDoneToggle={callbackDoneToggle}
-          callbackRemoveTodo={callbackRemoveTodo}></TodoList>
+          callbackRemoveTodo={callbackRemoveTodo}
+        ></TodoList>
 
         {/* <!-- TodoFooter --> */}
         <TodoFooter calllbackClearAll={calllbackClearAll}></TodoFooter>

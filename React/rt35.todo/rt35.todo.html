@@ -641,7 +641,7 @@
                 type="button"
                 className="removeBtn"
                 onClick={(e) => {
-                    e.stopPropagation();
+                    e.stopPropagation(); // 이벤트 취소. 버블링 방지
                     handlerRemoveTodo(item.id);
                 }}
             >
