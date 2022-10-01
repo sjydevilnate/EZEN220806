@@ -166,7 +166,8 @@
          src/index.css
 
     12-3. 실행된 화면 확인.
-        에러 있음. 어러를 처리하시오
+        에러 있음.
+        에러를 해결하시오
 
 
     ##################################
@@ -622,10 +623,19 @@
     step 26-5. TodoContainer 컴포넌트에 callbackDoneToggle 메서드 작성
         const callbackDoneToggle = useCallback(
             (id) => {
-                // state 변경
+                // state 변경 코드를 완성하시오.
                 debugger;
-                
-                // 직접 코드를 완성하시오.
+
+                const newTodos =
+                    todoItems &&
+                    todoItems.map((item) => {
+                        if (item.id === id) {
+                            item.done = !item.done;
+                        }
+                        return item;
+                    });
+
+                setTodoItems(newTodos);
             },
             [todoItems]
         );
@@ -648,7 +658,9 @@
                 <i aria-hidden="true" className="far fa-trash-alt"></i>
             </span>
 
-    step 27-02. TodoList 에 handlerRemoveTodo(id) handler 작성 ==> ap03-11.객체배열.html 참조
+    step 27-02. TodoList 에 handlerRemoveTodo(id) handler 작성 
+        ==> ap03-11.객체배열.html 참조
+
         const handlerRemoveTodo = (id) => {
             // 부모 컴포넌트의 콜백 메서드 호출
             callbackRemoveTodo(id);
@@ -676,10 +688,19 @@
     step 27-05. TodoContainer 컴포넌트에 callbackRemoveTodo 메서드 작성
         const callbackRemoveTodo = useCallback(
             (id) => {
-                // state 변경
+                // state 변경 코드를 완성하시오.
                 debugger;
-                
-                // 직접 코드를 완성하시오.
+
+                const newTodos =
+                    todoItems &&
+                    todoItems.filter((item) => {
+                        if (item.id === id) {
+                            return false;
+                        }
+                        return true;
+                    });
+
+                setTodoItems(newTodos);
             },
             [todoItems]
         );
