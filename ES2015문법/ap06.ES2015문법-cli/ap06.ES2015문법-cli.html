@@ -19,75 +19,83 @@
         v16.16.0
 
         $ npm -v                           #  npm 버전 확인
-        8.17.0
+        8.18.0
 
         $ npx -v                           #  npx(=npm extension) 버전 확인
-        8.17.0
+        8.18.0
 
         $ npm install -g npm@latest        #  npm 최신 버전 설치
 
 
       ##################################
-      # node 프로젝트 만들기
+      # node 프로젝트 폴더 만들기
       ##################################
 
         $ ls    # 현재 작업 디렉토리 파일 목록 조회
         ES2015babel방식.html  src/
 
         $ pwd   # 현재 작업 디렉토리 확인
-          /ES2015문법/ap06.ES2015문법-cli
+        /LectureMaterial/ES2015문법/ap06.ES2015문법-cli
 
         # 현재 디렉토리에 es2015test 폴더 만들기
         $ mkdir -p es2015test
 
-        $ ls    # 현재 작업 디렉토리 파일 목록 조회
+        # 현재 작업 디렉토리 파일 목록 조회
+        $ ls
 
-        $ cd es2015test     # 디렉토리 이동
+        # 만들어진 es2015test 디렉토리로 이동
+        $ cd es2015test
 
-        $ pwd   # 현재 작업 디렉토리 확인
-          /ES2015문법/ap06.ES2015문법-cli/es2015test
+        # 현재 작업 디렉토리 확인
+        $ pwd
+        /LectureMaterial/ES2015문법/ap06.ES2015문법-cli/es2015test
 
 
       ##################################
       # node 프로젝트 설정 초기화
       ##################################
-          $ npm init    # package.json 파일 생성 됨.
 
-          This utility will walk you through creating a package.json file.
-          It only covers the most common items, and tries to guess sensible defaults.
-
-          See `npm help json` for definitive documentation on these fields
-          and exactly what they do.
-
-          Use `npm install <pkg>` afterwards to install a package and
-          save it as a dependency in the package.json file.
-
-          Press ^C at any time to quit.
-          package name: (es2015test)
-          version: (1.0.0)
-          description:
-          entry point: (index.js)
-          test command:
-          git repository:
-          keywords:
-          author:
-          license: (ISC)
-          About to write to package.json:
-
-          {
-              "name": "es2015test",
-              "version": "1.0.0",
-              "description": "",
-              "main": "index.js",
-              "scripts": {
-                  "test": "echo \"Error: no test specified\" && exit 1"
-              },
-              "author": "",
-              "license": "ISC"
-          }
+      # 현재 작업 디렉토리 파일 목록 조회
+      $ ls
 
 
-          Is this OK? (yes) yes
+      $ npm init    # package.json 파일 생성 됨.
+
+      This utility will walk you through creating a package.json file.
+      It only covers the most common items, and tries to guess sensible defaults.
+
+      See `npm help json` for definitive documentation on these fields
+      and exactly what they do.
+
+      Use `npm install <pkg>` afterwards to install a package and
+      save it as a dependency in the package.json file.
+
+      Press ^C at any time to quit.
+      package name: (es2015test)
+      version: (1.0.0)
+      description:
+      entry point: (index.js)
+      test command:
+      git repository:
+      keywords:
+      author:
+      license: (ISC)
+      About to write to package.json:
+
+      {
+          "name": "es2015test",
+          "version": "1.0.0",
+          "description": "",
+          "main": "index.js",
+          "scripts": {
+              "test": "echo \"Error: no test specified\" && exit 1"
+          },
+          "author": "",
+          "license": "ISC"
+      }
+
+
+      Is this OK? (yes) yes
 
       $ ls
       package.json
@@ -108,43 +116,45 @@
       ##################################
       # nodemon 모듈 설치
       ##################################
-          nodemon은 디렉토리의 파일 변경이 감지되면
-          노드 응용 프로그램을 자동으로 다시 시작하여 프로그램을 개발하는 데 도움이 되는 도구입니다.
-          $ npm install --save-dev nodemon
+      nodemon은 디렉토리의 파일 변경이 감지되면
+      노드 응용 프로그램을 자동으로 다시 시작하여 프로그램을 개발하는 데 도움이 되는 도구입니다.
+      $ npm install --save-dev nodemon
 
 
       ##################################
       # node 프로젝트에 babel 라이브러리 설치
+      # babel 은 자바스크립트 버전 컴파일다.
+      # ES2015  ===> ES5, JSX ===> ES5
       ##################################
-          https://babeljs.io/docs/en/babel-preset-env-standalone
-          https://babeljs.io/docs/en/babel-preset-react
-          https://www.daleseo.com/js-babel/
+      https://babeljs.io/docs/en/babel-preset-env-standalone
+      https://babeljs.io/docs/en/babel-preset-react
+      https://www.daleseo.com/js-babel/
 
-          $ npm install --save-dev @babel/core
-          $ npm install --save-dev @babel/cli
-          $ npm install --save-dev @babel/preset-env
+      $ npm install --save-dev @babel/core
+      $ npm install --save-dev @babel/cli
+      $ npm install --save-dev @babel/preset-env
 
-          $ cat package.json
-          {
-            "name": "es2015test",
-            "version": "1.0.0",
-            "description": "",
-            "main": "index.js",
-            "scripts": {
-              "test": "echo \"Error: no test specified\" && exit 1"
-            },
-            "author": "",
-            "license": "ISC",
-            "devDependencies": {
-              "nodemon": "2.0.19",
-              "@babel/cli": "7.18.6",
-              "@babel/core": "7.18.6",
-              "@babel/preset-env": "7.18.6"
-            }
-          }
+      $ cat package.json
+      {
+        "name": "es2015test",
+        "version": "1.0.0",
+        "description": "",
+        "main": "index.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "",
+        "license": "ISC",
+        "devDependencies": {
+          "nodemon": "2.0.19",
+          "@babel/cli": "7.18.6",
+          "@babel/core": "7.18.6",
+          "@babel/preset-env": "7.18.6"
+        }
+      }
 
-          $ ls -a               # 현재 디렉토리의 파일 목록 조회
-          ./  ../  node_modules/  package.json  package-lock.json
+      $ ls -a               # 현재 디렉토리의 파일 목록 조회
+      ./  ../  node_modules/  package.json  package-lock.json
 
 
       ##################################
@@ -154,7 +164,7 @@
         |   package.json
         \---node_modules/
         \---src/
-              \---ap06-01.js
+              `---ap06-01.js
 
 
 
@@ -162,27 +172,34 @@
       # node 프로젝트에 src 작업 디렉토리 만들기
       ##################################
 
-        $ cp -r ../src ./        # 상위 디렉토리의 src 디렉토리를 현재 디렉토리로 복사하기.
+      $ mkdir -p  ./src/
 
-        또는 직접 상위 디렉토리의 src 디렉토리를 현재 디렉토리로 복사하거나 이동한다.
+      # 상위 디렉토리의 src 디렉토리를 현재 디렉토리로 복사하기.
+      $ cp -r ../src ./
 
-        $ ls -a
-        ./  ../  node_modules/  package.json  package-lock.json  src/
+      또는 직접 상위 디렉토리의 src 디렉토리를 현재 디렉토리로 복사하거나 이동한다.
 
-        $ es2015test/src/ap06-01.js 파일 생성 후 코드 추가
-        'use strict';
+      $ ls -a
+      ./  ../  node_modules/  package.json  package-lock.json  src/
 
-        const name = 'world';
-        console.log(`Hello ${name}`);
+      $ es2015test/src/ap06-01.js 파일 생성 후 코드 추가
+      'use strict';
 
-        const getMessage = (params) => {
-            console.log(`Hello ${params}`);
-        };
-        getMessage('sejoong');
+      const name = 'world';
+      console.log(`Hello ${name}`);
+
+      const getMessage = (params) => {
+          console.log(`Hello ${params}`);
+      };
+      getMessage('sejoong');
 
 
       ##################################
       # ap06-01.js 실행하기
+      # 디버깅시 자주 사용되는 단축키
+      #   F5, F8:
+      #   F10:
+      #   F11:
       ##################################
       ap06-01.js 파일 안에서 F5 버튼을 눌러 실행한다.
 
@@ -206,10 +223,8 @@
 
 
       ##################################
-      # 트랜스컴파일 수행
       # Babel 설정 파일(.babelrc)을 이용한 트랜스 컴파일 수행
       ##################################
-
 
       # 폴더 구조 및 파일 확인
         \es2015test
@@ -217,10 +232,9 @@
         |   package.json
         \---node_modules/
         \---src/
-              \---ap06-01.js
+              `---ap06-01.js
 
-
-      $ touch .babelrc      # babel 설정 파일 생성
+      $ touch .babelrc      # babel 설정 파일, .babelrc 생성
 
       $ ls -a               # 현재 디렉토리의 파일 목록 조회
       ./  ../  .babelrc  node_modules/  package.json  package-lock.json  src/
@@ -232,6 +246,7 @@
           "presets": ["@babel/env"]
       }
 
+      # 이전에 실행 컴파일 명령어: npx babel --presets=@babel/env src/ap06-01.js
       $ npx babel src/ap06-01.js
       'use strict';
 
@@ -245,13 +260,18 @@
       getMessage('sejoong')
 
       ##################################
-      # 트랜스컴파일 수행
-      # ==> src 폴더에 있는 js 파일을 es5로 트랜스 컴파일하여 build 폴더에 추가하시오.
+      # src 폴더에 있는 js 파일을 es5로 컴파일하여
+      # build 폴더에 추가하시오.
       ##################################
 
+      # package.json 파일이 있는지 확인.
+      $ ls -a
+      ./  ../  .babelrc  node_modules/  package.json  package-lock.json  src/
+
       # package.json 파일이 있는 곳에서 수행.
+      # -d : destination 의 약자.
       $ npx babel src/ -d build/
-        src\ap06-01.js -> build\ap06-01.js
+      Successfully compiled 24 files with Babel (2114ms)
 
 
       $ cat build/ap06-01.js    # 트랜스컴파일 확인
@@ -294,12 +314,13 @@
         }
       }
 
-      $ npm run build   # packages.json 의 scripts 에 추가된 build 실행하기
+      # packages.json 의 scripts 에 추가된 build 실행하기
+      $ npm run build
 
 
       ##################################
-      # packages.json 의 scripts 에 start 추가
       #   ==> src 디렉토리의 소스 변경을 자동으로 감지하여 ES5 컴파일하는 설정.
+      # packages.json 의 scripts 에 start 추가
       # "start": "nodemon --watch src/ --exec npm run build"
       ##################################
       $ ls -a               # 현재 디렉토리의 파일 목록 조회
@@ -325,6 +346,9 @@
             "@babel/preset-env": "7.18.6"
         }
       }
+
+      # packages.json 의 scripts 에 추가된 start 명령어 실행.
+      $ npm run start
 
       ##################################
       # 생성된 node 프로젝트에서 import/export 사용 설정
