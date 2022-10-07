@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
     <title>styled components 연습하기</title>
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet"
+      href="../css/reset.css" />
 
-</head>
-<body>
+  </head>
+  <body>
 
     <div style="margin-top: 40px;">
-        <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
+      <a href="#"
+        onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;"
+        rel="nofollow">npm 사용법</a>
     </div>
 
     <xmp>
-    styled-components 사용하는 방법을 학습한다.
 
-    리액트에서 스타일링을 처리 하는 방법은 크게 2가지 방식이다.
-    1. 인라인 방식
-    2. 파일 방식
+    컴포넌트 스타일링 기법을 학습한다.
+    컴포넌트의 작성 원칙은 수정없이 재사용 가능해야 한다.
+    컴포넌트의 html, style, javascript를 한 곳에 저장하는 것을 권장한다.
 
-    인라인 방식을 사용하는 것이 가장 추천되는 방식이다.
-
-    인라인 방식으로 스타일링을 할 때도 아래의 2 가지로 처리 가능한데
-    1. Javascript 표기법을 사용하는 스타일링
-    2. CSS 표기법을 사용하는 스타일링
-    이다.
+    React의 스타일링 방식
+    1. inline css 방식
+        JS 표기법을 사용하여 컴포넌트 안에서 style을 만드는 방법
+    2. import css 방식(★)
+        import './파일명.css';
+    3. styled-components 모듈(★★)
+        CSS-in-JS 방식
+        tagged-template-literal 을 이용
+        import styled, { css } from 'styled-components';
+    4. module css 방식
+        import 모듈명 from './파일명.modules.css';
 
     CSS 표기법을 사용하는 스타일링할 때 사용되는 라이브러리가 styled-components 이다.
     styled-components 는 CSS 표기법을 사용하여 인라인 스타일링을 만들 수 있게 해주는 라이브러리 이다.
 
     styled-components를 사용하여 리액트 컴포넌트를 생성하기 위해서는
-    styled.[HTML 태그] 형식과
-    템플릿 리터럴(`)을 사용한다.
+    styled.[HTML 태그] 형식과 템플릿 리터럴(`)을 사용한다.
 
     예시 1)
     >>> styled-components 적용 전
@@ -124,13 +132,7 @@
 
 
     ##################################
-    3. 프로젝트 폴더 구조
-       소요시간: 05분
-    ##################################
-
-
-    ##################################
-    5. 서버 실행
+    3. 서버 실행
     ##################################
         $ ls                                       # styleprj01 폴더가 보이는지 확인
 
@@ -153,102 +155,128 @@
 
 
     ##################################
-    11. 기능 설명
+    4. 리액트에서의 css 설정하기
     ##################################
-    App.css 대신 styled-components 을 사용하는 인라인 스타링으로 바꾸어 보기
+    index.html  ==>  link:css  ==> 사이트 전체 스타일링
+
+    index.js    ==> index.css  ==> 사이트 전체 스타일링
+
+    App.js      ==> App.css    ==> 사이트 전체 스타일링
+
+    만든컴포넌트.js  ==> 컴포넌트 스타일링(styled-components)
+
 
     ##################################
-    12. import css 방식을 styled-components 방식으로 바꾸기.
+    5. CompStyle 컴포넌트 만들기
+
+      StyledCompStyle 에 적용될 CSS
+      .App {
+        display: inline-block;
+        background-color: gray;
+        border: 10px solid black;
+        height: 63px;
+        width: 228px;
+      }
     ##################################
 
-
-    12-01. App.js 파일에 'styled-components' import
-        import styled from 'styled-components';
-
-    12-02. App.js 파일 안의 내용을 StyledApp 만들기
-
-        const StyledApp = styled.div`
-
-        `;
-
-    12-03. App.css 파일 안의 내용을 StyledApp 안에 넣기
-        const StyledApp = styled.div`
-            text-align: center;
-
-            .App-logo {
-                height: 40vmin;
-                pointer-events: none;
-            }
-
-            @media (prefers-reduced-motion: no-preference) {
-                .App-logo {
-                    animation: App-logo-spin infinite 20s linear;
-                }
-            }
-
-            .App-header {
-                background-color: #282c34;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                font-size: calc(10px + 2vmin);
-                color: white;
-            }
-
-            .App-link {
-                color: #61dafb;
-            }
-
-            @keyframes App-logo-spin {
-                from {
-                    transform: rotate(0deg);
-                }
-                to {
-                    transform: rotate(360deg);
-                }
-            }
-        `;
-
-    12-04. 실행 화면 확인
-
-    12-05. App.js 파일에서  css를 import 하는 부분을 찾아 삭제하도록 한다.
-        import'./App.css'; 삭제
-
-    12-06. App.css 파일 삭제
+    5-1. 컴포넌트 폴더 및 파일 생성
+    $ ls
+    $ mkdir  -p ./src/containers/styled
+    $ touch ./src/containers/styled/CompStyle.js
 
 
+
+    5-2. src/App.js 수정한다.
+    import  CompStyle from './src/containers/styled/CompStyle';
+
+    function App(){
+      return(
+        <div>
+          <CompStyle></CompStyle>
+        </div>
+      );
+    }
+
+    5-3.  ./src/containers/styled/CompStyle.js 수정한다.
+
+    import React from 'react';
+    import styled, { css } from 'styled-components';
+
+    const StyledCompStyle = styled.div`
+      .App {
+        display: inline-block;
+        background-color: gray;
+        border: 10px solid black;
+        height: 63px;
+        width: 300px;
+      }
+    `;
+
+    function CompStyle({ ...props }) {
+      return (
+        <StyledCompStyle>
+          <h2>styled-components 로 만든</h2>
+          <div className="App">styled-components 스타일로 만든</div>
+        </StyledCompStyle>
+      );
+    }
+
+
+
+    ##################################
+    6. StyledCircle 만들기
+      단축키: styled
+
+      StyledCircle 에 적용될 CSS
+      {
+        width: 5rem;
+        height: 5rem;
+        background: black;
+        border-radius: 50%;
+      }
     ####################################
-    # 13. StyledCircle 컴포넌트를 만든다.
-    ####################################
 
-        const StyledCircle = styled.div`
-          background: ${(props) => props.color || "black"};
-          border-radius: 50%;
+      import styled, { css } from 'styled-components';
 
-          width: 5rem;
-          height: 5rem;
+      const StyledCircle = styled.div`
+        /* https://styled-components.com/docs/basics#adapting-based-on-props */
+        width: 5rem;
+        height: 5rem;
+        background: ${(props) => props.color || 'black'};
+        border-radius: 50%;
+        margin: auto;
 
-          ${(props) =>
-            props.huge &&
-            css`
-              width: 10rem;
-              height: 10rem;
-            `}
-        `;
+        ${(props) =>
+          props.huge &&
+          css`
+            width: 10rem;
+            height: 10rem;
+          `}
+      `;
 
-        function Circle() {
-          return (
-            <div>
-              <StyledCircle></StyledCircle>
-              <StyledCircle color={"aqua"} huge={false}></StyledCircle>
-              <StyledCircle color={"red"} huge={true}></StyledCircle>
-            </div>
-          );
-        }
+      function CompStyle({ ...props }) {
+        // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+        return (
+          <StyledCompStyle>
+            <h2>styled-components 로 만든</h2>
+            <div className="App">styled-components 스타일로 만든</div>
+            <hr />
+
+            <StyledCircle></StyledCircle>
+            <hr />
+
+            <StyledCircle color={'blue'}></StyledCircle>
+            <hr />
+
+            <StyledCircle color={'aqua'} huge={false}></StyledCircle>
+            <hr />
+
+            <StyledCircle color={'red'} huge={true}></StyledCircle>
+          </StyledCompStyle>
+        );
+      }
 
     </xmp>
 
-</body>
+  </body>
 </html>
