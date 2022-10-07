@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
+    <title>Document</title>
+
+    <link rel="stylesheet"
+      href="../css/reset.css" />
+  </head>
+
+  <body>
+    <script type="text/x-template">
+
+                                                  +──────────+─────────+
+                                                  |        store       |
+                                                  |                    |
+      component ──> action ── dispatch() ──> reducer ──> state ── subscribe() ──> component
+                                                  |                    |
+                                                  +──────────+─────────+
+    </script>
+
+    <script type="text/x-template">
+      참조 사이트
+          https://redux.js.org/introduction/getting-started
+          https://kyounghwan01.github.io/blog/React/redux/redux-basic/
+          https://velog.io/@nibble/React-Redux로-Counter-만들기-1
+          https://jbee.io/react/introduce-redux-starter-kit/
+          https://kyounghwan01.github.io/blog/React/redux/redux-toolkit/
+          https://github.com/reduxjs/cra-template-redux-typescript
+          https://d2.naver.com/helloworld/1848131
+    </script>
+
+    <img src="./redux-process-flow.png"
+      alt=""
+      style="padding-left: 30px" />
+    <br />
+
+    <xmp
+>
+
+        redux는 기본적으로 flux 패턴을 따릅니다
+            Action -> Dispatch -> Store -> View(Component)
+
+
+        Redux 구성 요소
+            1. action : 순수 객체다. 기본적으로 CRUD 를 정의한다.
+            2. reducer : reducer는 store에 들어갈 state와 state를 바꿀 함수를 정의하는 곳입니다.
+            3. store :
+                4. state : 상태값이 저장되는 순수 객체다.
+
+                7. dispatch 만들기
+                6. subscribe 만들기
+
+
+        Redux 실행 순서
+                                                    +─────────────────────+
+                                                    |                                          |
+                                                    |       ┏─ reducer1 ─┓                 |
+    component ── action ── dispatch() ── middleware ─╋─ reducer2 ─╋─ state ── middleware ── subscribe() ── component
+                                                   [in]     └─ reducer3 ─┛                [out]
+                                                    |                                          |
+                                                    |                                          |
+                                                    +─────────────────────+
+
+
+
+        Redux 주요 메서드
+            1. Redux.createStore(reducer, preloadedState, enhancer)
+            2. Redux.combineReducers(reducers)
+                여러 reducer를 하나로 묶어주는 메소드. store에는 오직 1개의 리듀서만 설정 가능합니다.
+
+        Store 주요 메서드
+            1. store.dispatch(action) : store에 이벤트 발생시키기
+            2. store.getState() : store에 상태값 가져오기
+            3. store.replaceReducer(nextReducer) : store reducer 바꾸기
+            4. store.subscribe(listener) : store 상태값 구독하기
+
+
+        Redux 코딩 순서
+            0. Redux 플러그인 추가 or import.
+            1. state  만들기
+            2. reducer 만들기
+            3. store 만들기
+            4. action 만들기
+            5. store 구독하기
+            6. store에 action dispatch 하기
+
+
+        Redux 와 같이 사용되는 라이브러리
+            redux : flux 기반의 상태 관리 라이브러리
+            react-redux : react에서 redux를 사용할 수있게 하는 라이브러리
+            redux-actions : redux용 action을 정의하기 위한 라이브러리
+            redux-saga : 비동기 호출 라이브러리
+            redux-logger : 로깅 처리를 위한 미들웨어
+            redux-devtools-extension : 스토어의 상태를 개발자 도구에서 조회 할 수 있는 크롬 확장 프로그램
+            redux-toolkit :
+
+        Redux 패키지 설치
+            $ npm install --save redux react-redux redux-actions redux-saga redux-logger immer
+            $ npm install --save-dev redux-devtools
+    </xmp>
+
+    <div>
+      <b>리덕스용 비동기 처리 라이브러리</b>
+      <table>
+        <thead>
+          <tr>
+            <th>패키지명</th>
+            <th>선택기준</th>
+            <th>특징</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>axios</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>redux-thunk</td>
+            <td>여러개의 비동기 코드가 중첩되지 않는다. <br />비동기 코드의 로직이 간단하다.</td>
+            <td>시작하기가 쉽다</td>
+          </tr>
+          <tr>
+            <td>redux-saga</td>
+            <td>비동기 코드가 많이 사용된다</td>
+            <td>ES6 제너레이터를 사용한다.<br />테스트 코드 작성이 쉽다.</td>
+          </tr>
+          <tr>
+            <td>redux-obserbal</td>
+            <td>비동기 코드가 많이 사용된다</td>
+            <td>RxJS 패키지를 기반으로 만들어졌다. <br />진입 장벽이 높다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

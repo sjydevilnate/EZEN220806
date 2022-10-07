@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
+    <title>Document</title>
+
+    <link rel="stylesheet"
+      href="../css/reset.css" />
+  </head>
+
+  <body>
+    <img src="./redux-process-flow.png"
+      alt=""
+      style="padding-left: 30px" />
+    <br />
+
+    <pre>
+
+    Redux 실행 순서
+                                                    +─────────────────────+
+                                                    |                                          |
+                                                    |       ┏─ reducer1 ─┓                 |
+    component ── action ── dispatch() ── middleware ─╋─ reducer2 ─╋─ state ── middleware ── subscribe() ── component
+                                                   [in]     └─ reducer3 ─┛                [out]
+                                                    |                                          |
+                                                    |                                          |
+                                                    +─────────────────────+
+
+    middleware 는 reducer 가 액션을 처리하기 전에 실행되는 함수다.
+
+    middleware 사용 예시
+        1. 상태값 로그 출력
+        2. 예외를 서버 전송.
+
+    middleware 는 mis.n.a.na 3중첩 함수다.
+        mi: middleware, n: next, a: action, na: next(action)
+
+        <div class="langjs">
+            <code class="langjs">
+    const myMiddleware = store => next => action => next(action);
+            </code>
+
+            <code class="langjs">
+    const myMiddleware = function(store) {
+        return function(next) {
+            return function(action) {
+                return next(action);
+            };
+        };
+    };
+            </code>
+        </div>
+
+        <div>
+            <li class="langjs">
+                <h3 class="langjs">middleware 작성하기</h3>
+                <p class="langjs">
+    아래와 같은 결과 출력되게 middleware 와 reducer를 작성하시오.
+    middleware1 start
+    middleware2 start
+    reducer execution
+    middleware2 end
+    middleware1 end
+
+    작성할 middleware
+    작업1. middleware1 만들기. in 부분에서는 console.log("middleware1 start")를 , out 부분에서는 console.log("middleware1 end")를 출력한다.
+    작업2. middleware2 만들기. in 부분에서는 console.log("middleware2 start")를 , out 부분에서는 console.log("middleware2 end")를 출력한다.
+    작업3. reducer가 실행 전후로 상태값을 출력하는 middleware 만들기. printLog
+    작업4. 에러를 localStorage 에 저장하는 middleware 만들기. reportError
+    작업5. localStorage 에 상태값을 저장하는 middleware 만들기. saveLocalStorage
+                </p>
+                <ul>
+
+                </ul>
+                <pre class="langjs">
+                    <code class="langjs">
+
+                    </code>
+                </pre>
+    </li>
+    </div>
+
+    </pre>
+  </body>
+</html>

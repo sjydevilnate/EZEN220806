@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
+
+    <link rel="stylesheet"
+      href="../css/reset.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <xmp>
+
+        Redux 구성 요소
+            1. action : 순수 객체다. 기본적으로 CRUD 를 정의한다.
+            2. reducer : reducer는 store에 들어갈 state와 state를 바꿀 함수를 정의하는 곳입니다.
+            3. store :
+            4. state : 상태값이 저장되는 순수 객체다.
+
+            7. dispatch 만들기
+            6. subscribe 만들기
+
+
+        Redux 실행 순서
+                                        +────────────────────────+
+                                        |                     store                      |
+                                        |                                                |
+                                        |        ┏──> reducer1 ─┓                   |
+        component ──> action ── dispatch() ─╋──> reducer2 ─╋─> state ──> subscribe() ──> component
+                                        |        └──> reducer3 ─┛                   |
+                                        |                                                |
+                                        +────────────────────────+
+
+
+
+        Redux 주요 메서드
+        1. Redux.createStore(reducer, preloadedState, enhancer)
+        2. Redux.combineReducers(reducers)
+        여러 reducer를 하나로 묶어주는 메소드. store에는 오직 1개의 리듀서만 설정 가능합니다.
+
+        Store 주요 메서드
+        1. store.dispatch(action) : store에 이벤트 발생시키기
+        2. store.getState() : store에 상태값 가져오기
+        3. store.replaceReducer(nextReducer) : store reducer 바꾸기
+        4. store.subscribe(listener) : store 상태값 구독하기
+
+
+        Redux 를 코딩하는 것을 실습하여 본다.
+        1. React-Redux 플러그인 추가 or import.
+        console.log(window.Redux||window.dispatch||'Redux import 오류');
+        console.log(window.ReactRedux||window.Provider||'ReactRedux import 오류');
+
+        2-1. action상수 만들기. action상수에는 접두사를 붙인다.
+        const 액션상수 = { TASK_READ: "task/READ", };
+        2-2. action함수 만들기.
+        const 액션함수 = { taskRead(task){ return { type: 액션상수.TASK_READ, payload: { task }, error: {}, meta: {} } } };
+
+        3. reducer 만들기.
+        3-1. reducer state 만들기. 리듀서별로 상태값을 관리할 수 있다.
+        예시) const initialState = { }
+        3-2. reducer 만들기.
+        예시) const reducer이름 = function(state = initialState, action)
+        3-3. reducer 합치기. Redux.combineReducers() 사용하여 개별 리듀서를 합치기.
+        예시) const reducer = Redux.combineReducers({ a: reducer이름, b: reducer이름 });
+
+        4. store 만들기. store 만들기. 리덕스 개발자 도구 적용.
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        예시) const store = Redux.createStore(reducer, preloadedState, enhancer);
+        store의 state 형태 = { a: {...중략},  b: {...중략} }
+
+        5. store 구독하기
+
+        6. store에 action dispatch 하기
+    </xmp>
+
+    <hr />
+    <div id="app"></div>
+  </body>
+</html>

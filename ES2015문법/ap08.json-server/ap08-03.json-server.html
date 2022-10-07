@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
+    <title>Jest</title>
+  </head>
+  <body>
+    <hr />
+    <xmp>
+
+    ##################################
+    6. json-server 실행하기
+    ##################################
+
+    $ mkdir -p ./server
+    $ cd ./server
+    $ touch ./db.json
+    $ cat ./db.json
+    $ npx json-server --watch db.json  --port 5000
+
+    6-01. db.json 파일 생성
+        $ ls               # package.json 파일이 보이는지 확인.
+        $ touch ./db.json
+        $ cat ./db.json
+        {
+          "board": [ { "id": 1, "title": "json-server", "author": "typicode" } ],
+          "comments": [ { "id": 1, "body": "comment1", "postId": 1 } ],
+          "profile": { "name": "typicode" }
+        }
+
+    6-02. json-server 실행하기
+        $ npx json-server --watch db.json  --port 5000
+
+          \{^_^}/ hi!
+
+          Loading db.json
+          Done
+
+          Resources
+          http://localhost:5000/board
+          http://localhost:5000/comments
+          http://localhost:5000/profile
+
+          Home
+          http://localhost:5000
+
+          Type s + enter at any time to create a snapshot of the database
+          Watching...
+
+    </xmp>
+  </body>
+</html>

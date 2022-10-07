@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
+    <title>Document</title>
+
+    <link rel="stylesheet"
+      href="../css/reset.css" />
+  </head>
+
+  <body>
+    <img src="./redux-process-flow.png"
+      alt=""
+      style="padding-left: 30px" />
+    <br />
+
+    <xmp
+>
+
+    Redux 실행 순서
+                                                    +─────────────────────+
+                                                    |                                          |
+                                                    |       ┏─ reducer1 ─┓                 |
+    component ── action ── dispatch() ── middleware ─╋─ reducer2 ─╋─ state ── middleware ── subscribe() ── component
+                                                   [in]     └─ reducer3 ─┛                [out]
+                                                    |                                          |
+                                                    |                                          |
+                                                    +─────────────────────+
+
+    action 객체:
+        type 속성이 있는 자바스크립트 객체다.
+        action의 type 속성에는 접두사를 붙인다. 이름 충돌을 피하기 위해서
+
+    action 상수:
+
+    action 함수:
+
+    </xmp>
+  </body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
+    <title>Jest</title>
+  </head>
+  <body>
+    <hr />
+    <xmp
+>
+    자바스크립트 테스트 프레임워크
+        . Mocha
+        . Jasmine
+        . Jest
+        . Karma
+
+    Jest는 Jasmine을 기반으로 한 CLI 도구다.
+        . https://jestjs.io/
+
+    Jest 테스트 파일
+        . __test__ 폴더
+        . xxxx.test.js 파일
+
+    Jest의 장점
+        . 제로 설정
+        . 스냅샷 테스트 지원
+        . Mocking 객체 테스트 지원
+        . 테스트 코드 분리 지원
+        . 코드 coverage(정적 분석) 지원
+        . Jasmine assertion 지원
+
+    Jest는 test suite 와 test unit 의 구조를 갖는다.
+        . describe: 테스트 꾸러미. 여러 개의 테스트를 감싸는 역활
+        . before: 준비
+        . before Each: 모든 테스트 꾸러미 또는 개별 테스트를 위한 준비
+        . after: 정리
+        . afterEach: 모든 태스트 꾸러미 또는 개별 테스트를 위한 정리
+        . test: 개별 테스트 케이스.
+
+    태스트는
+        1. 테스트 꾸러미 작성 ==> describe
+        2. 테스트 케이스 작성 ==> it
+        3. 테스트 케이스에 assertion 생성. assertion 은 BDD 형식으로 작성하며 예/아니오 로  처리된다.
+
+    describe('Noun: method or a class/module name', () => {
+        beforeAll((done) => {
+            // This code will be called just once before all it statements
+            done()
+        });
+        beforeEach((done) => {
+            // This code will be called many times before all it statements
+            done()
+        });
+        afterAll((done) => {
+            // This code will be called just once after all it statements
+            done()
+        });
+        afterEach((done) => {
+            // This code will be called many times after all it statements
+            done()
+        });
+
+        test('Verb describing the behavior', (done) => {
+            // Assertions
+            done()
+        });
+    });
+
+    Jest가 지원하는 주요 assertion 메서드 목록
+    . not: 이어지는체인의 비교를반대로만든다.
+    . expect(OBJECT).toBe(value): 자바스크립트 일치 연산자←==)를 시용했을 때 값이 동일 할 것을 예상한다(값뿐만 아니라 값의 타입도 비교한다). 3
+    . expect(OBJECT).toEqual(value): 값을 갚은 비교(deep-equal) 했을 때 동일할 것을 예상 한다.
+    . expect(OBJECT).toBeFalsy(): 값이 거짓일 것으로 예상한다(이어지는참고사항을살펴보기 바란다).
+    . expect(OBJECT).toBeTruthy(): 값이 참일 것으로 예상한다.
+    . expect(OBJECT).toBeNul l(): 값이 null 일 것으로 예상한다.
+    . expect(OBJECT).toBeUndefined(): 값이 정의되지 않을 것으로 예상한다.
+    . expect(OBJECT).toBeDefined(): 값이 정의될 것으로 예상한다.
+    . expect(OBJECT).toMatch(regexp): 값이 정규표현식에 일치할 것으로 예상한다.
+
+
+    구글 검색
+    . jest saga debugging
+    . How To Debug Jest Tests
+
+        https://www.youtube.com/watch?v=Nl54MJDR2p8&ab_channel=BrianDesign
+        https://www.youtube.com/watch?v=g4MdUjxA-S4&list=PLZKTXPmaJk8L1xCg_1cRjL5huINlP2JKt
+
+    jest 동영상
+        https://artsy.github.io/blog/2018/08/24/How-to-debug-jest-tests/
+        https://github.com/facebook/jest/issues/3750
+
+
+    jest 프로젝트 참조 사이트
+        https://jestjs.io/docs/cli
+        https://jestjs.io/docs/getting-started
+
+    jest 테스트 코드 작성시 참조 사이트
+        https://jestjs.io/docs/getting-started
+        http://www.albertgao.xyz/2017/05/24/how-to-test-expressjs-with-jest-and-supertest/
+        https://yonghyunlee.gitlab.io/temp_post/jest/
+        https://www.js2uix.com/frontend/jest-study-step2/
+        https://www.js2uix.com/frontend/jest-study-step3/
+
+
+
+
+    ##################################
+    1. 작업 개요
+    ##################################
+
+
+    ##################################
+    2. 프로젝트 생성 작업
+       소요시간: 20분
+    ##################################
+
+    2-1. package.json 생성
+    $ npm init
+
+    2-2. axios 설치(비동기 라이브러리)
+    axios : rest api 호출 라이브러리
+    $ npm install --save axios
+
+    2-3. jest 설치
+    jest 는 코드가 제대로 동작하는지 확인하는 Jasmine 기반의 '테스팅 프레임워크' 입니다.
+    jest-cli 는 단일 파일만 테스트 하는 경우에 사용합니다.
+
+    $ npm install --save-dev jest  \
+                             jest-cli  \
+                             @types/jest  \
+                             babel-jest
+
+    2-4. supertest 모듈 설치
+    $ npm install --save-dev supertest
+
+    2-5. superagent 모듈 설치
+    $ npm install --save-dev superagent
+
+    2-6. babel 모듈 설치
+    https://medium.com/codeclan/mocking-es-and-commonjs-modules-with-jest-mock-37bbb552da43
+
+    $ npm install --save-dev @babel/cli \
+                         @babel/core \
+                         @babel/preset-env
+
+    2-7. babel 모듈 설정
+    # .babelrc 파일을 프로젝트 루트에 만들기
+    $ pwd     # 현재 작업하는 폴더 위치 확인
+    $ ls -a   # package.json 파일이 보이는지 확인
+    $ touch .babelrc
+    $ echo -e "{\n\"presets\": [\"@babel/preset-env\"]}" > .babelrc
+    $ cat .babelrc
+    $ .babelrc
+    {
+      "presets": ["@babel/preset-env"]
+    }
+
+
+    ##################################
+    3. Jest 테스트 와 디버깅 방법
+    ##################################
+
+    https://tod2.tistory.com/214
+    https://jestjs.io/docs/cli#--envenvironment
+
+    3-1 package.json 에서 실행 jest script 추가
+      변경 전
+      {
+          ...중략
+          "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1"
+          },
+      }
+
+      변경 후
+      {
+          ...중략
+          "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1",
+
+            "test:watch": "jest --watchAll --env=node --verbose --rootDir=./src",
+            "test:debug": "node --inspect-brk node_modules/jest/bin/jest --runInBand --watch --env=node --verbose --rootDir=./src"
+          },
+          ...중략
+      }
+
+    3-2. 터미널에서 개별 파일 jest 테스트 실행
+      $ npx jest --help
+      $ npx jest --env=node  src/containers/todo/components/PageHeader.test.js
+      $ npx jest --env=node  --watch  src/containers/todo/components/PageHeader.test.js
+
+    3-3. 터미널에서 watch 모드로 jest 테스트 실행
+      $ ls    # package.json 보이는지 확인
+      $ cat package.json
+      $ npx jest --watch --env=node
+      $ npm run test:watch
+
+    3-4. 터미널에서 deubgging 모드로 jest 테스트 실행
+      $ npm run test:debug
+      $ node --inspect-brk node_modules/jest/bin/jest --runInBand --env=node --watch
+
+    3-5. 소스 코드에 debugger 삽입
+
+    3-6. Chrome을 열고 주소 표시줄에 다음을 입력합니다.
+      chrome://inspect
+
+    3-7. "Open dedicated DevTools for Node" 클릭
+      연결 추가 127.0.0.1:9229
+
+    3-8. CLI 에서 실행을 중지하려면 이면 "ctrl + c" 눌러 실행 중지
+
+
+    ##################################
+    4. 프로젝트에 컴포넌트 추가
+    ##################################
+      프로젝트
+      |-- src
+      |   |-- api.js
+      |   |-- api.test.js
+      |   |-- sum.js
+      |   `-- sum.test.js
+      |-- .babelrc
+      |-- db.json
+      `-- package.json
+
+
+      $ mkdir -p ./src
+
+      $ touch ./src/api.js \
+              ./src/api.test.js \
+              ./src/sum.js \
+              ./src/sum.test.js
+
+    ##################################
+    5. sum 테스트 코드 작성
+    ##################################
+
+        5-01. 파일 생성
+            $ touch ./src/sum.js \
+                    ./src/sum.test.js
+
+        5-02. src/sum.js 만들기
+            const sum = (a, b) => {
+              return a + b;
+            };
+            module.exports = sum;
+
+        5-03. src/sum.test.js 만들기
+            const sum = require('./sum');
+
+            describe('Noun: method or a class/module name', () => {
+                test('Verb describing the behavior', () => {
+                    // Assertions
+                    expect(sum(1, 2)).toEqual(3);
+                    expect(sum(1, 2)).toBeLessThan(4);
+                });
+            });
+
+        5-04. sum 테스트 코드 실행
+            $ npx jest src/sum.test.js    # 실행을 중지하려면 이면 "ctrl + c" 눌러 실행 중지
+
+            $ npx jest --watch src/sum.test.js
+
+            PASS  src/sum.test.js
+            √ adds 1 + 2 to equal 3 (1 ms)
+            Test Suites: 1 passed, 1 total
+            Tests:       1 passed, 1 total
+            Snapshots:   0 total
+            Time:        1.349 s
+            Ran all test suites matching /sum/i.
+
+
+        5-05. 전체 jest 테스트 실행 - package.json 의 script로 test 실행하기
+            $ ls # package.json 보이는지 확인
+            $ npm run test
+            $ npx jest
+
+
+
+        5-06. 전체 jest 테스트 실행 - watch 모드로 jest 실행하기
+            $ ls # package.json 보이는지 확인
+            $ npm run test:watch
+            $ npx jest --watch
+
+
+    ##################################
+    6. json-server 실행하기
+    ##################################
+
+      6-01. db.json 파일 생성
+        $ ls               # package.json 파일이 보이는지 확인.
+        $ touch ./db.json
+
+        {
+          "board": [
+            {
+              "id": 1,
+              "title": "json-server",
+              "author": "typicode"
+            }
+          ],
+          "comments": [
+            {
+              "id": 1,
+              "body": "comment1",
+              "postId": 1
+            }
+          ],
+          "profile": {
+            "name": "typicode"
+          }
+        }
+
+        6-02. json-server 실행하기
+        $ npx json-server --watch db.json
+
+          \{^_^}/ hi!
+
+          Loading db.json
+          Done
+
+          Resources
+          http://localhost:3000/board
+          http://localhost:3000/comments
+          http://localhost:3000/profile
+
+          Home
+          http://localhost:3000
+
+          Type s + enter at any time to create a snapshot of the database
+          Watching...
+
+
+    ##################################
+    7. api 테스트 코드 작성
+    ##################################
+        7-01. 파일 생성
+            $ touch ./src/api.js \
+                    ./src/api.test.js
+
+        7-02. src/api.js 에 비밀번호 생성 코드 작성
+            const axios = require('axios');
+
+            const commentsget1 = () => {
+              return axios.get('http://localhost:3000/comments')
+              .then((res) => {
+                return res.data;
+              });
+            };
+            const commentsget2 = (payload) => {
+              return axios.get('http://localhost:3000/comments/' + payload)
+              .then((res) => {
+                return res.data;
+              });
+            };
+
+            module.exports = {
+              commentsget1,
+              commentsget2,
+            };
+
+
+        7-03. src/api.test.js 에 단위 테스트 작성
+            const api = require('./api');
+
+            describe('api.test 테스트', () => {
+              test('api.test >> get', (done) => {
+                const data = api.commentsget1();
+                console.table(data);
+                done();
+              });
+              test('api.test >> get', (done) => {
+                const data = api.commentsget2(1);
+                console.table(data);
+                done();
+              });
+              test('api.test >> get', (done) => {
+                const data = api.commentsget3(1);
+                console.table(data);
+                done();
+              });
+            });
+
+
+        7-04. 개별 파일 jest 테스트 실행
+
+            $ npx jest src/api.test.js
+            PASS  ./api.test.js
+                Noun: method or a class/module name
+                √ Verb describing the behavior (2 ms)
+                √ Verb describing the behavior (2 ms)
+
+            Test Suites: 1 passed, 1 total
+            Tests:       2 passed, 2 total
+            Snapshots:   0 total
+            Time:        1.613 s, estimated 3 s
+            Ran all test suites matching /api.test.js/i.
+
+
+            $ npm jest src/api.test.js
+            PASS  ./api.test.js
+                Noun: method or a class/module name
+                √ Verb describing the behavior (2 ms)
+                √ Verb describing the behavior (2 ms)
+
+            Test Suites: 1 passed, 1 total
+            Tests:       2 passed, 2 total
+            Snapshots:   0 total
+            Time:        1.613 s, estimated 3 s
+            Ran all test suites matching /api.test.js/i.
+
+        7-05. 전체 jest 테스트 실행 - package.json 의 script로 test 실행하기
+            $ ls # package.json 보이는지 확인
+            $ npm run test
+            $ npx jest
+
+
+        7-06. 전체 jest 테스트 실행 - watch 모드로 jest 실행하기
+            $ ls # package.json 보이는지 확인
+            $ npm run test:watch
+            $ npx jest --watch
+
+    </xmp>
+  </body>
+</html>

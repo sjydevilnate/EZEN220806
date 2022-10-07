@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible"
+      content="IE=edge" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>immer 사용법</title>
+  </head>
+  <body>
+    <xmp
+>
+        상태는 읽기 전용이다(State in read-only, redux 3원칙)
+
+        상태값은 불변 객체로 관리해야 하므로 수정할 때마다 새로운 객체를 생성해야 한다.
+
+        불변 객체를 관리할 목적으로 사용 가능한 라이브러리: immer, immutable
+        immer 를 사용하면 새로운 객체가 생성된다.
+
+        immer :: https://immerjs.github.io/immer/
+        immutable.js :: https://immutable-js.github.io/immutable-js/
+
+        swallow copy vs deep copy
+        . swallow copy:
+        . deep copy:
+
+        문제 1. immer 를 사용하여 새로운 복제 객체를 만드시오.
+        1-1. baseState 배열을 immer의 produce() 함수를 사용하여 새로운 복제 배열 newtState 을 만드시오
+        baseState = [ { todo: "Learn typescript", done: true }, { todo: "Try immer", done: false } ];
+
+        1-2. person 객체를 immer의 produce() 함수를 사용하여 새로운 복제 객체 newPerson를 만드시오
+        person  = { name: "mike", age: 22 }
+
+        문제 2. Immutable를 사용하여 새로운 복제 객체를 만드시오.
+        2-1. baseState 배열을 Immutable를 사용하여 새로운 복제 배열 newtState 을 만드시오
+        baseState = [ { todo: "Learn typescript", done: true }, { todo: "Try immer", done: false } ];
+
+        2-2. person 객체를 Immutable를 사용하여 새로운 복제 객체 newPerson를 만드시오
+        person  = { name: "mike", age: 22 }
+
+    </xmp>
+  </body>
+</html>

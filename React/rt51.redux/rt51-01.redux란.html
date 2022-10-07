@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
+    <title>Document</title>
+
+    <link rel="stylesheet"
+      href="../css/reset.css" />
+  </head>
+
+  <body>
+
+    <li class="langjs">
+      <h3 class="langjs">아래의 질문에 답을 구하시오</h3>
+      <table>
+        <colgroup>
+          <col width="250px;">
+          </col>
+          <col>
+          </col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th>질문</th>
+            <th>답변</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>redux 는 무엇인가?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>redux 를 왜 사용한가?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>redux 를 어떻게 사용하나?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>redux 를 언제 사용하나?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>redux 의 사용시 문제점이나 제약 사항이 있는가?</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>redux 의 대체제가 있는가?</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+
+    <script type="text/x-template">
+                                                    +─────────────────────+
+                                                    |                                          |
+                                                    |       ┏─ reducer1 ─┓                 |
+    component ── action ── dispatch() ── middleware ─╋─ reducer2 ─╋─ state ── middleware ── subscribe() ── component
+                                                   [in]     └─ reducer3 ─┛                [out]
+                                                    |                                          |
+                                                    |                                          |
+                                                    +─────────────────────+
+    </script>
+
+    <script type="text/x-template">
+        참조 사이트
+            https://redux.js.org/introduction/getting-started
+            https://kyounghwan01.github.io/blog/React/redux/redux-basic/
+            https://velog.io/@nibble/React-Redux로-Counter-만들기-1
+            https://jbee.io/react/introduce-redux-starter-kit/
+            https://kyounghwan01.github.io/blog/React/redux/redux-toolkit/
+            https://github.com/reduxjs/cra-template-redux-typescript
+            https://d2.naver.com/helloworld/1848131
+    </script>
+
+    <img src="./redux-process-flow.png"
+      alt=""
+      style="padding-left: 30px;">
+    <br />
+
+    <xmp>
+
+        redux란?
+            Redux는 상태 관리 라이브러리다.
+            Redux는 상태를 Store에 저장.
+            상태 관리를 컴포넌트에서 store 로 이동.
+            Redux is a pattern and library for managing and updating application state, using events called "actions".
+
+
+        redux 3원칙
+            진실은 하나의 소스로부터(Single source of truth)
+            ==>
+            상태는 읽기 전용이다(State in read-only)
+            ==>
+            변화는 순수 함수로 한다(Changes are made with pure function)
+            ==>
+
+
+        redux는 왜 사용하나?
+            state를 컴포넌트에서 독립시키기 위해서
+            redux를 사용하면 state down / state up 지옥 탈출
+
+            redux는 컴포넌트에 종속되지 않고, 상태관리를 컴포넌트 바깥에서 합니다.
+            redux는 store라는 곳에 state를 저장하고,
+            컴포넌트는 store를 구독하고
+            state가 바뀌면 해당 state를 바라보고 있는 컴포넌트는 모두 리렌더링 됩니다.
+
+
+            # props 지옥 탈출
+            props -> props -> props 지옥 탈출
+            우리가 원하는 state가 자식의 자식의 자식에서 사용한다면 props을 내리고 또 내리고 또 내리죠.
+            또 그 state를 바꾸기 위한 함수를 또 내리고 ..내리고....내립니다.
+            이렇게 되면 내가 잘 하고 있는지 의문이 들게 되고, 코딩을 실수 하게 됩니다.
+            위에서 본 대로, redux의 store는 프로젝트 루트레벨에 위치하고, 해당 store를 구독하는 컴포넌트는 모두 state와 state를 바꾸는 함수를 받을 수 있습니다.
+            어느 위치에 있든 상관 없이 단 한번에 상태를 받을 수 있게 됩니다!
+
+
+        redux를 언제 사용하나?
+
+    </xmp>
+
+  </body>
+
+</html>
