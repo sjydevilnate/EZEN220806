@@ -451,7 +451,6 @@
 
         const callbackClearAll = useCallback(() => {
             // state 변경
-            debugger;
 
             // 직접 코드를 완성하시오.
             // setTodoItems 는  todoItems 상태를 바꾸기 위한 setter 메서드
@@ -464,9 +463,9 @@
         components 탭을 누르시오.
         TodoContainer 를 선택하고 컴포넌트의 상태값을 확인한다.
     </xmp>
-   
+
     <img src="./snap0053.png" style="margin-left: 30px;">
-    
+
     <xmp>
     ##################################
     step 25. TodoList 컴포넌트 만들고 기능 완성한다.
@@ -550,7 +549,7 @@
                 </li>
             );
         });
-        
+
         return (
           <StyledTodoList>
             <section>
@@ -593,7 +592,7 @@
             //
             const id = Number(e.target.dataset.id);  // data-id
             const item = JSON.parse(e.target.dataset.item);  // data-item
-            
+
             e.stopPropagation(); // click 이벤트 취소. 버블링 막기
 
             // 부모 콜백 메서드 호출
@@ -620,7 +619,6 @@
         const callbackDoneToggle = useCallback(
             (id) => {
                 // state 변경 코드를 완성하시오.
-                debugger;
 
                 const newTodos =
                     todoItems &&
@@ -685,7 +683,6 @@
         const callbackRemoveTodo = useCallback(
             (id) => {
                 // state 변경 코드를 완성하시오.
-                debugger;
 
                 const newTodos =
                     todoItems &&
@@ -799,7 +796,7 @@
             const refInputTodo = useRef();
 
     step 28-12. TodoInput 컴포넌트 JSX 의 input 에 onKeyUp 기능 추가
-        input 태그에서 enter 가 입력되었을 때 처리하는 핸들러를 만든다. 
+        input 태그에서 enter 가 입력되었을 때 처리하는 핸들러를 만든다.
         <input
             type="text"
             placeholder="Type what you have to do"
@@ -817,22 +814,22 @@
 
     step 28-14. TodoInput 컴포넌트 handlerAddTodo 메서드 작성
         cosnt handlerAddTodo = (e) => {
-        
+
             // click 이벤트 취소. 버블링 방지
             e.stopPropagation();
-            
+
             // input 에 입력된 값을 가져오기. 어떻게 해야 하나? ==> ref명.current.value
             const value = refInputTodo.current.value;
-            
+
             // input 태그에 빈 문자열이나 공백이 입력 되는 경우는 modal 창이 출력되게
             if (!value || !value.trim()) {
               setIsShowModal(true);
               return; // 함수 실행을 멈춘다.
             }
-            
+
             // TodoContainer 의 callbackAddTodo 메서드 호출 기능 추가
             callbackAddTodo( value );
-            
+
             // add 후에 input 태그의 입력 값 지우기.
             refInputTodo.current.value = '';
         }
@@ -855,25 +852,25 @@
             callbackAddTodo={callbackAddTodo}
         >
         </TodoList>
-    
+
     step 28-18. TodoContainer 컴포넌트에 callbackAddTodo 메서드 작성
-    
+
         const callbackAddTodo = useCallback( (value)=>{
             // ap03-11.객체배열.html 참조
             // map과 reduce 를 사용하여 max id 구하기 ==> newid 만들기
             // todoItems 추가할 객체 만들기
             // 배열에 추가. todoItems = [...todoItems, newTodo];
-            const maxid = todoItems && 
+            const maxid = todoItems &&
                         todoItems
                         .map( (item)=>item.id )
                         reduce((pvalue,cvalue)=> (pvalue>cvalue ? pvalue: cvalue), 0);
-                        
+
             const newTodo = {
               id: maxid + 1,
               todo: value,
               done: false,
             }
-            
+
             setTodoItems( [...todoItems, newTodo] ); // todoItems = [...todoItems, newTodo];
           },
           [todoItems]
