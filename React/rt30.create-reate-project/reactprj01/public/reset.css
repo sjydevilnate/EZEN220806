@@ -272,7 +272,7 @@ div > table {
 }
 
 body > div {
-  margin: 0 45px 50px 45px;
+  /* margin: 0 45px 50px 45px; */
 }
 
 body > h1,
