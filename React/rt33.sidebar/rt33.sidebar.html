@@ -205,10 +205,12 @@
 
     ##################################
     step 15. SideBar 의 메뉴 생성을 데이터로 만들기
+        메뉴를 동적으로 만드는 기능을 추가하여 본다.
         https://github.com/briancodex/react-sidebar-v1 참고
     ##################################
     step 15-01. react-icons 패키지 추가.
       https://www.npmjs.com/package/react-icons
+      $ ls  # package.json 파일이 있는지 확인
       $ npm install react-icons
 
 
@@ -279,7 +281,7 @@
               </li>
               {SidebarData.map((item, index) => {
                 return (
-                  <li key={index} className={item.cName}>
+                  <li key={index} className={item.cName} onClick={handlerNavLink}>
                     <Link to={item.path}>
                       {item.icon}
                       <span>{item.title}</span>
