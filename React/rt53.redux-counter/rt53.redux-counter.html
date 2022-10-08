@@ -2,28 +2,26 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
     <title>redux counter</title>
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet"
+      href="../css/reset.css" />
   </head>
   <body>
     <div style="margin-top: 40px">
-      <a
-        href="#"
+      <a href="#"
         onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;"
-        rel="nofollow"
-        >npm 사용법</a
-      >
+        rel="nofollow">npm 사용법</a>
     </div>
 
     <xmp
 >
     React CLI 을 사용하여 Counter 어플리케이션을 만들어 본다.
-
-    "vue36-01.vuex-state.html" 를 참고하여 작성하시오.
 
     </xmp>
 
@@ -32,22 +30,24 @@
         <p></p>
         <p>
           1. 실행 전에 서버를 실행하세요.
-          <a
-            href="#"
-            onClick="window.open('../../st04.ES2015문법/ap09.서버통신/ap09-03.Node서버실행.html','Node서버실행','width=900,height=650,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;"
-            rel="nofollow"
-            >Node서버실행</a
-          >
+          <a href="#"
+            onClick="window.open('../../st04.ES2015문법/ap09.서버통신/ap09-01.Node서버실행.html','Node서버실행','width=900,height=650,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;"
+            rel="nofollow">Node서버실행</a>
         </p>
         <p>
           2. 브라우저로 서버 실행 여부 확인<br />
-          <a href="http://localhost:5050/counter" target="_blank">http://localhost:5050/counter</a> ==> 현재값 가져오기<br />
-          <a href="http://localhost:5050/counter?step=1" target="_blank">http://localhost:5050/counter?step=1</a> ==> 1 씩 증가<br />
-          <a href="http://localhost:5050/counter?step=1" target="_blank">http://localhost:5050/counter?step=-1</a> ==> -1 씩
+          <a href="http://localhost:5050/counter"
+            target="_blank">http://localhost:5050/counter</a> ==> 현재값 가져오기<br />
+          <a href="http://localhost:5050/counter?step=1"
+            target="_blank">http://localhost:5050/counter?step=1</a> ==> 1 씩 증가<br />
+          <a href="http://localhost:5050/counter?step=1"
+            target="_blank">http://localhost:5050/counter?step=-1</a> ==> -1 씩
           증가<br />
-          <a href="http://localhost:5050/counter?step=10" target="_blank">http://localhost:5050/counter?step=10</a> ==> 10 씩
+          <a href="http://localhost:5050/counter?step=10"
+            target="_blank">http://localhost:5050/counter?step=10</a> ==> 10 씩
           증가<br />
-          <a href="http://localhost:5050/counter?step=10" target="_blank">http://localhost:5050/counter?step=-10</a> ==> -10 씩
+          <a href="http://localhost:5050/counter?step=10"
+            target="_blank">http://localhost:5050/counter?step=-10</a> ==> -10 씩
           증가<br />
         </p>
       </div>
@@ -105,7 +105,8 @@
         $ npm run start                            # package.json 파일이 보이면 서버 실행
     </xmp>
 
-    <img src="./snap0029.png" width="100%" />
+    <img src="./snap0029.png"
+      width="100%" />
 
     <xmp
 >
@@ -228,7 +229,8 @@
         "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
     </xmp>
 
-    <img src="./snap0030.png" width="100%" />
+    <img src="./snap0030.png"
+      width="100%" />
 
     <xmp
 >
@@ -268,7 +270,6 @@
     |   |       |-- action.js    (액션상수,액션함수 정의)
     |   |       |-- api.js       (외부 API 호출)
     |   |       |-- CounterContainer.css  (counter 컨테이너에서만 사용되는 css 파일)
-    |   |       |-- CounterContainer.js   (컴포넌트 UI )
     |   |       |-- reducer.js   (리덕스 리듀서)
     |   |       `-- saga.js      (외부 API 호출 saga)
     |   |-- constant (상수)
@@ -677,13 +678,13 @@
         To create a production build, use npm run build.
 
         webpack compiled successfully
-  </xmp
-    >
+  </xmp>
 
-    <img src="./snap0031.png" width="100%" />
+    <img src="./snap0031.png"
+      width="100%" />
 
     <xmp>
-
+    <script type="text/x-template">
     ##################################
     6. Jest 테스트 와 디버깅 설정
     ##################################
@@ -733,7 +734,7 @@
         연결 추가 127.0.0.1:9229
 
     6-8. CLI 에서 실행을 중지하려면 이면 "ctrl + c" 눌러 실행 중지
-
+    </script>
 
 
 
@@ -765,11 +766,10 @@
                 `-- counter
                     |-- components   (counter 컨테이너에서만 사용되는 프리젠테이션용 컴포넌트 폴더)
                     |-- action.js    (액션상수,액션함수 정의)
+                    |-- saga.js      (외부 API 호출 saga)
                     |-- api.js       (외부 API 호출)
-                    |-- CounterContainer.css  (counter 컨테이너에서만 사용되는 css 파일)
-                    |-- CounterContainer.js   (컴포넌트 UI )
                     |-- reducer.js   (리덕스 리듀서)
-                    `-- saga.js      (외부 API 호출 saga)
+                    `-- CounterContainer.js   (컴포넌트 UI )
 
     12-1. 파일 생성
       $ pwd       # 현재 작업 디렉토리 확인
@@ -781,9 +781,6 @@
 
       (CounterContainer 컴포넌트 파일 생성)
       $ touch ./src/containers/counter/CounterContainer.js   # 컴포넌트 파일 생성
-
-      (CounterContainer 컴포넌트 css 파일 생성)
-      $ touch ./src/containers/counter/CounterContainer.css   # 컴포넌트 css 파일 생성
 
       (액션상수,액션함수 파일 생성)
       $ touch ./src/containers/counter/action.js   # 액션 파일 생성
@@ -801,7 +798,7 @@
       $ mkdir -p ./src/reducers
       $ touch ./src/reducers/index.js
 
-      (리덕스 store 생성 후 saga 등록하기)
+      (여러 개의 saga를 하나로 합치기)
       $ mkdir -p ./src/store
       $ touch ./src/store/index.js
 
@@ -810,16 +807,23 @@
     13. 라우팅 설정
     ##################################
 
-    13-1. 라우팅 수정
-      $ ~/src/index.js 수정
-      변경 전 : import App from './App';
-      변경 후 : import App from './containers/counter/CounterContainer';
+    13-1. 라우팅 경로 추가
+      수정파일: ~/src/pages/PageHome.js
+      import CounterContainer from './containers/counter/CounterContainer';
 
-    13-2. 실행 화면 확인하고 개발자 모드에서 오류 확인
+        <Routes>
+          <Route path="/counter" element="{<CounterContainer />}"></Route>
+        </Routes>
+
+
+    13-3. Link 기능 추가
+
+    13-3. 실행 화면 확인하고 개발자 모드에서 오류 확인
       ==> 빈 화면이 나오면 정상.
   </xmp>
 
-    <img src="./snap0032.png" width="100%" />
+    <img src="./snap0032.png"
+      width="100%" />
 
     <xmp>
 
@@ -923,7 +927,8 @@
     15-8. 실행 화면 확인
   </xmp>
 
-    <img src="./snap0033.png" width="100%" />
+    <img src="./snap0033.png"
+      width="100%" />
 
     <xmp
 >
@@ -959,10 +964,10 @@
         // redux store 와 연동되는 경우에만 useDispatch(), useSelector() 사용
         // const dispatch = useDispatch();
         const { error, isLoading, counter, welcome } = useSelector((state) => state.counter);
-  </xmp
-    >
+  </xmp>
 
-    <img src="./snap0034.png" width="100%" />
+    <img src="./snap0034.png"
+      width="100%" />
 
     <xmp
 >
@@ -976,12 +981,13 @@
 
     16-3. redux store에서 state를 증가시키는 하는 set 기능을 구현 한다. ===> 같이
       컴포넌트 ===> action함수 ===> reducer  ===> 컴포넌트
-  </xmp
-    >
+  </xmp>
 
-    <img src="./snap0036.png" width="100%" />
+    <img src="./snap0036.png"
+      width="100%" />
 
-    <img src="./snap0035.png" width="100%" />
+    <img src="./snap0035.png"
+      width="100%" />
 
     <xmp
 >
@@ -1253,9 +1259,9 @@
           `-- assets (기타 자원)
               `-- images (이미지)
                   `-- loadingbar.gif
-  </xmp
-    >
-    <img src="./loadingbar.gif" alt="" />
+  </xmp>
+    <img src="./loadingbar.gif"
+      alt="" />
     <xmp>
 
     18-2. loading 을 위한 css 작성
@@ -1552,7 +1558,10 @@
       <h2>{welcome}</h2>
       <h3>{counter}</h3>
       <div>
-        <input type="checkbox" defaultChecked="{callapi}" ref="{refInputApi}" onChange="{handlerChangeCallapi}" />외부 api 호출
+        <input type="checkbox"
+          defaultChecked="{callapi}"
+          ref="{refInputApi}"
+          onChange="{handlerChangeCallapi}" />외부 api 호출
       </div>
       <button onClick="{handlerIncrement}">더해줘</button>
       <button onClick="{handlerDecrement}">빼줘</button>
