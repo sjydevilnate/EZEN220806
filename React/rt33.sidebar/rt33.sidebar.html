@@ -63,7 +63,15 @@
         . for 속성 ===> htmlFor
         . value 속성 ===> defaultValue
         . stroke-width ===> strokeWidth
-        . style="color: rgb(255, 255, 255)"  ===> style={{ color: "rgb(255, 255, 255)" }}
+        . style="color: rgb(255, 255, 255);"  ===> style={{ color: "rgb(255, 255, 255)", }}
+
+        css 표기법을 javascript 프로퍼티 로 바꾸는 방법
+          1. 대문자 로 바꾼다.명칭은 카멜 표기법 사용. 왜냐하면 자바스립트이기 때문.
+              예시) 대시 표기법(CSS) ==> 카멜 표기법(JS)
+              font-size ==> fontSize
+              background-color ==> backgroundColor
+          2. 값을 문자열로 바꾼다.
+          3. 구분자는 세미콜론 대신 콤마 로 바꾼다. 왜냐하면 자바스크립트 객체기이기 때문.
 
     step 11-4. 실행 화면 확인
 
