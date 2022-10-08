@@ -88,25 +88,62 @@
 
     step 12-1. SideBar 에 공유 상태값 isSidebar 만들기
     const [isSidebar, setIsSidebar] = useState(false);
+    
+    step 12-2. SisSidebar 기능 추가
+        변경전 
+        <nav className='nav-menu active'>
+          ...중략
+        </nav>
+        
+        변경후
+        <nav className={isSidebar ? 'nav-menu active' : 'nav-menu'}>
+          ...중략
+        </nav>
 
 
     ##################################
     step 12. SideBar 에 상태값 바꾸는 핸들러 만들기
     ##################################
-    step 12-01. SideBar 컴포넌트 핸들러 만든다.
-      
+    
+    step 12-01. ul 태그에 onClick 추가 
+        변경전
+        <nav className={isSidebar ? 'nav-menu active' : 'nav-menu'}>
+          <ul className="nav-menu-items">
+            ...중략
+          </ul>
+        </nav>
+        
+        변경후
+        <nav className={isSidebar ? 'nav-menu active' : 'nav-menu'}>
+          <ul className="nav-menu-items" onClick={handlerIsSidebar}>
+            ...중략
+          </ul>
+        </nav>
+    
+    step 12-02. SideBar 컴포넌트에 handlerIsSidebar 핸들러 만들기
       const handlerIsSidebar = (e) => {
         console.log(e.targer);
         debugger;
         setIsSidebar(!isSidebar);
       }
-      
-    step 12-02. react-icons 패키지 추가.
+
+
+    ##################################
+    step 13. 기존 사이트에 결합하기
+    ##################################
+
+
+
+
+    ##################################
+    step 14. SideBar 의 메뉴 생성을 데이터로 만들기
+    ##################################
+    step 14-01. react-icons 패키지 추가.
       https://www.npmjs.com/package/react-icons
       $ npm install react-icons
       
       
-    step 12-02. SidebarData.js 만들기.
+    step 14-02. SidebarData.js 만들기.
       $ mkdir -p src/constants
       $ touch src/constants/SidebarData.js
       $ cat src/constants/SidebarData.js
@@ -155,7 +192,7 @@
         },
       ];
 
-    step 12-03. SideBar JSX 를 수정한다.    
+    step 14-03. SideBar JSX 를 수정한다.    
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
