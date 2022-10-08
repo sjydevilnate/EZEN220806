@@ -146,7 +146,7 @@ function SideBar({ ...props }) {
                 </span>
               </li>
               <li className="nav-text">
-                <NavLink to="/recipes">
+                <NavLink to="/recipes" onClick={handlerNavLink}>
                   <span>
                     <svg
                       stroke="currentColor"
@@ -165,7 +165,7 @@ function SideBar({ ...props }) {
                 </NavLink>
               </li>
               <li className="nav-text">
-                <NavLink to="/starrating">
+                <NavLink to="/starrating" onClick={handlerNavLink}>
                   <span>
                     <svg
                       stroke="currentColor"
@@ -184,7 +184,7 @@ function SideBar({ ...props }) {
                 </NavLink>
               </li>
               <li className="nav-text">
-                <NavLink to="/crud">
+                <NavLink to="/crud" onClick={handlerNavLink}>
                   <span>
                     <svg
                       stroke="currentColor"
@@ -203,7 +203,7 @@ function SideBar({ ...props }) {
                 </NavLink>
               </li>
               <li className="nav-text">
-                <NavLink to="/todo">
+                <NavLink to="/todo" onClick={handlerNavLink}>
                   <span>
                     <svg
                       stroke="currentColor"

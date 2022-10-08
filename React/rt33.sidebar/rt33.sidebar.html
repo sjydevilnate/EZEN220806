@@ -192,8 +192,12 @@
         </span>
       </NavLink>
       
+    step 14-5. src/pages/SideBar.js handlerNavLink 핸들러 만들기
       const handlerNavLink = (e) => {
         console.log(e.targer);
+        e.stopPropagation(); // 이벤트 버블링 방지. 이벤트 취소
+        e.preventDefault();
+        
         debugger;
         setIsSidebar(false);
       }
