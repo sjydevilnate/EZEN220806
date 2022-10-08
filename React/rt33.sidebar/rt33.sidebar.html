@@ -52,10 +52,10 @@
     11. SideBar 컴포넌트 구현
     ##################################
 
-    step 11-1. src/components/SideBar.js 파일 만들기
-        $ touch src/components/SideBar.js
+    step 11-1. src/pages/SideBar.js 파일 만들기
+        $ touch src/pages/SideBar.js
 
-    step 11-2. src/components/SideBar.js 의 JSX 를 기능 완성
+    step 11-2. src/pages/SideBar.js 의 JSX 를 기능 완성
         "react-sidebar-on.html" 내용을 참고하여 SideBar.js 에 JSX를 만드시오
 
     step 11-3. JSX 수정
@@ -79,7 +79,7 @@
         "react-sidebar-on.html" 파일의 css 코드를 StyledSideBar 에 추가한다.
 
     step 11-6. App.js 수정
-      import SideBar from './components/SideBar';
+      import SideBar from './pages/SideBar';
 
       function App() {
         return (
@@ -162,7 +162,7 @@
       import StarRatingContainer from '../containers/starrating/RatingContainer';
       import CrudContainer from '../containers/crud/CrudContainer';
       import TodoContainer from '../containers/todo/TodoContainer';
-      import SideBar from '../components/SideBar';
+      import SideBar from './SideBar';
       import Woops404 from './Woops404';
 
       function PageHome({ ...props }) {
@@ -363,13 +363,11 @@
         import { Routes, Route, NavLink } from 'react-router-dom';
 
         import HomeContainer from '../containers/home/HomeContainer';
-        import CompStyle from '../containers/styled/CompStyle';
-        import SideBar from '../containers/todo/SideBar';
+        import SideBar from './SideBar';
 
         <div>
             <Routes>
                 <Route path="/" element={<HomeContainer />} />
-                <Route path="/styled" element={<CompStyle />} />
                 <Route path="/todo" element={<SideBar />} />
             </Routes>
         </div>
@@ -381,8 +379,7 @@
         <div>
             <Routes>
                 <Route path="/" element={<HomeContainer />} />
-                <Route path="/styled" element={<CompStyle />} />
-                <Route path="/todo" element={<SideBar />} />
+                <Route path="/todo" element={<Todo />} />
             </Routes>
         </div>
 
@@ -391,15 +388,13 @@
             <div>
                 <ul>
                     <li><NavLink to="/">Home</NavLink></li>
-                    <li><NavLink to="/styled">Styled</NavLink></li>
-                    <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/todo">Todo</NavLink></li>
+                    <li><NavLink to="/todo">Todo</NavLink></li>
                 </ul>
             </div>
 
             <Routes>
                 <Route path="/" element={<HomeContainer />} />
-                <Route path="/styled" element={<CompStyle />} />
-                <Route path="/todo" element={<SideBar />} />
+                <Route path="/todo" element={<Todo />} />
             </Routes>
         </div>
 
