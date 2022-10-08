@@ -1,9 +1,10 @@
 import PageHome from './pages/PageHome';
+import SideBar from './pages/SideBar';
 
 function App() {
   return (
     <div>
-      <PageHome></PageHome>
+      <SideBar></SideBar>
     </div>
   );
 }

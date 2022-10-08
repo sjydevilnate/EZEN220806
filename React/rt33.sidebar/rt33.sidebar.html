@@ -58,7 +58,17 @@
     step 11-2. src/pages/SideBar.js 의 JSX 를 기능 완성
         "react-sidebar-on.html" 내용을 참고하여 SideBar.js 에 JSX를 만드시오
 
-    step 11-3. JSX 수정
+    step 11-3. App.js 수정
+      import SideBar from './pages/SideBar';
+
+      function App() {
+        return (
+          <StyledApp>
+            <SideBar />
+          </StyledApp>
+        );
+    
+    step 11-4. JSX 수정
         . class 속성 ===> className
         . for 속성 ===> htmlFor
         . value 속성 ===> defaultValue
@@ -73,20 +83,10 @@
           2. 값을 문자열로 바꾼다.
           3. 구분자는 세미콜론 대신 콤마 로 바꾼다. 왜냐하면 자바스크립트 객체기이기 때문.
 
-    step 11-4. 실행 화면 확인
+    step 11-5. 실행 화면 확인
 
-    step 11-5. styled-components 를 이용하여 SideBar 컴포넌트 스타일링하기
+    step 11-6. styled-components 를 이용하여 SideBar 컴포넌트 스타일링하기
         "react-sidebar-on.html" 파일의 css 코드를 StyledSideBar 에 추가한다.
-
-    step 11-6. App.js 수정
-      import SideBar from './pages/SideBar';
-
-      function App() {
-        return (
-          <StyledApp>
-            <SideBar />
-          </StyledApp>
-        );
       }
 
     ##################################
