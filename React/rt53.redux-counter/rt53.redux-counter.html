@@ -809,14 +809,20 @@
 
     13-1. 라우팅 경로 추가
       수정파일: ~/src/pages/PageHome.js
-      import CounterContainer from './containers/counter/CounterContainer';
+      import CounterContainer from '../containers/counter/CounterContainer';
 
         <Routes>
-          <Route path="/counter" element="{<CounterContainer />}"></Route>
+          <Route path="/counter" element={<CounterContainer />}></Route>
         </Routes>
 
+    13-2. url 접근 테스트
+        http://localhost:15109/counter
+        빈 화면이 나오면 정상
 
-    13-3. Link 기능 추가
+    13-3. CounterContainer 컴포넌트 만들기
+        수정파일: ~/src/containers/counter/CounterContainer.js
+
+    13-4. Link 기능 추가
 
     13-3. 실행 화면 확인하고 개발자 모드에서 오류 확인
       ==> 빈 화면이 나오면 정상.
@@ -949,6 +955,7 @@
       reducer  ===> 컴포넌트
 
       16-2-1. CounterContainer 컴포넌트의 상태값 welcome과 counter 를 redux store 로 옮기기.
+        작업파일: src/containers/counter/reducer.js
         const stateCounter = {
           error: null,
           isLoading: false,
@@ -957,10 +964,18 @@
         };
 
       16-2-2. CounterContainer 컴포넌트의 상태값 welcome과 counter 를 주석 처리한다.
+        작업파일: src/containers/counter/CounterContainer.js
         // const [welcome, setWelcome] = useState('HELLO WORLD');
         // const [counter, setCounter] = useState(0);
+        
+      16-2-3. setCounter() 관련 코드 주석 처리
+        작업파일: src/containers/counter/CounterContainer.js
 
-      16-2-3. CounterContainer 컴포넌트에서 useSelector() 사용하여 redux의 store에서 상태값을 가져오는 코드를 추가한다.
+        // setCounter(counter + 1);
+        // setCounter(counter - 1);
+
+      16-2-4. CounterContainer 컴포넌트에서 useSelector() 사용하여 redux의 store에서 상태값을 가져오는 코드를 추가한다.
+        작업파일: src/containers/counter/CounterContainer.js
         // redux store 와 연동되는 경우에만 useDispatch(), useSelector() 사용
         // const dispatch = useDispatch();
         const { error, isLoading, counter, welcome } = useSelector((state) => state.counter);
@@ -971,10 +986,6 @@
 
     <xmp
 >
-
-      16-2-4. setCounter() 관련 코드 주석 처리
-        // setCounter(counter + 1);
-        // setCounter(counter - 1);
 
       16-2-5. 실행 결과 확인
 

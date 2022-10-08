@@ -18,6 +18,7 @@ import RecipesContainer from '../containers/recipes/App';
 import StarRatingContainer from '../containers/starrating/RatingContainer';
 import CrudContainer from '../containers/crud/CrudContainer';
 import TodoContainer from '../containers/todo/TodoContainer';
+import CounterContainer from '../containers/counter/CounterContainer';
 
 import SideBar from './SideBar';
 
@@ -41,6 +42,7 @@ function PageHome({ ...props }) {
         <Route path="/starrating" element={<StarRatingContainer />} />
         <Route path="/crud" element={<CrudContainer />} />
         <Route path="/todo" element={<TodoContainer />} />
+        <Route path="/counter" element={<CounterContainer />}></Route>
       </Routes>
     </StyledPageHome>
   );
