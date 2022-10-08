@@ -48,171 +48,50 @@
 
 
 
-
     ##################################
-    13. 라우팅 설정
-      1. BrowserRouter 추가
-      2. 라우팅 설정
-      3. 링크(메뉴) 설정
-      4. 스타일링 설정
+    11. SideBar 컴포넌트 구현
     ##################################
 
-    13-1. 라우팅 관련 폴더 및 파일 생성
-        $ mkdir -p ./src/pages
-        $ touch ./src/pages/PageHome.js
-
-        $ mkdir -p ./src/containers/home
-        $ touch ./src/containers/home/HomeContainer.js
-
-
-    13-2. BrowserRouter 추가
-        작업파일: src/index.js 수정
-
-        변경 전
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(
-            <React.StrictMode>
-                <App />
-            </React.StrictMode>
-        );
-
-
-        변경 후
-        import { BrowserRouter } from 'react-router-dom';
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(
-            <React.StrictMode>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </React.StrictMode>
-        );
-
-    13-3. 라우팅 설정
-        작업파일: src/App.js 수정
-        import PageHome from './pages/PageHome';
-
-        function App() {
-            return (
-                <div>
-                    <PageHome />
-                </div>
-            );
-        }
-
-    13-4. 실행 화면 확인하고 개발자 모드에서 오류 확인
-        ==> 빈 화면이 나오면 정상.
-
-    13-5. HomeContainer 컴포넌트 파일 생성
-        $ mkdir -p ./src/containers/home
-        $ touch src/containers/home/HomeContainer.js
-
-    13-6. 라우팅 폴더 및 PageHome 컴포넌트 만들기
-        $ mkdir -p ./src/pages
-        $ touch src/pages/PageHome.js
-
-    13-7. PageHome 에 라우팅 설정
-        작업파일: src/pages/PageHome.js
-
-        import { Routes, Route, NavLink } from 'react-router-dom';
-
-        import HomeContainer from '../containers/home/HomeContainer';
-        import CompStyle from '../containers/styled/CompStyle';
-        import SideBar from '../containers/todo/SideBar';
-
-        <div>
-            <Routes>
-                <Route path="/" element={<HomeContainer />} />
-                <Route path="/styled" element={<CompStyle />} />
-                <Route path="/todo" element={<SideBar />} />
-            </Routes>
-        </div>
-
-    13-8. PageHome 에 링크 설정
-        작업파일: src/pages/PageHome.js
-
-        변경 전
-        <div>
-            <Routes>
-                <Route path="/" element={<HomeContainer />} />
-                <Route path="/styled" element={<CompStyle />} />
-                <Route path="/todo" element={<SideBar />} />
-            </Routes>
-        </div>
-
-        변경 후
-        <div>
-            <div>
-                <ul>
-                    <li><NavLink to="/">Home</NavLink></li>
-                    <li><NavLink to="/styled">Styled</NavLink></li>
-                    <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/todo">Todo</NavLink></li>
-                </ul>
-            </div>
-
-            <Routes>
-                <Route path="/" element={<HomeContainer />} />
-                <Route path="/styled" element={<CompStyle />} />
-                <Route path="/todo" element={<SideBar />} />
-            </Routes>
-        </div>
-
-
-    13-9. PageHome 에 스타일링 설정
-        작업파일: src/pages/PageHome.js
-
-        변경 전
-        const StyledPageHome = styled.div`
-          /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
-
-        `;
-
-        변경 후
-        const StyledPageHome = styled.div`
-          /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
-          .active {
-            background-color: aqua;
-          }
-          .inactive {
-            background-color: none;
-          }
-        `;
-
-
-    ##################################
-    21. SideBar 컴포넌트 구현
-    ##################################
-
-    step 21-1. src/components/SideBar.js 파일 만들기
+    step 11-1. src/components/SideBar.js 파일 만들기
         $ touch src/components/SideBar.js
 
-    step 21-2. src/components/SideBar.js 의 JSX 를 기능 완성
+    step 11-2. src/components/SideBar.js 의 JSX 를 기능 완성
         "react-sidebar-on.html" 내용을 참고하여 SideBar.js 에 JSX를 만드시오
 
-    step 21-3. JSX 수정
+    step 11-3. JSX 수정
         . class 속성 ===> className
         . for 속성 ===> htmlFor
         . value 속성 ===> defaultValue
 
-    step 21-4. 실행 화면 확인
+    step 11-4. 실행 화면 확인
 
-    step 21-5. styled-components 를 이용하여 SideBar 컴포넌트 스타일링하기
+    step 11-5. styled-components 를 이용하여 SideBar 컴포넌트 스타일링하기
         1차/style.css 파일의 css 코드를 StyledSideBar 에 추가한다.
 
 
+    step 11-6. App.js 수정
+      import SideBar from './components/SideBar';
+      
+      function App() {
+        return (
+          <>
+            <SideBar />
+          </>
+        );
+      }
+        
     ##################################
-    step 22. SideBar 에 공유 상태값 만들기
+    step 12. SideBar 에 공유 상태값 만들기
     ##################################
 
-    step 22-1. SideBar 에 공유 상태값 isSidebar 만들기
+    step 12-1. SideBar 에 공유 상태값 isSidebar 만들기
     const [isSidebar, setIsSidebar] = useState(false);
 
 
     ##################################
-    step 22. SideBar 에 상태값 바꾸는 핸들러 만들기
+    step 12. SideBar 에 상태값 바꾸는 핸들러 만들기
     ##################################
-    step 23-01. SideBar 컴포넌트 핸들러 만든다.
+    step 12-01. SideBar 컴포넌트 핸들러 만든다.
       
       const handlerIsSidebar = (e) => {
         console.log(e.targer);
@@ -220,12 +99,12 @@
         setIsSidebar(!isSidebar);
       }
       
-    step 23-02. react-icons 패키지 추가.
+    step 12-02. react-icons 패키지 추가.
       https://www.npmjs.com/package/react-icons
       $ npm install react-icons
       
       
-    step 23-02. SidebarData.js 만들기.
+    step 12-02. SidebarData.js 만들기.
       $ mkdir -p src/constants
       $ touch src/constants/SidebarData.js
       $ cat src/constants/SidebarData.js
@@ -274,7 +153,7 @@
         },
       ];
 
-    step 23-03. SideBar JSX 를 수정한다.    
+    step 12-03. SideBar JSX 를 수정한다.    
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
@@ -301,6 +180,138 @@
           </ul>
         </nav>
       </IconContext.Provider>
+
+
+    ##################################
+    21. 라우팅 설정
+      1. BrowserRouter 추가
+      2. 라우팅 설정
+      3. 링크(메뉴) 설정
+      4. 스타일링 설정
+    ##################################
+
+    21-1. 라우팅 관련 폴더 및 파일 생성
+        $ mkdir -p ./src/pages
+        $ touch ./src/pages/PageHome.js
+
+        $ mkdir -p ./src/containers/home
+        $ touch ./src/containers/home/HomeContainer.js
+
+
+    21-2. BrowserRouter 추가
+        작업파일: src/index.js 수정
+
+        변경 전
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        );
+
+
+        변경 후
+        import { BrowserRouter } from 'react-router-dom';
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(
+            <React.StrictMode>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </React.StrictMode>
+        );
+
+    21-3. 라우팅 설정
+        작업파일: src/App.js 수정
+        import PageHome from './pages/PageHome';
+
+        function App() {
+            return (
+                <div>
+                    <PageHome />
+                </div>
+            );
+        }
+
+    21-4. 실행 화면 확인하고 개발자 모드에서 오류 확인
+        ==> 빈 화면이 나오면 정상.
+
+    21-5. HomeContainer 컴포넌트 파일 생성
+        $ mkdir -p ./src/containers/home
+        $ touch src/containers/home/HomeContainer.js
+
+    21-6. 라우팅 폴더 및 PageHome 컴포넌트 만들기
+        $ mkdir -p ./src/pages
+        $ touch src/pages/PageHome.js
+
+    21-7. PageHome 에 라우팅 설정
+        작업파일: src/pages/PageHome.js
+
+        import { Routes, Route, NavLink } from 'react-router-dom';
+
+        import HomeContainer from '../containers/home/HomeContainer';
+        import CompStyle from '../containers/styled/CompStyle';
+        import SideBar from '../containers/todo/SideBar';
+
+        <div>
+            <Routes>
+                <Route path="/" element={<HomeContainer />} />
+                <Route path="/styled" element={<CompStyle />} />
+                <Route path="/todo" element={<SideBar />} />
+            </Routes>
+        </div>
+
+    21-8. PageHome 에 링크 설정
+        작업파일: src/pages/PageHome.js
+
+        변경 전
+        <div>
+            <Routes>
+                <Route path="/" element={<HomeContainer />} />
+                <Route path="/styled" element={<CompStyle />} />
+                <Route path="/todo" element={<SideBar />} />
+            </Routes>
+        </div>
+
+        변경 후
+        <div>
+            <div>
+                <ul>
+                    <li><NavLink to="/">Home</NavLink></li>
+                    <li><NavLink to="/styled">Styled</NavLink></li>
+                    <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/todo">Todo</NavLink></li>
+                </ul>
+            </div>
+
+            <Routes>
+                <Route path="/" element={<HomeContainer />} />
+                <Route path="/styled" element={<CompStyle />} />
+                <Route path="/todo" element={<SideBar />} />
+            </Routes>
+        </div>
+
+
+    21-9. PageHome 에 스타일링 설정
+        작업파일: src/pages/PageHome.js
+
+        변경 전
+        const StyledPageHome = styled.div`
+          /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
+
+        `;
+
+        변경 후
+        const StyledPageHome = styled.div`
+          /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
+          .active {
+            background-color: aqua;
+          }
+          .inactive {
+            background-color: none;
+          }
+        `;
+
 
 
     </xmp>
