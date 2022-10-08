@@ -6,7 +6,7 @@
       content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible"
       content="ie=edge" />
-    <title>ToDo Project</title>
+    <title>SideBar 만들기</title>
 
     <!-- CSS import -->
     <link rel="stylesheet"
@@ -83,9 +83,9 @@
 
       function App() {
         return (
-          <>
+          <StyledApp>
             <SideBar />
-          </>
+          </StyledApp>
         );
       }
 
@@ -141,7 +141,18 @@
     step 13. 기존 사이트에 결합하기
     ##################################
 
+    step 13-1. App.js 수정
+    import PageHome from './pages/PageHome';
 
+    const StyledApp = styled.div``;
+
+      function App() {
+        return (
+          <StyledApp>
+            <SideBar />
+          </StyledApp>
+        );
+      }
 
 
     ##################################
