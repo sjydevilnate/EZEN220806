@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
+import { IconContext } from 'react-icons';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+
+import { SidebarData } from '../constants/SidebarData';
+
 const StyledSideBar = styled.div`
   /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
   .home,
@@ -97,7 +103,7 @@ function SideBar({ ...props }) {
   const handlerIsSidebar = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(e.target);
-    e.stopPropagation(); // 이벤트 버블링 방지. 이벤트 취소
+    // e.stopPropagation(); // 이벤트 버블링 방지. 이벤트 취소
 
     debugger;
     // isSidebar = !isSidebar;
@@ -105,12 +111,13 @@ function SideBar({ ...props }) {
   };
 
   const handlerNavLink = (e) => {
-    // 이벤트 핸들러는 화살표 함수로 만든다
+    // 이벤트 핸들러는 화살표 함수로 만든다d
+    debugger;
     console.log(e.target);
-    e.stopPropagation(); // 이벤트 버블링 방지. 이벤트 취소
+    //  e.stopPropagation(); // 이벤트 버블링 방지. 이벤트 취소
 
     debugger;
-    setIsSidebar(false);
+    // setIsSidebar(false);
   };
 
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
@@ -123,17 +130,17 @@ function SideBar({ ...props }) {
     <StyledSideBar>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className="navbar">
-          <Link to="#" className="menu-bars">
+          <NavLink to="#" className="menu-bars">
             <FaIcons.FaBars onClick={handlerIsSidebar} />
-          </Link>
+          </NavLink>
         </div>
         {isSidebar && (
           <nav className="nav-menu active">
             <ul className="nav-menu-items" onClick={handlerIsSidebar}>
               <li className="navbar-toggle">
-                <Link to="#" className="menu-bars">
+                <NavLink to="#" className="menu-bars">
                   <AiIcons.AiOutlineClose />
-                </Link>
+                </NavLink>
               </li>
               {SidebarData.map((item, index) => {
                 return (
@@ -142,10 +149,10 @@ function SideBar({ ...props }) {
                     className={item.cName}
                     onClick={handlerNavLink}
                   >
-                    <Link to={item.path}>
+                    <NavLink to={item.path}>
                       {item.icon}
                       <span>{item.title}</span>
-                    </Link>
+                    </NavLink>
                   </li>
                 );
               })}
