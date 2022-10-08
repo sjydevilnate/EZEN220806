@@ -96,9 +96,11 @@
         </nav>
         
         변경후
-        <nav className={isSidebar ? 'nav-menu active' : 'nav-menu'}>
-          ...중략
-        </nav>
+        {isSidebar && (
+          <nav className="nav-menu active">
+            ...중략
+          </nav>
+        )}
 
 
     ##################################
@@ -107,18 +109,18 @@
     
     step 12-01. ul 태그에 onClick 추가 
         변경전
-        <nav className={isSidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className="nav-menu-items">
+        <div class="navbar">
+          <span class="menu-bars">
             ...중략
-          </ul>
-        </nav>
+          </span>
+        </div>
         
         변경후
-        <nav className={isSidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className="nav-menu-items" onClick={handlerIsSidebar}>
+        <div class="navbar">
+          <span class="menu-bars"onClick={handlerIsSidebar}>
             ...중략
-          </ul>
-        </nav>
+          </span>
+        </div>
     
     step 12-02. SideBar 컴포넌트에 handlerIsSidebar 핸들러 만들기
       const handlerIsSidebar = (e) => {
