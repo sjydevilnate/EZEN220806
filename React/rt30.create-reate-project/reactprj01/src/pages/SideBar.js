@@ -96,9 +96,20 @@ function SideBar({ ...props }) {
   const handlerIsSidebar = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(e.target);
+    e.stopPropagation(); // 이벤트 버블링 방지. 이벤트 취소
+
     debugger;
     // isSidebar = !isSidebar;
     setIsSidebar(!isSidebar);
+  };
+
+  const handlerNavLink = (e) => {
+    // 이벤트 핸들러는 화살표 함수로 만든다
+    console.log(e.target);
+    e.stopPropagation(); // 이벤트 버블링 방지. 이벤트 취소
+
+    debugger;
+    setIsSidebar(false);
   };
 
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
