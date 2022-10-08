@@ -138,7 +138,7 @@ function TodoContainer({ ...props }) {
           // 큰값 반환하기
           if (pvalue > cvalue) return pvalue;
           else return cvalue;
-        }, 0); // 배열에서의 최대값찾기
+        }, 0); // 최대값 찾기
 
       const newItem = {
         id: maxid + 1,
@@ -150,18 +150,11 @@ function TodoContainer({ ...props }) {
       // todoItems = [...todoItems, newItem];
       setTodoItems([...todoItems, newItem]);
     },
-
     [
       /* 연관배열: 메서드와 연관되는 상태(변수)명들을 기술 */
       todoItems,
     ],
   );
-
-  // 이벤트 핸들러 작성.
-  const handler = (e) => {
-    // 이벤트 핸들러는 화살표 함수로 만든다
-    console.log(e.target);
-  };
 
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   return (

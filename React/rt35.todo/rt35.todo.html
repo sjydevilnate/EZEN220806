@@ -859,8 +859,12 @@
             // 배열에 추가. todoItems = [...todoItems, newTodo];
             const maxid = todoItems &&
                         todoItems
-                        .map( (item)=>item.id )
-                        reduce((pvalue,cvalue)=> (pvalue>cvalue ? pvalue: cvalue), 0);
+                        .map( (item)=>item.id ) // [1,2,3,4]
+                        .reduce((pvalue, cvalue) => {
+                          // 큰값 반환하기
+                          if (pvalue > cvalue) return pvalue;
+                          else return cvalue;
+                        }, 0); // 최대값 찾기
 
             const newTodo = {
               id: maxid + 1,
@@ -868,6 +872,8 @@
               done: false,
             }
 
+            // todoItems.push(newItem);
+            // todoItems = [...todoItems, newTodo];
             setTodoItems( [...todoItems, newTodo] ); // todoItems = [...todoItems, newTodo];
           },
           [todoItems]
