@@ -167,17 +167,22 @@ function TodoInput({ callbackAddTodo }) {
     console.log(e.target);
     debugger;
 
-    // 버블링 방지
+    // 버블링 방지(이벤트취소)
     e.stopPropagation();
     e.preventDefault();
 
-    // input 에 입력된 값을 가져오기
+    // input 에 입력된 값을 가져오기. ref를 사용하여
+    // ref이름.current.속성명
+    // value 속성값 가져오기: ref이름.current.value
+    // class 속성값 가져오기: ref이름.current.className
     const value = refInputTodo.current.value;
 
     // input 태그에 빈 문자열이 입력 되는 경우는 modal 창이 출력되게
-    if (!value) {
+    // if ( value === null || value === undefined || value === '' || value.trim() === '' ) {
+    if (!value || !value.trim()) {
+      // isShowModal = true;
       setIsShowModal(true);
-      return;
+      return false;
     }
 
     // TodoContainer 의 callbackAddTodo 메서드 호출 기능 추가
@@ -195,7 +200,7 @@ function TodoInput({ callbackAddTodo }) {
           type="text"
           placeholder="Type what you have to do"
           ref={refInputTodo}
-          onKeyUp={(e) => e.keyCode === 13 && handlerAddTodo()}
+          onKeyUp={(e) => e.keyCode === 13 && handlerAddTodo(e)}
         />
         <span className="addContainer" onClick={handlerAddTodo}>
           <i aria-hidden="true" className="addBtn fas fa-plus"></i>

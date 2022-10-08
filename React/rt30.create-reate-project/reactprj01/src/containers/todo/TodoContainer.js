@@ -128,11 +128,29 @@ function TodoContainer({ ...props }) {
       debugger;
 
       // 직접 코드를 완성하시오.
-      // ????
+      // ap03-11.객체배열.html 참조
+      // map과 reduce 를 사용하여 max id 구하기 ==> newid 만들기
+      // todoItems 추가할 객체 만들기
+      // 배열에 추가. todoItems = [...todoItems, newTodo];
+      const maxid = todoItems
+        .map((item) => item.id) // [1,2,3,4]
+        .reduce((pvalue, cvalue) => {
+          // 큰값 반환하기
+          if (pvalue > cvalue) return pvalue;
+          else return cvalue;
+        }, 0); // 배열에서의 최대값찾기
 
-      // setTodoItems 는 todoItems 상태를 바꾸기 위한 setter 메서드
-      // setTodoItems(newTodos); // setTodoItems 는 todoItems 상태를 바꾸기 위한 setter 메서드
+      const newItem = {
+        id: maxid + 1,
+        todo: value,
+        done: false,
+      };
+
+      // todoItems.push(newItem);
+      // todoItems = [...todoItems, newItem];
+      setTodoItems([...todoItems, newItem]);
     },
+
     [
       /* 연관배열: 메서드와 연관되는 상태(변수)명들을 기술 */
       todoItems,
