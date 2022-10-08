@@ -70,10 +70,9 @@
     step 11-5. styled-components 를 이용하여 SideBar 컴포넌트 스타일링하기
         "react-sidebar-on.html" 파일의 css 코드를 StyledSideBar 에 추가한다.
 
-
     step 11-6. App.js 수정
       import SideBar from './components/SideBar';
-      
+
       function App() {
         return (
           <>
@@ -81,20 +80,20 @@
           </>
         );
       }
-        
+
     ##################################
     step 12. SideBar 에 공유 상태값 만들기
     ##################################
 
     step 12-1. SideBar 에 공유 상태값 isSidebar 만들기
     const [isSidebar, setIsSidebar] = useState(false);
-    
+
     step 12-2. isSidebar 상태 기능 추가
-        변경전 
+        변경전
         <nav className='nav-menu active'>
           ...중략
         </nav>
-        
+
         변경후
         {isSidebar && (
           <nav className="nav-menu active">
@@ -106,22 +105,22 @@
     ##################################
     step 12. SideBar 에 상태값 바꾸는 핸들러 만들기
     ##################################
-    
-    step 12-01. ul 태그에 onClick 추가 
+
+    step 12-01. ul 태그에 onClick 추가
         변경전
         <div class="navbar">
           <span class="menu-bars">
             ...중략
           </span>
         </div>
-        
+
         변경후
         <div class="navbar">
           <span class="menu-bars"onClick={handlerIsSidebar}>
             ...중략
           </span>
         </div>
-    
+
     step 12-02. SideBar 컴포넌트에 handlerIsSidebar 핸들러 만들기
       const handlerIsSidebar = (e) => {
         console.log(e.targer);
@@ -143,13 +142,13 @@
     step 14-01. react-icons 패키지 추가.
       https://www.npmjs.com/package/react-icons
       $ npm install react-icons
-      
-      
+
+
     step 14-02. SidebarData.js 만들기.
       $ mkdir -p src/constants
       $ touch src/constants/SidebarData.js
       $ cat src/constants/SidebarData.js
-      
+
       import React from 'react';
       import * as FaIcons from 'react-icons/fa';
       import * as AiIcons from 'react-icons/ai';
@@ -194,7 +193,7 @@
         },
       ];
 
-    step 14-03. SideBar JSX 를 수정한다.    
+    step 14-03. SideBar JSX 를 수정한다.
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
