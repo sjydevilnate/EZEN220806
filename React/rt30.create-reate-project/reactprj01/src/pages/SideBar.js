@@ -38,6 +38,7 @@ const StyledSideBar = styled.div`
     top: 0;
     left: -100%;
     transition: 850ms;
+    z-index: 100;
   }
 
   .nav-menu.active {
