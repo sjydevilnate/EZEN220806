@@ -141,7 +141,7 @@
     step 13. 기존 사이트에 결합하기
     ##################################
 
-    step 13-1. App.js 수정
+    step 13-1. src/App.js 수정
     import PageHome from './pages/PageHome';
 
     const StyledApp = styled.div``;
@@ -149,8 +149,36 @@
       function App() {
         return (
           <StyledApp>
-            <SideBar />
+            <PageHome />
           </StyledApp>
+        );
+      }
+
+      step 13-2. src/pages/PageHome.js 수정
+
+      import { Routes, Route } from 'react-router-dom';
+      import Home from '../components/Home';
+      import RecipesContainer from '../containers/recipes/App';
+      import StarRatingContainer from '../containers/starrating/RatingContainer';
+      import CrudContainer from '../containers/crud/CrudContainer';
+      import TodoContainer from '../containers/todo/TodoContainer';
+      import SideBar from '../components/SideBar';
+      import Woops404 from './Woops404';
+
+      function PageHome({ ...props }) {
+        // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+        return (
+          <StyledPageHome>
+            <SideBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/recipes" element={<RecipesContainer />} />
+              <Route path="/starrating" element={<StarRatingContainer />} />
+              <Route path="/crud" element={<CrudContainer />} />
+              <Route path="/todo" element={<TodoContainer />} />
+              <Route path="/*" element={<Woops404 />} />
+            </Routes>
+          </StyledPageHome>
         );
       }
 
