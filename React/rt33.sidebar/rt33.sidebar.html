@@ -111,10 +111,10 @@
 
 
     ##################################
-    step 12. SideBar 에 상태값 바꾸는 핸들러 만들기
+    step 13. SideBar 에 상태값 바꾸는 핸들러 만들기
     ##################################
 
-    step 12-01. ul 태그에 onClick 추가
+    step 13-01. ul 태그에 onClick 추가
         변경전
         <div class="navbar">
           <span class="menu-bars">
@@ -129,7 +129,7 @@
           </span>
         </div>
 
-    step 12-02. SideBar 컴포넌트에 handlerIsSidebar 핸들러 만들기
+    step 13-02. SideBar 컴포넌트에 handlerIsSidebar 핸들러 만들기
       const handlerIsSidebar = (e) => {
         console.log(e.targer);
         debugger;
@@ -138,10 +138,10 @@
 
 
     ##################################
-    step 13. 기존 사이트에 결합하기
+    step 14. 기존 사이트에 결합하기
     ##################################
 
-    step 13-1. src/App.js 수정
+    step 14-1. src/App.js 수정
     import PageHome from './pages/PageHome';
 
     const StyledApp = styled.div``;
@@ -154,7 +154,7 @@
         );
       }
 
-      step 13-2. src/pages/PageHome.js 수정
+      step 14-2. src/pages/PageHome.js 수정
 
       import { Routes, Route } from 'react-router-dom';
       import Home from '../components/Home';
@@ -184,14 +184,14 @@
 
 
     ##################################
-    step 14. SideBar 의 메뉴 생성을 데이터로 만들기
+    step 15. SideBar 의 메뉴 생성을 데이터로 만들기
     ##################################
-    step 14-01. react-icons 패키지 추가.
+    step 15-01. react-icons 패키지 추가.
       https://www.npmjs.com/package/react-icons
       $ npm install react-icons
 
 
-    step 14-02. SidebarData.js 만들기.
+    step 15-02. SidebarData.js 만들기.
       $ mkdir -p src/constants
       $ touch src/constants/SidebarData.js
       $ cat src/constants/SidebarData.js
@@ -240,7 +240,7 @@
         },
       ];
 
-    step 14-03. SideBar JSX 를 수정한다.
+    step 15-03. SideBar JSX 를 수정한다.
     <StyledSideBar>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className="navbar">
