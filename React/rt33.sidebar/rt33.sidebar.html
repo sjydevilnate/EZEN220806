@@ -93,10 +93,10 @@
     step 12. SideBar 에 공유 상태값 만들기
     ##################################
 
-    step 12-1. SideBar 를 show/ hide 하기 위한 상태값 isSidebar 만들기
+    step 12-01. SideBar 를 show/ hide 하기 위한 상태값 isSidebar 만들기
         const [isSidebar, setIsSidebar] = useState(false);
 
-    step 12-2. isSidebar 상태 기능 추가
+    step 12-02. isSidebar 상태 기능 추가
         변경전
         <nav className='nav-menu active'>
           ...중략
@@ -154,7 +154,7 @@
         );
       }
 
-      step 14-2. src/pages/PageHome.js 수정
+    step 14-2. src/pages/PageHome.js 수정
 
       import { Routes, Route } from 'react-router-dom';
       import Home from '../components/Home';
@@ -182,6 +182,22 @@
         );
       }
 
+    step 14-3. src/pages/SideBar.js 를 열고 NavLink 
+    
+    step 14-4. src/pages/SideBar.js 를 열고 NavLink 에 onClick 설정하기
+    
+      <NavLink to="/starrating" onClick={handlerNavLink>
+        <span>
+          ... 중략
+        </span>
+      </NavLink>
+      
+      const handlerNavLink = (e) => {
+        console.log(e.targer);
+        debugger;
+        setIsSidebar(false);
+      }
+    
 
     ##################################
     step 15. SideBar 의 메뉴 생성을 데이터로 만들기

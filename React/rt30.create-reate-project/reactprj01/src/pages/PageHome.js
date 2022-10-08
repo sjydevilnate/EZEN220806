@@ -19,6 +19,8 @@ import StarRatingContainer from '../containers/starrating/RatingContainer';
 import CrudContainer from '../containers/crud/CrudContainer';
 import TodoContainer from '../containers/todo/TodoContainer';
 
+import SideBar from './SideBar';
+
 const StyledPageHome = styled.div`
   /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
   .active {
@@ -32,29 +34,7 @@ function PageHome({ ...props }) {
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
   return (
     <StyledPageHome>
-      <ul>
-        <li>
-          <NavLink to="/">home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/service">service</NavLink>
-        </li>
-        <li>
-          <NavLink to="/recipes">recipes</NavLink>
-        </li>
-        <li>
-          <NavLink to="/starrating">starrating</NavLink>
-        </li>
-        <li>
-          <NavLink to="/crud">crud</NavLink>
-        </li>
-        <li>
-          <NavLink to="/todo" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
-            todo
-          </NavLink>
-        </li>
-      </ul>
-
+      <SideBar></SideBar>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipes" element={<RecipesContainer />} />
