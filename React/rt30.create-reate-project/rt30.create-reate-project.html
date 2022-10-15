@@ -229,19 +229,19 @@
         소요시간: 5분
     ##################################
 
-        배포용 파일을 만들고 nginx 에 배포하여 본다.
-        "npm run build" 을 실행하면 /build/ 폴더에 배포용 파일들이 만들어진다.
+      배포용 파일을 만들고 nginx 에 배포하여 본다.
+      "npm run build" 을 실행하면 /build/ 폴더에 배포용 파일들이 만들어진다.
 
-        $ ls     # build/ 폴더가 보이는지 확인. 없으면 정상
-        node_modules/  package.json  package-lock.json  public/  README.md  src/
+      $ ls     # build/ 폴더가 보이는지 확인. 없으면 정상
+      node_modules/  package.json  package-lock.json  public/  README.md  src/
 
-        $ npm run build
+      $ npm run build
 
-        $ ls    # build/ 폴더가 보이는지 확인. 있으면 정상
-        build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
+      $ ls    # build/ 폴더가 보이는지 확인. 있으면 정상
+      build/  node_modules/  package.json  package-lock.json  public/  README.md  src/
 
-        nginx 에 배포 테스트
-        "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
+      nginx 에 배포 테스트
+      "build/" 폴더에 파일들을 "nginx폴더/html" 에 복사후에 nginx.exe 를 실행
 
 
     ##################################

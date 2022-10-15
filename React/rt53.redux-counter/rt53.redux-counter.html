@@ -302,27 +302,27 @@
 
 
     3-1. 프로젝트용 공통 폴더 생성
-      $ mkdir -p ./public/assets \
-              ./public/assets/images \
-              ./public/assets/styles \
+      $ mkdir -p ./public/assets /
+              ./public/assets/images /
+              ./public/assets/styles /
               ./public/assets/text
 
-      $ mkdir -p ./src/common \
-              ./src/components \
-              ./src/containers \
-              ./src/constant \
-              ./src/models \
-              ./src/pages \
-              ./src/reducers \
-              ./src/routes \
-              ./src/store \
+      $ mkdir -p ./src/common /
+              ./src/components /
+              ./src/containers /
+              ./src/constant /
+              ./src/models /
+              ./src/pages /
+              ./src/reducers /
+              ./src/routes /
+              ./src/store /
               ./src/utils
 
     3-2. 프로젝트용 공통 파일 생성
       $ touch  .babelrc  .env  .prettierrc  eslintrc.json  jsconfig.json
 
-      $ touch ./src/reducers/index.js \
-              ./src/routes/index.js \
+      $ touch ./src/reducers/index.js /
+              ./src/routes/index.js /
               ./src/store/index.js
 
     3-3. .babelrc 파일 생성 후 내용 추가
@@ -330,7 +330,7 @@
       $ cat .babelrc
 
     3-4. .env 파일 생성 후 내용 추가
-      $ echo -e "SKIP_PREFLIGHT_CHECK=true \nPORT=15109" > .env
+      $ echo -e "SKIP_PREFLIGHT_CHECK=true /nPORT=15109" > .env
       $ cat .env
 
     3-5. .prettierrc 파일 생성 후 내용 추가
@@ -829,7 +829,7 @@
       ==> 빈 화면이 나오면 정상.
   </xmp>
 
-    <img src="./snap0032.png"
+    <img src="./snap0032.png" width="50%" height="50%"
       width="100%" />
 
     <xmp>
@@ -934,9 +934,17 @@
     15-8. 실행 화면 확인
   </xmp>
 
-    <img src="./snap0033.png"
+    <img src="./snap0033.png" width="50%" height="50%"
       width="100%" />
 
+    <br />
+    
+    <xmp>
+    15-9. redux state 확인
+    </xmp>
+    <img src="./snap0038.png" width="50%" height="50%"
+      alt="" />
+      
     <xmp
 >
 
@@ -1351,8 +1359,8 @@
       );
 
 
-    18-5. saga.js 에 delay 를 추가하여 로딩바가 표시되게 한다.
-      작업 파일: \src\containers\counter\saga.js
+    18-5. saga.js 에 delay 를 추가하여 로딩바가 오래동안 표시되게 한다.
+      작업 파일: ~/src/containers/counter/saga.js
       변경전: // yield delay(2000); // 2초 기다리기
       변경후: yield delay(2000); // 2초 기다리기
 
@@ -1360,10 +1368,15 @@
 
 
     ##################################
-    21. 프로젝트에  Counter, LoadingBox 컴포넌트 기능 추가
+    21. CounterContainer 컴포넌트의 기능을 Counter, LoadingBox 컴포넌트로 분리하는 것을 실습한다.
         소요시간: 20분
     ##################################
-
+    </xmp>
+    
+    <img src="./snap0039.png" width="50%" height="50%"
+      alt="" />
+      
+    <xmp>
     |-- containers (컨테이너 컴포넌트)
         `-- counter
             |-- components        (counter 컨테이너에서만 사용되는 프리젠테이션 컴포넌트 폴더)
@@ -1381,11 +1394,9 @@
 
     21-1. 파일 생성
       $ pwd       # 현재 작업 디렉토리 확인
-
       $ ls        # packages.json 이 보이는지 확인.
-
+      $ mkdir -p ./src/containers/counter/components
       $ touch ./src/containers/counter/components/Counter.js       # Counter 컴포넌트 파일 생성
-
       $ touch ./src/containers/counter/components/LoadingBox.js    # LoadingBox 컴포넌트 파일 생성
 
 
