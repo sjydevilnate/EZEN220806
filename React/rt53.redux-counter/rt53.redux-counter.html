@@ -1446,10 +1446,7 @@
           // 인자명: PropTypes.func.isRequired,
           welcome: PropTypes.string.isRequired,
           counter: PropTypes.number.isRequired,
-          callapi: PropTypes.bool.isRequired,
-          handlerChangeCallapi: PropTypes.func.isRequired,
-          handlerIncrement: PropTypes.func.isRequired,
-          handlerDecrement: PropTypes.func.isRequired,
+          callback: PropTypes.func.isRequired,
         };
 
         Counter.defaultProps = {
@@ -1457,10 +1454,7 @@
           // 인자명: () => {},
           welcome: '',
           counter: 0,
-          callapi: false,
-          handlerChangeCallapi: () => {},
-          handlerIncrement: () => {},
-          handlerDecrement: () => {},
+          callback: () => {},
         };
 
         export default Counter;
@@ -1516,6 +1510,7 @@
           }
 
           return (
+          <StyledCounterContainer>
             <Counter
               welcome={welcome}
               counter={counter}
@@ -1524,6 +1519,7 @@
               handlerIncrement={handlerIncrement}
               handlerDecrement={handlerDecrement}
             ></Counter>
+          </StyledCounterContainer>
           );
         }
 

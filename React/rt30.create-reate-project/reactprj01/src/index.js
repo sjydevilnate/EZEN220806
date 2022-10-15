@@ -8,7 +8,9 @@ import './index.css';
 // redux store 임포트
 import store from './store';
 
-// ReactRedux.Provider 는 store의 state가 변경되면 자동으로 render() 메서드를 실행되게 하는 컴포넌트다.
+// ReactRedux.Provider 는
+// store의 state가 변경되면 자동으로
+// render() 메서드를 실행되게 하는 컴포넌트다.
 import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
