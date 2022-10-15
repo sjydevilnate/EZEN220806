@@ -49,15 +49,6 @@ function CounterContainer({ ...props }) {
     (state) => state.counter,
   );
 
-  // 페이지에 대한 경로와 query-string 정보를 추출하는 경우 useLocation() 훅 사용
-  // const { pathname, search } = useLocation();
-
-  // path 변수를 추출하는 경우 useParams() 사용. id === match.params.id */
-  // const { id } = useParams();
-
-  // 이전 경로 useHistory() 사용 */
-  // const history = useHistory();
-
   // useState 를 사용한 컴포넌트의 상태값 설정
   const [header, setHeader] = useState('redux 사용 앱'); // 상태값이 기본타입인 경우
   // const [welcome, setWelcome] = useState('HELLO WORLD'); // 상태값이 기본타입인 경우
@@ -68,17 +59,15 @@ function CounterContainer({ ...props }) {
   const refInputApi = useRef();
 
   // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
-  const refIsMounted = useRef(false);
   useEffect(
     () => {
-      if (refIsMounted.current) {
-        // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
-        // console.log('CounterContainer >> componentDidUpdate');
-      } else {
-        // 마운트 완료 후에 실행됨. 한번만. focus 줄때
-        // console.log('CounterContainer >> componentDidMount');
-        refIsMounted.current = true;
-      }
+      debugger;
+      // 액션함수를 이용하여 api에 전달될 action 생성
+      const action값 = actions.getTaskSaga({}); // 액션함수 사용하여 saga 로 보낼 정보 생성
+
+      // 생성된 action 을 saga 로 보내기 위해 dispatch 호출하기
+      dispatch(action값); // 외부 서버에서 데이터를 가져오라는 명령
+
       return () => {
         // 언마운트 직전에 한번만 실행됨.
         // console.log('CounterContainer >> componentWillUmount');
@@ -110,9 +99,16 @@ function CounterContainer({ ...props }) {
     console.log(e.target);
     // counter = counter + 1;
     // setCounter(counter + 1);
-    const action = actions.setTaskReducer({ counter: counter + 1 });
+
+    // reducer 를 사용할 때
+    // const action = actions.setTaskReducer({ counter: counter + 1 });
+    // dispatch(action); // saga 로 보내기
 
     debugger;
+    // saga 를 사용할 때
+    // http://localhost:5050/counter?step=1   ==> 1 씩 증가
+    const payload = { step: +1 };
+    const action = actions.setTaskSaga(payload); // 액션함수를 이용하여 전달될 action 생성
     dispatch(action); // saga 로 보내기
   };
   const handlerDecrement = (e) => {

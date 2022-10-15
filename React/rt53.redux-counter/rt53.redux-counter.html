@@ -1047,10 +1047,11 @@
 
     ##################################
     17. CounterContainer 컴포넌트 + saga + api + reducer 사용하여 기능 구현
-        컴포넌트 ===> action함수 ===> saga ===> api ==> reducer  ===> 컴포넌트
+        컴포넌트 ===> dispatch(action함수) ===> saga(action함수) ===> api ==> reducer  ===> 컴포넌트
         소요시간: 20분
 
-        asare 설정
+        dasare 설정
+        d: dispatch
         a: actions,
         s: saga,
         a: api,
@@ -1084,10 +1085,10 @@
 
             // 액션함수를 이용하여 api에 전달될 action 생성
             // http://localhost:5050/counter
-            const action = actions.getTaskSaga({});
+            const action = actions.getTaskSaga({}); // 액션함수 사용하여 saga 로 보낼 정보 생성
 
-            // 생성된 action 을 saga 로 dispatch 하기
-            dispatch(action);
+            // 생성된 action 을 saga 로 보내기 위해 dispatch 하기
+            dispatch(action); // 외부 서버에서 데이터를 가져오라는 명령
           }
         });
 
@@ -1175,7 +1176,6 @@
           // http://localhost:5050/counter?step=1   ==> 1 씩 증가
           const payload = { step: +1 };
           const action = actions.setTaskSaga(payload); // 액션함수를 이용하여 전달될 action 생성
-
           dispatch(action); // action 을 saga 로 dispatch 하기
         };
 
