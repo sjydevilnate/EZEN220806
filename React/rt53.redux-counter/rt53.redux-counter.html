@@ -1281,45 +1281,47 @@
     <xmp>
 
     18-2. loading 을 위한 css 작성. 
-      StyledCounterContainer 수정
-      $ touch ./src/containers/counter/CounterContainer.js
+      작업 파일: ./src/containers/counter/CounterContainer.js 의 StyledCounterContainer 수정
 
-    변경 전
-    const StyledCounterContainer = styled.div`
-      /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
-      margin: 0 auto;
-      text-align: center;
-    `;
-        
-    변경 후
-    const StyledCounterContainer = styled.div`
-      /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
-      margin: 0 auto;
-      text-align: center;
+      변경 전
+      const StyledCounterContainer = styled.div`
+        /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
+        margin: 0 auto;
+        text-align: center;
+      `;
+          
+      변경 후
+      const StyledCounterContainer = styled.div`
+        /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
+        margin: 0 auto;
+        text-align: center;
 
-      .loadingbox {
-        position: absolute;
-        padding: 0;
-        margin: 0;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        /* background-color: rgba(255, 0,0,0.5); */
-        z-index: 100;
-      }
+        .loadingbox {
+          position: absolute;
+          padding: 0;
+          margin: 0;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          /* background-color: rgba(255, 0,0,0.5); */
+          z-index: 100;
+        }
 
-      .loadingbox > .loadingbar {
-        position: relative;
-        padding: 0;
-        margin: 0;
-        top: calc(50% - 150px);
-        left: calc(50% - 150px);
-        z-index: 200;
-      }
-    `;
+        .loadingbox > .loadingbar {
+          position: relative;
+          padding: 0;
+          margin: 0;
+          top: calc(50% - 150px);
+          left: calc(50% - 150px);
+          z-index: 200;
+        }
+      `;
 
-    18-4. CounterContainer 컴포넌트에 아래의 JSX 수정
+    18-3. CounterContainer 컴포넌트의 JSX 수정
+      주의사항: public 폴더 아래의 파일에 접근할때는 절대 경로 사용.
+             예시) src="/assets/images/loadingbar.gif"
+      
       // JSX로 화면 만들기
       if(isLoading) {
         return (
@@ -1349,7 +1351,7 @@
       );
 
 
-    18-5. saga.js 에 delay 추가
+    18-5. saga.js 에 delay 를 추가하여 로딩바가 표시되게 한다.
       작업 파일: \src\containers\counter\saga.js
       변경전: // yield delay(2000); // 2초 기다리기
       변경후: yield delay(2000); // 2초 기다리기
