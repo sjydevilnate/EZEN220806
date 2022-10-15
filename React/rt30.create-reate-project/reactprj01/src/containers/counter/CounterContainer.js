@@ -116,9 +116,16 @@ function CounterContainer({ ...props }) {
     console.log(e.target);
     // counter = counter - 1;
     // setCounter(counter - 1);
-    const action = actions.setTaskReducer({ counter: counter - 1 });
 
-    dispatch(action);
+    // reducer를 사용할 때
+    // const action = actions.setTaskReducer({ counter: counter - 1 });
+    // dispatch(action);
+
+    // saga 를 사용할 때
+    // http://localhost:5050/counter?step=-1   ==> -1 씩 증가
+    const payload = { step: -1 };
+    const action = actions.setTaskSaga(payload); // 액션함수를 이용하여 전달될 action 생성
+    dispatch(action); // saga 로 보내기
   };
 
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html

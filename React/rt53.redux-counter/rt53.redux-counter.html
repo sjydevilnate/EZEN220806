@@ -1169,10 +1169,12 @@
 
           // setCounter(counter + 1);
 
+          // reducer 를 사용할 때
           // const payload = { counter: counter + 1 };
           // const action = actions.setTaskReducer(payload); // 액션함수를 이용하여 전달될 action 생성
           // dispatch(action); // action 을 reducer 로 dispatch 하기
 
+          // saga 를 사용할 때
           // http://localhost:5050/counter?step=1   ==> 1 씩 증가
           const payload = { step: +1 };
           const action = actions.setTaskSaga(payload); // 액션함수를 이용하여 전달될 action 생성
@@ -1229,6 +1231,8 @@
           });
         };
 
+      17-3-6. 실행 결과 확인
+
     17-4. 외부 api 연동 set 기능 구현. decrement <== 각자
       외부 api 호출해서 redux store 의 state 값을 바꾸는 set 중에 decrement 기능을 구현 한다.
 
@@ -1242,19 +1246,19 @@
 
           // setCounter(counter - 1);
 
-          // const payload = { counter: counter + 1 };
+          // reducer 를 사용할 때
+          // const payload = { counter: counter - 1 };
           // const action = actions.setTaskReducer(payload); // 액션함수를 이용하여 전달될 action 생성
-
           // dispatch(action); // action 을 reducer 로 dispatch 하기
 
-          // http://localhost:5050/counter?step=-1   ==> -1 씩 증가
+          // saga 를 사용할 때
+          // http://localhost:5050/counter?step=-1   ==> -1 씩 감소
           const payload = { step: -1 };
           const action = actions.setTaskSaga(payload); // 액션함수를 이용하여 전달될 action 생성
-
           dispatch(action); // action 을 saga 로 dispatch 하기
         };
 
-    17-5. 실행 결과 확인
+      17-4-2. 실행 결과 확인
 
 
     ##################################
