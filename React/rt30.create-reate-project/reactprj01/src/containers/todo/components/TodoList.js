@@ -68,7 +68,7 @@ function TodoList({ todoItems, callbackDoneToggle, callbackRemoveTodo }) {
   const handlerDoneToggle = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(e.target);
-    debugger;
+
     const id = Number(e.target.dataset.id); // data-id={item.id}
     const item = JSON.parse(e.target.dataset.item); // data-item={JSON.stringify(item)}
 
@@ -79,7 +79,7 @@ function TodoList({ todoItems, callbackDoneToggle, callbackRemoveTodo }) {
   };
   const handlerRemoveTodo = (id) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
-    debugger;
+
     callbackRemoveTodo(id);
   };
 

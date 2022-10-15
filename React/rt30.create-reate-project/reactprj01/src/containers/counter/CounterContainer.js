@@ -19,6 +19,27 @@ const StyledCounterContainer = styled.div`
   /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
   margin: 0 auto;
   text-align: center;
+
+  .loadingbox {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(255, 0,0,0.5); */
+    z-index: 100;
+  }
+
+  .loadingbox > .loadingbar {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    top: calc(50% - 150px);
+    left: calc(50% - 150px);
+    z-index: 200;
+  }
 `;
 
 function CounterContainer({ ...props }) {
@@ -82,7 +103,6 @@ function CounterContainer({ ...props }) {
   const handlerChangeCallapi = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(e.target);
-    debugger;
     setCallapi(!callapi);
   };
   const handlerIncrement = (e) => {
@@ -91,8 +111,9 @@ function CounterContainer({ ...props }) {
     // counter = counter + 1;
     // setCounter(counter + 1);
     const action = actions.setTaskReducer({ counter: counter + 1 });
+
     debugger;
-    dispatch(action);
+    dispatch(action); // saga 로 보내기
   };
   const handlerDecrement = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
@@ -100,11 +121,18 @@ function CounterContainer({ ...props }) {
     // counter = counter - 1;
     // setCounter(counter - 1);
     const action = actions.setTaskReducer({ counter: counter - 1 });
-    debugger;
+
     dispatch(action);
   };
 
   // JSX로 화면 만들기. 조건부 렌더링: https://ko.reactjs.org/docs/conditional-rendering.html
+  if (isLoading) {
+    return (
+      <div className="loadingbox">
+        <img className="loadingbar" src="/assets/images/loadingbar.gif"></img>
+      </div>
+    );
+  }
   return (
     <StyledCounterContainer>
       <div>

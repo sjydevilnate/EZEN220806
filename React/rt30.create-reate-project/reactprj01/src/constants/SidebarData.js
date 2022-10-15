@@ -40,4 +40,10 @@ export const SidebarData = [
     icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text',
   },
+  {
+    title: 'counter',
+    path: '/counter',
+    icon: <IoIcons.IoMdHelpCircle />,
+    cName: 'nav-text',
+  },
 ];

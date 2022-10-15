@@ -65,10 +65,9 @@ function TodoContainer({ ...props }) {
   // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
   // useCallback 상태값이 변경되면 메서드를 다시 만들고
   // 자식들에게 변경된 함수(메서드)를 다시 내려준다
-  const callbackClearAll  = useCallback(
+  const callbackClearAll = useCallback(
     (param) => {
       // state 변경
-      debugger;
 
       // 직접 코드를 완성하시오.
       // setTodoItems 는  todoItems 상태를 바꾸기 위한 setter 메서드
@@ -83,12 +82,10 @@ function TodoContainer({ ...props }) {
   const callbackDoneToggle = useCallback(
     (id) => {
       // state 변경
-      debugger;
 
       // 직접 코드를 완성하시오.
       // setTodoItems 는  todoItems 상태를 바꾸기 위한 setter 메서드
       const newTodos = todoItems.map((item) => {
-        debugger;
         if (item.id === id) {
           item.done = !item.done;
         }
@@ -106,7 +103,6 @@ function TodoContainer({ ...props }) {
   const callbackRemoveTodo = useCallback(
     (id) => {
       // state 변경
-      debugger;
 
       // 직접 코드를 완성하시오.
       // setTodoItems 는  todoItems 상태를 바꾸기 위한 setter 메서드
@@ -129,7 +125,6 @@ function TodoContainer({ ...props }) {
   const callbackAddTodo = useCallback(
     (value) => {
       // state 변경
-      debugger;
 
       // 직접 코드를 완성하시오.
       // ap03-11.객체배열.html 참조
@@ -179,7 +174,7 @@ function TodoContainer({ ...props }) {
         ></TodoList>
 
         {/* <!-- TodoFooter --> */}
-        <TodoFooter callbackClearAll ={callbackClearAll }></TodoFooter>
+        <TodoFooter callbackClearAll={callbackClearAll}></TodoFooter>
       </div>
     </StyledTodoContainer>
   );

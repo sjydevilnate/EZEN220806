@@ -124,7 +124,6 @@ function TodoInput({ callbackAddTodo }) {
   const handlerShowModal = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(e.target);
-    debugger;
 
     // isShowModal === true  ===> isShowModal = false
     // isShowModal === false ===> isShowModal = true
@@ -133,7 +132,6 @@ function TodoInput({ callbackAddTodo }) {
   const handlerAddTodo = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(e.target);
-    debugger;
 
     // 버블링 방지(이벤트취소)
     e.stopPropagation();

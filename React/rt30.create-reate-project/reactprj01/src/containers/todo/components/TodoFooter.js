@@ -35,7 +35,6 @@ function TodoFooter({ callbackClearAll }) {
   const handlerClearAll = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다
     console.log(e.target);
-    debugger;
     // 부모 콜백 메서드 호출
     callbackClearAll();
   };

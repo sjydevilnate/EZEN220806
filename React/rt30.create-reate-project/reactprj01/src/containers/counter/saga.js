@@ -5,7 +5,7 @@ import * as api from './api';
 
 /* saga 이펙트 함수 설명
 
- * saga 실행 순서 : TPC(take[Latest}, put, call)
+ * saga 실행 순서 : TCP(take[Latest}, call, put)
 
  * takeLatest      마지막 요청만 처리. 기존에 진행 중인 작업은 취소됨.
  *                 클릭 실수로 2번 했을때, 앞 이벤트 무시 마지막 이벤트 실행(보통 이거 많이씀)
@@ -13,10 +13,10 @@ import * as api from './api';
  * takeLeading     첫번째 요청만 실행, 이후 요청은 무시
  * take            한번만 실행되고 이벤트 삭제됨
  *
- * put             특정 액션을 dispatch 한다.
- *
  * call            call은 함수를 동기식으로 실행한다(동기식: 외부 api가 리턴할때까지 기다림).
  *                 함수의 첫 번째 파라미터는 함수, 나머지 파라미터는 해당 함수에 넣을 인수이다.
+ *
+ * put             특정 액션을 dispatch 한다.
  *
  * delay           설정된 시간 이후에 resolve하는 Promise객체를 리턴한다.
  * all             all함수를 사용해서 제너레이터 함수를 배열의 형태로 인자로 넣어주면,

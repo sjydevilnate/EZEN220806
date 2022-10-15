@@ -264,15 +264,13 @@
     |   |-- containers (컨테이너 컴포넌트)
     |   |   `-- counter
     |   |       |-- components        (counter 컨테이너에서만 사용되는 프리젠테이션 컴포넌트 폴더)
-    |   |       |   |-- LoadingBox.css
     |   |       |   |-- LoadingBox.js
     |   |       |   |-- LoadingBox.test.js    (컴포넌트 UI 테스트)
-    |   |       |   |-- Counter.css
     |   |       |   |-- Counter.js
     |   |       |   `-- Counter.test.js       (컴포넌트 UI 테스트)
     |   |       |-- action.js    (액션상수,액션함수 정의)
     |   |       |-- api.js       (외부 API 호출)
-    |   |       |-- CounterContainer.css  (counter 컨테이너에서만 사용되는 css 파일)
+    |   |       |-- CounterContainer.js  (counter 컨테이너에서만 사용되는 js 파일)
     |   |       |-- reducer.js   (리덕스 리듀서)
     |   |       `-- saga.js      (외부 API 호출 saga)
     |   |-- constant (상수)
@@ -1048,7 +1046,7 @@
 
 
     ##################################
-    17. CounterContainer 컴포넌트 + saga + api + Reducer 사용하여 기능 구현
+    17. CounterContainer 컴포넌트 + saga + api + reducer 사용하여 기능 구현
         컴포넌트 ===> action함수 ===> saga ===> api ==> reducer  ===> 컴포넌트
         소요시간: 20분
 
@@ -1061,9 +1059,9 @@
 
     17-1. api 연동에 필요한 기능을 추가한다.(아사레: a,s,a,re)
       17-1-1. action.js    (액션상수,액션함수 정의)
-      17-1-2. saga.js      (외부 API 호출 saga)
-      17-1-3. api.js       (외부 API 호출)
-      17-1-4. reducer.js   (리덕스 리듀서)
+      17-1-2. saga.js      (외부 API 호출 middleware)
+      17-1-3. api.js       (외부 API 호출: axios 사용하여 외부 api 호출 후결과 받기)
+      17-1-4. reducer.js   (리덕스 리듀서: state 저장)
 
     17-2. api 연동 get 기능 구현. <== 같이
 
@@ -1278,8 +1276,22 @@
       alt="" />
     <xmp>
 
-    18-2. loading 을 위한 css 작성
-    $ touch ./src/containers/counter/CounterContainer.css
+    18-2. loading 을 위한 css 작성. 
+      StyledCounterContainer 수정
+      $ touch ./src/containers/counter/CounterContainer.js
+
+    변경 전
+    const StyledCounterContainer = styled.div`
+      /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
+      margin: 0 auto;
+      text-align: center;
+    `;
+        
+    변경 후
+    const StyledCounterContainer = styled.div`
+      /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
+      margin: 0 auto;
+      text-align: center;
 
       .loadingbox {
         position: absolute;
@@ -1301,11 +1313,7 @@
         left: calc(50% - 150px);
         z-index: 200;
       }
-
-
-    18-3. CounterContainer.js 컴포넌트에 CounterContainer.css import 설정 추가
-      import './CounterContainer.css';
-
+    `;
 
     18-4. CounterContainer 컴포넌트에 아래의 JSX 수정
       // JSX로 화면 만들기
@@ -1338,6 +1346,7 @@
 
 
     18-5. saga.js 에 delay 추가
+      작업 파일: \src\containers\counter\saga.js
       변경전: // yield delay(2000); // 2초 기다리기
       변경후: yield delay(2000); // 2초 기다리기
 
@@ -1352,15 +1361,12 @@
     |-- containers (컨테이너 컴포넌트)
         `-- counter
             |-- components        (counter 컨테이너에서만 사용되는 프리젠테이션 컴포넌트 폴더)
-            |   |-- LoadingBox.css
             |   |-- LoadingBox.js
-            |   |-- Counter.css
             |   `-- Counter.js
             |-- action.js                 (액션상수,액션함수 정의)
             |-- action.test.js            (액션상수,액션함수 테스트)
             |-- api.js                    (외부 API 호출)
             |-- api.test.js               (외부 API 호출 테스트)
-            |-- CounterContainer.css      (counter 컨테이너에서만 사용되는 css 파일)
             |-- CounterContainer.js       (컴포넌트 UI )
             |-- reducer.js                (리듀서)
             |-- reducer.test.js           (리듀서 테스트)
@@ -1373,10 +1379,9 @@
       $ ls        # packages.json 이 보이는지 확인.
 
       $ touch ./src/containers/counter/components/Counter.js       # Counter 컴포넌트 파일 생성
-      $ touch ./src/containers/counter/components/Counter.css      # Counter 컴포넌트 css 파일 생성
 
       $ touch ./src/containers/counter/components/LoadingBox.js    # LoadingBox 컴포넌트 파일 생성
-      $ touch ./src/containers/counter/components/LoadingBox.css   # LoadingBox 컴포넌트 css 파일 생성
+
 
     21-2. Counter.js 컴포넌트 기능 구현
 
@@ -1467,7 +1472,7 @@
         export default LoadingBox;
 
 
-    21-4. CounterContainer.css 의 내용을 LoadingBox.css 로 이동
+    21-4. CounterContainer.js 의 css 의 내용을 LoadingBox.js 로 이동
 
     21-5. CounterContainer 컴포넌트 기능 수정
 
@@ -1513,17 +1518,14 @@
     |-- containers (컨테이너 컴포넌트)
         `-- counter
             |-- components        (counter 컨테이너에서만 사용되는 프리젠테이션 컴포넌트 폴더)
-            |   |-- LoadingBox.css
             |   |-- LoadingBox.js
             |   |-- LoadingBox.test.js    (컴포넌트 UI 테스트)
-            |   |-- Counter.css
             |   |-- Counter.js
             |   `-- Counter.test.js       (컴포넌트 UI 테스트)
             |-- action.js                 (액션상수,액션함수 정의)
             |-- action.test.js            (액션상수,액션함수 테스트)
             |-- api.js                    (외부 API 호출)
             |-- api.test.js               (외부 API 호출 테스트)
-            |-- CounterContainer.css      (counter 컨테이너에서만 사용되는 css 파일)
             |-- CounterContainer.js       (컴포넌트 UI )
             |-- CounterContainer.test.js  (컴포넌트 UI 테스트)
             |-- reducer.js                (리듀서)

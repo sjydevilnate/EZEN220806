@@ -105,18 +105,15 @@ function SideBar({ ...props }) {
     console.log(e.target);
     // e.stopPropagation(); // 이벤트 버블링 방지. 이벤트 취소
 
-    debugger;
     // isSidebar = !isSidebar;
     setIsSidebar(!isSidebar);
   };
 
   const handlerNavLink = (e) => {
     // 이벤트 핸들러는 화살표 함수로 만든다d
-    debugger;
     console.log(e.target);
     //  e.stopPropagation(); // 이벤트 버블링 방지. 이벤트 취소
 
-    debugger;
     // setIsSidebar(false);
   };
 

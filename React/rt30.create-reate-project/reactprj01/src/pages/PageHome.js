@@ -28,10 +28,10 @@ const StyledPageHome = styled.div`
   /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
   .active {
     color: red;
-    background-color: aqua;
+    /* background-color: aqua; */
   }
   .inactive {
-    background-color: none;
+    /* background-color: none; */
   }
 `;
 
