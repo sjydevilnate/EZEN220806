@@ -11,6 +11,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+
 import TodoHeader from './components/TodoHeader';
 import TodoFooter from './components/TodoFooter';
 import TodoList from './components/TodoList';
@@ -64,7 +65,7 @@ function TodoContainer({ ...props }) {
   // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
   // useCallback 상태값이 변경되면 메서드를 다시 만들고
   // 자식들에게 변경된 함수(메서드)를 다시 내려준다
-  const calllbackClearAll = useCallback(
+  const callbackClearAll  = useCallback(
     (param) => {
       // state 변경
       debugger;
@@ -72,7 +73,7 @@ function TodoContainer({ ...props }) {
       // 직접 코드를 완성하시오.
       // setTodoItems 는  todoItems 상태를 바꾸기 위한 setter 메서드
       // todoItems = [];
-      setTodoItems([]); // setTodoItems 는 todoItems 상태를 바꾸기 위한 setter 메서드
+      setTodoItems([]);
     },
     [
       /* 연관배열: 메서드와 연관되는 상태(변수)명들을 기술 */
@@ -94,6 +95,7 @@ function TodoContainer({ ...props }) {
         return item;
       });
 
+      // todoItems = newTodos;
       setTodoItems(newTodos); // setTodoItems 는 todoItems 상태를 바꾸기 위한 setter 메서드
     },
     [
@@ -107,11 +109,13 @@ function TodoContainer({ ...props }) {
       debugger;
 
       // 직접 코드를 완성하시오.
+      // setTodoItems 는  todoItems 상태를 바꾸기 위한 setter 메서드
       const newTodos = todoItems.filter((item) => {
         if (item.id === id) {
-          return false; // 빼는 경우
+          return false; // 제외
+        } else {
+          return true; // 포함
         }
-        return true; // 포함되는 경우
       });
 
       // setTodoItems 는 todoItems 상태를 바꾸기 위한 setter 메서드
@@ -140,15 +144,16 @@ function TodoContainer({ ...props }) {
           else return cvalue;
         }, 0); // 최대값 찾기
 
-      const newItem = {
+      // todoItems 추가할 객체 만들기
+      const newTodo = {
         id: maxid + 1,
         todo: value,
         done: false,
       };
 
-      // todoItems.push(newItem);
-      // todoItems = [...todoItems, newItem];
-      setTodoItems([...todoItems, newItem]);
+      // todoItems.push(newTodo);
+      // todoItems = [...todoItems, newTodo];
+      setTodoItems([...todoItems, newTodo]);
     },
     [
       /* 연관배열: 메서드와 연관되는 상태(변수)명들을 기술 */
@@ -174,7 +179,7 @@ function TodoContainer({ ...props }) {
         ></TodoList>
 
         {/* <!-- TodoFooter --> */}
-        <TodoFooter calllbackClearAll={calllbackClearAll}></TodoFooter>
+        <TodoFooter callbackClearAll ={callbackClearAll }></TodoFooter>
       </div>
     </StyledTodoContainer>
   );

@@ -17,7 +17,7 @@
   "editor.fontFamily": "나눔고딕코딩",
   "editor.fontLigatures": true,
   /* 저장 시 해당 파일 전체 포맷 여부 */
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   /* 해당값 true로 설정 시 ; 을 입력하면 해당 라인이 파일에 설정된 포맷에 따라 가게됩니다.  */
   "editor.formatOnType": false,
   /* 붙여넣기 시 해당 텍스트 포맷 여부. */

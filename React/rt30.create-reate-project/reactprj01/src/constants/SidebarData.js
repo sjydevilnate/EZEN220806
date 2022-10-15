@@ -34,4 +34,10 @@ export const SidebarData = [
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text',
   },
+  {
+    title: 'styled',
+    path: '/styled',
+    icon: <IoIcons.IoMdHelpCircle />,
+    cName: 'nav-text',
+  },
 ];

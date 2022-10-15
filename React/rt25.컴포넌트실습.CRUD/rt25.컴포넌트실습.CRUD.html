@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible"
+      content="ie=edge" />
     <title>Document</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 
     <!-- CSS import -->
-    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet"
+      href="../css/reset.css" />
     <style>
-        .strong {color:red; font-weight:bold; font-size:1.2em;}
-        label { display: inline-block; width: 80px;}
-        #app > div { margin: 5px 0 ;}
+      .strong {
+        color: red;
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      label {
+        display: inline-block;
+        width: 80px;
+      }
+
+      #app>div {
+        margin: 5px 0;
+      }
     </style>
-</head>
-<body>
-    <div style="margin: 40px 0 0 40px;">
-        <a href="#" onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;" rel="nofollow">npm 사용법</a>
+  </head>
+  <body>
+    <div style="margin: 40px 0 0 40px">
+      <a href="#"
+        onClick="window.open('../../ES2015문법/ap01.docs/npm사용법.html','npm사용법','width=800,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=yes');return false;"
+        rel="nofollow">npm 사용법</a>
     </div>
     <xmp>
     리액트에서 CRUD2S 방법을 학습한다.
@@ -111,7 +128,7 @@
             `-- CrudList
 
         실행 화면 확인
-        
+
 
     1-03. 1차 폴더에 있는 reset.css 파일을 프로젝트폴더/public 으로 복사
 
@@ -465,7 +482,7 @@
     작업 3 CrudContainer 컴포넌트 수정하기
     ##############################
 
-        3-1. CrudContainer 에 상태값( items ) 과 콜백 메서드 정의하기 
+        3-1. CrudContainer 에 상태값( items ) 과 콜백 메서드 정의하기
         function CrudContainer(props) {
 
             const [items, setItems] = useState([
@@ -504,7 +521,7 @@
                 // ...생략
             }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */]);
 
-            ...이하 생략 
+            ...이하 생략
         }
 
         3-2. CrudContainer 에서 5개의 callback 메서드 props 내림 설정한다.
@@ -650,7 +667,7 @@
     작업 5. CrudInput 컴포넌트 기능 추가
     ##############################
 
-        5-1. CrudInput 컴포넌트의 input 태그에 ref 설정. 
+        5-1. CrudInput 컴포넌트의 input 태그에 ref 설정.
             ref 는 input 태그에 입력된 값을 가져오기 위해서 사용된다
             refInputName
             refInputPower
@@ -883,10 +900,10 @@
 
 
     ##################################
-    작업 7. CrudInput 과 CrudListItem 에서 중복되는 
+    작업 7. CrudInput 과 CrudListItem 에서 중복되는
         입력되는 부분을 공통 컴포넌트로 분리하기.
     ##############################
-        
+
         7-1. CrudInputPower
             <input
               type="number"
@@ -907,78 +924,81 @@
 
 
     </xmp>
-    <hr>
+    <hr />
     <div id="app">
-        <h1>Creat Read Update Delete</h1>
+      <h1>Creat Read Update Delete</h1>
+      <div>
         <div>
-            <div>
-                <label for="">Name : </label>
-                <input type="text" name="name" placeholder="이름을 입력하세요" />
-            </div>
-            <div>
-                <label for="">Power : </label>
-                <input type="number" name="power" placeholder="숫자를 입력하세요"  />
-            </div>
-            <button type="button">Add</button>
+          <label for="">Name : </label>
+          <input type="text"
+            name="name"
+            placeholder="이름을 입력하세요" />
         </div>
-        <hr/>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>NAME</th>
-                    <th>POWER</th>
-                    <th>CRUD</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="">
-                    <td>1</td>
-                    <td>슈퍼맨</td>
-                    <td>100</td>
-                    <td>
-                        <button type="button">Del</button>
-                        <button type="button">Power Up</button>
-                        <button type="button">Power Down</button>
-                        <button type="button">Edit</button>
-                    </td>
-                </tr>
-                <tr class="strong">
-                    <td>2</td>
-                    <td>아쿠아맨</td>
-                    <td>300</td>
-                    <td>
-                        <button type="button">Del</button>
-                        <button type="button">Power Up</button>
-                        <button type="button">Power Down</button>
-                        <button type="button">Edit</button>
-                    </td>
-                </tr>
-                <tr class="strong">
-                    <td>3</td>
-                    <td>스파이더맨</td>
-                    <td>500</td>
-                    <td>
-                        <button type="button">Del</button>
-                        <button type="button">Power Up</button>
-                        <button type="button">Power Down</button>
-                        <button type="button">Edit</button>
-                    </td>
-                </tr>
-                <tr class="strong">
-                    <td>4</td>
-                    <td>배트맨</td>
-                    <td>30</td>
-                    <td>
-                        <button type="button">Del</button>
-                        <button type="button">Power Up</button>
-                        <button type="button">Power Down</button>
-                        <button type="button">Edit</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+          <label for="">Power : </label>
+          <input type="number"
+            name="power"
+            placeholder="숫자를 입력하세요" />
+        </div>
+        <button type="button">Add</button>
+      </div>
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>POWER</th>
+            <th>CRUD</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="">
+            <td>1</td>
+            <td>슈퍼맨</td>
+            <td>100</td>
+            <td>
+              <button type="button">Del</button>
+              <button type="button">Power Up</button>
+              <button type="button">Power Down</button>
+              <button type="button">Edit</button>
+            </td>
+          </tr>
+          <tr class="strong">
+            <td>2</td>
+            <td>아쿠아맨</td>
+            <td>300</td>
+            <td>
+              <button type="button">Del</button>
+              <button type="button">Power Up</button>
+              <button type="button">Power Down</button>
+              <button type="button">Edit</button>
+            </td>
+          </tr>
+          <tr class="strong">
+            <td>3</td>
+            <td>스파이더맨</td>
+            <td>500</td>
+            <td>
+              <button type="button">Del</button>
+              <button type="button">Power Up</button>
+              <button type="button">Power Down</button>
+              <button type="button">Edit</button>
+            </td>
+          </tr>
+          <tr class="strong">
+            <td>4</td>
+            <td>배트맨</td>
+            <td>30</td>
+            <td>
+              <button type="button">Del</button>
+              <button type="button">Power Up</button>
+              <button type="button">Power Down</button>
+              <button type="button">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-</body>
+  </body>
 </html>

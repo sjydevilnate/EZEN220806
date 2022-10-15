@@ -1,3 +1,4 @@
+import './App.css';
 import PageHome from './pages/PageHome';
 
 function App() {

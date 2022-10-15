@@ -1,57 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0" />
     <title>React 라우팅</title>
-    <link rel="stylesheet" href="../css/reset.css" />
-</head>
-<body>
+    <link rel="stylesheet"
+      href="../css/reset.css" />
+  </head>
+  <body>
 
     <div>
-        <h2>리액트의 라우팅 기법에 대해서 학습한다.</h2>
-        <ul>
-            <li class="langjs">
-                <h3 class="langjs">라우팅이란?</h3>
-                <ul>
-                    <li>URL에 따라 컴포넌트를 선택하는 기술이다.</li>
-                    <li>앵커 anchor 엘리먼트를 사용</li>
-                </ul>
+      <h2>리액트의 라우팅 기법에 대해서 학습한다.</h2>
+      <ul>
+        <li class="langjs">
+          <h3 class="langjs">라우팅이란?</h3>
+          <ul>
+            <li>URL에 따라 컴포넌트를 선택하는 기술이다.</li>
+            <li>앵커 anchor 엘리먼트를 사용</li>
+          </ul>
+        </li>
+        <li class="langjs">
+          <h3 class="langjs">라우팅 구분</h3>
+          <ul>
+            <li>서버 라우팅</li>
+            <li>클라이언트 라우팅
+              <ol>
+                <li>SPA(Single Page Application)에서 주로 사용됨</li>
+                <li>response 지연 개선</li>
+              </ol>
             </li>
+          </ul>
+        </li>
+        <li class="langjs">
+          <h3 class="langjs">라우팅은 아래의 조건을 만족해야 한다.</h3>
+          <ul>
+            <li>url 표시</li>
+            <li>뒤로가기, 앞으로가기 지원</li>
+            <li>url을 통한 페이지 직접 접근</li>
+          </ul>
+        </li>
+        <li class="langjs">
+          <h3 class="langjs">리액트에서 사용되는 라우팅 라이브러리</h3>
+          <ul>
+            <li>react-router: 기본 라이브러리</li>
+            <li>react-router-dom: 리액트 웹에서 사용하는 라우팅 라이브러리. react-router 에 웹 기능 추가</li>
+            <li>react-router-native: 리액트 네이티브 에서 사용하는 라우팅라이브러리. react-router 에 네이티브 기능 추가</li>
+          </ul>
+        </li>
+        <li class="langjs">
+          <h3 class="langjs">라우팅 설정 방식</h3>
+          <ul>
             <li class="langjs">
-                <h3 class="langjs">라우팅 구분</h3>
-                <ul>
-                    <li>서버 라우팅</li>
-                    <li>클라이언트 라우팅
-                        <ol>
-                            <li>SPA(Single Page Application)에서 주로 사용됨</li>
-                            <li>response 지연 개선</li>
-                        </ol>
-                    </li>
-                </ul>
-            </li>
-            <li class="langjs">
-                <h3 class="langjs">라우팅은 아래의 조건을 만족해야 한다.</h3>
-                <ul>
-                    <li>url 표시</li>
-                    <li>뒤로가기, 앞으로가기 지원</li>
-                    <li>url을 통한 페이지 직접 접근</li>
-                </ul>
-            </li>
-            <li class="langjs">
-                <h3 class="langjs">리액트에서 사용되는 라우팅 라이브러리</h3>
-                <ul>
-                    <li>react-router: 기본 라이브러리</li>
-                    <li>react-router-dom: 리액트 웹에서 사용하는 라우팅 라이브러리. react-router 에 웹 기능 추가</li>
-                    <li>react-router-native: 리액트 네이티브 에서 사용하는 라우팅라이브러리. react-router 에 네이티브 기능 추가</li>
-                </ul>
-            </li>
-            <li class="langjs">
-                <h3 class="langjs">라우팅 설정 방식</h3>
-                <ul>
-                    <li class="langjs">
-                        <h3 class="langjs">프로그래밍 방식</h3>
-                        <xmp class="langjs">
+              <h3 class="langjs">프로그래밍 방식</h3>
+              <xmp class="langjs">
 import {
     createBrowserRouter,
     RouterProvider,
@@ -65,11 +67,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
 );
                         </xmp>
-                    </li>
-                    <li class="langjs">
-                        <h3 class="langjs">컴포넌트 방식 </h3>
+            </li>
+            <li class="langjs">
+              <h3 class="langjs">컴포넌트 방식 </h3>
 
-                        <xmp class="langjs">
+              <xmp class="langjs">
 import { BrowserRouter, NavLink, Routes, Route } from "react-router-dom";
 
 const App = () => (
@@ -85,223 +87,236 @@ const App = () => (
     </BrowserRouter>
 );
                         </xmp>
-                    </li>
-                </ul>
             </li>
-            <li class="langjs">
-                <h3 class="langjs">라우팅 기법</h3>
-                <ul>
-                    <li>
-                        단순 라우팅(Basic Routing)
-                        <a href="https://reactrouter.com/web/guides/quick-start/1st-example-basic-routing" target="_blank" rel="noopener noreferrer">https://reactrouter.com/web/guides/quick-start/1st-example-basic-routing</a><br>
-                    </li>
-                    <li>
-                        중첩 라우팅(Nested Routing)
-                        <a href="https://reactrouter.com/web/guides/philosophy/nested-routes" target="_blank" rel="noopener noreferrer">https://reactrouter.com/web/guides/philosophy/nested-routes</a>
-                    </li>
-                </ul>
+          </ul>
+        </li>
+        <li class="langjs">
+          <h3 class="langjs">라우팅 기법</h3>
+          <ul>
+            <li>
+              단순 라우팅(Basic Routing)
+              <a href="https://reactrouter.com/web/guides/quick-start/1st-example-basic-routing"
+                target="_blank"
+                rel="noopener noreferrer">https://reactrouter.com/web/guides/quick-start/1st-example-basic-routing</a><br>
             </li>
-            <li class="langjs">
-                <h3 class="langjs"> </h3>
-                <table>
-                    <colgroup>
-                        <col width="350px;" ></col>
-                        <col></col>
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>질문</th>
-                            <th>답변</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>라우팅은 무엇인가?</td>
-                            <td>URL 에 따라 보여줄 컴포넌트를 선택하는 기술이다</td>
-                        </tr>
-                        <tr>
-                            <td>라우팅은 왜 유용한가?</td>
-                            <td>state 없이 애플리케이션 구성이 가능하다. </td>
-                        </tr>
-                        <tr>
-                            <td>라우팅은 어떻게 사용하는가?</td>
-                            <td>a 태그의 페이지내의 위치 이동, 앵커(anchor) 기능을 사용하여... </td>
-                        </tr>
-                        <tr>
-                            <td>라우팅의 문제점이나 제약 사항이 있는가?</td>
-                            <td>url 경로에 대한 테스트가 필요하다.</td>
-                        </tr>
-                        <tr>
-                            <td>라우팅의 대체제가 있는가?</td>
-                            <td>state를 통한 처리로 대체 가능하다.</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <li>
+              중첩 라우팅(Nested Routing)
+              <a href="https://reactrouter.com/web/guides/philosophy/nested-routes"
+                target="_blank"
+                rel="noopener noreferrer">https://reactrouter.com/web/guides/philosophy/nested-routes</a>
             </li>
+          </ul>
+        </li>
+        <li class="langjs">
+          <h3 class="langjs"> </h3>
+          <table>
+            <colgroup>
+              <col width="350px;">
+              </col>
+              <col>
+              </col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>질문</th>
+                <th>답변</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>라우팅은 무엇인가?</td>
+                <td>URL 에 따라 보여줄 컴포넌트를 선택하는 기술이다</td>
+              </tr>
+              <tr>
+                <td>라우팅은 왜 유용한가?</td>
+                <td>state 없이 애플리케이션 구성이 가능하다. </td>
+              </tr>
+              <tr>
+                <td>라우팅은 어떻게 사용하는가?</td>
+                <td>a 태그의 페이지내의 위치 이동, 앵커(anchor) 기능을 사용하여... </td>
+              </tr>
+              <tr>
+                <td>라우팅의 문제점이나 제약 사항이 있는가?</td>
+                <td>url 경로에 대한 테스트가 필요하다.</td>
+              </tr>
+              <tr>
+                <td>라우팅의 대체제가 있는가?</td>
+                <td>state를 통한 처리로 대체 가능하다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
 
-            <li class="langjs">
-                <h3 class="langjs">중요 라우트 객체</h3>
-                <p class="langjs">
+        <li class="langjs">
+          <h3 class="langjs">중요 라우트 객체</h3>
+          <p class="langjs">
 
-                </p>
-                <ul>
-                    <li>match 객체</li>
-                    <li>location 객체</li>
-                    <li>history 객체</li>
-                </ul>
-                <table>
-                    <colgroup>
-                        <col width="150px;" ></col>
-                        <col width="150px;" ></col>
-                        <col></col>
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>객체명</th>
-                            <th>객체/메서드</th>
-                            <th>설명</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>match</td>
-                            <td>params</td>
-                            <td>PathVarable 을 받을 때</td>
-                        </tr>
-                        <tr>
-                            <td>location</td>
-                            <td>search</td>
-                            <td>QueryString을 받을 때</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="5">history</td>
-                            <td>go()</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>forward()</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>back()</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
+          </p>
+          <ul>
+            <li>match 객체</li>
+            <li>location 객체</li>
+            <li>history 객체</li>
+          </ul>
+          <table>
+            <colgroup>
+              <col width="150px;">
+              </col>
+              <col width="150px;">
+              </col>
+              <col>
+              </col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>객체명</th>
+                <th>객체/메서드</th>
+                <th>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>match</td>
+                <td>params</td>
+                <td>PathVarable 을 받을 때</td>
+              </tr>
+              <tr>
+                <td>location</td>
+                <td>search</td>
+                <td>QueryString을 받을 때</td>
+              </tr>
+              <tr>
+                <td rowspan="5">history</td>
+                <td>go()</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>forward()</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>back()</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
 
-            <li class="langjs">
-                <h3 class="langjs"> </h3>
-                <table>
-                    <colgroup>
-                        <col width="150px;" ></col>
-                        <col width="180px;" ></col>
-                        <col></col>
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>네임스페이스</th>
-                            <th>컴포넌트명</th>
-                            <th>설명</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="5">ReactRouter</td>
-                            <td>Routes ★</td>
-                            <td>여러 Route를 감싸서 그 중 규칙이 일치하는 라우트 단 하나만을 렌더링 시켜주는 역할을 한다</td>
-                        </tr>
-                        <tr>
-                            <td>Route ★</td>
-                            <td>요청 경로와 렌더링할 컴포넌트를 설정한다
-                                <xmp class="langjs">
+        <li class="langjs">
+          <h3 class="langjs"> </h3>
+          <table>
+            <colgroup>
+              <col width="150px;">
+              </col>
+              <col width="180px;">
+              </col>
+              <col>
+              </col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>네임스페이스</th>
+                <th>컴포넌트명</th>
+                <th>설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="5">ReactRouter</td>
+                <td>Routes ★</td>
+                <td>여러 Route를 감싸서 그 중 규칙이 일치하는 라우트 단 하나만을 렌더링 시켜주는 역할을 한다</td>
+              </tr>
+              <tr>
+                <td>Route ★</td>
+                <td>요청 경로와 렌더링할 컴포넌트를 설정한다
+                  <xmp class="langjs">
 <Route path='login' element={<Login />} />
 <Route path='login'>
     Login
 </Route>
                                 </xmp>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>NavLink ★</td>
-                            <td>
-                                라우트 이동 + 새로고침 방지 + active 기능<br>
-                                활성화된 Route 표시<br>
-                                &lt;NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/"&gt;&lt;/NavLink&gt;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Link</td>
-                            <td>
-                                라우트 이동 + 새로고침 방지 기능<br>
-                                &lt;Link to="url" &gt;&lt;/Link&gt;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" style="text-align:center;">
-                                <span style="margin-left: 50px; font-weight: 900; ">↓</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>네임스페이스</th>
-                            <th>컴포넌트명</th>
-                            <th>설명</th>
-                        </tr>
-                        <tr>
-                            <td rowspan="8">ReactRouterDOM</td>
-                            <td>BrowserRouter ★</td>
-                            <td>
-                                <p>히스토리 API를 사용하여 주소를 관리하는 라우터</p>
-                                <p>&lt;Link&gt; 태그를 통해 to 속성에 이동할 경로를 추가하여 이동시킨다</p>
-                                <p>주로 동적인 페이지에서 사용된다.</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>HashRouter</td>
-                            <td>
-                                <p>주소에 해쉬태그가 붙는다(#). 예시) index.html#</p>
-                                <p>새로고침하여도 에러가 발생하지 않는다.</p>
-                                <p>검색 엔진이 찾지를 못한다.</p>
-                                <p>주로 정적인 페이지에서 사용된다.</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>useParams()</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>useLocation()</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>useNavigate()</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
-        </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>NavLink ★</td>
+                <td>
+                  라우트 이동 + 새로고침 방지 + active 기능<br>
+                  활성화된 Route 표시<br>
+                  &lt;NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/"&gt;&lt;/NavLink&gt;
+                </td>
+              </tr>
+              <tr>
+                <td>Link</td>
+                <td>
+                  라우트 이동 + 새로고침 방지 기능<br>
+                  &lt;Link to="url" &gt;&lt;/Link&gt;
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3"
+                  style="text-align:center;">
+                  <span style="margin-left: 50px; font-weight: 900; ">↓</span>
+                </td>
+              </tr>
+              <tr>
+                <th>네임스페이스</th>
+                <th>컴포넌트명</th>
+                <th>설명</th>
+              </tr>
+              <tr>
+                <td rowspan="8">ReactRouterDOM</td>
+                <td>BrowserRouter ★</td>
+                <td>
+                  <p>히스토리 API를 사용하여 주소를 관리하는 라우터</p>
+                  <p>&lt;Link&gt; 태그를 통해 to 속성에 이동할 경로를 추가하여 이동시킨다</p>
+                  <p>주로 동적인 페이지에서 사용된다.</p>
+                </td>
+              </tr>
+              <tr>
+                <td>HashRouter</td>
+                <td>
+                  <p>주소에 해쉬태그가 붙는다(#). 예시) index.html#</p>
+                  <p>새로고침하여도 에러가 발생하지 않는다.</p>
+                  <p>검색 엔진이 찾지를 못한다.</p>
+                  <p>주로 정적인 페이지에서 사용된다.</p>
+                </td>
+              </tr>
+              <tr>
+                <td>useParams()</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>useLocation()</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>useNavigate()</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ul>
     </div>
     <div>
-        <h2>라우팅 코딩 절차</h2>
-        <ul>
-            <li class="langjs">
-                <h3 class="langjs">1. BrowserRouter 설정 </h3>
-                <p class="langjs">
+      <h2>라우팅 코딩 절차</h2>
+      <ul>
+        <li class="langjs">
+          <h3 class="langjs">1. BrowserRouter 설정 </h3>
+          <p class="langjs">
 
-                </p>
-                <ul>
+          </p>
+          <ul>
 
-                </ul>
-                <xmp class="langjs">
+          </ul>
+          <xmp class="langjs">
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <BrowserRouter>
@@ -310,10 +325,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </React.StrictMode>
 );
                 </xmp>
-            </li>
-            <li class="langjs">
-                <h3>2. 라우팅(Route) 설정</h3>
-                <xmp class="langjs">
+        </li>
+        <li class="langjs">
+          <h3>2. 라우팅(Route) 설정</h3>
+          <xmp class="langjs">
 
 <Routes>
     <Route path="/" element={<Home />} />
@@ -325,14 +340,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Route path="/about"><About /></Route>
 </Routes>
                 </xmp>
-            </li>
-            <li class="langjs">
-                <h3 class="langjs">3. 메뉴(NavLink) 설정 </h3>
-                <ul>
-                    <li>Link나 NavLink 컴포넌트를 사용하여 작성.</li>
-                    <li>새로고침이 발생하면 안된다. a 태그 사용 불가.</li>
-                </ul>
-                <xmp class="langjs">
+        </li>
+        <li class="langjs">
+          <h3 class="langjs">3. 메뉴(NavLink) 설정 </h3>
+          <ul>
+            <li>Link나 NavLink 컴포넌트를 사용하여 작성.</li>
+            <li>새로고침이 발생하면 안된다. a 태그 사용 불가.</li>
+          </ul>
+          <xmp class="langjs">
 <div>
     <ul>
         <li><NavLink active={({ isActive })=>{ isActive ? 'active' : 'inactive' }} to="/">Home</NavLink></li>
@@ -341,21 +356,22 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </ul>
 </div>
                 </xmp>
+        </li>
+        <li class="langjs">
+          <h3 class="langjs">4. PathVariable</h3>
+          <ul>
+            <li>url 에 인자를 넘기는 방법</li>
+            <li>
+              예시) /about/value/value2 형태<br>
+              &lt;Route path="/about/:key/:key2" element={
+              <About />} /&gt; <br>
+              props.match.params.key, props.match.params.key2 로 접근 가능
             </li>
-            <li class="langjs">
-                <h3 class="langjs">4. PathVariable</h3>
-                <ul>
-                    <li>url 에 인자를 넘기는 방법</li>
-                    <li>
-                        예시) /about/value/value2 형태<br>
-                        &lt;Route path="/about/:key/:key2" element={<About />} /&gt; <br>
-                        props.match.params.key, props.match.params.key2 로 접근 가능
-                    </li>
-                </ul>
-                <ul>
+          </ul>
+          <ul>
 
-                </ul>
-                <pre class="langjs">
+          </ul>
+          <pre class="langjs">
                     <code class="langjs">
     &lt;Route path="/about/:name?/:city?" element={<About />}&gt;&lt;/Route&gt;
 
@@ -367,20 +383,20 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     http://localhost:3000/about/아이유/서울시
                     </code>
                 </pre>
+        </li>
+        <li class="langjs">
+          <h3 class="langjs">5. QueryString</h3>
+          <ul>
+            <li>url 의 ? 다음에 인자를 넘기는 방법</li>
+            <li>
+              예시) /about?key=value&key2=value2 형태 <br>
+              props.location.search 로 접근 가능
             </li>
-            <li class="langjs">
-                <h3 class="langjs">5. QueryString</h3>
-                <ul>
-                    <li>url 의 ? 다음에 인자를 넘기는 방법</li>
-                    <li>
-                        예시) /about?key=value&key2=value2 형태 <br>
-                        props.location.search 로 접근 가능
-                    </li>
-                </ul>
-                <ul>
+          </ul>
+          <ul>
 
-                </ul>
-                <pre class="langjs">
+          </ul>
+          <pre class="langjs">
                     <code class="langjs">
     var obj = {};
     if( location.search.length > 1){
@@ -406,8 +422,139 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     }
                     </code>
                 </pre>
-            </li>
-        </ul>
+        </li>
+      </ul>
+
+      <xmp>
+
+  ##################################
+  13. 라우팅 설정
+    1. BrowserRouter 추가
+    2. 라우팅 설정
+    3. 링크(메뉴) 설정
+    4. 스타일링 설정
+  ##################################
+
+  13-1. 라우팅 관련 폴더 및 파일 생성
+      $ mkdir -p ./src/pages
+      $ touch ./src/pages/PageHome.js
+
+      $ mkdir -p ./src/containers/home
+      $ touch ./src/containers/home/HomeContainer.js
+
+
+  13-2. BrowserRouter 추가
+      작업파일: src/index.js 수정
+
+      변경 전
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(
+          <React.StrictMode>
+              <App />
+          </React.StrictMode>
+      );
+
+
+      변경 후
+      import { BrowserRouter } from 'react-router-dom';
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(
+          <React.StrictMode>
+              <BrowserRouter>
+                  <App />
+              </BrowserRouter>
+          </React.StrictMode>
+      );
+
+  13-3. 라우팅 설정
+      작업파일: src/App.js 수정
+      import PageHome from './pages/PageHome';
+
+      function App() {
+          return (
+              <div>
+                  <PageHome />
+              </div>
+          );
+      }
+
+  13-4. 실행 화면 확인하고 개발자 모드에서 오류 확인
+      ==> 빈 화면이 나오면 정상.
+
+  13-5. HomeContainer 컴포넌트 파일 생성
+      $ mkdir -p ./src/containers/home
+      $ touch src/containers/home/HomeContainer.js
+
+  13-6. 라우팅 폴더 및 PageHome 컴포넌트 만들기
+      $ mkdir -p ./src/pages
+      $ touch src/pages/PageHome.js
+
+  13-7. PageHome 에 라우팅 설정
+      작업파일: src/pages/PageHome.js
+
+      import { Routes, Route, NavLink } from 'react-router-dom';
+
+      import HomeContainer from '../containers/home/HomeContainer';
+      import TodoContainer from '../containers/todo/TodoContainer';
+
+      <div>
+          <Routes>
+              <Route path="/" element={<HomeContainer />} />
+              <Route path="/todo" element={<TodoContainer />} />
+              <Route path="*" to="/" />
+          </Routes>
+      </div>
+
+  13-8. PageHome 에 링크 설정
+      작업파일: src/pages/PageHome.js
+
+      변경 전
+      <div>
+          <Routes>
+              <Route path="/" element={<HomeContainer />} />
+              <Route path="/todo" element={<TodoContainer />} />
+              <Route path="*" to="/" />
+          </Routes>
+      </div>
+
+      변경 후
+      <div>
+          <div>
+              <ul>
+                  <li><NavLink to="/">Home</NavLink></li>
+                  <li><NavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/todo">Todo</NavLink></li>
+              </ul>
+          </div>
+
+          <Routes>
+              <Route path="/" element={<HomeContainer />} />
+              <Route path="/todo" element={<TodoContainer />} />
+              <Route path="*" to="/" />
+          </Routes>
+      </div>
+
+
+  13-9. PageHome 에 스타일링 설정
+      작업파일: src/pages/PageHome.js
+
+      변경 전
+      const StyledPageHome = styled.div`
+        /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
+
+      `;
+
+      변경 후
+      const StyledPageHome = styled.div`
+        /* styled 설정. https://styled-components.com/docs/basics#adapting-based-on-props */
+        .active {
+          background-color: aqua;
+        }
+        .inactive {
+          background-color: none;
+        }
+      `;
+    </xmp>
     </div>
-</body>
+  </body>
 </html>
